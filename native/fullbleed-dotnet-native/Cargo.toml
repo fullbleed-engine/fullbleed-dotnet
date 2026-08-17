@@ -1,0 +1,22 @@
+[package]
+name = "fullbleed-dotnet-native"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT"
+description = "Stable C ABI bridge used by the first-party Fullbleed .NET bindings."
+repository = "https://github.com/fullbleed-engine/fullbleed-dotnet"
+
+[lib]
+name = "fullbleed_dotnet_native"
+crate-type = ["cdylib"]
+
+[features]
+default = ["svg_raster"]
+svg_raster = ["fullbleed/svg_raster"]
+
+[dependencies]
+base64 = "0.22"
+fullbleed = { version = "2.3.0", path = "../../../fullbleed-official", default-features = false }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

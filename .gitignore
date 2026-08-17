@@ -1,0 +1,19 @@
+.vs/
+.idea/
+.vscode/
+**/bin/
+**/obj/
+**/target/
+artifacts/
+TestResults/
+runtimes/
+*.user
+*.suo
+*.nupkg
+*.snupkg
+output/
+
+# Local orchestration state and binaries are not product sources.
+.swarmstation/
+swarmstation
+swarmstation.d

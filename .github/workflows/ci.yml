@@ -1,0 +1,152 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-and-tests:
+    name: ${{ matrix.rid }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            rid: win-x64
+            file: fullbleed_dotnet_native.dll
+          - os: ubuntu-latest
+            rid: linux-x64
+            file: libfullbleed_dotnet_native.so
+          - os: macos-15-intel
+            rid: osx-x64
+            file: libfullbleed_dotnet_native.dylib
+          - os: macos-15
+            rid: osx-arm64
+            file: libfullbleed_dotnet_native.dylib
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Check out .NET bindings
+        uses: actions/checkout@v4
+        with:
+          path: fullbleed-dotnet
+
+      - name: Check out Fullbleed engine
+        uses: actions/checkout@v4
+        with:
+          repository: fullbleed-engine/fullbleed-official
+          path: fullbleed-official
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.85.0
+          components: rustfmt, clippy
+
+      - name: Check Rust formatting
+        shell: pwsh
+        working-directory: fullbleed-dotnet
+        run: cargo fmt --manifest-path native/fullbleed-dotnet-native/Cargo.toml -- --check
+
+      - name: Build and stage native runtime
+        shell: pwsh
+        working-directory: fullbleed-dotnet
+        run: ./scripts/build-native.ps1 -Rid '${{ matrix.rid }}'
+
+      - name: Test native bridge
+        shell: pwsh
+        working-directory: fullbleed-dotnet
+        run: cargo test --locked --manifest-path native/fullbleed-dotnet-native/Cargo.toml
+
+      - name: Lint native bridge
+        shell: pwsh
+        working-directory: fullbleed-dotnet
+        run: cargo clippy --locked --manifest-path native/fullbleed-dotnet-native/Cargo.toml --all-targets -- -D warnings
+
+      - name: Check managed formatting
+        shell: pwsh
+        working-directory: fullbleed-dotnet
+        run: dotnet format FullBleed.DotNet.sln --verify-no-changes
+
+      - name: Build managed solution and samples
+        shell: pwsh
+        working-directory: fullbleed-dotnet
+        run: dotnet build FullBleed.DotNet.sln -c Release
+
+      - name: Test managed bindings
+        shell: pwsh
+        working-directory: fullbleed-dotnet
+        run: dotnet test tests/FullBleed.DotNet.Tests/FullBleed.DotNet.Tests.csproj -c Release --no-build
+
+      - name: Upload native runtime
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-${{ matrix.rid }}
+          path: fullbleed-dotnet/runtimes/${{ matrix.rid }}/native/${{ matrix.file }}
+          if-no-files-found: error
+
+  package:
+    needs: native-and-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out .NET bindings
+        uses: actions/checkout@v4
+        with:
+          path: fullbleed-dotnet
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: native-win-x64
+          path: fullbleed-dotnet/runtimes/win-x64/native
+      - uses: actions/download-artifact@v4
+        with:
+          name: native-linux-x64
+          path: fullbleed-dotnet/runtimes/linux-x64/native
+      - uses: actions/download-artifact@v4
+        with:
+          name: native-osx-x64
+          path: fullbleed-dotnet/runtimes/osx-x64/native
+      - uses: actions/download-artifact@v4
+        with:
+          name: native-osx-arm64
+          path: fullbleed-dotnet/runtimes/osx-arm64/native
+
+      - name: Pack NuGet artifacts
+        working-directory: fullbleed-dotnet
+        run: dotnet pack src/FullBleed.DotNet/FullBleed.DotNet.csproj -c Release -o artifacts/packages
+
+      - name: Verify RID assets
+        working-directory: fullbleed-dotnet
+        shell: bash
+        run: |
+          package="$(find artifacts/packages -name 'FullBleed.DotNet.*.nupkg' ! -name '*.symbols.nupkg' -print -quit)"
+          unzip -l "$package" > artifacts/package-contents.txt
+          grep -F 'runtimes/win-x64/native/fullbleed_dotnet_native.dll' artifacts/package-contents.txt
+          grep -F 'runtimes/linux-x64/native/libfullbleed_dotnet_native.so' artifacts/package-contents.txt
+          grep -F 'runtimes/osx-x64/native/libfullbleed_dotnet_native.dylib' artifacts/package-contents.txt
+          grep -F 'runtimes/osx-arm64/native/libfullbleed_dotnet_native.dylib' artifacts/package-contents.txt
+
+      - name: Smoke-test packed package
+        working-directory: fullbleed-dotnet
+        shell: pwsh
+        run: ./scripts/package-smoke.ps1 -SkipPack
+
+      - name: Upload packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: fullbleed-dotnet/artifacts/packages/*
+          if-no-files-found: error
