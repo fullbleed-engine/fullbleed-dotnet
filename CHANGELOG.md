@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 - Unreleased
+## 0.1.0 - 2026-08-17
 
 - Add the stable native ABI bridge and source-generated .NET interop.
 - Add ordinary, diagnostic, metric, preview, batch, compiled-copy, fixed-binding, and reflow-binding APIs.
