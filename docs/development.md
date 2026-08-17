@@ -11,7 +11,7 @@ runtimes/{rid}/native/          generated/staged package assets
 scripts/                        build, verify, and pack entrypoints
 ```
 
-The native crate uses a versioned path dependency on a sibling `fullbleed-official` checkout. Cargo uses the path during development; the `version = "2.3.0"` constraint records the intended engine release.
+The native crate uses a versioned path dependency on a sibling `fullbleed-official` checkout. Cargo uses the path during development; the `version = "2.3.1"` constraint records the intended engine release.
 
 ## Local verification
 

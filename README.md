@@ -11,7 +11,7 @@ The managed assembly has no third-party NuGet runtime dependencies. Native runti
 
 ## Status
 
-The binding is version `0.1.0` and currently builds against the Fullbleed `2.3.0` Rust crate. It is not yet claimed as published on NuGet. `dotnet pack` produces the intended `FullBleed.DotNet` package locally and CI assembles platform artifacts.
+The binding is version `0.1.0` and currently builds against the Fullbleed `2.3.1` Rust crate. It is not yet claimed as published on NuGet. `dotnet pack` produces the intended `FullBleed.DotNet` package locally and CI assembles platform artifacts.
 
 Supported package targets in the current build pipeline:
 
