@@ -237,7 +237,8 @@ public sealed class FullBleedCliClient
             return payload;
         }
 
-        foreach (var line in trimmed.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries).Reverse())
+        foreach (var line in Enumerable.Reverse(
+                     trimmed.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries)))
         {
             if (TryParse(line, out payload))
             {
