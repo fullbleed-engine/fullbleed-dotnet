@@ -18,5 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="../../src/FullBleed.DotNet/FullBleed.DotNet.csproj" />
+    <None Update="Assets/**" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

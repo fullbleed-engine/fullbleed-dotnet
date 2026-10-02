@@ -40,14 +40,7 @@ public sealed class CliIntegrationTests
             OutputPath = output,
             Profile = "prod",
         });
-        // A CLI may be discoverable while its independently installed Python wheel/native
-        // extension pair is inconsistent. That is external runtime health, not this process
-        // wrapper's contract; native rendering is covered unconditionally elsewhere.
-        if (!render.ExitedSuccessfully || !render.ReportedSuccess)
-        {
-            return;
-        }
-
+        render.EnsureSuccess();
         var inspect = await client.InspectPdfAsync(output);
 
         Assert.True(render.EnsureSuccess().Payload.HasValue);
@@ -56,14 +49,22 @@ public sealed class CliIntegrationTests
 
     private static async Task<bool> IsCliAvailableAsync()
     {
+        bool available;
         try
         {
             var result = await new FullBleedCliClient().RunAsync(["--version"]);
-            return result.ExitCode == 0;
+            available = result.ExitCode == 0;
         }
         catch (FullBleedCliException)
         {
-            return false;
+            available = false;
         }
+
+        if (Environment.GetEnvironmentVariable("FULLBLEED_REQUIRE_CLI") == "1")
+        {
+            Assert.True(available, "This validation run requires a working Fullbleed CLI on PATH.");
+        }
+
+        return available;
     }
 }

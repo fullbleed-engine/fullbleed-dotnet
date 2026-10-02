@@ -124,7 +124,7 @@ public sealed class NativeIntegrationTests
     public void CompiledFixedBindingsSupportRegisteredFontsAndMatchOrdinaryPaint()
     {
         using var temporary = TemporaryDirectory.Create();
-        var fontPath = FullBleedOfficialFontPath("NotoSans-Regular.ttf");
+        var fontPath = Path.Combine(AppContext.BaseDirectory, "Assets", "NotoSans-Regular.ttf");
         using var engine = new FullBleedEngine(new FullBleedEngineOptions
         {
             PageSize = new PageSize(260f, 140f),
@@ -307,28 +307,6 @@ public sealed class NativeIntegrationTests
 
     private sealed record Badge(string Attendee, string Role, string Seat);
 
-    private static string FullBleedOfficialFontPath(string fileName)
-    {
-        var repository = Path.GetFullPath(
-            Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
-        var path = Path.GetFullPath(
-            Path.Combine(
-                repository,
-                "..",
-                "fullbleed-official",
-                "python",
-                "fullbleed_assets",
-                "fonts",
-                fileName));
-        if (!File.Exists(path))
-        {
-            throw new FileNotFoundException(
-                "The Fullbleed source repository must be checked out beside fullbleed-dotnet.",
-                path);
-        }
-
-        return path;
-    }
 }
 
 internal sealed class TemporaryDirectory : IDisposable

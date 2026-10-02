@@ -1,0 +1,57 @@
+name: Release NuGet
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    uses: ./.github/workflows/ci.yml
+
+  publish:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: validate
+    runs-on: ubuntu-latest
+    environment: nuget
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - uses: actions/download-artifact@v4
+        with:
+          name: nuget-packages
+          path: artifacts/packages
+      - name: Verify tag, commit and artifact checksums
+        env:
+          NUGET_USER: ${{ vars.NUGET_USER }}
+        shell: pwsh
+        run: |
+          if (-not $env:NUGET_USER) { throw 'Configure the NuGet account as the NUGET_USER repository variable.' }
+          $manifest = Get-Content artifacts/packages/package-manifest.json -Raw | ConvertFrom-Json
+          if ($env:GITHUB_REF_NAME -ne "v$($manifest.version)") { throw 'Tag and package versions differ.' }
+          if ($env:GITHUB_SHA -ne $manifest.source_commit) { throw 'Package source differs from the tag.' }
+          foreach ($asset in @($manifest.package, $manifest.symbols)) {
+            $hash = (Get-FileHash (Join-Path artifacts/packages $asset.file) -Algorithm SHA256).Hash.ToLowerInvariant()
+            if ($hash -ne $asset.sha256) { throw "Artifact checksum mismatch: $($asset.file)" }
+          }
+      - name: Get the NuGet trusted-publisher credential
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ vars.NUGET_USER }}
+      - name: Publish the validated package and symbols
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        shell: pwsh
+        run: |
+          $manifest = Get-Content artifacts/packages/package-manifest.json -Raw | ConvertFrom-Json
+          dotnet nuget push (Join-Path artifacts/packages $manifest.package.file) --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json
+          if ($LASTEXITCODE -ne 0) { throw 'NuGet publication failed.' }

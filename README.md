@@ -11,7 +11,7 @@ The managed assembly has no third-party NuGet runtime dependencies. Native runti
 
 ## Status
 
-The binding is version `0.1.0` and currently builds against the Fullbleed `2.3.1` Rust crate. It is not yet claimed as published on NuGet. `dotnet pack` produces the intended `FullBleed.DotNet` package locally and CI assembles platform artifacts.
+The `0.1.1` release candidate pins the published Fullbleed `2.5.1` Rust crate. NuGet publication is pending; the package ID is `FullBleed.DotNet`. CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
 
 Supported package targets in the current build pipeline:
 
@@ -24,19 +24,19 @@ The public managed API targets `net8.0`; applications on compatible later .NET r
 
 ## Quick start from source
 
-Place this repository beside `fullbleed-official`:
-
-```text
-workbench/
-  fullbleed-dotnet/
-  fullbleed-official/
-```
-
-Then build and test:
+With .NET 8 SDK and Rust 1.85 or later installed, clone this repository and build:
 
 ```powershell
 ./scripts/build-native.ps1
 dotnet test FullBleed.DotNet.sln -c Release
+```
+
+Cargo downloads the exact engine release from crates.io. No sibling checkout is required.
+
+After the package is published, a .NET console project can install it with:
+
+```sh
+dotnet add package FullBleed.DotNet --version 0.1.1
 ```
 
 Basic rendering:
@@ -60,6 +60,16 @@ Console.WriteLine($"{inspection.PageCount} page(s), PDF {inspection.PdfVersion}"
 ```
 
 `FullBleedRenderer.Render(...)` and `RenderToFile(...)` remain as compatibility helpers for the original proof of concept.
+
+## A styled invoice you can run
+
+The Northstar sample uses explicit fonts, print dimensions, CSS grid, tables, color, and typographic hierarchy. All content is fictional. Font files and their OFL notices are included; rendering needs no network access or system fonts.
+
+```sh
+dotnet run --project samples/FullBleed.DotNet.Showcase -c Release -- output/northstar
+```
+
+This writes `invoice.pdf` and a PNG preview. The [sample source](samples/FullBleed.DotNet.Showcase/Program.cs) shows font registration and missing-glyph diagnostics. The same document is also rendered from the assembled NuGet package in CI. [Inspect the design and download its HTML/CSS](https://docs.fullbleed.dev/examples/).
 
 ## LINQ and compiled VDP
 
@@ -183,7 +193,7 @@ Build the current platform package locally:
 ./scripts/pack.ps1
 ```
 
-Cross-platform release packages must contain every claimed RID asset. CI builds each native library on its matching operating system and verifies the final `.nupkg` entries. Details are in [`docs/development.md`](docs/development.md).
+Cross-platform release packages must contain every claimed RID asset. CI checks the binary architecture, retained license texts, and dependency provenance inside the final `.nupkg`, then tests it on each matching OS. The managed assembly has no third-party NuGet runtime dependencies; the separate CLI adapter requires an independently installed Fullbleed Python CLI. Details are in [`docs/development.md`](docs/development.md).
 
 ## License
 

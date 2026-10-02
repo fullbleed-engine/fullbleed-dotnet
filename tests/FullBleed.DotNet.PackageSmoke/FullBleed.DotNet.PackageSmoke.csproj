@@ -8,5 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="FullBleed.DotNet" />
+    <None Include="../../samples/FullBleed.DotNet.Showcase/Assets/**" Link="Assets/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

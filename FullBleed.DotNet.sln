@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -11,6 +11,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullBleed.DotNet.LinqVdp", "samples\FullBleed.DotNet.LinqVdp\FullBleed.DotNet.LinqVdp.csproj", "{FF23AC6C-6204-4394-981A-56BF14A3A974}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullBleed.DotNet.CliDiscovery", "samples\FullBleed.DotNet.CliDiscovery\FullBleed.DotNet.CliDiscovery.csproj", "{DFF2499A-5C6A-4034-827C-8DF114243F60}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{5FFE6ECD-3EB6-4DD7-8BFB-598628DB6561}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullBleed.DotNet.Showcase", "samples\FullBleed.DotNet.Showcase\FullBleed.DotNet.Showcase.csproj", "{5C0A5EEB-7003-4C7C-9144-BA75BB7B63B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,5 +42,12 @@ Global
 		{DFF2499A-5C6A-4034-827C-8DF114243F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFF2499A-5C6A-4034-827C-8DF114243F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFF2499A-5C6A-4034-827C-8DF114243F60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C0A5EEB-7003-4C7C-9144-BA75BB7B63B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C0A5EEB-7003-4C7C-9144-BA75BB7B63B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C0A5EEB-7003-4C7C-9144-BA75BB7B63B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C0A5EEB-7003-4C7C-9144-BA75BB7B63B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5C0A5EEB-7003-4C7C-9144-BA75BB7B63B8} = {5FFE6ECD-3EB6-4DD7-8BFB-598628DB6561}
 	EndGlobalSection
 EndGlobal
