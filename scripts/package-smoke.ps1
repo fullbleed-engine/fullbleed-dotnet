@@ -24,6 +24,16 @@ if (-not $SkipPack) {
 # development resolver. Keep both the consumer and NuGet cache outside the source tree.
 $consumer = Join-Path ([System.IO.Path]::GetTempPath()) ('fullbleed-package-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $consumer -Force | Out-Null
+# macOS exposes /var through /private/var. MSBuild item updates can miss files
+# when the project and its current directory use different spellings of that path.
+# See https://github.com/dotnet/sdk/issues/34442.
+if ([System.IO.Path]::DirectorySeparatorChar -eq '/') {
+    Push-Location $consumer
+    try {
+        $consumer = & /bin/pwd -P
+        if ($LASTEXITCODE -ne 0) { throw 'Could not resolve the physical consumer directory.' }
+    } finally { Pop-Location }
+}
 New-Item -ItemType Directory -Path $output -Force | Out-Null
 [xml]$versions = Get-Content -LiteralPath (Join-Path $repository 'Directory.Packages.props') -Raw
 $version = ($versions.Project.ItemGroup.PackageVersion | Where-Object { $_.Include -eq 'FullBleed.DotNet' }).Version
