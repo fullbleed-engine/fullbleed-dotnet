@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.1 - Unreleased
+
+- Pin the published Fullbleed 2.5.1 crate; source builds no longer need a sibling engine checkout.
+- Reject native builds whose requested RID differs from the compiler host.
+- Include exact dependency provenance and upstream license texts in the NuGet package.
+- Test the assembled package in an isolated consumer on Windows, Linux, and both macOS architectures.
+- Require the CLI integration lane in CI and fail on CLI render errors.
+- Add the runnable Northstar invoice example with vendored fonts and PNG previews.
+- Add NuGet trusted publishing after the complete validation matrix.
+
 ## 0.1.0 - 2026-08-17
 
 - Add the stable native ABI bridge and source-generated .NET interop.
