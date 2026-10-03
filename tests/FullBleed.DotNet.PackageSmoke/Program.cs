@@ -56,6 +56,18 @@ if (finalizedPreview.Paths.Count != 1 || !File.ReadAllBytes(finalizedPreview.Pat
     throw new InvalidOperationException("The packaged runtime did not produce a valid preview of the saved PDF.");
 }
 
+var boldPath = Path.Combine(outputDirectory, "bold.pdf");
+engine.RenderPdfToFile(
+    "<h1>Invoice BOLD-1042</h1><p><strong>Customer Ada</strong></p><p>Total USD 250.00</p>",
+    "body { font-family: Inter; font-size: 12pt; } h1, strong { font-weight: 700; }",
+    boldPath);
+var boldPreview = engine.RenderFinalizedPdfImagePagesToDirectory(
+    boldPath, Path.Combine(outputDirectory, "finalized-bold"), dpi: 96, stem: "bold");
+if (boldPreview.Paths.Count != 1)
+{
+    throw new InvalidOperationException("Expected one preview page for the bold-text regression fixture.");
+}
+
 using var compiled = engine.Compile("<p>Invoice {{id}}</p>", "body { font-family: Inter; }");
 var recordsPath = Path.Combine(outputDirectory, "records.pdf");
 compiled.RenderBindingsToFile(
@@ -76,6 +88,8 @@ var evidence = new
     PdfSha256 = Convert.ToHexString(SHA256.HashData(diagnostic.Pdf)).ToLowerInvariant(),
     PreviewSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(preview.Paths[0]))).ToLowerInvariant(),
     FinalizedPreviewSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(finalizedPreview.Paths[0]))).ToLowerInvariant(),
+    BoldPdfSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(boldPath))).ToLowerInvariant(),
+    BoldPreviewSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(boldPreview.Paths[0]))).ToLowerInvariant(),
     CompiledRecords = 2,
 };
 File.WriteAllText(Path.Combine(outputDirectory, "evidence.json"),

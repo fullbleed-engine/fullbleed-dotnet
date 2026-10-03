@@ -43,7 +43,7 @@ The CI matrix compiles native assets on matching Windows, Linux, Intel macOS, an
 
 A second four-platform matrix consumes that same assembled package. `scripts/package-smoke.ps1` creates a consumer and a fresh NuGet cache outside the checkout and clears `FULLBLEED_NATIVE_LIBRARY` for the child run. This prevents the development resolver from masking missing or incorrect packaged assets. Its retained PDF, PNG, compiled-record PDF, and JSON hashes come from the package, not a ProjectReference.
 
-The evidence job uses `pypdf==6.1.1` to independently check the invoice's searchable styled text and both compiled records. It compares the invoice PDF, HTML preview, and preview of the saved PDF across all four consumers. For a local package check, install that reader in a maintainer environment and run `python tools/verify_document_outputs.py artifacts/package-smoke`. The reader is a release-check dependency, not a dependency of applications using the .NET package.
+The evidence job uses `pypdf==6.1.1` to independently check the invoice's searchable styled text, a separate weight-700 bold-text fixture, and both compiled records. It compares the invoice PDF, HTML preview, and preview of the saved PDF across all four consumers, along with the bold fixture PDF and saved-PDF preview. For a local package check, install that reader in a maintainer environment and run `python tools/verify_document_outputs.py artifacts/package-smoke`. The reader is a release-check dependency, not a dependency of applications using the .NET package.
 
 When changing the Cargo lockfile, use Python 3.11 or later to regenerate and inspect the committed dependency provenance and upstream license texts:
 

@@ -27,14 +27,19 @@ def main():
         finalized = list((directory / 'finalized').glob('invoice*.png'))
         assert len(finalized) == 1
         assert hashlib.sha256(finalized[0].read_bytes()).hexdigest() == data['FinalizedPreviewSha256']
+        assert hashlib.sha256((directory / 'bold.pdf').read_bytes()).hexdigest() == data['BoldPdfSha256']
+        bold_previews = list((directory / 'finalized-bold').glob('bold*.png'))
+        assert len(bold_previews) == 1
+        assert hashlib.sha256(bold_previews[0].read_bytes()).hexdigest() == data['BoldPreviewSha256']
         data['IndependentDocumentChecks'] = verify_document_outputs(directory)
         records.append(data)
-    for field in ['PdfSha256', 'PreviewSha256', 'FinalizedPreviewSha256']:
+    for field in ['PdfSha256', 'PreviewSha256', 'FinalizedPreviewSha256', 'BoldPdfSha256', 'BoldPreviewSha256']:
         assert len({record[field] for record in records}) == 1, f'Platform output differs: {field}'
     result = {'schema': 'fullbleed.dotnet.package_consumers.v1', 'status': 'passed',
               'package_sha256': manifest['package']['sha256'], 'consumers': records,
               'scope': 'Northstar invoice PDF, HTML preview and finalized-PDF 96-DPI PNG match on these four native runtimes. '
-                       'pypdf independently verifies searchable styled text and two compiled records. '
+                       'The weight-700 bold fixture PDF and saved-PDF preview also match. '
+                       'pypdf independently verifies searchable styled and bold text and two compiled records. '
                        'This fixture is not a universal platform-parity or conformance claim.'}
     path = ROOT / 'artifacts/cross-platform-evidence.json'
     path.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
