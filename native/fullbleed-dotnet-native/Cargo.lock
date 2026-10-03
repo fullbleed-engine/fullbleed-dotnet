@@ -10,9 +10,9 @@ checksum = "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6"
 
 [[package]]
 name = "fullbleed"
-version = "2.5.1"
+version = "2.5.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1c6f953c95f03551fec45cfca05a7551fb1e1b057d3dbb87d821bdf42f26bd02"
+checksum = "728ec0ea75d1c93d44caf93c5e96e46cc848b2c5903165b835cf821fddb88270"
 dependencies = [
  "fullbleed_audit_contract",
  "subsetter",
