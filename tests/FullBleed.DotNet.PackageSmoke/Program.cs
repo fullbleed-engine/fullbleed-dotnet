@@ -48,6 +48,14 @@ if (preview.Paths.Count != 1 || !File.ReadAllBytes(preview.Paths[0]).AsSpan(0, 8
     throw new InvalidOperationException("The packaged runtime did not produce a valid one-page PNG preview.");
 }
 
+var finalizedPreview = engine.RenderFinalizedPdfImagePagesToDirectory(
+    outputPath, Path.Combine(outputDirectory, "finalized"), dpi: 96, stem: "invoice");
+if (finalizedPreview.Paths.Count != 1 || !File.ReadAllBytes(finalizedPreview.Paths[0]).AsSpan(0, 8)
+    .SequenceEqual(new byte[] { 137, 80, 78, 71, 13, 10, 26, 10 }))
+{
+    throw new InvalidOperationException("The packaged runtime did not produce a valid preview of the saved PDF.");
+}
+
 using var compiled = engine.Compile("<p>Invoice {{id}}</p>", "body { font-family: Inter; }");
 var recordsPath = Path.Combine(outputDirectory, "records.pdf");
 compiled.RenderBindingsToFile(
@@ -67,6 +75,7 @@ var evidence = new
     MissingGlyphs = diagnostic.Diagnostics.MissingGlyphs.Count,
     PdfSha256 = Convert.ToHexString(SHA256.HashData(diagnostic.Pdf)).ToLowerInvariant(),
     PreviewSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(preview.Paths[0]))).ToLowerInvariant(),
+    FinalizedPreviewSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(finalizedPreview.Paths[0]))).ToLowerInvariant(),
     CompiledRecords = 2,
 };
 File.WriteAllText(Path.Combine(outputDirectory, "evidence.json"),

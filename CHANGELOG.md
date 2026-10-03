@@ -1,11 +1,12 @@
 # Changelog
 
-## 0.1.1 - Unreleased
+## 0.1.1 - 2026-10-03
 
-- Pin the published Fullbleed 2.5.1 crate; source builds no longer need a sibling engine checkout.
+- Pin the published Fullbleed 2.5.6 crate, including corrected bold-text extraction and finalized previews; source builds no longer need a sibling engine checkout.
 - Reject native builds whose requested RID differs from the compiler host.
 - Include exact dependency provenance and upstream license texts in the NuGet package.
 - Test the assembled package in an isolated consumer on Windows, Linux, and both macOS architectures.
+- Independently verify searchable styled text and compiled record contents, and compare saved-PDF previews across the four packaged runtimes.
 - Require the CLI integration lane in CI and fail on CLI render errors.
 - Add the runnable Northstar invoice example with vendored fonts and PNG previews.
 - Add NuGet trusted publishing after the complete validation matrix.

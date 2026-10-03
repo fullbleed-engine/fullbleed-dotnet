@@ -6,6 +6,7 @@
 **/target/
 artifacts/
 TestResults/
+__pycache__/
 runtimes/
 *.user
 *.suo

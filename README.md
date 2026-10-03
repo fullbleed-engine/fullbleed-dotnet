@@ -11,7 +11,7 @@ The managed assembly has no third-party NuGet runtime dependencies. Native runti
 
 ## Status
 
-The `0.1.1` release candidate pins the published Fullbleed `2.5.1` Rust crate. NuGet publication is pending; the package ID is `FullBleed.DotNet`. CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
+Version `0.1.1` pins the published Fullbleed `2.5.6` Rust crate. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.1.1). CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
 
 Supported package targets in the current build pipeline:
 
@@ -22,18 +22,9 @@ Supported package targets in the current build pipeline:
 
 The public managed API targets `net8.0`; applications on compatible later .NET releases can consume that target.
 
-## Quick start from source
+## Install and render
 
-With .NET 8 SDK and Rust 1.85 or later installed, clone this repository and build:
-
-```powershell
-./scripts/build-native.ps1
-dotnet test FullBleed.DotNet.sln -c Release
-```
-
-Cargo downloads the exact engine release from crates.io. No sibling checkout is required.
-
-After the package is published, a .NET console project can install it with:
+In a .NET 8 console project:
 
 ```sh
 dotnet add package FullBleed.DotNet --version 0.1.1
@@ -186,6 +177,15 @@ More detail is in [`docs/api.md`](docs/api.md), [`docs/native-abi.md`](docs/nati
 Selecting `PdfUa1`, `PdfUa2`, a PDF/A profile, PDF/X, PDF/VT, WTPDF, or `Tagged` changes engine output configuration; it does not by itself prove conformance or accessibility. Supply the required embedded fonts/output intent, run Fullbleed verification, retain diagnostics, and use the applicable independent conformance checker before making claims.
 
 ## Packaging
+
+To build from source, install the .NET 8 SDK and Rust 1.85 or later, then run:
+
+```powershell
+./scripts/build-native.ps1
+dotnet test FullBleed.DotNet.sln -c Release
+```
+
+Cargo downloads the exact engine release from crates.io. No sibling checkout is required.
 
 Build the current platform package locally:
 
