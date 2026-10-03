@@ -11,7 +11,7 @@ The managed assembly has no third-party NuGet runtime dependencies. Native runti
 
 ## Status
 
-Version `0.1.1` pins the published Fullbleed `2.5.6` Rust crate. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.1.1). CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
+Version `0.1.2` pins the published Fullbleed `2.5.6` Rust crate. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.1.2). CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
 
 Supported package targets in the current build pipeline:
 
@@ -27,7 +27,7 @@ The public managed API targets `net8.0`; applications on compatible later .NET r
 In a .NET 8 console project:
 
 ```sh
-dotnet add package FullBleed.DotNet --version 0.1.1
+dotnet add package FullBleed.DotNet --version 0.1.2
 ```
 
 Basic rendering:
@@ -60,7 +60,7 @@ The Northstar sample uses explicit fonts, print dimensions, CSS grid, tables, co
 dotnet run --project samples/FullBleed.DotNet.Showcase -c Release -- output/northstar
 ```
 
-This writes `invoice.pdf` and a PNG preview. The [sample source](samples/FullBleed.DotNet.Showcase/Program.cs) shows font registration and missing-glyph diagnostics. The same document is also rendered from the assembled NuGet package in CI. [Inspect the design and download its HTML/CSS](https://docs.fullbleed.dev/examples/).
+This writes `invoice.pdf` and a PNG preview. The [sample source](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/samples/FullBleed.DotNet.Showcase/Program.cs) shows font registration and missing-glyph diagnostics. The same document is also rendered from the assembled NuGet package in CI. [Inspect the design and download its HTML/CSS](https://docs.fullbleed.dev/examples/).
 
 ## LINQ and compiled VDP
 
@@ -100,7 +100,7 @@ compiled.RenderReflowBindingsToFile(
 
 Structural `data-fb-bind-html` values are trusted HTML. Construct them from escaped fields or pass them through an application-approved allowlist sanitizer; ordinary `{{slot}}` values remain literal text.
 
-See the complete executable example in [`samples/FullBleed.DotNet.LinqVdp`](samples/FullBleed.DotNet.LinqVdp).
+See the complete executable example in [`samples/FullBleed.DotNet.LinqVdp`](https://github.com/fullbleed-engine/fullbleed-dotnet/tree/master/samples/FullBleed.DotNet.LinqVdp).
 
 ## Batches, diagnostics, and previews
 
@@ -170,7 +170,7 @@ result.EnsureSuccess();
 | Capability/contract/schema discovery | `FullBleedCliClient` |
 | Verification and full CLI suite | typed CLI requests plus `RunJsonAsync` |
 
-More detail is in [`docs/api.md`](docs/api.md), [`docs/native-abi.md`](docs/native-abi.md), and [`docs/development.md`](docs/development.md).
+More detail is in [`docs/api.md`](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/api.md), [`docs/native-abi.md`](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/native-abi.md), and [`docs/development.md`](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md).
 
 ## PDF profiles and claims
 
@@ -193,8 +193,8 @@ Build the current platform package locally:
 ./scripts/pack.ps1
 ```
 
-Cross-platform release packages must contain every claimed RID asset. CI checks the binary architecture, retained license texts, and dependency provenance inside the final `.nupkg`, then tests it on each matching OS. The managed assembly has no third-party NuGet runtime dependencies; the separate CLI adapter requires an independently installed Fullbleed Python CLI. Details are in [`docs/development.md`](docs/development.md).
+Cross-platform release packages must contain every claimed RID asset. CI checks the binary architecture, retained license texts, and dependency provenance inside the final `.nupkg`, then tests it on each matching OS. The managed assembly has no third-party NuGet runtime dependencies; the separate CLI adapter requires an independently installed Fullbleed Python CLI. Details are in [`docs/development.md`](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md).
 
 ## License
 
-MIT. See [`LICENSE`](LICENSE) and [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+MIT. See [`LICENSE`](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/LICENSE) and [`THIRD_PARTY_NOTICES.md`](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/THIRD_PARTY_NOTICES.md).

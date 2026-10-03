@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2 - 2026-10-03
+
+- Use absolute links for sample source, API documentation, and license notices so NuGet's README renderer preserves them.
+- Keep the Fullbleed 2.5.6 engine and rendering behavior from 0.1.1.
+
 ## 0.1.1 - 2026-10-03
 
 - Pin the published Fullbleed 2.5.6 crate, including corrected bold-text extraction and finalized previews; source builds no longer need a sibling engine checkout.
