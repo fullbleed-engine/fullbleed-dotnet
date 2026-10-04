@@ -2,6 +2,11 @@ using FullBleed.DotNet;
 using System.Security.Cryptography;
 using System.Text.Json;
 
+if (args.Length >= 3 && $"{Environment.Version.Major}.{Environment.Version.Minor}" != args[2])
+{
+    throw new InvalidOperationException($"Running on .NET {Environment.Version}; expected {args[2]}.");
+}
+
 var outputPath = Path.GetFullPath(args.Length >= 1 ? args[0] : "output/package-smoke.pdf");
 var outputDirectory = Path.GetDirectoryName(outputPath)!;
 Directory.CreateDirectory(outputDirectory);
@@ -83,6 +88,9 @@ var evidence = new
     features.BindingVersion,
     features.AbiVersion,
     Runtime = System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier,
+    Framework = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription,
+    FrameworkVersion = Environment.Version.ToString(),
+    TargetFramework = AppContext.TargetFrameworkName,
     inspection.PageCount,
     MissingGlyphs = diagnostic.Diagnostics.MissingGlyphs.Count,
     PdfSha256 = Convert.ToHexString(SHA256.HashData(diagnostic.Pdf)).ToLowerInvariant(),

@@ -1,6 +1,8 @@
 [CmdletBinding()]
 param(
     [switch]$SkipPack,
+    [ValidateSet('net8.0', 'net9.0', 'net10.0')]
+    [string]$TargetFramework = 'net8.0',
     [string]$PackageDirectory = 'artifacts/packages',
     [string]$OutputDirectory = 'artifacts/package-smoke'
 )
@@ -40,10 +42,17 @@ $version = ($versions.Project.ItemGroup.PackageVersion | Where-Object { $_.Inclu
 $packagePath = Join-Path $packages "FullBleed.DotNet.$version.nupkg"
 if (-not (Test-Path -LiteralPath $packagePath)) { throw "Missing package: $packagePath" }
 $project = Join-Path $consumer 'Consumer.csproj'
+$frameworkVersion = $TargetFramework.Substring(3)
+# Select the matching stable SDK even when newer SDKs are installed. The consumer
+# lives outside the repository, so its global.json does not inherit the build SDK.
+@{
+    sdk = @{ version = "$frameworkVersion.100"; rollForward = 'latestFeature'; allowPrerelease = $false }
+} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $consumer 'global.json') -Encoding utf8
 @"
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework>
+    <OutputType>Exe</OutputType><TargetFramework>$TargetFramework</TargetFramework>
+    <RollForward>LatestPatch</RollForward>
     <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
@@ -59,15 +68,19 @@ try {
     $env:FULLBLEED_NATIVE_LIBRARY = $null
     Push-Location $consumer
     try {
+        $sdkVersion = & dotnet --version
+        if ($LASTEXITCODE -ne 0) { throw 'The matching stable .NET SDK is required.' }
         & dotnet restore $project --source $packages --packages (Join-Path $consumer 'packages') --force-evaluate
         if ($LASTEXITCODE -ne 0) { throw 'package smoke restore failed' }
-        & dotnet run --project $project -c Release --no-restore -- (Join-Path $output 'invoice.pdf') $version
+        & dotnet run --project $project -c Release --no-restore -- (Join-Path $output 'invoice.pdf') $version $frameworkVersion
         if ($LASTEXITCODE -ne 0) { throw 'package smoke execution failed' }
     } finally { Pop-Location }
 } finally { $env:FULLBLEED_NATIVE_LIBRARY = $priorNative }
 @{
     package = (Split-Path $packagePath -Leaf)
     sha256 = (Get-FileHash -LiteralPath $packagePath -Algorithm SHA256).Hash.ToLowerInvariant()
+    target_framework = $TargetFramework
+    sdk_version = $sdkVersion
     consumer = $consumer
 } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $output 'package.json') -Encoding utf8
 Write-Host "Isolated package evidence: $output"
