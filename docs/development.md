@@ -35,15 +35,18 @@ Exercise the packed package through a clean `PackageReference` consumer:
 
 ```powershell
 ./scripts/package-smoke.ps1 -SkipPack
+./scripts/package-smoke.ps1 -SkipPack -TargetFramework net10.0 -OutputDirectory artifacts/package-smoke-net10
 ```
+
+Install the matching stable SDK for each requested framework. The consumer pins that SDK family in its own `global.json`, disallows major runtime roll-forward, and fails if its actual runtime differs from the requested .NET version. The default remains `net8.0`; `net9.0` and `net10.0` are also accepted.
 
 ## CI package assembly
 
 The CI matrix compiles native assets on matching Windows, Linux, Intel macOS, and Apple Silicon macOS runners. A packaging job downloads each artifact into its RID directory and packs once. `tools/verify_package.py --all-rids` checks native binary architectures, managed dependency metadata, required notices, and staged-versus-packaged hashes.
 
-A second four-platform matrix consumes that same assembled package. `scripts/package-smoke.ps1` creates a consumer and a fresh NuGet cache outside the checkout and clears `FULLBLEED_NATIVE_LIBRARY` for the child run. This prevents the development resolver from masking missing or incorrect packaged assets. Its retained PDF, PNG, compiled-record PDF, and JSON hashes come from the package, not a ProjectReference.
+A second matrix consumes that same assembled package on .NET 8, 9, and 10 for each of the four platforms (12 consumers). `scripts/package-smoke.ps1` creates a consumer and a fresh NuGet cache outside the checkout and clears `FULLBLEED_NATIVE_LIBRARY` for the child run. This prevents the development resolver from masking missing or incorrect packaged assets. Its retained PDF, PNG, compiled-record PDF, and JSON hashes come from the package, not a ProjectReference. Evidence includes the SDK, target framework, actual runtime version, and package checksum.
 
-The evidence job uses `pypdf==6.1.1` to independently check the invoice's searchable styled text, a separate weight-700 bold-text fixture, and both compiled records. It compares the invoice PDF, HTML preview, and preview of the saved PDF across all four consumers, along with the bold fixture PDF and saved-PDF preview. For a local package check, install that reader in a maintainer environment and run `python tools/verify_document_outputs.py artifacts/package-smoke`. The reader is a release-check dependency, not a dependency of applications using the .NET package.
+The evidence job uses `pypdf==6.1.1` to independently check the invoice's searchable styled text, a separate weight-700 bold-text fixture, and both compiled records. It compares the invoice PDF, HTML preview, and preview of the saved PDF across all 12 consumers, along with the bold fixture PDF and saved-PDF preview. It also rejects evidence from a missing or incorrect framework/platform combination. For a local package check, install that reader in a maintainer environment and run `python tools/verify_document_outputs.py artifacts/package-smoke`. The reader is a release-check dependency, not a dependency of applications using the .NET package.
 
 When changing the Cargo lockfile, use Python 3.11 or later to regenerate and inspect the committed dependency provenance and upstream license texts:
 

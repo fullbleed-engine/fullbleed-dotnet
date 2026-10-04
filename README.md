@@ -1,6 +1,6 @@
 # Fullbleed for .NET
 
-Idiomatic .NET 8 bindings for [Fullbleed PDF Engine](https://github.com/fullbleed-engine/fullbleed-official): deterministic HTML/CSS-to-PDF rendering, compiled variable-data publishing (VDP), diagnostics, previews, PDF inspection, template composition, and runtime-discovered CLI workflows.
+Idiomatic C# bindings for [Fullbleed PDF Engine](https://github.com/fullbleed-engine/fullbleed-official): deterministic HTML/CSS-to-PDF rendering, compiled variable-data publishing (VDP), diagnostics, previews, PDF inspection, template composition, and runtime-discovered CLI workflows.
 
 This repository contains two complementary integration layers:
 
@@ -20,17 +20,21 @@ Supported package targets in the current build pipeline:
 - `osx-x64`
 - `osx-arm64`
 
-The public managed API targets `net8.0`; applications on compatible later .NET releases can consume that target.
+The managed library targets `net8.0`, which applications on .NET 8, 9, and 10 can reference. CI runs the same assembled NuGet package in applications targeting each of those frameworks on every platform above, checks the actual runtime version, and compares the fixture PDF and PNG bytes. See the [verification workflow](https://github.com/fullbleed-engine/fullbleed-dotnet/actions/workflows/ci.yml) and its retained `cross-platform-evidence` artifact.
+
+Use .NET 10 LTS for a new application. Microsoft's [support policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) lists November 10, 2026 as the end of support for both .NET 8 and 9; a library's minimum target does not require your application to stay on that runtime.
 
 ## Install and render
 
-In a .NET 8 console project:
+With the .NET 10 SDK installed:
 
 ```sh
+dotnet new console -n FullbleedDemo --framework net10.0
+cd FullbleedDemo
 dotnet add package FullBleed.DotNet --version 0.1.2
 ```
 
-Basic rendering:
+Replace `Program.cs` with:
 
 ```csharp
 using FullBleed.DotNet;
@@ -49,6 +53,8 @@ engine.RenderPdfToFile(
 var inspection = FullBleedEngine.InspectPdf("output/report.pdf");
 Console.WriteLine($"{inspection.PageCount} page(s), PDF {inspection.PdfVersion}");
 ```
+
+Run `dotnet run` and open `output/report.pdf`. Existing .NET 8 and 9 projects use the same package and API.
 
 `FullBleedRenderer.Render(...)` and `RenderToFile(...)` remain as compatibility helpers for the original proof of concept.
 

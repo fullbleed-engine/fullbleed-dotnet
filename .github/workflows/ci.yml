@@ -153,12 +153,13 @@ jobs:
           if-no-files-found: error
 
   package-consumer:
-    name: Package consumer ${{ matrix.rid }}
+    name: Package consumer ${{ matrix.platform.rid }} .NET ${{ matrix.dotnet }}
     needs: package
     strategy:
       fail-fast: false
       matrix:
-        include:
+        dotnet: ['8.0', '9.0', '10.0']
+        platform:
           - os: windows-latest
             rid: win-x64
           - os: ubuntu-latest
@@ -167,22 +168,22 @@ jobs:
             rid: osx-x64
           - os: macos-15
             rid: osx-arm64
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.platform.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: ${{ matrix.dotnet }}.x
       - uses: actions/download-artifact@v4
         with:
           name: nuget-packages
           path: artifacts/packages
       - name: Consume the assembled NuGet package outside the checkout
         shell: pwsh
-        run: ./scripts/package-smoke.ps1 -SkipPack
+        run: ./scripts/package-smoke.ps1 -SkipPack -TargetFramework 'net${{ matrix.dotnet }}'
       - uses: actions/upload-artifact@v4
         with:
-          name: package-consumer-${{ matrix.rid }}
+          name: package-consumer-${{ matrix.platform.rid }}-net${{ matrix.dotnet }}
           path: artifacts/package-smoke/*
           if-no-files-found: error
 
