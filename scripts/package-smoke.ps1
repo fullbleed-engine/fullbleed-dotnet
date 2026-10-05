@@ -3,6 +3,7 @@ param(
     [switch]$SkipPack,
     [ValidateSet('net8.0', 'net9.0', 'net10.0')]
     [string]$TargetFramework = 'net8.0',
+    [string]$PackageVersion,
     [string]$PackageDirectory = 'artifacts/packages',
     [string]$OutputDirectory = 'artifacts/package-smoke'
 )
@@ -39,6 +40,8 @@ if ([System.IO.Path]::DirectorySeparatorChar -eq '/') {
 New-Item -ItemType Directory -Path $output -Force | Out-Null
 [xml]$versions = Get-Content -LiteralPath (Join-Path $repository 'Directory.Packages.props') -Raw
 $version = ($versions.Project.ItemGroup.PackageVersion | Where-Object { $_.Include -eq 'FullBleed.DotNet' }).Version
+if ($PackageVersion) { $version = $PackageVersion }
+if ($version -notmatch '^\d+\.\d+\.\d+$') { throw 'Use a stable numeric package version.' }
 $packagePath = Join-Path $packages "FullBleed.DotNet.$version.nupkg"
 if (-not (Test-Path -LiteralPath $packagePath)) { throw "Missing package: $packagePath" }
 $project = Join-Path $consumer 'Consumer.csproj'
@@ -63,6 +66,11 @@ $frameworkVersion = $TargetFramework.Substring(3)
 "@ | Set-Content -LiteralPath $project -Encoding utf8
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/Program.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'samples/FullBleed.DotNet.Showcase/Assets') -Destination $consumer -Recurse
+$verificationFonts = Join-Path $consumer 'Assets/verification-fonts'
+New-Item -ItemType Directory -Path $verificationFonts | Out-Null
+foreach ($name in @('NotoSans-Regular.ttf', 'NotoSans-OFL.txt')) {
+    Copy-Item -LiteralPath (Join-Path $repository "tests/FullBleed.DotNet.Tests/Assets/$name") -Destination $verificationFonts
+}
 $priorNative = $env:FULLBLEED_NATIVE_LIBRARY
 try {
     $env:FULLBLEED_NATIVE_LIBRARY = $null

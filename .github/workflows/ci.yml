@@ -46,7 +46,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install the independently versioned CLI for integration tests
-        run: python -m pip install fullbleed==2.5.6
+        run: python -m pip install fullbleed==2.5.7
 
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
@@ -196,8 +196,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install independent PDF reader for release evidence
-        run: python -m pip install pypdf==6.1.1
+      - name: Install independent PDF and font readers for release evidence
+        run: python -m pip install pypdf==6.19.0 pypdfium2==5.14.0 fonttools==4.65.0 pillow==12.3.0
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
       - uses: actions/download-artifact@v4
         with:
           pattern: package-consumer-*
@@ -207,9 +210,24 @@ jobs:
           name: nuget-packages
           path: artifacts/packages
       - run: python tools/verify_consumer_evidence.py
-        name: Verify independent text extraction and compare PDF/PNG bytes
+        name: Verify independent fonts and text and compare PDF/PNG bytes
+      - name: Compare with the previous public package and reject old font metadata
+        run: python tools/compare_font_packages.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0
       - uses: actions/upload-artifact@v4
         with:
           name: cross-platform-evidence
-          path: artifacts/cross-platform-evidence.json
+          path: |
+            artifacts/cross-platform-evidence.json
+            artifacts/consumer-evidence/**/font-verification.json
+            artifacts/consumer-evidence/**/pdfium-*/*.png
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: font-comparison
+          path: |
+            artifacts/font-comparison/baseline/
+            artifacts/font-comparison/source-fonts/
+            artifacts/font-comparison/*.json
+            artifacts/font-comparison/*.txt
+            artifacts/font-comparison/*.log
           if-no-files-found: error

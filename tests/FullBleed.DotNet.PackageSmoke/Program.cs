@@ -62,10 +62,9 @@ if (finalizedPreview.Paths.Count != 1 || !File.ReadAllBytes(finalizedPreview.Pat
 }
 
 var boldPath = Path.Combine(outputDirectory, "bold.pdf");
-engine.RenderPdfToFile(
-    "<h1>Invoice BOLD-1042</h1><p><strong>Customer Ada</strong></p><p>Total USD 250.00</p>",
-    "body { font-family: Inter; font-size: 12pt; } h1, strong { font-weight: 700; }",
-    boldPath);
+const string boldHtml = "<h1>Invoice BOLD-1042</h1><p><strong>Customer Ada</strong></p><p>Total USD 250.00</p>";
+const string boldCss = "body { font-family: Inter; font-size: 12pt; } h1, strong { font-weight: 700; }";
+engine.RenderPdfToFile(boldHtml, boldCss, boldPath);
 var boldPreview = engine.RenderFinalizedPdfImagePagesToDirectory(
     boldPath, Path.Combine(outputDirectory, "finalized-bold"), dpi: 96, stem: "bold");
 if (boldPreview.Paths.Count != 1)
@@ -73,15 +72,85 @@ if (boldPreview.Paths.Count != 1)
     throw new InvalidOperationException("Expected one preview page for the bold-text regression fixture.");
 }
 
-using var compiled = engine.Compile("<p>Invoice {{id}}</p>", "body { font-family: Inter; }");
+const string fixedHtml = "<p>Invoice {{id}}</p>";
+const string fixedCss = "body { font-family: Inter; }";
+var fixedRecords = new[] { "FIRST-001", "SECOND-002" };
+using var compiled = engine.Compile(fixedHtml, fixedCss);
 var recordsPath = Path.Combine(outputDirectory, "records.pdf");
 compiled.RenderBindingsToFile(
-    new[] { "FIRST-001", "SECOND-002" },
+    fixedRecords,
     map => map.Bind("id", id => id), recordsPath);
 if (FullBleedEngine.InspectPdf(recordsPath).PageCount != 2)
 {
     throw new InvalidOperationException("The packaged compiled-binding API did not emit two records.");
 }
+if (!File.ReadAllBytes(recordsPath).SequenceEqual(compiled.RenderBindings(fixedRecords, map => map.Bind("id", id => id))))
+{
+    throw new InvalidOperationException("Compiled fixed records differ between file and repeated byte output.");
+}
+var recordsPreview = engine.RenderFinalizedPdfImagePagesToDirectory(
+    recordsPath, Path.Combine(outputDirectory, "finalized-records"), dpi: 96, stem: "records");
+
+const string reflowHtml = "<h1>Record {{id}}</h1><p>{{story}}</p>";
+const string reflowCss = "@page {size:A4;margin:36pt} body {font-family:Inter;font-size:12pt} p {width:180pt}";
+var reflowRecords = new[]
+{
+    new { Id = "REFLOW-001", Story = "Résumé café Ångström. A short narrative." },
+    new { Id = "REFLOW-002", Story = string.Join(" ", Enumerable.Repeat("A longer narrative wraps across several lines while retaining its original glyphs and metrics.", 8)) },
+};
+using var reflow = engine.Compile(reflowHtml, reflowCss);
+var reflowPath = Path.Combine(outputDirectory, "reflow.pdf");
+reflow.RenderReflowBindingsToFile(reflowRecords,
+    map => map.Bind("id", record => record.Id).Bind("story", record => record.Story),
+    reflowPath, CompiledFlowCompression.Compact);
+if (FullBleedEngine.InspectPdf(reflowPath).PageCount != 2 ||
+    !File.ReadAllBytes(reflowPath).SequenceEqual(reflow.RenderReflowBindings(reflowRecords,
+        map => map.Bind("id", record => record.Id).Bind("story", record => record.Story), CompiledFlowCompression.Compact)))
+{
+    throw new InvalidOperationException("Compiled reflow records must retain two pages and repeat identically.");
+}
+var reflowPreview = engine.RenderFinalizedPdfImagePagesToDirectory(
+    reflowPath, Path.Combine(outputDirectory, "finalized-reflow"), dpi: 96, stem: "reflow");
+
+var probeFont = Path.Combine(assets, "verification-fonts", "NotoSans-Regular.ttf");
+const string probeText = "Invoice 2042 Résumé café Ångström Ω Ж 123.45";
+const string probeHtml = "<p>" + probeText + "</p>";
+const string probeCss = "@page {size:A4;margin:36pt} body {font-family:'Noto Sans';font-size:18pt}";
+using var probeEngine = new FullBleedEngine(new FullBleedEngineOptions
+{
+    DocumentLanguage = "en-US",
+    DocumentTitle = "Unicode font verification",
+    Assets = [FullBleedAsset.FromPath(probeFont, FullBleedAssetKind.Font)],
+});
+var probe = probeEngine.RenderPdfWithDiagnostics(probeHtml, probeCss);
+if (probe.Diagnostics.MissingGlyphs.Count != 0 || !probe.Pdf.SequenceEqual(probeEngine.RenderPdf(probeHtml, probeCss)))
+{
+    throw new InvalidOperationException("Unicode font output must have no missing glyphs and repeat identically.");
+}
+var probePath = Path.Combine(outputDirectory, "unicode.pdf");
+File.WriteAllBytes(probePath, probe.Pdf);
+if (FullBleedEngine.InspectPdf(probePath).PageCount != 1)
+{
+    throw new InvalidOperationException("Expected one Unicode font probe page.");
+}
+var probePreview = probeEngine.RenderFinalizedPdfImagePagesToDirectory(
+    probePath, Path.Combine(outputDirectory, "finalized-unicode"), dpi: 96, stem: "unicode");
+
+var inputs = new
+{
+    Schema = "fullbleed.dotnet.font_inputs.v1",
+    DocumentLanguage = "en-US",
+    DocumentTitle = "Northstar Studio - Invoice NS-1042",
+    Invoice = new { Html = html, Css = css },
+    Bold = new { Html = boldHtml, Css = boldCss },
+    Fixed = new { Html = fixedHtml, Css = fixedCss, Records = fixedRecords },
+    Reflow = new { Html = reflowHtml, Css = reflowCss, Records = reflowRecords, Compression = "Compact" },
+    Unicode = new { Html = probeHtml, Css = probeCss, Text = probeText, DocumentTitle = "Unicode font verification" },
+    Fonts = Directory.GetFiles(Path.Combine(assets, "fonts"), "*.ttf").Append(probeFont)
+        .Order(StringComparer.Ordinal).Select(path => new { Name = Path.GetFileName(path), Sha256 = HashFile(path) }).ToArray(),
+};
+File.WriteAllText(Path.Combine(outputDirectory, "font-inputs.json"),
+    JsonSerializer.Serialize(inputs, new JsonSerializerOptions { WriteIndented = true }));
 
 var evidence = new
 {
@@ -99,7 +168,17 @@ var evidence = new
     BoldPdfSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(boldPath))).ToLowerInvariant(),
     BoldPreviewSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(boldPreview.Paths[0]))).ToLowerInvariant(),
     CompiledRecords = 2,
+    CompiledPdfSha256 = HashFile(recordsPath),
+    CompiledPreviewsSha256 = recordsPreview.Paths.Select(HashFile).ToArray(),
+    ReflowRecords = 2,
+    ReflowPdfSha256 = HashFile(reflowPath),
+    ReflowPreviewsSha256 = reflowPreview.Paths.Select(HashFile).ToArray(),
+    UnicodePdfSha256 = HashFile(probePath),
+    UnicodePreviewsSha256 = probePreview.Paths.Select(HashFile).ToArray(),
+    FontInputsSha256 = HashFile(Path.Combine(outputDirectory, "font-inputs.json")),
 };
 File.WriteAllText(Path.Combine(outputDirectory, "evidence.json"),
     JsonSerializer.Serialize(evidence, new JsonSerializerOptions { WriteIndented = true }));
 Console.WriteLine($"package smoke passed: {outputPath}");
+
+static string HashFile(string path) => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))).ToLowerInvariant();
