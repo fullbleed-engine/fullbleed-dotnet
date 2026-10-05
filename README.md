@@ -11,7 +11,7 @@ The managed assembly has no third-party NuGet runtime dependencies. Native runti
 
 ## Status
 
-Version `0.1.2` pins the published Fullbleed `2.5.6` Rust crate. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.1.2). CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
+Version `0.1.3` pins the published Fullbleed `2.5.7` Rust crate. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.1.3). CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
 
 Supported package targets in the current build pipeline:
 
@@ -31,7 +31,7 @@ With the .NET 10 SDK installed:
 ```sh
 dotnet new console -n FullbleedDemo --framework net10.0
 cd FullbleedDemo
-dotnet add package FullBleed.DotNet --version 0.1.2
+dotnet add package FullBleed.DotNet --version 0.1.3
 ```
 
 Replace `Program.cs` with:
@@ -67,6 +67,8 @@ dotnet run --project samples/FullBleed.DotNet.Showcase -c Release -- output/nort
 ```
 
 This writes `invoice.pdf` and a PNG preview. The [sample source](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/samples/FullBleed.DotNet.Showcase/Program.cs) shows font registration and missing-glyph diagnostics. The same document is also rendered from the assembled NuGet package in CI. [Inspect the design and download its HTML/CSS](https://docs.fullbleed.dev/examples/).
+
+In the retained package comparison, this invoice shrank from 81,227 bytes with `0.1.2` to 34,542 bytes with `0.1.3` (57.5%). Its extracted text and page pixels stayed identical. The checks also cover bold text, fixed and reflow records, and an explicitly registered Unicode font. These measurements describe the supplied fixtures; savings depend on the document and fonts. See [how to reproduce the comparison](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#font-output-comparison) and the release workflow's `font-comparison` artifact.
 
 ## LINQ and compiled VDP
 

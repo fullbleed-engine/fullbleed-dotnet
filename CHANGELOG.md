@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.3 - 2026-10-05
+
+- Pin the published Fullbleed 2.5.7 crate, which compacts embedded font metadata while preserving retained glyph programs, metrics, mappings, and notices.
+- Extend isolated package checks to Unicode font input and compiled reflow records, with independent font, text, and page-pixel checks against the previous public package.
+- Keep the managed API, native ABI, runtime dependency graph, and .NET 8/9/10 platform coverage unchanged.
+
 ## 0.1.2 - 2026-10-03
 
 - Use absolute links for sample source, API documentation, and license notices so NuGet's README renderer preserves them.

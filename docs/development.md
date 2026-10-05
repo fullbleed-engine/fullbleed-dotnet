@@ -11,7 +11,7 @@ runtimes/{rid}/native/          generated/staged package assets
 scripts/                        build, verify, and pack entrypoints
 ```
 
-The native crate pins the published Fullbleed `2.5.6` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
+The native crate pins the published Fullbleed `2.5.7` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
 
 ## Local verification
 
@@ -21,7 +21,7 @@ The native crate pins the published Fullbleed `2.5.6` crate with an exact Cargo 
 
 This stages the host native library, checks Rust formatting and Clippy, runs native tests, verifies managed formatting, builds the full solution, and runs the managed test suite. The integration suite verifies deterministic rendering, diagnostics, metrics, PNG output, in-memory and direct-to-file batches, fixed and reflow compiled bindings, inspection, template stamping/composition, concurrency, and failure-path recovery.
 
-CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.6` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
+CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.7` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
 
 ## Local package
 
@@ -46,7 +46,21 @@ The CI matrix compiles native assets on matching Windows, Linux, Intel macOS, an
 
 A second matrix consumes that same assembled package on .NET 8, 9, and 10 for each of the four platforms (12 consumers). `scripts/package-smoke.ps1` creates a consumer and a fresh NuGet cache outside the checkout and clears `FULLBLEED_NATIVE_LIBRARY` for the child run. This prevents the development resolver from masking missing or incorrect packaged assets. Its retained PDF, PNG, compiled-record PDF, and JSON hashes come from the package, not a ProjectReference. Evidence includes the SDK, target framework, actual runtime version, and package checksum.
 
-The evidence job uses `pypdf==6.1.1` to independently check the invoice's searchable styled text, a separate weight-700 bold-text fixture, and both compiled records. It compares the invoice PDF, HTML preview, and preview of the saved PDF across all 12 consumers, along with the bold fixture PDF and saved-PDF preview. It also rejects evidence from a missing or incorrect framework/platform combination. For a local package check, install that reader in a maintainer environment and run `python tools/verify_document_outputs.py artifacts/package-smoke`. The reader is a release-check dependency, not a dependency of applications using the .NET package.
+The evidence job independently checks five fixtures: the styled invoice, weight-700 bold text, two fixed records, two reflow records, and Unicode text using a separately registered Noto Sans font. It compares their PDF bytes and saved-PDF PNG previews across all 12 consumers, plus the invoice's HTML preview. It also rejects evidence from a missing or incorrect framework/platform combination. `pypdf` and PDFium must agree on extracted text; FontTools checks embedded glyph programs, metrics, mappings, checksums, notices, and compact metadata against the source fonts. Four source fonts are exercised; the invoice registers a fifth font that is unused in these outputs. These readers are release-check dependencies, not dependencies of applications using the .NET package.
+
+## Font output comparison
+
+After creating an isolated consumer with `scripts/package-smoke.ps1`, install the independent readers in a maintainer environment:
+
+```sh
+python -m pip install pypdf==6.19.0 pypdfium2==5.14.0 fonttools==4.65.0 pillow==12.3.0
+python tools/verify_font_outputs.py artifacts/package-smoke
+python tools/compare_font_packages.py artifacts/package-smoke
+```
+
+The comparison script requires PowerShell (`pwsh`, or an explicit `--shell` path) and the .NET 8 SDK. It downloads the previous public `0.1.2` package, checks its pinned SHA-256 and engine provenance, and renders the same inputs in another isolated consumer. The old package must fail the new compact-metadata gate as a negative control, while passing the original glyph/metric checks. Every fixture must become smaller with unchanged extracted text, native previews, and independently rendered PDFium page pixels. These are document-size checks, not timing measurements or general parity claims.
+
+CI retains the baseline PDFs and previews, exact input HTML/CSS/records, source fonts with licenses, package checksums, reader versions, negative-control result, and comparison report in `font-comparison`. The candidate outputs are in the corresponding `package-consumer-*` artifacts; `cross-platform-evidence` retains the independent reports and PDFium renders for all 12 consumers. Locally the comparison writes to a new `artifacts/font-comparison` directory; pass `--output` to preserve an earlier run.
 
 When changing the Cargo lockfile, use Python 3.11 or later to regenerate and inspect the committed dependency provenance and upstream license texts:
 
