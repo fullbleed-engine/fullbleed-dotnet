@@ -17,6 +17,7 @@ from verify_document_outputs import verify as verify_document_outputs
 ROOT = Path(__file__).resolve().parents[1]
 CASES = [
     ('invoice', 1, 'PdfSha256', 'finalized', 'FinalizedPreviewSha256'),
+    ('invoice-explicit', 1, 'ExplicitInvoicePdfSha256', 'finalized-explicit', 'ExplicitInvoicePreviewSha256'),
     ('bold', 1, 'BoldPdfSha256', 'finalized-bold', 'BoldPreviewSha256'),
     ('records', 2, 'CompiledPdfSha256', 'finalized-records', 'CompiledPreviewsSha256'),
     ('reflow', 2, 'ReflowPdfSha256', 'finalized-reflow', 'ReflowPreviewsSha256'),
@@ -32,7 +33,7 @@ def compact(text):
     return re.sub(r'\s+', '', text)
 
 
-def verify(directory, baseline=None, legacy=False, report_path=None):
+def verify(directory, baseline=None, legacy=False, report_path=None, legacy_family=False):
     directory = Path(directory).resolve()
     evidence = json.loads((directory / 'evidence.json').read_text(encoding='utf-8-sig'))
     package = json.loads((directory / 'package.json').read_text(encoding='utf-8-sig'))
@@ -44,7 +45,7 @@ def verify(directory, baseline=None, legacy=False, report_path=None):
     result = dict(schema='fullbleed.dotnet.font_verification.v1', ok=False,
                   packageVersion=evidence['BindingVersion'], packageSha256=package['sha256'],
                   runtime=evidence['Runtime'], framework=evidence['FrameworkVersion'],
-                  inputs=inputs, legacyMetadataAllowed=legacy,
+                  inputs=inputs, legacyMetadataAllowed=legacy, legacyFamilyDefaultAllowed=legacy_family,
                   baselinePackageVersion=previous['packageVersion'] if previous else None,
                   readers={name: metadata.version(name) for name in ['pypdf', 'pypdfium2', 'fonttools', 'pillow']},
                   fixtures=[], scope='Retained synthetic documents: font programs, text and page pixels. No speed, general parity or conformance claim.')
@@ -91,6 +92,13 @@ def verify(directory, baseline=None, legacy=False, report_path=None):
                     checked.append(item)
                     fonts_seen.add(source.name)
             assert checked
+            if name in {'invoice', 'invoice-explicit'}:
+                expected_faces = {'BebasNeue-Regular.ttf', 'DMSerifDisplay-Italic.ttf', 'Inter-Variable.ttf'}
+                if name == 'invoice-explicit' or not legacy_family:
+                    expected_faces.add('DMSerifDisplay-Regular.ttf')
+                assert {item['source'] for item in checked} == expected_faces, (name, 'unexpected invoice font faces')
+                if name == 'invoice-explicit':
+                    assert text == result['fixtures'][0]['text'], 'Explicit invoice control changed text'
             if name == 'unicode':
                 assert {item['source'] for item in checked} == {'NotoSans-Regular.ttf'}
             pixel_hashes = []
@@ -121,7 +129,7 @@ def verify(directory, baseline=None, legacy=False, report_path=None):
                 item['reductionPercent'] = round(100 * (1 - item['pdfBytes'] / prior['pdfBytes']), 2)
                 item['baselineTextAndPixelsIdentical'] = True
             result['fixtures'].append(item)
-        assert fonts_seen == {'BebasNeue-Regular.ttf', 'DMSerifDisplay-Italic.ttf',
+        assert fonts_seen == {'BebasNeue-Regular.ttf', 'DMSerifDisplay-Italic.ttf', 'DMSerifDisplay-Regular.ttf',
                               'Inter-Variable.ttf', 'NotoSans-Regular.ttf'}, fonts_seen
         result['verifiedSourceFonts'] = sorted(fonts_seen)
         result['registeredButUnusedSourceFonts'] = sorted(set(expected) - fonts_seen)

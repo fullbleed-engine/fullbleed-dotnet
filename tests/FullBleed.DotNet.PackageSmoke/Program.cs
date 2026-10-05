@@ -61,6 +61,14 @@ if (finalizedPreview.Paths.Count != 1 || !File.ReadAllBytes(finalizedPreview.Pat
     throw new InvalidOperationException("The packaged runtime did not produce a valid preview of the saved PDF.");
 }
 
+// This control pins the brand's intended regular face. The ordinary invoice
+// above retains its original family CSS and exercises registration order.
+var explicitInvoiceCss = css + "\n.invoice .brand {font-family:'DMSerifDisplay-Regular';font-style:normal;}";
+var explicitInvoicePath = Path.Combine(outputDirectory, "invoice-explicit.pdf");
+engine.RenderPdfToFile(html, explicitInvoiceCss, explicitInvoicePath);
+var explicitInvoicePreview = engine.RenderFinalizedPdfImagePagesToDirectory(
+    explicitInvoicePath, Path.Combine(outputDirectory, "finalized-explicit"), dpi: 96, stem: "invoice-explicit");
+
 var boldPath = Path.Combine(outputDirectory, "bold.pdf");
 const string boldHtml = "<h1>Invoice BOLD-1042</h1><p><strong>Customer Ada</strong></p><p>Total USD 250.00</p>";
 const string boldCss = "body { font-family: Inter; font-size: 12pt; } h1, strong { font-weight: 700; }";
@@ -142,6 +150,7 @@ var inputs = new
     DocumentLanguage = "en-US",
     DocumentTitle = "Northstar Studio - Invoice NS-1042",
     Invoice = new { Html = html, Css = css },
+    InvoiceExplicit = new { Html = html, Css = explicitInvoiceCss },
     Bold = new { Html = boldHtml, Css = boldCss },
     Fixed = new { Html = fixedHtml, Css = fixedCss, Records = fixedRecords },
     Reflow = new { Html = reflowHtml, Css = reflowCss, Records = reflowRecords, Compression = "Compact" },
@@ -165,6 +174,8 @@ var evidence = new
     PdfSha256 = Convert.ToHexString(SHA256.HashData(diagnostic.Pdf)).ToLowerInvariant(),
     PreviewSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(preview.Paths[0]))).ToLowerInvariant(),
     FinalizedPreviewSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(finalizedPreview.Paths[0]))).ToLowerInvariant(),
+    ExplicitInvoicePdfSha256 = HashFile(explicitInvoicePath),
+    ExplicitInvoicePreviewSha256 = HashFile(explicitInvoicePreview.Paths[0]),
     BoldPdfSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(boldPath))).ToLowerInvariant(),
     BoldPreviewSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(boldPreview.Paths[0]))).ToLowerInvariant(),
     CompiledRecords = 2,
@@ -179,6 +190,7 @@ var evidence = new
 };
 File.WriteAllText(Path.Combine(outputDirectory, "evidence.json"),
     JsonSerializer.Serialize(evidence, new JsonSerializerOptions { WriteIndented = true }));
+FontFamilyFixtures.Run(assets, outputDirectory, features.BindingVersion);
 Console.WriteLine($"package smoke passed: {outputPath}");
 
 static string HashFile(string path) => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))).ToLowerInvariant();

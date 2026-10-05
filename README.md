@@ -11,7 +11,9 @@ The managed assembly has no third-party NuGet runtime dependencies. Native runti
 
 ## Status
 
-Version `0.1.3` pins the published Fullbleed `2.5.7` Rust crate. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.1.3). CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
+Version `0.1.4` pins the published Fullbleed `2.5.8` Rust crate. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.1.4). CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
+
+Normal text now selects the regular face when a family's italic font is registered first. Review saved PDF baselines when upgrading: affected documents can change appearance, line breaks, and file size. Explicit face names and `@font-face` mappings remain available. See the [font-selection guide](https://docs.fullbleed.dev/engine/font-registration/).
 
 Supported package targets in the current build pipeline:
 
@@ -31,7 +33,7 @@ With the .NET 10 SDK installed:
 ```sh
 dotnet new console -n FullbleedDemo --framework net10.0
 cd FullbleedDemo
-dotnet add package FullBleed.DotNet --version 0.1.3
+dotnet add package FullBleed.DotNet --version 0.1.4
 ```
 
 Replace `Program.cs` with:
@@ -68,7 +70,9 @@ dotnet run --project samples/FullBleed.DotNet.Showcase -c Release -- output/nort
 
 This writes `invoice.pdf` and a PNG preview. The [sample source](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/samples/FullBleed.DotNet.Showcase/Program.cs) shows font registration and missing-glyph diagnostics. The same document is also rendered from the assembled NuGet package in CI. [Inspect the design and download its HTML/CSS](https://docs.fullbleed.dev/examples/).
 
-In the retained package comparison, this invoice shrank from 81,227 bytes with `0.1.2` to 34,542 bytes with `0.1.3` (57.5%). Its extracted text and page pixels stayed identical. The checks also cover bold text, fixed and reflow records, and an explicitly registered Unicode font. These measurements describe the supplied fixtures; savings depend on the document and fonts. See [how to reproduce the comparison](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#font-output-comparison) and the release workflow's `font-comparison` artifact.
+The 0.1.4 family-selection fix corrects the invoice's brand to its intended regular face. The release check compares it with an explicit regular-face control, while preserving the original family CSS in the real invoice. It also checks bold text, fixed and reflow records, Unicode text, and both font registration orders. See [how to reproduce the comparison](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#font-output-comparison).
+
+The historical [0.1.3 font-compaction evidence](https://github.com/fullbleed-engine/fullbleed-dotnet/releases/tag/v0.1.3) records this invoice changing from 81,227 to 34,542 bytes with identical text and pixels. That measurement uses the earlier font selection; the 0.1.4 correction changes its appearance and size. Savings depend on the document and fonts.
 
 ## LINQ and compiled VDP
 

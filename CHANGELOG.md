@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.4 - 2026-10-05
+
+- Pin published Fullbleed 2.5.8 so normal family text selects the regular face even when italic is registered first.
+- Verify ordinary, fixed, and reflow font selection against explicit faces in isolated package consumers, including both registration orders and explicit `@font-face` mappings.
+- Correct the Northstar invoice brand and retain its comparison with an explicit regular-face control. Affected documents can change appearance, line breaks, and size; review saved PDF baselines when upgrading.
+
 ## 0.1.3 - 2026-10-05
 
 - Pin the published Fullbleed 2.5.7 crate, which compacts embedded font metadata while preserving retained glyph programs, metrics, mappings, and notices.
