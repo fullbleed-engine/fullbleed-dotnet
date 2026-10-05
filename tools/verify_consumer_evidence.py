@@ -14,6 +14,7 @@ FRAMEWORKS = ['8.0', '9.0', '10.0']
 def main():
     manifest = json.loads((ROOT / 'artifacts/packages/package-manifest.json').read_text(encoding='utf-8'))
     records = []
+    inputs = []
     for rid, framework in product(RIDS, FRAMEWORKS):
         consumer = f'{rid}-net{framework}'
         directory = ROOT / 'artifacts/consumer-evidence' / ('package-consumer-' + consumer)
@@ -40,14 +41,18 @@ def main():
         assert hashlib.sha256(bold_previews[0].read_bytes()).hexdigest() == data['BoldPreviewSha256']
         assert data['ReflowRecords'] == 2
         font_report = verify_font_outputs(directory)
+        inputs.append(font_report['inputs'])
         data['IndependentDocumentChecks'] = font_report['documentChecks']
         data['IndependentFontChecks'] = {'status': 'passed', 'fixtures': len(font_report['fixtures']),
                                         'verifiedSourceFonts': font_report['verifiedSourceFonts']}
         records.append(data)
     for field in ['PdfSha256', 'PreviewSha256', 'FinalizedPreviewSha256', 'BoldPdfSha256', 'BoldPreviewSha256',
                   'CompiledPdfSha256', 'CompiledPreviewsSha256', 'ReflowPdfSha256', 'ReflowPreviewsSha256',
-                  'UnicodePdfSha256', 'UnicodePreviewsSha256', 'FontInputsSha256']:
+                  'UnicodePdfSha256', 'UnicodePreviewsSha256']:
         assert len({json.dumps(record[field], sort_keys=True) for record in records}) == 1, f'Platform or .NET runtime output differs: {field}'
+    # System.Text.Json uses platform line endings for indented JSON. Each file's
+    # raw hash is checked above; compare its exact parsed values across platforms.
+    assert all(item == inputs[0] for item in inputs), 'Platform or .NET runtime fixture inputs differ'
     result = {'schema': 'fullbleed.dotnet.package_consumers.v1', 'status': 'passed',
               'package_sha256': manifest['package']['sha256'], 'consumers': records,
               'scope': 'Northstar invoice PDF, HTML preview and finalized-PDF 96-DPI PNG match on .NET 8, 9 and 10 '
