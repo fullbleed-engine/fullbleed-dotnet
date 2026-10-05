@@ -1,6 +1,6 @@
 {
   "schema": "fullbleed.dotnet.native_provenance.v1",
-  "cargo_lock_sha256": "6ca50943a1fed15a495e1229820249e8124f9bc109f8870db6610bd01e30733d",
+  "cargo_lock_sha256": "63a6cc9246703b7c9623781ca7f05163adae44c67fabfd6082bee1f667c7ad32",
   "scope": "Cargo-locked native bridge graph, including build-time proc macros",
   "dependencies": [
     {
@@ -22,17 +22,17 @@
     },
     {
       "name": "fullbleed",
-      "version": "2.5.7",
+      "version": "2.5.8",
       "license": "MIT",
       "repository": "https://github.com/fullbleed-engine/fullbleed-official",
-      "crate_sha256": "2c7e5a61d8456e29afd7ceb3028ce4c88e45dee2580a81e47c6eee6c4a385b6a",
+      "crate_sha256": "443024fa33d7f7d9b3115d884120bfba2b43590ce3b89fc38fe3b8ec9b7b97d4",
       "license_files": [
         {
-          "path": "licenses/native/fullbleed-2.5.7/COPYRIGHT",
+          "path": "licenses/native/fullbleed-2.5.8/COPYRIGHT",
           "sha256": "b262548a457e00a8b593fe2fb1d42bc27468bab4524e5ee4b4c2c7d2e0fdceb5"
         },
         {
-          "path": "licenses/native/fullbleed-2.5.7/LICENSE",
+          "path": "licenses/native/fullbleed-2.5.8/LICENSE",
           "sha256": "36a2115938f6e68cf0d87eccff7a6a3e57c17017e909cbd640d51aff1fa0c5a9"
         }
       ]
