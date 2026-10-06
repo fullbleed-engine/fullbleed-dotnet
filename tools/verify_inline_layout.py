@@ -67,7 +67,8 @@ def verify(directory):
               'readers': {name: version(name) for name in ['pypdf', 'pypdfium2', 'pillow']},
               'scope': '48 ordinary/fixed/reflow inline wrapping fixtures and six intrinsic-width cases. '
                        'Unembedded Helvetica/Times preview fidelity is checked independently with PDFium; '
-                       'native previews can omit those glyphs. No general layout or conformance claim.'}
+                       'native previews use host font fallbacks and can differ or omit glyphs. '
+                       'No general layout or conformance claim.'}
     try:
         for item in inputs['cases']:
             mode, kind, expected = MATRIX[item['name']]
@@ -94,6 +95,18 @@ def verify(directory):
                 data = (folder / 'document.pdf').read_bytes()
                 reader = PdfReader(folder / 'document.pdf', strict=True)
                 assert len(reader.pages) == 1
+                pdf_fonts = [ref.get_object() for ref in reader.pages[0]['/Resources']['/Font'].values()]
+                assert pdf_fonts, 'Expected PDF font resources'
+                if builtin:
+                    expected_face = '/Helvetica' if item['name'].endswith('-helvetica') else '/Times-Roman'
+                    assert pdf_fonts and all(font['/BaseFont'] == expected_face and '/FontDescriptor' not in font for font in pdf_fonts), 'Expected only the explicit unembedded standard font'
+                    result['previewFontScope'] = 'unembedded-base14'
+                else:
+                    for font in pdf_fonts:
+                        for descendant in font.get('/DescendantFonts', [font]):
+                            descriptor = descendant.get_object().get('/FontDescriptor')
+                            assert descriptor and '/FontFile2' in descriptor.get_object(), 'Portable native-preview fixture must embed its font'
+                    result['previewFontScope'] = 'embedded'
                 result['pypdfText'] = ' '.join(reader.pages[0].extract_text().split())
                 if item['name'].endswith(('-different-font', '-decorated')):
                     result['fonts'] = [str(ref.get_object().get('/BaseFont', '')) for ref in reader.pages[0]['/Resources']['/Font'].values()]

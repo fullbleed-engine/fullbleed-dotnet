@@ -1,4 +1,5 @@
 """Compare retained output from consumers of the same assembled package."""
+import argparse
 import hashlib
 import json
 from itertools import product
@@ -14,14 +15,18 @@ FRAMEWORKS = ['8.0', '9.0', '10.0']
 
 
 def main():
-    manifest = json.loads((ROOT / 'artifacts/packages/package-manifest.json').read_text(encoding='utf-8'))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--consumers', type=Path, default=ROOT / 'artifacts/consumer-evidence')
+    parser.add_argument('--packages', type=Path, default=ROOT / 'artifacts/packages')
+    args = parser.parse_args()
+    manifest = json.loads((args.packages / 'package-manifest.json').read_text(encoding='utf-8'))
     records = []
     inputs = []
     families = []
     inline_cases = []
     for rid, framework in product(RIDS, FRAMEWORKS):
         consumer = f'{rid}-net{framework}'
-        directory = ROOT / 'artifacts/consumer-evidence' / ('package-consumer-' + consumer)
+        directory = args.consumers / ('package-consumer-' + consumer)
         data = json.loads((directory / 'evidence.json').read_text(encoding='utf-8-sig'))
         package = json.loads((directory / 'package.json').read_text(encoding='utf-8-sig'))
         assert package['sha256'] == manifest['package']['sha256'], f'{consumer} consumed a different package'
@@ -74,20 +79,33 @@ def main():
     for cases in inline_cases:
         assert [item['name'] for item in cases] == [item['name'] for item in inline_cases[0]]
         for case, expected in zip(cases, inline_cases[0], strict=True):
-            for key in ['pdfSha256', 'previewSha256', 'pdfiumPixelsSha256', 'pypdfText', 'pdfiumText', 'htmlSha256', 'cssSha256']:
+            for key in ['pdfSha256', 'pdfiumPixelsSha256', 'pypdfText', 'pdfiumText', 'htmlSha256', 'cssSha256', 'previewFontScope']:
                 assert case[key] == expected[key], (case['name'], 'platform or runtime differs', key)
+            if case['previewFontScope'] == 'embedded':
+                assert case['previewSha256'] == expected['previewSha256'], (case['name'], 'embedded-font native preview differs')
+    base14_previews = {}
+    for record, cases in zip(records, inline_cases, strict=True):
+        for case in cases:
+            if case['previewFontScope'] == 'unembedded-base14':
+                by_rid = base14_previews.setdefault(case['name'], {})
+                expected = by_rid.setdefault(record['Runtime'], case['previewSha256'])
+                assert case['previewSha256'] == expected, (case['name'], 'standard-font native preview differs between .NET runtimes on the same platform')
     result = {'schema': 'fullbleed.dotnet.package_consumers.v1', 'status': 'passed',
               'package_sha256': manifest['package']['sha256'], 'consumers': records,
+              'unembeddedStandardFontNativePreviewsByRid': base14_previews,
               'scope': 'Northstar invoice PDF, HTML preview and finalized-PDF 96-DPI PNG match on .NET 8, 9 and 10 '
                        'across Windows x64, Linux x64, Intel macOS and Apple Silicon macOS. '
                        'Bold, fixed-record, reflow-record and Unicode fixture PDFs and saved-PDF previews also match. '
                        'pypdf, PDFium and FontTools independently verify text and embedded font programs in all six fixtures. '
                        'Twenty-two regular/italic family cases match explicit-face controls and agree across all consumers. '
-                       'Fifty-four inline wrapping and intrinsic-width cases pass independent text/geometry checks and their PDF/PNG outputs agree across all consumers. '
+                       'Fifty-four inline cases pass text/geometry checks; their PDF bytes and independent PDFium pixels agree across all consumers. '
+                       'Native previews agree across platforms for the 46 embedded-font inline cases. '
+                       'Eight unembedded Helvetica/Times native previews agree across .NET runtimes within each platform; '
+                       'their host-font substitution differences across platforms are retained explicitly. '
                        'These retained fixtures are not a universal platform-parity or conformance claim.'}
     path = ROOT / 'artifacts/cross-platform-evidence.json'
     path.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
-    print(f'{len(records)} isolated package consumers passed; font/text checks passed and PDF/PNG bytes match.')
+    print(f'{len(records)} isolated package consumers passed; PDFs and embedded-font previews match across platforms.')
 
 
 if __name__ == '__main__':

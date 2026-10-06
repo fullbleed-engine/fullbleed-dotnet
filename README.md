@@ -7,7 +7,7 @@ This repository contains two complementary integration layers:
 - `FullBleedEngine` calls a small, panic-safe C ABI over the Rust engine. Use it for in-process rendering, high-volume batches, and compiled VDP.
 - `FullBleedCliClient` calls the installed `fullbleed` command with argument-safe process APIs and structured JSON. Use it for runtime discovery, verification, profiles, assets, scaffolding, agent contracts, and commands that evolve independently of the native ABI.
 
-The managed assembly has no third-party NuGet runtime dependencies. Native runtime libraries are packaged using NuGet's `runtimes/{rid}/native/` convention. The core engine remains browser-free and does not depend on the operating system's PDF stack or fonts.
+The managed assembly has no third-party NuGet runtime dependencies. Native runtime libraries are packaged using NuGet's `runtimes/{rid}/native/` convention. PDF generation requires neither a browser nor the operating system's PDF stack. Explicit font files make both PDF output and native PNG previews independent of installed fonts.
 
 ## Status
 
@@ -24,7 +24,7 @@ Supported package targets in the current build pipeline:
 - `osx-x64`
 - `osx-arm64`
 
-The managed library targets `net8.0`, which applications on .NET 8, 9, and 10 can reference. CI runs the same assembled NuGet package in applications targeting each of those frameworks on every platform above, checks the actual runtime version, and compares the fixture PDF and PNG bytes. See the [verification workflow](https://github.com/fullbleed-engine/fullbleed-dotnet/actions/workflows/ci.yml) and its retained `cross-platform-evidence` artifact.
+The managed library targets `net8.0`, which applications on .NET 8, 9, and 10 can reference. CI runs the same assembled NuGet package in applications targeting each of those frameworks on every platform above, checks the actual runtime version, and compares fixture PDFs, independent PDFium renders, and native previews with embedded fonts. Native previews of unembedded standard fonts are checked within each platform because their host font fallbacks can differ. See the [verification workflow](https://github.com/fullbleed-engine/fullbleed-dotnet/actions/workflows/ci.yml) and its retained `cross-platform-evidence` artifact.
 
 Use .NET 10 LTS for a new application. Microsoft's [support policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) lists November 10, 2026 as the end of support for both .NET 8 and 9; a library's minimum target does not require your application to stay on that runtime.
 
@@ -141,6 +141,8 @@ var previews = engine.RenderImagePagesToDirectory(
 ```
 
 Parallel native batching is used when jobs share CSS. Mixed-CSS jobs retain input order and use the ordinary ordered batch lane.
+
+Register font files for portable PNG previews. When a PDF uses unembedded standard fonts such as Helvetica or Times, the native previewer uses host font fallbacks; previews can differ across operating systems or omit glyphs when a fallback is unavailable. The styled invoice sample includes explicit fonts.
 
 ## Runtime-authoritative CLI access
 

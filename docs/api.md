@@ -39,6 +39,8 @@ Null options preserve native defaults and allow CSS `@page` rules to remain auth
 
 The direct-to-file methods create the parent directory on the managed side, then let the native engine write through a buffered file writer.
 
+For portable native PNG previews, register explicit font files. Unembedded standard PDF fonts use host font fallbacks in the native previewer, so their previews can differ across operating systems or omit glyphs when no fallback is available.
+
 ## Batch rendering
 
 `RenderBatch(IEnumerable<RenderJob>, BatchRenderOptions)` materializes the input once. When every job has the same CSS and `Parallel` is true, the native parallel lane is selected. Mixed CSS is supported with deterministic input ordering but currently uses the ordered mixed-CSS lane.
