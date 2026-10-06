@@ -62,9 +62,17 @@ def main():
     assert set(before) == set(after)
     assert previous['inputs'] == candidate['inputs'], 'Before/after fixture inputs differ'
     fields = ['pages', 'text', 'pdfSha256', 'nativePreviewSha256', 'pdfiumPixelSha256']
+    reviewed = json.loads((ROOT / 'tests/FullBleed.DotNet.PackageSmoke/reviewed-layout-2.5.10.json').read_text(encoding='utf-8'))
+    assert reviewed['package'] == candidate['packageVersion'] and reviewed['engine'] == '2.5.10'
+    assert set(reviewed['fontFixtures']) == {'invoice', 'invoice-explicit', 'bold'}
     unchanged = []
     for name, item in after.items():
-        if name != 'invoice':
+        if name in reviewed['fontFixtures']:
+            assert item['pages'] == before[name]['pages']
+            assert [' '.join(text.split()) for text in item['text']] == [' '.join(text.split()) for text in before[name]['text']], (name, 'content changed')
+            for key, value in reviewed['fontFixtures'][name].items():
+                assert item[key] == value, (name, 'reviewed layout differs', key)
+        else:
             for key in fields:
                 assert item[key] == before[name][key], (name, key)
             unchanged.append(name)
@@ -77,8 +85,12 @@ def main():
                   'unchangedFixturePdfTextAndPixels':unchanged, 'familyCases':len(families['cases']),
                   'invoice':{'beforeBytes':before['invoice']['pdfBytes'], 'afterBytes':after['invoice']['pdfBytes'],
                              'textUnchanged':True, 'matchesExplicitRegularControl':True,
-                             'controlUnchangedAcrossVersions':True, 'appearanceChangedAsIntended':True},
-                  'scope':'The real invoice now uses its intended regular brand face. Other retained fixtures and the explicit invoice control remain byte-identical. No universal visual parity or conformance claim.'}
+                             'matchesReviewedEngine2510Layout':True, 'appearanceChangedAsIntended':True},
+                  'reviewedLayoutChanges':list(reviewed['fontFixtures']),
+                  'scope':'The old family-selection negative control still fails and the real invoice uses its intended regular brand face. '
+                          'Fixed, reflow and Unicode fixtures remain byte-identical. Invoice, explicit-face invoice and bold text '
+                          'retain normalized content and match separately reviewed 2.5.10 PDF/preview hashes. '
+                          'No universal visual parity or conformance claim.'}
     (output / 'comparison.json').write_text(json.dumps(comparison, indent=2) + '\n', encoding='utf-8')
     fonts = output / 'source-fonts'
     shutil.copytree(ROOT / 'samples/FullBleed.DotNet.Showcase/Assets/fonts', fonts)

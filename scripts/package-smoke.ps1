@@ -66,6 +66,7 @@ $frameworkVersion = $TargetFramework.Substring(3)
 "@ | Set-Content -LiteralPath $project -Encoding utf8
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/Program.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/FontFamilyFixtures.cs') -Destination $consumer
+Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/InlineLayoutFixtures.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'samples/FullBleed.DotNet.Showcase/Assets') -Destination $consumer -Recurse
 $verificationFonts = Join-Path $consumer 'Assets/verification-fonts'
 New-Item -ItemType Directory -Path $verificationFonts | Out-Null

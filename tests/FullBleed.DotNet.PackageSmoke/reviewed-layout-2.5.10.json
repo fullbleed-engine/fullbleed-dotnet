@@ -1,0 +1,55 @@
+{
+  "schema": "fullbleed.dotnet.reviewed_layout.v1",
+  "package": "0.1.5",
+  "engine": "2.5.10",
+  "source": "Windows x64 isolated consumer of the locally packed package; independent text/font/geometry checks passed.",
+  "review": "Invoice and explicit-face control, bold text, and zero-tracking flex/inline-block previews inspected. Invoice footer fits the content edge, words remain separated, and labels stay on one line. The 2.5.10 intrinsic-width fix and inline advance rounding intentionally change these outputs.",
+  "fontFixtures": {
+    "invoice": {
+      "pages": 1,
+      "pdfSha256": "6f898f935a5491572e5b6222428cc861c8d131694a73c441036e8545f477367f",
+      "nativePreviewSha256": [
+        "72420749ccc3deaa8025daf7baffcdf79be716b6e8e93ed605effebed01e86c7"
+      ],
+      "pdfiumPixelSha256": [
+        "d71293741974bef9abffbdf5d88b0827b48fe6523f8d9baf46f46fe1000895a5"
+      ]
+    },
+    "invoice-explicit": {
+      "pages": 1,
+      "pdfSha256": "6f898f935a5491572e5b6222428cc861c8d131694a73c441036e8545f477367f",
+      "nativePreviewSha256": [
+        "72420749ccc3deaa8025daf7baffcdf79be716b6e8e93ed605effebed01e86c7"
+      ],
+      "pdfiumPixelSha256": [
+        "d71293741974bef9abffbdf5d88b0827b48fe6523f8d9baf46f46fe1000895a5"
+      ]
+    },
+    "bold": {
+      "pages": 1,
+      "pdfSha256": "76507d02475455d04cdf844dcc3ba62e43591501ad2a094e8adae667e05075d2",
+      "nativePreviewSha256": [
+        "93e64ea9585bf2f8e329df59b93ce7343639c9510be10c19e06e89bb9a49290d"
+      ],
+      "pdfiumPixelSha256": [
+        "3d6498692ef9d268b463c9d911af574cbe79e0e8abe0a08d1c198d395c5c9bb3"
+      ]
+    }
+  },
+  "inlineFixtures": {
+    "sizing-flex-0": {
+      "htmlSha256": "ae8c60ceec1b2168cbd067474ca053fb11ebb3164969397b0eee8fa7429b8e8d",
+      "cssSha256": "7c10bb308036e6472099e902f3a5399151c514b50bc058717979a252f62bba40",
+      "pdfSha256": "dfee4a1a60fe43893ef87917d79ec71dd27d33d6025c9e60ac2ae650ab7e354a",
+      "previewSha256": "3e7ff72668a0430df6bdbea224963fe6c8bc11f7bdaa5e8a36b8b4a121cc3fcb",
+      "pdfiumPixelsSha256": "b583d7c7e80b301d25c9e150d89febfec5a441f90752b15ef884153f3202f1f2"
+    },
+    "sizing-inline-block-0": {
+      "htmlSha256": "d96a7e2fd12834730a2d9d866ecac23a49290128e8d0ade2658adf54fb8a5252",
+      "cssSha256": "88d1561241591e54ec6f5f28949ff188dd2c772188afcf5731388a7320c6d254",
+      "pdfSha256": "c1ef8e43d07146e13bddeeeff4688e988591bc1ce86ae9ae2dc2ea7ca66d8f64",
+      "previewSha256": "7ad049070084174c57b6a7644d99c983e8cc82496d3734275c32bc2ad2e392c7",
+      "pdfiumPixelsSha256": "28931d83513015c1574a9845a2c2956d53ab253e4f4cb01b4ec2f83ae784f175"
+    }
+  }
+}

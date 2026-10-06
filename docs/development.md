@@ -11,7 +11,7 @@ runtimes/{rid}/native/          generated/staged package assets
 scripts/                        build, verify, and pack entrypoints
 ```
 
-The native crate pins the published Fullbleed `2.5.8` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
+The native crate pins the published Fullbleed `2.5.10` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
 
 ## Local verification
 
@@ -21,7 +21,7 @@ The native crate pins the published Fullbleed `2.5.8` crate with an exact Cargo 
 
 This stages the host native library, checks Rust formatting and Clippy, runs native tests, verifies managed formatting, builds the full solution, and runs the managed test suite. The integration suite verifies deterministic rendering, diagnostics, metrics, PNG output, in-memory and direct-to-file batches, fixed and reflow compiled bindings, inspection, template stamping/composition, concurrency, and failure-path recovery.
 
-CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.8` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
+CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.10` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
 
 ## Local package
 
@@ -50,6 +50,23 @@ The evidence job independently checks six fixtures: the styled invoice, an expli
 
 Each isolated consumer also renders 22 regular/italic family cases: explicit-face controls, both registration orders through ordinary/fixed/reflow output, and ordinary `@font-face` mappings. The independent family verifier checks embedded face names and notice tables, extracted text, and native/PDFium preview pixels against those controls. Their PDFs and previews must agree across all 12 consumers.
 
+## Inline-layout verification
+
+Every isolated package consumer renders 54 cases: 12 wrapping styles through ordinary PDF, compiled fixed, throughput reflow, and compact reflow output, plus flex and inline-block labels at three letter spacings. The tests retain exact HTML/CSS, explicit font files and licenses, PDF bytes, and saved-PDF previews. Rendering twice must produce identical PDF bytes.
+
+```sh
+python tools/verify_inline_layout.py artifacts/package-smoke/inline-layout
+python tools/compare_inline_packages.py artifacts/package-smoke
+```
+
+Use the independent reader dependencies listed below. The comparison requires the .NET 8 SDK and PowerShell (`pwsh`, or `--shell` with an explicit path). It checks the downloaded public 0.1.4 package's SHA-256 and engine provenance, then runs the same consumer outside the checkout. That package must fail the reviewed 40 styled-wrapping cases and four tracked-label cases. Ten healthy controls must keep the same text; eight wrapping controls also keep identical PDF bytes and native/PDFium previews. Corrected intrinsic advances move the two zero-tracking label controls slightly. Their output must match the separately reviewed PDF/preview hashes in `tests/FullBleed.DotNet.PackageSmoke/reviewed-layout-2.5.10.json`. Every candidate case must pass.
+
+The verifier checks content with pypdf and PDFium, then checks physical word positions for overlap, line order, boundaries, and unintended wrapping. Fixed bindings paint replacements after the static base in the PDF stream; their content is checked once and their visual order is verified independently. Proportional Helvetica and Times spacing is compared with a whole-string control. Their native previews use the engine's existing host-font fallback, so they can differ between platforms or omit glyphs when no fallback exists. Their visual check uses PDFium.
+
+CI checks all 12 platform/framework consumers. All 54 PDF byte sequences and independent PDFium pixel buffers must agree across consumers. The verifier confirms that the 46 portable native-preview fixtures actually embed their fonts, then requires their native PNG bytes to agree too. The eight unembedded standard-font native previews must agree across .NET runtimes within each platform; their per-platform hashes are retained separately. Register and embed explicit fonts for portable native previews.
+
+`inline-comparison` retains the old outputs, failure report, package identity, and before/after summary; candidate output is retained in `package-consumer-*` and `cross-platform-evidence`. These are fixture-specific checks, not universal rendering parity or standards-conformance evidence.
+
 ## Font output comparison
 
 After creating an isolated consumer with `scripts/package-smoke.ps1`, install the independent readers in a maintainer environment:
@@ -61,7 +78,9 @@ python tools/verify_font_families.py artifacts/package-smoke/font-families
 python tools/compare_font_packages.py artifacts/package-smoke
 ```
 
-The comparison script requires PowerShell (`pwsh`, or an explicit `--shell` path) and the .NET 8 SDK. It downloads the previous public `0.1.3` package, checks its pinned SHA-256 and engine provenance, and renders the same inputs in another isolated consumer. The old package must fail the normal-text family check when italic is registered first, while still passing the glyph/metric checks. The current invoice must match its explicit regular-face control; that control and the other four fixtures must preserve PDF bytes, extracted text, native previews, and PDFium pixels across versions. The actual invoice's text stays unchanged while its appearance and size change to use the correct brand face. These checks make no general parity or speed claim.
+The comparison script requires PowerShell (`pwsh`, or an explicit `--shell` path) and the .NET 8 SDK. It retains the public `0.1.3` package as the font-family negative control, checking its pinned SHA-256 and engine provenance before rendering the same inputs in another isolated consumer. That package must fail the normal-text family check when italic is registered first, while still passing the glyph/metric checks. The current invoice must match its explicit regular-face control. Fixed, reflow, and Unicode fixtures preserve PDF bytes, extracted text, native previews, and PDFium pixels across versions.
+
+The invoice, its explicit-face control, and the bold fixture retain their normalized text but change layout in engine 2.5.10: inline advances use the corrected spacing and tracked footer labels use their corrected intrinsic widths. These three outputs must match the reviewed versioned PDF/preview hashes, in addition to the independent glyph, metric, face-selection, and text checks. The baseline is not regenerated by CI. These checks make no general parity or speed claim; the historical [0.1.4 release evidence](https://github.com/fullbleed-engine/fullbleed-dotnet/releases/tag/v0.1.4) retains the earlier comparison before the inline-layout change.
 
 The earlier 0.1.2-to-0.1.3 compaction comparison remains available in the [0.1.3 release evidence](https://github.com/fullbleed-engine/fullbleed-dotnet/releases/tag/v0.1.3). Its historical inputs and measurements are not rewritten for the family-selection fix.
 
