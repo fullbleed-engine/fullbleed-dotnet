@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.5 - 2026-10-06
+
+- Pin Fullbleed 2.5.10 to correct text following styled inline content and intrinsic widths of tracked labels in flex and inline-block layouts.
+- Add 54 PDF fixtures to isolated NuGet consumers: 12 wrapping cases through ordinary, fixed, throughput reflow, and compact reflow rendering, plus six label-width cases. Check text, physical word positions, deterministic output, and previews independently.
+- Retain a published 0.1.4 negative control and compare the assembled package across .NET 8, 9, and 10 on all four supported platforms.
+- The managed API and native ABI are unchanged. Affected templates can change line breaks and page layout; review saved PDF baselines when upgrading.
+
 ## 0.1.4 - 2026-10-05
 
 - Pin published Fullbleed 2.5.8 so normal family text selects the regular face even when italic is registered first.

@@ -46,7 +46,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install the independently versioned CLI for integration tests
-        run: python -m pip install fullbleed==2.5.8
+        run: python -m pip install fullbleed==2.5.10
 
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
@@ -213,7 +213,10 @@ jobs:
         name: Verify independent fonts and text and compare PDF/PNG bytes
       - name: Compare with the previous public package and reject incorrect family selection
         run: python tools/compare_font_packages.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0
+      - name: Reject inline-layout defects in public 0.1.4 and verify the candidate
+        run: python tools/compare_inline_packages.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: cross-platform-evidence
           path: |
@@ -222,8 +225,20 @@ jobs:
             artifacts/consumer-evidence/**/pdfium-*/*.png
             artifacts/consumer-evidence/**/font-families/verification.json
             artifacts/consumer-evidence/**/font-families/**/pdfium-*.png
+            artifacts/consumer-evidence/**/inline-layout/verification.json
+            artifacts/consumer-evidence/**/inline-layout/**/pdfium-*.png
           if-no-files-found: error
       - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: inline-comparison
+          path: |
+            artifacts/inline-comparison/baseline/
+            artifacts/inline-comparison/*.json
+            artifacts/inline-comparison/*.log
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: font-comparison
           path: |
