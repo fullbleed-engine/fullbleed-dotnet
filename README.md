@@ -144,7 +144,7 @@ var previews = engine.RenderImagePagesToDirectory(
 
 Parallel native batching is used when jobs share CSS. Mixed-CSS jobs retain input order and use the ordinary ordered batch lane.
 
-Register font files for portable PNG previews. When a PDF uses unembedded standard fonts such as Helvetica or Times, the native previewer uses host font fallbacks; previews can differ across operating systems or omit glyphs when a fallback is unavailable. The styled invoice sample includes explicit fonts.
+For unembedded standard fonts such as Helvetica or Times, the native previewer uses bundled outline substitutes and works without installed system fonts. Register explicit font files when you need a particular type design. The styled invoice sample includes its fonts.
 
 ## Runtime-authoritative CLI access
 
