@@ -69,7 +69,7 @@ def main():
         for key in ['pypdfText', 'pdfiumText']:
             assert before[name][key] == after[name][key], (name, 'healthy control changed', key)
     reviewed = json.loads((ROOT / 'tests/FullBleed.DotNet.PackageSmoke/reviewed-layout-2.5.10.json').read_text(encoding='utf-8'))
-    assert reviewed['package'] == current['packageVersion'] and reviewed['engine'] == '2.5.10'
+    assert reviewed['package'] == '0.1.5' and reviewed['engine'] == '2.5.10'
     assert set(reviewed['inlineFixtures']) == {'sizing-flex-0', 'sizing-inline-block-0'}
     for name in healthy:
         if name in reviewed['inlineFixtures']:

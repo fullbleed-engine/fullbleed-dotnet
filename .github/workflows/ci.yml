@@ -46,7 +46,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install the independently versioned CLI for integration tests
-        run: python -m pip install fullbleed==2.5.10
+        run: python -m pip install fullbleed==2.5.11
 
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
@@ -215,6 +215,11 @@ jobs:
         run: python tools/compare_font_packages.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0
       - name: Reject inline-layout defects in public 0.1.4 and verify the candidate
         run: python tools/compare_inline_packages.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0
+      - name: Reject blank public 0.1.5 previews with system fonts hidden
+        run: |
+          sudo env "PATH=$PATH" "DOTNET_ROOT=$DOTNET_ROOT" unshare --mount --propagation private "$(command -v python)" \
+            tools/compare_standard_font_packages.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0 \
+            --shell "$(command -v pwsh)"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -227,6 +232,18 @@ jobs:
             artifacts/consumer-evidence/**/font-families/**/pdfium-*.png
             artifacts/consumer-evidence/**/inline-layout/verification.json
             artifacts/consumer-evidence/**/inline-layout/**/pdfium-*.png
+            artifacts/consumer-evidence/**/standard-fonts/verification.json
+            artifacts/consumer-evidence/**/standard-fonts/**/pdfium-*.png
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: standard-font-comparison
+          path: |
+            artifacts/standard-font-comparison/baseline/
+            artifacts/standard-font-comparison/candidate/
+            artifacts/standard-font-comparison/*.json
+            artifacts/standard-font-comparison/*.log
           if-no-files-found: error
       - uses: actions/upload-artifact@v4
         if: always()

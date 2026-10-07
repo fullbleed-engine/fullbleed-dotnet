@@ -25,6 +25,14 @@ def collect():
         source = Path(package['manifest_path']).parent
         licenses = sorted(p for p in source.iterdir() if p.is_file() and
                           p.name.lower().startswith(('license', 'copying', 'copyright', 'notice')))
+        if package['name'] == 'fullbleed':
+            # The core's compiled preview outlines include OFL font data. Keep
+            # their notices and modification/provenance record in the NuGet too.
+            notices = [source / 'THIRD_PARTY_LICENSES.md', source / 'src/preview_fonts/README.md',
+                       source / 'src/preview_fonts/sources.json']
+            notices.extend(sorted((source / 'src/preview_fonts').glob('LICENSE-*.txt')))
+            assert len(notices) == 8 and all(path.is_file() for path in notices), 'Missing bundled preview-font notices'
+            licenses.extend(notices)
         if not licenses:
             raise RuntimeError(f"No upstream license text found for {package['name']}")
         record = {'name': package['name'], 'version': package['version'],
@@ -32,7 +40,7 @@ def collect():
                   'crate_sha256': checksums[(package['name'], package['version'])],
                   'license_files': []}
         for license_file in licenses:
-            relative = Path('licenses/native') / f"{package['name']}-{package['version']}" / license_file.name
+            relative = Path('licenses/native') / f"{package['name']}-{package['version']}" / license_file.relative_to(source)
             content = license_file.read_bytes()
             files[relative] = content
             record['license_files'].append({'path': relative.as_posix(),

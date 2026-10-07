@@ -8,6 +8,7 @@ from pathlib import Path
 from verify_font_outputs import verify as verify_font_outputs
 from verify_font_families import verify as verify_font_families
 from verify_inline_layout import verify as verify_inline_layout
+from verify_standard_fonts import verify as verify_standard_fonts
 
 ROOT = Path(__file__).resolve().parents[1]
 RIDS = ['win-x64', 'linux-x64', 'osx-x64', 'osx-arm64']
@@ -24,6 +25,7 @@ def main():
     inputs = []
     families = []
     inline_cases = []
+    standard_cases = []
     for rid, framework in product(RIDS, FRAMEWORKS):
         consumer = f'{rid}-net{framework}'
         directory = args.consumers / ('package-consumer-' + consumer)
@@ -56,6 +58,10 @@ def main():
         inline_report = verify_inline_layout(directory / 'inline-layout')
         assert len(inline_report['cases']) == 54
         inline_cases.append(inline_report['cases'])
+        standard_report = verify_standard_fonts(directory / 'standard-fonts')
+        assert standard_report['packageVersion'] == manifest['version']
+        standard_cases.append(standard_report['cases'])
+        data['IndependentStandardFontChecks'] = {'status': 'passed', 'cases': len(standard_report['cases'])}
         data['IndependentInlineChecks'] = {'status': 'passed', 'cases': len(inline_report['cases'])}
         inputs.append(font_report['inputs'])
         data['IndependentDocumentChecks'] = font_report['documentChecks']
@@ -79,10 +85,14 @@ def main():
     for cases in inline_cases:
         assert [item['name'] for item in cases] == [item['name'] for item in inline_cases[0]]
         for case, expected in zip(cases, inline_cases[0], strict=True):
-            for key in ['pdfSha256', 'pdfiumPixelsSha256', 'pypdfText', 'pdfiumText', 'htmlSha256', 'cssSha256', 'previewFontScope']:
+            for key in ['pdfSha256', 'pdfiumPixelsSha256', 'pypdfText', 'pdfiumText', 'htmlSha256', 'cssSha256', 'previewFontScope', 'previewSha256']:
                 assert case[key] == expected[key], (case['name'], 'platform or runtime differs', key)
-            if case['previewFontScope'] == 'embedded':
-                assert case['previewSha256'] == expected['previewSha256'], (case['name'], 'embedded-font native preview differs')
+    for cases in standard_cases:
+        assert [item['name'] for item in cases] == [item['name'] for item in standard_cases[0]]
+        for case, expected in zip(cases, standard_cases[0], strict=True):
+            for key in ['pdfSha256', 'pdfiumPixelsSha256', 'text', 'faces', 'htmlSha256', 'cssSha256',
+                        'previewSha256', 'htmlPreviewSha256']:
+                assert case[key] == expected[key], (case['name'], 'platform or runtime differs', key)
     base14_previews = {}
     for record, cases in zip(records, inline_cases, strict=True):
         for case in cases:
@@ -93,19 +103,20 @@ def main():
     result = {'schema': 'fullbleed.dotnet.package_consumers.v1', 'status': 'passed',
               'package_sha256': manifest['package']['sha256'], 'consumers': records,
               'unembeddedStandardFontNativePreviewsByRid': base14_previews,
+              'standardFontFixtures': standard_cases[0],
               'scope': 'Northstar invoice PDF, HTML preview and finalized-PDF 96-DPI PNG match on .NET 8, 9 and 10 '
                        'across Windows x64, Linux x64, Intel macOS and Apple Silicon macOS. '
                        'Bold, fixed-record, reflow-record and Unicode fixture PDFs and saved-PDF previews also match. '
                        'pypdf, PDFium and FontTools independently verify text and embedded font programs in all six fixtures. '
                        'Twenty-two regular/italic family cases match explicit-face controls and agree across all consumers. '
                        'Fifty-four inline cases pass text/geometry checks; their PDF bytes and independent PDFium pixels agree across all consumers. '
-                       'Native previews agree across platforms for the 46 embedded-font inline cases. '
-                       'Eight unembedded Helvetica/Times native previews agree across .NET runtimes within each platform; '
-                       'their host-font substitution differences across platforms are retained explicitly. '
+                       'All 54 inline native previews agree across platforms, including eight unembedded Helvetica/Times cases. '
+                       'Fifty-two standard-font cases agree in PDF bytes, independent PDFium pixels and native PNG bytes: '
+                       'twelve unembedded Latin faces and an embedded control, each through ordinary, fixed, reflow and compact rendering. '
                        'These retained fixtures are not a universal platform-parity or conformance claim.'}
     path = ROOT / 'artifacts/cross-platform-evidence.json'
     path.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
-    print(f'{len(records)} isolated package consumers passed; PDFs and embedded-font previews match across platforms.')
+    print(f'{len(records)} isolated package consumers passed; fixture PDFs and native previews match across platforms.')
 
 
 if __name__ == '__main__':

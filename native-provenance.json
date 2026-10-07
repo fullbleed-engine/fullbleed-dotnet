@@ -1,6 +1,6 @@
 {
   "schema": "fullbleed.dotnet.native_provenance.v1",
-  "cargo_lock_sha256": "6afaf73ed044b5ab237b5701f353dc2813d2ce901a564878cd44a07aff228300",
+  "cargo_lock_sha256": "f104b896dbbe8bc024e9edb40d639ed06119b55088cc1dcca3deee2945739d49",
   "scope": "Cargo-locked native bridge graph, including build-time proc macros",
   "dependencies": [
     {
@@ -22,18 +22,50 @@
     },
     {
       "name": "fullbleed",
-      "version": "2.5.10",
+      "version": "2.5.11",
       "license": "MIT",
       "repository": "https://github.com/fullbleed-engine/fullbleed-official",
-      "crate_sha256": "cde5bca216e60f3a1b79cadbfed3efd9b14ea09c26ea5bbc105166fcf9fc5980",
+      "crate_sha256": "a672e0401fb42234b2e5a619adbe3a431db646780bf3398a44c70d8855c63270",
       "license_files": [
         {
-          "path": "licenses/native/fullbleed-2.5.10/COPYRIGHT",
+          "path": "licenses/native/fullbleed-2.5.11/COPYRIGHT",
           "sha256": "b262548a457e00a8b593fe2fb1d42bc27468bab4524e5ee4b4c2c7d2e0fdceb5"
         },
         {
-          "path": "licenses/native/fullbleed-2.5.10/LICENSE",
+          "path": "licenses/native/fullbleed-2.5.11/LICENSE",
           "sha256": "36a2115938f6e68cf0d87eccff7a6a3e57c17017e909cbd640d51aff1fa0c5a9"
+        },
+        {
+          "path": "licenses/native/fullbleed-2.5.11/THIRD_PARTY_LICENSES.md",
+          "sha256": "18a4d179c115d0459eac46af7831fb996235818c106b66e15a31aa220ecfc0fe"
+        },
+        {
+          "path": "licenses/native/fullbleed-2.5.11/src/preview_fonts/README.md",
+          "sha256": "0547af9666e783d76a86b8a26b226c90181996278cc3ff3e5ca07d0f011dc25a"
+        },
+        {
+          "path": "licenses/native/fullbleed-2.5.11/src/preview_fonts/sources.json",
+          "sha256": "366a5a62fd92b1931bcb48f59899bd13e852d0fece0a100366491008b6dae75b"
+        },
+        {
+          "path": "licenses/native/fullbleed-2.5.11/src/preview_fonts/LICENSE-Liberation.txt",
+          "sha256": "93fed46019c38bbe566b479d22148e2e8a1e85ada614accb0211c37b2c61c19b"
+        },
+        {
+          "path": "licenses/native/fullbleed-2.5.11/src/preview_fonts/LICENSE-NotoSans.txt",
+          "sha256": "f8a660d97cc1640e808490fdbb7f1c2b27ba7936146850a59e76ef4075ede435"
+        },
+        {
+          "path": "licenses/native/fullbleed-2.5.11/src/preview_fonts/LICENSE-NotoSansMath.txt",
+          "sha256": "0137f89fc92efb9a91c696149c5fb788fcc8966e851ee4a7e8c4b0ed977ba4c9"
+        },
+        {
+          "path": "licenses/native/fullbleed-2.5.11/src/preview_fonts/LICENSE-NotoSansSymbols.txt",
+          "sha256": "8af1a4c296c9e133183283ae2cc44163485498d2c9b654db7207401832a65e01"
+        },
+        {
+          "path": "licenses/native/fullbleed-2.5.11/src/preview_fonts/LICENSE-NotoSansSymbols2.txt",
+          "sha256": "2ff0138bb7c3790336e62cbfa2447fff8f85e75fa715eafce2d14ae6685bf164"
         }
       ]
     },
