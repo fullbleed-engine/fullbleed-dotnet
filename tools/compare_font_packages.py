@@ -63,7 +63,7 @@ def main():
     assert previous['inputs'] == candidate['inputs'], 'Before/after fixture inputs differ'
     fields = ['pages', 'text', 'pdfSha256', 'nativePreviewSha256', 'pdfiumPixelSha256']
     reviewed = json.loads((ROOT / 'tests/FullBleed.DotNet.PackageSmoke/reviewed-layout-2.5.10.json').read_text(encoding='utf-8'))
-    assert reviewed['package'] == candidate['packageVersion'] and reviewed['engine'] == '2.5.10'
+    assert reviewed['package'] == '0.1.5' and reviewed['engine'] == '2.5.10'
     assert set(reviewed['fontFixtures']) == {'invoice', 'invoice-explicit', 'bold'}
     unchanged = []
     for name, item in after.items():

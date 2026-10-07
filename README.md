@@ -7,13 +7,15 @@ This repository contains two complementary integration layers:
 - `FullBleedEngine` calls a small, panic-safe C ABI over the Rust engine. Use it for in-process rendering, high-volume batches, and compiled VDP.
 - `FullBleedCliClient` calls the installed `fullbleed` command with argument-safe process APIs and structured JSON. Use it for runtime discovery, verification, profiles, assets, scaffolding, agent contracts, and commands that evolve independently of the native ABI.
 
-The managed assembly has no third-party NuGet runtime dependencies. Native runtime libraries are packaged using NuGet's `runtimes/{rid}/native/` convention. PDF generation requires neither a browser nor the operating system's PDF stack. Explicit font files make both PDF output and native PNG previews independent of installed fonts.
+The managed assembly has no third-party NuGet runtime dependencies. Native runtime libraries are packaged using NuGet's `runtimes/{rid}/native/` convention. PDF generation requires neither a browser nor the operating system's PDF stack. Standard-font previews use bundled outlines; explicit fonts provide your chosen type design. Both work without installed system fonts.
 
 ## Status
 
-Version `0.1.5` pins the published Fullbleed `2.5.10` Rust crate. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.1.5). CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
+Version `0.1.6` pins the published Fullbleed `2.5.11` Rust crate. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.1.6). CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
 
-This version fixes wrapping after styled inline text and the widths of tracked labels in flex and inline-block layouts. The release checks ordinary PDFs and compiled fixed/reflow documents against the previous published package. See the [inline-layout verification](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#inline-layout-verification).
+Version 0.1.5 fixed wrapping after styled inline text and the widths of tracked labels in flex and inline-block layouts. The release checks ordinary PDFs and compiled fixed/reflow documents against the previous published package. See the [inline-layout verification](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#inline-layout-verification).
+
+Native PNG previews of unembedded standard PDF fonts now use bundled, licensed outline substitutes. They no longer depend on host fonts or become blank when those fonts are absent. PDF bytes and embedded-font previews are preserved. See the [standard-font verification](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#standard-font-preview-verification) for the twelve Latin faces checked through ordinary and compiled output, including a Linux run with system fonts hidden. Register explicit fonts when the exact type design matters.
 
 Normal text now selects the regular face when a family's italic font is registered first. Review saved PDF baselines when upgrading: affected documents can change appearance, line breaks, and file size. Explicit face names and `@font-face` mappings remain available. See the [font-selection guide](https://docs.fullbleed.dev/engine/font-registration/).
 
@@ -24,7 +26,7 @@ Supported package targets in the current build pipeline:
 - `osx-x64`
 - `osx-arm64`
 
-The managed library targets `net8.0`, which applications on .NET 8, 9, and 10 can reference. CI runs the same assembled NuGet package in applications targeting each of those frameworks on every platform above, checks the actual runtime version, and compares fixture PDFs, independent PDFium renders, and native previews with embedded fonts. Native previews of unembedded standard fonts are checked within each platform because their host font fallbacks can differ. See the [verification workflow](https://github.com/fullbleed-engine/fullbleed-dotnet/actions/workflows/ci.yml) and its retained `cross-platform-evidence` artifact.
+The managed library targets `net8.0`, which applications on .NET 8, 9, and 10 can reference. CI runs the same assembled NuGet package in applications targeting each of those frameworks on every platform above, checks the actual runtime version, and compares fixture PDFs, independent PDFium renders, and native previews with both embedded fonts and unembedded standard fonts. See the [verification workflow](https://github.com/fullbleed-engine/fullbleed-dotnet/actions/workflows/ci.yml) and its retained `cross-platform-evidence` artifact.
 
 Use .NET 10 LTS for a new application. Microsoft's [support policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) lists November 10, 2026 as the end of support for both .NET 8 and 9; a library's minimum target does not require your application to stay on that runtime.
 
@@ -35,7 +37,7 @@ With the .NET 10 SDK installed:
 ```sh
 dotnet new console -n FullbleedDemo --framework net10.0
 cd FullbleedDemo
-dotnet add package FullBleed.DotNet --version 0.1.5
+dotnet add package FullBleed.DotNet --version 0.1.6
 ```
 
 Replace `Program.cs` with:

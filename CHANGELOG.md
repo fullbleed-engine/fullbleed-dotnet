@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.6 - 2026-10-07
+
+- Pin Fullbleed 2.5.11 so unembedded standard-font PNG previews use bundled outline substitutes instead of system-font fallbacks.
+- Retain the bundled fonts' OFL licenses, modification notices, Adobe metric/mapping notices and source provenance in the NuGet archive.
+- Check 52 standard-font cases through ordinary and compiled output in the 12-consumer platform/framework matrix, plus a no-system-font comparison against public 0.1.5. PDF bytes and embedded-font controls remain unchanged.
+- Require all 54 existing inline native previews to match across platforms, including the eight unembedded standard-font cases. Preserve the reviewed 2.5.10 layout baselines.
+
 ## 0.1.5 - 2026-10-06
 
 - Pin Fullbleed 2.5.10 to correct text following styled inline content and intrinsic widths of tracked labels in flex and inline-block layouts.
