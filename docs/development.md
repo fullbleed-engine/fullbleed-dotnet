@@ -11,7 +11,7 @@ runtimes/{rid}/native/          generated/staged package assets
 scripts/                        build, verify, and pack entrypoints
 ```
 
-The native crate pins the published Fullbleed `2.5.11` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
+The native crate pins the published Fullbleed `2.5.13` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
 
 ## Local verification
 
@@ -21,7 +21,7 @@ The native crate pins the published Fullbleed `2.5.11` crate with an exact Cargo
 
 This stages the host native library, checks Rust formatting and Clippy, runs native tests, verifies managed formatting, builds the full solution, and runs the managed test suite. The integration suite verifies deterministic rendering, diagnostics, metrics, PNG output, in-memory and direct-to-file batches, fixed and reflow compiled bindings, inspection, template stamping/composition, concurrency, and failure-path recovery.
 
-CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.11` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
+CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.13` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
 
 ## Local package
 
@@ -49,6 +49,27 @@ A second matrix consumes that same assembled package on .NET 8, 9, and 10 for ea
 The evidence job independently checks six fixtures: the styled invoice, an explicit regular-face invoice control, weight-700 bold text, two fixed records, two reflow records, and Unicode text using a separately registered Noto Sans font. It compares their PDF bytes and saved-PDF PNG previews across all 12 consumers, plus the invoice's HTML preview. It also rejects evidence from a missing or incorrect framework/platform combination. `pypdf` and PDFium must agree on extracted text; FontTools checks embedded glyph programs, metrics, mappings, checksums, notices, and compact metadata against all five source fonts. These readers are release-check dependencies, not dependencies of applications using the .NET package.
 
 Each isolated consumer also renders 22 regular/italic family cases: explicit-face controls, both registration orders through ordinary/fixed/reflow output, and ordinary `@font-face` mappings. The independent family verifier checks embedded face names and notice tables, extracted text, and native/PDFium preview pixels against those controls. Their PDFs and previews must agree across all 12 consumers.
+
+## Tagged-structure verification
+
+The isolated NuGet consumer also renders a rich specimen through ordinary PDF,
+PDF/UA-1 and PDF/UA-2 profiles. It includes mixed-size decorated text, scoped
+headers, nested lists, a definition list, and figures with first/last captions.
+Every run retains exact source, PDF bytes, native previews and diagnostics.
+
+`tools/verify_tagged_structure.py <consumer>/tagged-structure` verifies hashes,
+text, structure-tree presence and the two PDF/UA profiles with veraPDF 1.30.2.
+The maintainer-only validator download has a pinned SHA-256 and requires Java.
+CI runs it on all 12 platform/framework consumers, then compares PDF bytes,
+previews, text and validator results. None of these tools are runtime NuGet
+dependencies.
+
+`tools/compare_tagged_packages.py <consumer>` downloads hash-pinned public 0.1.6
+and runs the same isolated consumer. Both old PDF/UA outputs must fail the
+independent validator and the candidate must pass. The ordinary PDF bytes,
+all text and previews must remain unchanged. The `tagged-structure-comparison`
+artifact retains the failing old PDFs and validator reports. These are
+specimen-level machine checks, not blanket PDF accessibility acceptance.
 
 ## Standard-font preview verification
 

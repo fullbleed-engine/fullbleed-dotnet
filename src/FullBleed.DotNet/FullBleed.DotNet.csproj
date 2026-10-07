@@ -13,7 +13,7 @@
     <NoWarn>$(NoWarn);CS1591</NoWarn>
 
     <PackageId>FullBleed.DotNet</PackageId>
-    <Version>0.1.6</Version>
+    <Version>0.1.7</Version>
     <Authors>Fullbleed contributors</Authors>
     <Description>Idiomatic, dependency-free managed bindings for Fullbleed PDF Engine, including compiled VDP and structured CLI access.</Description>
     <PackageTags>pdf;html;css;document-generation;vdp;printing;fullbleed</PackageTags>

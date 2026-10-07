@@ -10,5 +10,6 @@
     <PackageReference Include="FullBleed.DotNet" />
     <None Include="../../samples/FullBleed.DotNet.Showcase/Assets/**" Link="Assets/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../FullBleed.DotNet.Tests/Assets/*" Link="Assets/verification-fonts/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="Assets/*" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>
