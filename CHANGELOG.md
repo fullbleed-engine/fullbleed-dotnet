@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.7 - 2026-10-07
+
+- Pin Fullbleed 2.5.13 to correct decorative artifacts, list numbering and HTML figure/caption structure in tagged PDFs.
+- Render a rich PDF/UA-1 and PDF/UA-2 specimen and an ordinary control in every isolated .NET 8/9/10 package consumer on all four supported platforms. Validate with pinned veraPDF 1.30.2 and compare exact PDF, preview and text output.
+- Retain the real public 0.1.6 negative control. Machine checks cover these specimens; content quality and reading order still need review.
+- Keep the managed API and native ABI unchanged.
+
 ## 0.1.6 - 2026-10-07
 
 - Pin Fullbleed 2.5.11 so unembedded standard-font PNG previews use bundled outline substitutes instead of system-font fallbacks.

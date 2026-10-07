@@ -18,7 +18,7 @@ procedural-macro dependencies for complete provenance.
 
 The native runtime includes renamed font derivatives used to preview unembedded
 standard PDF fonts without system fonts. Their original OFL notices, modification
-notes and pinned provenance are retained under `licenses/native/fullbleed-2.5.11/`.
+notes and pinned provenance are retained under `licenses/native/fullbleed-2.5.13/`.
 The substitutes affect raster previews; PDF font resources and text are unchanged.
 
 The repository's separate test and showcase fonts are licensed under the SIL Open Font License.

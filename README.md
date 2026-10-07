@@ -11,7 +11,7 @@ The managed assembly has no third-party NuGet runtime dependencies. Native runti
 
 ## Status
 
-Version `0.1.6` pins the published Fullbleed `2.5.11` Rust crate. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.1.6). CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
+Version `0.1.7` pins the published Fullbleed `2.5.13` Rust crate. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.1.7). CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
 
 Version 0.1.5 fixed wrapping after styled inline text and the widths of tracked labels in flex and inline-block layouts. The release checks ordinary PDFs and compiled fixed/reflow documents against the previous published package. See the [inline-layout verification](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#inline-layout-verification).
 
@@ -37,7 +37,7 @@ With the .NET 10 SDK installed:
 ```sh
 dotnet new console -n FullbleedDemo --framework net10.0
 cd FullbleedDemo
-dotnet add package FullBleed.DotNet --version 0.1.6
+dotnet add package FullBleed.DotNet --version 0.1.7
 ```
 
 Replace `Program.cs` with:

@@ -68,7 +68,11 @@ Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmo
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/FontFamilyFixtures.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/InlineLayoutFixtures.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/StandardFontFixtures.cs') -Destination $consumer
+Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/TaggedStructureFixtures.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'samples/FullBleed.DotNet.Showcase/Assets') -Destination $consumer -Recurse
+foreach ($name in @('tagged-structure.html', 'tagged-structure.css')) {
+    Copy-Item -LiteralPath (Join-Path $repository "tests/FullBleed.DotNet.PackageSmoke/Assets/$name") -Destination (Join-Path $consumer 'Assets')
+}
 $verificationFonts = Join-Path $consumer 'Assets/verification-fonts'
 New-Item -ItemType Directory -Path $verificationFonts | Out-Null
 foreach ($name in @('NotoSans-Regular.ttf', 'NotoSans-OFL.txt')) {
