@@ -1,2 +1,10 @@
-# Preserve the upstream font notice byte for byte, including its trailing space.
+native/fullbleed-dotnet-native/Cargo.lock text eol=lf
+native-provenance.json text eol=lf
+licenses/** -text -whitespace
+samples/FullBleed.DotNet.Showcase/Assets/** -text
+tests/FullBleed.DotNet.Tests/Assets/** -text
+samples/FullBleed.DotNet.Showcase/Assets/fonts/*-OFL.txt -whitespace
+tests/FullBleed.DotNet.Tests/Assets/*-OFL.txt -whitespace
+# Preserve the shared fixtures and upstream font notice byte for byte.
+tests/FullBleed.DotNet.PackageSmoke/Assets/engine-2.5.22.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/engine-regressions-font-OFL.txt -text -whitespace
