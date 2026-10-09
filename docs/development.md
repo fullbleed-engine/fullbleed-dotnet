@@ -11,7 +11,7 @@ runtimes/{rid}/native/          generated/staged package assets
 scripts/                        build, verify, and pack entrypoints
 ```
 
-The native crate pins the published Fullbleed `2.5.13` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
+The native crate pins the published Fullbleed `2.5.22` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
 
 ## Local verification
 
@@ -21,7 +21,7 @@ The native crate pins the published Fullbleed `2.5.13` crate with an exact Cargo
 
 This stages the host native library, checks Rust formatting and Clippy, runs native tests, verifies managed formatting, builds the full solution, and runs the managed test suite. The integration suite verifies deterministic rendering, diagnostics, metrics, PNG output, in-memory and direct-to-file batches, fixed and reflow compiled bindings, inspection, template stamping/composition, concurrency, and failure-path recovery.
 
-CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.13` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
+CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.22` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
 
 ## Local package
 
@@ -49,6 +49,30 @@ A second matrix consumes that same assembled package on .NET 8, 9, and 10 for ea
 The evidence job independently checks six fixtures: the styled invoice, an explicit regular-face invoice control, weight-700 bold text, two fixed records, two reflow records, and Unicode text using a separately registered Noto Sans font. It compares their PDF bytes and saved-PDF PNG previews across all 12 consumers, plus the invoice's HTML preview. It also rejects evidence from a missing or incorrect framework/platform combination. `pypdf` and PDFium must agree on extracted text; FontTools checks embedded glyph programs, metrics, mappings, checksums, notices, and compact metadata against all five source fonts. These readers are release-check dependencies, not dependencies of applications using the .NET package.
 
 Each isolated consumer also renders 22 regular/italic family cases: explicit-face controls, both registration orders through ordinary/fixed/reflow output, and ordinary `@font-face` mappings. The independent family verifier checks embedded face names and notice tables, extracted text, and native/PDFium preview pixels against those controls. Their PDFs and previews must agree across all 12 consumers.
+
+## Engine regression verification
+
+The package consumer renders thirteen retained counter, filtered-clipping,
+border-image and floated-first-letter layouts through direct and compiled
+output. It preserves HTML/CSS, repeat-render checks, saved-PDF previews and
+HTML previews. `tools/verify_engine_regressions.py <consumer>/engine-regressions`
+checks emitted counter labels, interior colors, and character/decoration bounds
+against the independently reviewed Chrome print references. It uses the exact
+Noto Sans font recorded in `Assets/engine-2.5.22.json`.
+
+The fixture JSON and checker expectations originate in the
+[verified JavaScript integration](https://github.com/fullbleed-engine/fullbleed-node/blob/1f6f00f7239e8378794b6aabaef6511a6504da8d/test/fixtures/engine-2.5.22.json).
+The JSON is retained byte for byte, including its upstream source hashes and
+reference provenance. These expectations are independent of the .NET candidate.
+
+CI checks all 26 outputs across the twelve platform/framework consumers and
+requires identical PDFs, native previews, independent PDFium pixels and text.
+`tools/compare_engine_packages.py <consumer>` runs the same inputs through the
+hash-pinned public 0.1.7 package. The previous package must fail at least one
+case in each of the four fix families; every candidate case must pass. The two
+healthy nested-counter controls retain identical PDFs, previews and text.
+The `engine-regression-comparison` artifact retains those old PDFs and results.
+These checks cover the recorded layouts and do not establish general CSS parity.
 
 ## Tagged-structure verification
 

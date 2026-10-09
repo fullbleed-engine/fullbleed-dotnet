@@ -10,6 +10,7 @@ from verify_font_families import verify as verify_font_families
 from verify_inline_layout import verify as verify_inline_layout
 from verify_standard_fonts import verify as verify_standard_fonts
 from verify_tagged_structure import verify as verify_tagged_structure, validator
+from verify_engine_regressions import verify as verify_engine_regressions
 
 ROOT = Path(__file__).resolve().parents[1]
 RIDS = ['win-x64', 'linux-x64', 'osx-x64', 'osx-arm64']
@@ -29,6 +30,7 @@ def main():
     standard_cases = []
     tagged_cases = []
     tagged_inputs = []
+    engine_cases = []
     verapdf = validator(ROOT / 'artifacts/verapdf')
     for rid, framework in product(RIDS, FRAMEWORKS):
         consumer = f'{rid}-net{framework}'
@@ -69,6 +71,10 @@ def main():
         assert tagged_report['packageVersion'] == manifest['version']
         tagged_cases.append(tagged_report['cases'])
         tagged_inputs.append(tagged_report['inputs'])
+        engine_report = verify_engine_regressions(directory / 'engine-regressions')
+        assert engine_report['packageVersion'] == manifest['version']
+        engine_cases.append(engine_report['cases'])
+        data['IndependentEngineChecks'] = {'status': 'passed', 'cases': len(engine_report['cases'])}
         data['IndependentTaggedChecks'] = {'status': 'passed', 'validator': 'veraPDF 1.30.2', 'profiles': ['ua1', 'ua2']}
         data['IndependentStandardFontChecks'] = {'status': 'passed', 'cases': len(standard_report['cases'])}
         data['IndependentInlineChecks'] = {'status': 'passed', 'cases': len(inline_report['cases'])}
@@ -103,6 +109,11 @@ def main():
                         'previewSha256', 'htmlPreviewSha256']:
                 assert case[key] == expected[key], (case['name'], 'platform or runtime differs', key)
     base14_previews = {}
+    for cases in engine_cases:
+        assert [(item['name'], item['mode']) for item in cases] == [(item['name'], item['mode']) for item in engine_cases[0]]
+        for case, expected in zip(cases, engine_cases[0], strict=True):
+            for key in ['pdfSha256', 'previewsSha256', 'htmlPreviewsSha256', 'pdfiumPixelsSha256', 'text', 'htmlSha256', 'cssSha256']:
+                assert case[key] == expected[key], (case['name'], case['mode'], 'platform or runtime differs', key)
     assert all(cases == tagged_cases[0] for cases in tagged_cases), 'Tagged PDFs, previews, text or validator results differ'
     assert all(inputs == tagged_inputs[0] for inputs in tagged_inputs), 'Tagged specimen inputs differ'
     for record, cases in zip(records, inline_cases, strict=True):
@@ -116,6 +127,7 @@ def main():
               'unembeddedStandardFontNativePreviewsByRid': base14_previews,
               'standardFontFixtures': standard_cases[0],
               'taggedStructureFixtures': tagged_cases[0],
+              'engineRegressionFixtures': engine_cases[0],
               'scope': 'Northstar invoice PDF, HTML preview and finalized-PDF 96-DPI PNG match on .NET 8, 9 and 10 '
                        'across Windows x64, Linux x64, Intel macOS and Apple Silicon macOS. '
                        'Bold, fixed-record, reflow-record and Unicode fixture PDFs and saved-PDF previews also match. '
@@ -126,6 +138,7 @@ def main():
                        'Fifty-two standard-font cases agree in PDF bytes, independent PDFium pixels and native PNG bytes: '
                        'twelve unembedded Latin faces and an embedded control, each through ordinary, fixed, reflow and compact rendering. '
                        'The rich tagged specimen passes pinned veraPDF 1.30.2 for PDF/UA-1 and PDF/UA-2 across all 12 consumers, with identical PDFs, previews and text. '
+                        'Thirteen counter, clipping, border-image and first-letter layouts pass independent checks through direct and compiled output, with identical PDFs and previews across all consumers. '
                        'These retained fixtures are not a universal platform-parity or conformance claim.'}
     path = ROOT / 'artifacts/cross-platform-evidence.json'
     path.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')

@@ -46,7 +46,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install the independently versioned CLI for integration tests
-        run: python -m pip install fullbleed==2.5.13
+        run: python -m pip install fullbleed==2.5.22
 
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
@@ -221,6 +221,8 @@ jobs:
         run: python tools/compare_inline_packages.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0
       - name: Reject tagged-structure defects in public 0.1.6 and verify the candidate
         run: python tools/compare_tagged_packages.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0
+      - name: Reject layout defects in public 0.1.7 and verify the candidate
+        run: python tools/compare_engine_packages.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0
       - name: Reject blank public 0.1.5 previews with system fonts hidden
         run: |
           sudo env "PATH=$PATH" "DOTNET_ROOT=$DOTNET_ROOT" unshare --mount --propagation private "$(command -v python)" \
@@ -242,6 +244,17 @@ jobs:
             artifacts/consumer-evidence/**/standard-fonts/**/pdfium-*.png
             artifacts/consumer-evidence/**/tagged-structure/**/*.json
             artifacts/consumer-evidence/**/tagged-structure/**/*.txt
+            artifacts/consumer-evidence/**/engine-regressions/**/*.json
+            artifacts/consumer-evidence/**/engine-regressions/**/pdfium-*.png
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: engine-regression-comparison
+          path: |
+            artifacts/engine-regression-comparison/baseline/engine-regressions/
+            artifacts/engine-regression-comparison/*.json
+            artifacts/engine-regression-comparison/*.log
           if-no-files-found: error
       - uses: actions/upload-artifact@v4
         if: always()

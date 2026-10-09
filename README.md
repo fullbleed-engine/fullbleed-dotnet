@@ -11,7 +11,9 @@ The managed assembly has no third-party NuGet runtime dependencies. Native runti
 
 ## Status
 
-Version `0.1.7` pins the published Fullbleed `2.5.13` Rust crate. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.1.7). CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
+Version `0.1.8` pins the published Fullbleed `2.5.22` Rust crate with SVG raster fallback enabled. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.1.8). CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
+
+This update brings corrected counter scopes, filtered clipping, border-image tiling and floated first letters to C#. The package checks thirteen layouts through direct and compiled rendering against independent text, color and browser geometry expectations, then runs the same inputs through public 0.1.7 to retain the failing examples. See the [engine regression verification](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#engine-regression-verification). Review PDF baselines for templates using those features when upgrading.
 
 Version 0.1.5 fixed wrapping after styled inline text and the widths of tracked labels in flex and inline-block layouts. The release checks ordinary PDFs and compiled fixed/reflow documents against the previous published package. See the [inline-layout verification](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#inline-layout-verification).
 
@@ -37,7 +39,7 @@ With the .NET 10 SDK installed:
 ```sh
 dotnet new console -n FullbleedDemo --framework net10.0
 cd FullbleedDemo
-dotnet add package FullBleed.DotNet --version 0.1.7
+dotnet add package FullBleed.DotNet --version 0.1.8
 ```
 
 Replace `Program.cs` with:
