@@ -69,7 +69,8 @@ CI checks all 26 outputs across the twelve platform/framework consumers and
 requires identical PDFs, native previews, independent PDFium pixels and text.
 `tools/compare_engine_packages.py <consumer>` runs the same inputs through the
 hash-pinned public 0.1.7 package. The previous package must fail at least one
-case in each of the four fix families; every candidate case must pass.
+case in each of the four fix families; every candidate case must pass. The two
+healthy nested-counter controls retain identical PDFs, previews and text.
 The `engine-regression-comparison` artifact retains those old PDFs and results.
 These checks cover the recorded layouts and do not establish general CSS parity.
 

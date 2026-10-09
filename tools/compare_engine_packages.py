@@ -15,6 +15,29 @@ PACKAGE_SHA256 = '4334469bb70fe5896c479f9bb68025cd0fefafa280429dd367055f1818ecd1
 URL = f'https://api.nuget.org/v3-flatcontainer/fullbleed.dotnet/{VERSION}/fullbleed.dotnet.{VERSION}.nupkg'
 
 
+def compare(previous, current):
+    assert previous['packageVersion'] == VERSION and current['packageVersion'] != VERSION
+    assert previous['sourceSha256'] == current['sourceSha256']
+    assert previous['fontSha256'] == current['fontSha256']
+    assert set(previous['failedFamilies']) == {'counter', 'overflow', 'border-image', 'first-letter'}
+    assert current['ok'] and not previous['ok']
+    controls = []
+    for old, new in zip(previous['cases'], current['cases'], strict=True):
+        for key in ['name', 'mode', 'htmlSha256', 'cssSha256']:
+            assert old[key] == new[key], (key, old['name'])
+        if old['ok']:
+            for key in ['pdfSha256', 'previewsSha256', 'htmlPreviewsSha256', 'pdfiumPixelsSha256', 'text']:
+                assert old[key] == new[key], (key, old['name'], 'healthy control changed')
+            controls.append(f"{old['mode']}/{old['name']}")
+    assert set(controls) == {'direct/engine-counter-nested-branches', 'compiled/engine-counter-nested-branches'}
+    failed = [f"{case['mode']}/{case['name']}" for case in previous['cases'] if not case['ok']]
+    return dict(ok=True, baselinePackage=VERSION, baselineEngine='2.5.13',
+                candidatePackage=current['packageVersion'], baselineFailedCases=failed,
+                failedFamilies=previous['failedFamilies'], candidateCases=len(current['cases']),
+                candidateFailedCases=0, unchangedInputs=True, unchangedHealthyControls=controls,
+                scope='Thirteen retained layouts through direct and compiled .NET APIs. Text, color and geometry checks cover these fixtures only.')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('candidate', type=Path)
@@ -45,20 +68,7 @@ def main():
         subprocess.run(command, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT, check=True)
     previous = verify(output / 'baseline/engine-regressions', require_correct=False)
     current = verify(args.candidate.resolve() / 'engine-regressions')
-    assert previous['packageVersion'] == VERSION and current['packageVersion'] != VERSION
-    assert previous['sourceSha256'] == current['sourceSha256']
-    assert previous['fontSha256'] == current['fontSha256']
-    assert set(previous['failedFamilies']) == {'counter', 'overflow', 'border-image', 'first-letter'}
-    assert current['ok'] and not previous['ok']
-    for old, new in zip(previous['cases'], current['cases'], strict=True):
-        for key in ['name', 'mode', 'htmlSha256', 'cssSha256']:
-            assert old[key] == new[key], (key, old['name'])
-    failed = [f"{case['mode']}/{case['name']}" for case in previous['cases'] if not case['ok']]
-    report = dict(ok=True, baselinePackage=VERSION, baselineEngine='2.5.13',
-                  candidatePackage=current['packageVersion'], baselineFailedCases=failed,
-                  failedFamilies=previous['failedFamilies'], candidateCases=len(current['cases']),
-                  candidateFailedCases=0, unchangedInputs=True,
-                  scope='Thirteen retained layouts through direct and compiled .NET APIs. Text, color and geometry checks cover these fixtures only.')
+    report = compare(previous, current)
     (output / 'comparison.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(report))
 
