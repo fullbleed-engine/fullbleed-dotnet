@@ -194,6 +194,7 @@ FontFamilyFixtures.Run(assets, outputDirectory, features.BindingVersion);
 InlineLayoutFixtures.Run(assets, outputDirectory, features.BindingVersion);
 StandardFontFixtures.Run(assets, outputDirectory, features.BindingVersion);
 TaggedStructureFixtures.Run(assets, outputDirectory, features.BindingVersion);
+EngineRegressionFixtures.Run(assets, outputDirectory, features.BindingVersion);
 Console.WriteLine($"package smoke passed: {outputPath}");
 
 static string HashFile(string path) => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))).ToLowerInvariant();

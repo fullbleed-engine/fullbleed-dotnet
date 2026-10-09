@@ -69,8 +69,9 @@ Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmo
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/InlineLayoutFixtures.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/StandardFontFixtures.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/TaggedStructureFixtures.cs') -Destination $consumer
+Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/EngineRegressionFixtures.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'samples/FullBleed.DotNet.Showcase/Assets') -Destination $consumer -Recurse
-foreach ($name in @('tagged-structure.html', 'tagged-structure.css')) {
+foreach ($name in @('tagged-structure.html', 'tagged-structure.css', 'engine-2.5.22.json', 'engine-regressions-font-OFL.txt')) {
     Copy-Item -LiteralPath (Join-Path $repository "tests/FullBleed.DotNet.PackageSmoke/Assets/$name") -Destination (Join-Path $consumer 'Assets')
 }
 $verificationFonts = Join-Path $consumer 'Assets/verification-fonts'

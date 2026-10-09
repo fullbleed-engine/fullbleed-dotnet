@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.8 - 2026-10-09
+
+- Pin Fullbleed 2.5.22 with SVG raster fallback, bringing corrected counter scopes, filtered clipping, border images and floated first letters to native .NET applications.
+- Add 26 independently checked layout outputs to all twelve isolated package consumers, with a hash-pinned public 0.1.7 negative control and retained PDFs and previews.
+- Keep the managed API, native ABI and supported .NET/platform matrix unchanged. Review saved outputs when upgrading templates that use the corrected layouts.
+
 ## 0.1.7 - 2026-10-07
 
 - Pin Fullbleed 2.5.13 to correct decorative artifacts, list numbering and HTML figure/caption structure in tagged PDFs.
