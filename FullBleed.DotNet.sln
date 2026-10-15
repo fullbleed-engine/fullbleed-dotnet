@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{5FFE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullBleed.DotNet.Showcase", "samples\FullBleed.DotNet.Showcase\FullBleed.DotNet.Showcase.csproj", "{5C0A5EEB-7003-4C7C-9144-BA75BB7B63B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FullBleed.DotNet.Components", "samples\FullBleed.DotNet.Components\FullBleed.DotNet.Components.csproj", "{98CD7D61-AF39-4FEA-A74F-0D6BF7FE0F51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,8 +48,13 @@ Global
 		{5C0A5EEB-7003-4C7C-9144-BA75BB7B63B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C0A5EEB-7003-4C7C-9144-BA75BB7B63B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C0A5EEB-7003-4C7C-9144-BA75BB7B63B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98CD7D61-AF39-4FEA-A74F-0D6BF7FE0F51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98CD7D61-AF39-4FEA-A74F-0D6BF7FE0F51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98CD7D61-AF39-4FEA-A74F-0D6BF7FE0F51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98CD7D61-AF39-4FEA-A74F-0D6BF7FE0F51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5C0A5EEB-7003-4C7C-9144-BA75BB7B63B8} = {5FFE6ECD-3EB6-4DD7-8BFB-598628DB6561}
+		{98CD7D61-AF39-4FEA-A74F-0D6BF7FE0F51} = {5FFE6ECD-3EB6-4DD7-8BFB-598628DB6561}
 	EndGlobalSection
 EndGlobal

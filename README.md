@@ -1,6 +1,6 @@
 # Fullbleed for .NET
 
-Idiomatic C# bindings for [Fullbleed PDF Engine](https://github.com/fullbleed-engine/fullbleed-official): deterministic HTML/CSS-to-PDF rendering, compiled variable-data publishing (VDP), diagnostics, previews, PDF inspection, template composition, and runtime-discovered CLI workflows.
+Build deterministic PDFs from C# components or HTML/CSS with [Fullbleed PDF Engine](https://github.com/fullbleed-engine/fullbleed-official). Compose documents from ordinary methods, LINQ, named elements and explicit styles, then use native rendering, previews, diagnostics and compiled variable-data publishing (VDP).
 
 This repository contains two complementary integration layers:
 
@@ -11,15 +11,11 @@ The managed assembly has no third-party NuGet runtime dependencies. Native runti
 
 ## Status
 
-Version `0.1.8` pins the published Fullbleed `2.5.22` Rust crate with SVG raster fallback enabled. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.1.8). CI builds the native libraries, assembles one package, and runs a separate consumer of that exact package on each supported platform.
+Version `0.2.0` adds the dependency-free `FullBleed.DotNet.UI` authoring API. The native engine remains pinned to Fullbleed `2.5.22` with SVG raster fallback enabled; existing HTML/CSS APIs and the native ABI are unchanged. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.2.0).
 
-This update brings corrected counter scopes, filtered clipping, border-image tiling and floated first letters to C#. The package checks thirteen layouts through direct and compiled rendering against independent text, color and browser geometry expectations, then runs the same inputs through public 0.1.7 to retain the failing examples. See the [engine regression verification](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#engine-regression-verification). Review PDF baselines for templates using those features when upgrading.
+Component trees and styles are immutable after construction. Text and attributes are escaped, LINQ children are enumerated once, and custom components are normal methods returning elements. Read the [component guide](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/components.md), including [how class names and styles connect](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/components.md#class-names-and-styles).
 
-Version 0.1.5 fixed wrapping after styled inline text and the widths of tracked labels in flex and inline-block layouts. The release checks ordinary PDFs and compiled fixed/reflow documents against the previous published package. See the [inline-layout verification](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#inline-layout-verification).
-
-Native PNG previews of unembedded standard PDF fonts now use bundled, licensed outline substitutes. They no longer depend on host fonts or become blank when those fonts are absent. PDF bytes and embedded-font previews are preserved. See the [standard-font verification](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#standard-font-preview-verification) for the twelve Latin faces checked through ordinary and compiled output, including a Linux run with system fonts hidden. Register explicit fonts when the exact type design matters.
-
-Normal text now selects the regular face when a family's italic font is registered first. Review saved PDF baselines when upgrading: affected documents can change appearance, line breaks, and file size. Explicit face names and `@font-face` mappings remain available. See the [font-selection guide](https://docs.fullbleed.dev/engine/font-registration/).
+CI assembles one NuGet package and consumes it separately on each supported platform and .NET version. It checks the designed component invoice, paid/empty/credit variants, escaping, multi-page tables, class selectors, inline overrides, compiled bindings and batching with independent PDF readers. Existing font, layout and tagged-structure checks remain in the [development workflow](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md).
 
 Supported package targets in the current build pipeline:
 
@@ -39,32 +35,49 @@ With the .NET 10 SDK installed:
 ```sh
 dotnet new console -n FullbleedDemo --framework net10.0
 cd FullbleedDemo
-dotnet add package FullBleed.DotNet --version 0.1.8
+dotnet add package FullBleed.DotNet --version 0.2.0
 ```
 
 Replace `Program.cs` with:
 
 ```csharp
 using FullBleed.DotNet;
+using FullBleed.DotNet.UI;
+using static FullBleed.DotNet.UI.Components;
+
+var styles = new StyleSheet
+{
+    ["@page"] = new Style { ["size"] = "A4", ["margin"] = "18mm" },
+    ["body"] = new Style { ["font-family"] = "Helvetica" },
+    [".notice"] = new Style { ["color"] = "#315d9b", ["font-size"] = "18pt" },
+};
+var report = new Document(
+    Stack(Heading(1, "Quarterly report"),
+        Paragraph("Deterministic print output.").WithClass("notice"))
+) { Title = "Quarterly report", Styles = styles };
 
 using var engine = new FullBleedEngine(new FullBleedEngineOptions
 {
     DocumentLanguage = "en-US",
-    DocumentTitle = "Quarterly report",
+    DocumentTitle = report.Title,
 });
-
-engine.RenderPdfToFile(
-    "<h1>Quarterly report</h1><p>Deterministic print output.</p>",
-    "body { font-family: Helvetica, sans-serif; }",
-    "output/report.pdf");
-
-var inspection = FullBleedEngine.InspectPdf("output/report.pdf");
-Console.WriteLine($"{inspection.PageCount} page(s), PDF {inspection.PdfVersion}");
+report.RenderPdfToFile(engine, "output/report.pdf");
+report.RenderImagePagesToDirectory(engine, "output/preview", dpi: 96);
 ```
 
 Run `dotnet run` and open `output/report.pdf`. Existing .NET 8 and 9 projects use the same package and API.
 
 `FullBleedRenderer.Render(...)` and `RenderToFile(...)` remain as compatibility helpers for the original proof of concept.
+
+## An invoice made from components
+
+The [component invoice](https://github.com/fullbleed-engine/fullbleed-dotnet/tree/master/samples/FullBleed.DotNet.Components) uses typed records, LINQ rows, shared styles, an amount panel and a paid-state variant. Its 40-row check flows across four pages with repeated table headers. Explicit fonts and their licenses are included.
+
+```sh
+dotnet run --project samples/FullBleed.DotNet.Components -c Release -- output/components
+```
+
+Edit `InvoiceDocument.cs` to change the data, reusable methods or styles. It writes the PDF, PNG previews, diagnostics and the generated HTML/CSS for inspection. No HTML strings are needed to author the invoice.
 
 ## A styled invoice you can run
 
@@ -144,7 +157,7 @@ var previews = engine.RenderImagePagesToDirectory(
     dpi: 144);
 ```
 
-Parallel native batching is used when jobs share CSS. Mixed-CSS jobs retain input order and use the ordinary ordered batch lane.
+Batch jobs must use matching page geometry. Parallel native batching is used when jobs share CSS. Mixed-CSS jobs retain input order and use the ordinary ordered batch lane.
 
 For unembedded standard fonts such as Helvetica or Times, the native previewer uses bundled outline substitutes and works without installed system fonts. Register explicit font files when you need a particular type design. The styled invoice sample includes its fonts.
 
@@ -177,7 +190,8 @@ result.EnsureSuccess();
 
 | Area | .NET API |
 | --- | --- |
-| Ordinary PDF bytes/files | `FullBleedEngine.RenderPdf*` |
+| Component authoring and styles | `FullBleed.DotNet.UI`, `Document`, `Style`, `StyleSheet` |
+| Ordinary PDF bytes/files | `FullBleedEngine.RenderPdf*`, `Document.RenderPdf*` |
 | Metrics, page data, glyphs | `RenderPdfWithMetrics`, `RenderPdfWithDiagnostics` |
 | PNG page previews | `RenderImagePagesToDirectory`, `RenderFinalizedPdfImagePagesToDirectory` |
 | Ordered and parallel batch | `RenderBatch`, `RenderBatchToFile` |

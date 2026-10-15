@@ -215,6 +215,8 @@ jobs:
           path: artifacts/packages
       - run: python tools/verify_consumer_evidence.py
         name: Verify independent fonts and text and compare PDF/PNG bytes
+      - name: Compile and render actual component documentation through the assembled package
+        run: python tools/verify_component_guide.py
       - name: Compare with the previous public package and reject incorrect family selection
         run: python tools/compare_font_packages.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0
       - name: Reject inline-layout defects in public 0.1.4 and verify the candidate
@@ -246,6 +248,9 @@ jobs:
             artifacts/consumer-evidence/**/tagged-structure/**/*.txt
             artifacts/consumer-evidence/**/engine-regressions/**/*.json
             artifacts/consumer-evidence/**/engine-regressions/**/pdfium-*.png
+            artifacts/consumer-evidence/**/components/verification.json
+            artifacts/consumer-evidence/**/components/pdfium-*.png
+            artifacts/component-guide/**
           if-no-files-found: error
       - uses: actions/upload-artifact@v4
         if: always()

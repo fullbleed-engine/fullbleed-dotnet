@@ -11,6 +11,7 @@ from verify_inline_layout import verify as verify_inline_layout
 from verify_standard_fonts import verify as verify_standard_fonts
 from verify_tagged_structure import verify as verify_tagged_structure, validator
 from verify_engine_regressions import verify as verify_engine_regressions
+from verify_component_outputs import verify as verify_component_outputs
 
 ROOT = Path(__file__).resolve().parents[1]
 RIDS = ['win-x64', 'linux-x64', 'osx-x64', 'osx-arm64']
@@ -24,6 +25,7 @@ def main():
     args = parser.parse_args()
     manifest = json.loads((args.packages / 'package-manifest.json').read_text(encoding='utf-8'))
     records = []
+    component_cases = []
     inputs = []
     families = []
     inline_cases = []
@@ -74,6 +76,10 @@ def main():
         engine_report = verify_engine_regressions(directory / 'engine-regressions')
         assert engine_report['packageVersion'] == manifest['version']
         engine_cases.append(engine_report['cases'])
+        component_report = verify_component_outputs(directory / 'components')
+        assert component_report['packageVersion'] == manifest['version']
+        component_cases.append(component_report['cases'])
+        data['IndependentComponentChecks'] = {'status': 'passed', 'cases': len(component_report['cases'])}
         data['IndependentEngineChecks'] = {'status': 'passed', 'cases': len(engine_report['cases'])}
         data['IndependentTaggedChecks'] = {'status': 'passed', 'validator': 'veraPDF 1.30.2', 'profiles': ['ua1', 'ua2']}
         data['IndependentStandardFontChecks'] = {'status': 'passed', 'cases': len(standard_report['cases'])}
@@ -108,6 +114,8 @@ def main():
             for key in ['pdfSha256', 'pdfiumPixelsSha256', 'text', 'faces', 'htmlSha256', 'cssSha256',
                         'previewSha256', 'htmlPreviewSha256']:
                 assert case[key] == expected[key], (case['name'], 'platform or runtime differs', key)
+    for cases in component_cases:
+        assert cases == component_cases[0], 'Component PDFs, text, styles, previews or glyph bounds differ across platforms/frameworks'
     base14_previews = {}
     for cases in engine_cases:
         assert [(item['name'], item['mode']) for item in cases] == [(item['name'], item['mode']) for item in engine_cases[0]]
@@ -128,6 +136,7 @@ def main():
               'standardFontFixtures': standard_cases[0],
               'taggedStructureFixtures': tagged_cases[0],
               'engineRegressionFixtures': engine_cases[0],
+              'componentFixtures': component_cases[0],
               'scope': 'Northstar invoice PDF, HTML preview and finalized-PDF 96-DPI PNG match on .NET 8, 9 and 10 '
                        'across Windows x64, Linux x64, Intel macOS and Apple Silicon macOS. '
                        'Bold, fixed-record, reflow-record and Unicode fixture PDFs and saved-PDF previews also match. '

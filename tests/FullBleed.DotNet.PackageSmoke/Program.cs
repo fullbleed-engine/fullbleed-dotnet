@@ -195,6 +195,9 @@ InlineLayoutFixtures.Run(assets, outputDirectory, features.BindingVersion);
 StandardFontFixtures.Run(assets, outputDirectory, features.BindingVersion);
 TaggedStructureFixtures.Run(assets, outputDirectory, features.BindingVersion);
 EngineRegressionFixtures.Run(assets, outputDirectory, features.BindingVersion);
+#if FULLBLEED_COMPONENTS
+ComponentFixtures.Run(assets, outputDirectory, features.BindingVersion);
+#endif
 Console.WriteLine($"package smoke passed: {outputPath}");
 
 static string HashFile(string path) => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))).ToLowerInvariant();

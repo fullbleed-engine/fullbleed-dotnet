@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 - 2026-10-15
+
+- Add `FullBleed.DotNet.UI`: ordinary C# component methods, immutable trees, named semantic/layout elements, captured LINQ children, escaped values and explicit document styles.
+- Add immutable style maps and stylesheet composition, class helpers, inline overrides, CSS declaration parsing and named document rendering/preview/compile methods.
+- Ship a component-authored invoice and explain class labels, selectors, shared sheets, CSS precedence and styling reusable components.
+- Verify fourteen component cases (21 PDF pages) through the assembled NuGet consumer on .NET 8, 9 and 10 across four supported platforms, including independent text/geometry/style checks and retained previews.
+- Keep Fullbleed 2.5.22, the native ABI, existing HTML/CSS APIs and runtime dependency footprint unchanged.
+
 ## 0.1.8 - 2026-10-09
 
 - Pin Fullbleed 2.5.22 with SVG raster fallback, bringing corrected counter scopes, filtered clipping, border images and floated first letters to native .NET applications.
