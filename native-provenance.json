@@ -1,6 +1,6 @@
 {
   "schema": "fullbleed.dotnet.native_provenance.v1",
-  "cargo_lock_sha256": "dbc028f8fa537925615740912a0672fc209665834fccc676798f1085eb291db1",
+  "cargo_lock_sha256": "d8a6f55e95122e071261ce71dac4ebeb117b760ef8829d7f716237ebb3a2000d",
   "scope": "Cargo-locked native bridge graph, including build-time proc macros",
   "dependencies": [
     {

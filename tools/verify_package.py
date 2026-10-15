@@ -39,11 +39,12 @@ def architecture(rid, data):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--all-rids', action='store_true')
+    parser.add_argument('--packages', type=Path, default=ROOT / 'artifacts/packages')
     args = parser.parse_args()
     version = ET.parse(ROOT / 'src/FullBleed.DotNet/FullBleed.DotNet.csproj').findtext('.//Version')
     central = ET.parse(ROOT / 'Directory.Packages.props').find('.//PackageVersion[@Include="FullBleed.DotNet"]')
     assert central.get('Version') == version
-    packages = ROOT / 'artifacts/packages'
+    packages = args.packages.resolve()
     package = packages / f'FullBleed.DotNet.{version}.nupkg'
     symbols = packages / f'FullBleed.DotNet.{version}.snupkg'
     assert symbols.is_file(), 'Missing symbol package'

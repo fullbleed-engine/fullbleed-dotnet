@@ -4,10 +4,12 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <DefineConstants>$(DefineConstants);FULLBLEED_COMPONENTS</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FullBleed.DotNet" />
+    <Compile Include="../../samples/FullBleed.DotNet.Components/InvoiceDocument.cs" Link="InvoiceDocument.cs" />
     <None Include="../../samples/FullBleed.DotNet.Showcase/Assets/**" Link="Assets/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="../FullBleed.DotNet.Tests/Assets/*" Link="Assets/verification-fonts/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Update="Assets/*" CopyToOutputDirectory="PreserveNewest" />

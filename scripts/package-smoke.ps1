@@ -46,6 +46,7 @@ $packagePath = Join-Path $packages "FullBleed.DotNet.$version.nupkg"
 if (-not (Test-Path -LiteralPath $packagePath)) { throw "Missing package: $packagePath" }
 $project = Join-Path $consumer 'Consumer.csproj'
 $frameworkVersion = $TargetFramework.Substring(3)
+$componentConstants = if ([version]$version -ge [version]'0.2.0') { '<DefineConstants>FULLBLEED_COMPONENTS</DefineConstants>' } else { '' }
 # Select the matching stable SDK even when newer SDKs are installed. The consumer
 # lives outside the repository, so its global.json does not inherit the build SDK.
 @{
@@ -57,6 +58,7 @@ $frameworkVersion = $TargetFramework.Substring(3)
     <OutputType>Exe</OutputType><TargetFramework>$TargetFramework</TargetFramework>
     <RollForward>LatestPatch</RollForward>
     <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
+    $componentConstants
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FullBleed.DotNet" Version="$version" />
@@ -70,6 +72,10 @@ Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmo
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/StandardFontFixtures.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/TaggedStructureFixtures.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/EngineRegressionFixtures.cs') -Destination $consumer
+if ($componentConstants) {
+    Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/ComponentFixtures.cs') -Destination $consumer
+    Copy-Item -LiteralPath (Join-Path $repository 'samples/FullBleed.DotNet.Components/InvoiceDocument.cs') -Destination $consumer
+}
 Copy-Item -LiteralPath (Join-Path $repository 'samples/FullBleed.DotNet.Showcase/Assets') -Destination $consumer -Recurse
 foreach ($name in @('tagged-structure.html', 'tagged-structure.css', 'engine-2.5.22.json', 'engine-regressions-font-OFL.txt')) {
     Copy-Item -LiteralPath (Join-Path $repository "tests/FullBleed.DotNet.PackageSmoke/Assets/$name") -Destination (Join-Path $consumer 'Assets')

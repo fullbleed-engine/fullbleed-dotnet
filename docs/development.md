@@ -154,6 +154,31 @@ python tools/native_provenance.py --check
 
 The package includes `native-provenance.json` and `licenses/native/`. Python is needed for these maintainer checks and the CLI integration lane; applications using the native .NET bindings do not need Python.
 
+## Component authoring verification
+
+The assembled-package consumer compiles the actual `InvoiceDocument.cs` sample
+against the packaged managed assembly. Fourteen fixtures cover normal, paid,
+empty, credit, escaped-data and four-page invoices; class and descendant rules;
+inline-border overrides and controls that remove classes or inline styling;
+compiled fixed/reflow templates; and ordered batching. The fixture inputs,
+21 PDF pages and native previews are retained for every platform/framework.
+
+```sh
+python tools/verify_component_outputs.py artifacts/package-smoke/components
+```
+
+Using the independent readers listed above, this checks content with pypdf and
+PDFium, page counts, every glyph's page bounds, PDF colors and font sizes,
+visible native previews, expected invoice totals, and all 40 rows exactly once.
+`verify_consumer_evidence.py` compares source hashes, PDFs, native previews,
+independent PDFium pixels, text and glyph bounds across all twelve consumers.
+Class-removal and inline-removal controls must change the expected rendered
+styles. These checks concern the recorded fixtures, not full language parity.
+
+Older-package comparisons deliberately omit the new component fixture source:
+the 0.1.x managed assemblies do not export this API. All existing legacy
+fixtures continue to run against those packages unchanged.
+
 ## NuGet trusted publishing
 
 The `Release NuGet` workflow validates and consumes the package on all four platforms before publishing the exact validated artifact. It publishes only from a `v<package-version>` tag. Manual branch runs validate without uploading.
