@@ -11,7 +11,7 @@ runtimes/{rid}/native/          generated/staged package assets
 scripts/                        build, verify, and pack entrypoints
 ```
 
-The native crate pins the published Fullbleed `2.5.22` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
+The native crate pins the published Fullbleed `2.5.35` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
 
 ## Local verification
 
@@ -21,7 +21,7 @@ The native crate pins the published Fullbleed `2.5.22` crate with an exact Cargo
 
 This stages the host native library, checks Rust formatting and Clippy, runs native tests, verifies managed formatting, builds the full solution, and runs the managed test suite. The integration suite verifies deterministic rendering, diagnostics, metrics, PNG output, in-memory and direct-to-file batches, fixed and reflow compiled bindings, inspection, template stamping/composition, concurrency, and failure-path recovery.
 
-CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.22` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
+CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.35` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
 
 ## Local package
 
@@ -73,6 +73,33 @@ case in each of the four fix families; every candidate case must pass. The two
 healthy nested-counter controls retain identical PDFs, previews and text.
 The `engine-regression-comparison` artifact retains those old PDFs and results.
 These checks cover the recorded layouts and do not establish general CSS parity.
+
+## Pagination verification
+
+Each isolated consumer renders nine retained layouts through direct and compiled
+output: six long-table overflow variants, auto-height and fixed-height forced
+breaks, and footnotes on a line that moves to the next page. Inputs are copied
+byte for byte from the [published 2.5.35 playground fixtures](https://github.com/fullbleed-engine/docs/blob/0ff865479d3084b5476973f5d7353ce48cbed4d6/tools/playground-fixtures/pagination.json),
+including their Node source provenance.
+
+`tools/verify_pagination_outputs.py <consumer>/pagination` checks page counts,
+all 80 table rows exactly once, repeated headers, marker placement, footnotes
+following their callouts, physical glyph bounds, independent text extraction,
+and visible previews. CI compares all 18 PDFs and native/PDFium previews across
+the twelve platform/framework consumers. Repeated renders must be identical.
+
+`tools/compare_pagination_packages.py <consumer>` repeats the same inputs with
+hash-pinned public 0.2.0. All eight defective layouts must fail in each mode;
+every candidate output must pass. The fixed-height control must preserve its
+PDF bytes, native previews, PDFium pixels and text. The `pagination-comparison`
+artifact retains old PDFs, exact sources, previews, package identity and results.
+The same comparison checks the existing PDF/native preview outputs against
+0.2.0. Only the two tagged PDF byte sequences change: table borders now use
+artifact marking outside cell MCIDs. `review_engine_upgrade.py` requires
+identical drawing operators, text/glyph ownership and other PDF objects; all
+legacy previews and ordinary PDFs remain byte-identical. The artifact retains
+the old tagged PDFs and this review. Existing historical fixture hashes remain
+unchanged; independent profile validation still runs separately.
 
 ## Tagged-structure verification
 

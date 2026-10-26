@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1 - 2026-10-26
+
+- Pin the published Fullbleed 2.5.35 engine, including corrected long-table pagination, forced breaks in auto-height containers, and footnotes that stay with moved callouts.
+- Add eighteen direct/compiled pagination outputs to the isolated package consumers, with independent text, page-boundary and preview checks and a hash-pinned public 0.2.0 negative control.
+- Keep the C# component and HTML/CSS APIs, native ABI, runtime dependency footprint and supported platform/framework matrix unchanged. Review saved PDF baselines when upgrading templates affected by layout corrections.
+
 ## 0.2.0 - 2026-10-15
 
 - Add `FullBleed.DotNet.UI`: ordinary C# component methods, immutable trees, named semantic/layout elements, captured LINQ children, escaped values and explicit document styles.
