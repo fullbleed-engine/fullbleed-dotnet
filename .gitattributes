@@ -8,4 +8,8 @@ tests/FullBleed.DotNet.Tests/Assets/*-OFL.txt -whitespace
 # Preserve the shared fixtures and upstream font notice byte for byte.
 tests/FullBleed.DotNet.PackageSmoke/Assets/engine-2.5.22.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/pagination-2.5.35.json -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/table-wrapping-2.5.37.json -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/table-wrapping-font.json -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/FullbleedCJKTest-Regular.ttf -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/FullbleedCJKTest-OFL.txt -text -whitespace
 tests/FullBleed.DotNet.PackageSmoke/Assets/engine-regressions-font-OFL.txt -text -whitespace

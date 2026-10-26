@@ -7,10 +7,10 @@ does not start a renderer or load fonts; you supply an explicit engine.
 
 ## A component is a method
 
-Install `FullBleed.DotNet` 0.2.1 in a .NET 8, 9 or 10 console application:
+Install `FullBleed.DotNet` 0.2.2 in a .NET 8, 9 or 10 console application:
 
 ```sh
-dotnet add package FullBleed.DotNet --version 0.2.1
+dotnet add package FullBleed.DotNet --version 0.2.2
 ```
 
 ```csharp

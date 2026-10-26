@@ -1,0 +1,452 @@
+{
+  "source": "https://github.com/fullbleed-engine/fullbleed-official/blob/23ba59ca2ed80b3fb14661192d16f96382e04a05/tests/test_fullbleed_table_wrapping.py",
+  "sourceSha256": "b8b2411d736b8188be0108ddef568d172f9032c2aa22a11b1dd9b7e1268b1081",
+  "fontSha256": "82767f7e62e2038af78a032effbf8ad15ca7b2d92d47e758ee9e0954313bf562",
+  "sourceNegativeControl": {
+    "engine": "2.5.35",
+    "cases": 35,
+    "failed": 18,
+    "passed": 17,
+    "junitSha256": "65770f6514732c431acb5fba8fa6e9130316ddb33361b7e64c7e252a5ed9ea6d"
+  },
+  "scope": "Synthetic table-wrapping and authored-child-width fixtures. Intentional keep-all, nowrap, break-word and unbreakable-content controls retain their intrinsic minimum. The renamed font subset is test-only.",
+  "cases": [
+    {
+      "name": "auto-cjk-normal-plain",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td>東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です</td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { ; } table { table-layout: auto; }",
+      "expectedText": "東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[cjk-normal-plain]",
+      "public081Fails": true
+    },
+    {
+      "name": "auto-cjk-normal-inline-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><span>東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です</span></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { ; } table { table-layout: auto; }",
+      "expectedText": "東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[cjk-normal-inline-element]",
+      "public081Fails": true
+    },
+    {
+      "name": "auto-cjk-normal-block-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><p>東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です</p></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { ; } table { table-layout: auto; }",
+      "expectedText": "東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[cjk-normal-block-element]",
+      "public081Fails": true
+    },
+    {
+      "name": "auto-cjk-keep-all-plain",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td>東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です</td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { word-break: keep-all; } table { table-layout: auto; }",
+      "expectedText": "東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です",
+      "intentionalOverflow": true,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[cjk-keep-all-plain]",
+      "public081Fails": false
+    },
+    {
+      "name": "auto-cjk-keep-all-inline-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><span>東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です</span></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { word-break: keep-all; } table { table-layout: auto; }",
+      "expectedText": "東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です",
+      "intentionalOverflow": true,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[cjk-keep-all-inline-element]",
+      "public081Fails": false
+    },
+    {
+      "name": "auto-cjk-keep-all-block-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><p>東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です</p></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { word-break: keep-all; } table { table-layout: auto; }",
+      "expectedText": "東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です",
+      "intentionalOverflow": true,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[cjk-keep-all-block-element]",
+      "public081Fails": false
+    },
+    {
+      "name": "auto-break-all-plain",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { word-break: break-all; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[break-all-plain]",
+      "public081Fails": true
+    },
+    {
+      "name": "auto-break-all-inline-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><span>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</span></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { word-break: break-all; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[break-all-inline-element]",
+      "public081Fails": true
+    },
+    {
+      "name": "auto-break-all-block-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><p>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</p></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { word-break: break-all; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[break-all-block-element]",
+      "public081Fails": true
+    },
+    {
+      "name": "auto-overflow-anywhere-plain",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { overflow-wrap: anywhere; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[overflow-anywhere-plain]",
+      "public081Fails": true
+    },
+    {
+      "name": "auto-overflow-anywhere-inline-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><span>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</span></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { overflow-wrap: anywhere; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[overflow-anywhere-inline-element]",
+      "public081Fails": true
+    },
+    {
+      "name": "auto-overflow-anywhere-block-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><p>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</p></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { overflow-wrap: anywhere; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[overflow-anywhere-block-element]",
+      "public081Fails": true
+    },
+    {
+      "name": "auto-line-anywhere-plain",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { line-break: anywhere; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[line-anywhere-plain]",
+      "public081Fails": true
+    },
+    {
+      "name": "auto-line-anywhere-inline-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><span>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</span></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { line-break: anywhere; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[line-anywhere-inline-element]",
+      "public081Fails": true
+    },
+    {
+      "name": "auto-line-anywhere-block-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><p>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</p></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { line-break: anywhere; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[line-anywhere-block-element]",
+      "public081Fails": true
+    },
+    {
+      "name": "auto-break-word-minimum-plain",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { overflow-wrap: break-word; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": true,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[break-word-minimum-plain]",
+      "public081Fails": false
+    },
+    {
+      "name": "auto-break-word-minimum-inline-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><span>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</span></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { overflow-wrap: break-word; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": true,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[break-word-minimum-inline-element]",
+      "public081Fails": false
+    },
+    {
+      "name": "auto-break-word-minimum-block-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><p>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</p></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { overflow-wrap: break-word; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": true,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[break-word-minimum-block-element]",
+      "public081Fails": false
+    },
+    {
+      "name": "auto-unbreakable-latin-plain",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { overflow-wrap: normal; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": true,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[unbreakable-latin-plain]",
+      "public081Fails": false
+    },
+    {
+      "name": "auto-unbreakable-latin-inline-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><span>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</span></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { overflow-wrap: normal; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": true,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[unbreakable-latin-inline-element]",
+      "public081Fails": false
+    },
+    {
+      "name": "auto-unbreakable-latin-block-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><p>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</p></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { overflow-wrap: normal; } table { table-layout: auto; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": true,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[unbreakable-latin-block-element]",
+      "public081Fails": false
+    },
+    {
+      "name": "auto-nowrap-plain",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td>東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です</td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { white-space: nowrap; overflow-wrap: anywhere; } table { table-layout: auto; }",
+      "expectedText": "東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です",
+      "intentionalOverflow": true,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[nowrap-plain]",
+      "public081Fails": false
+    },
+    {
+      "name": "auto-nowrap-inline-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><span>東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です</span></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { white-space: nowrap; overflow-wrap: anywhere; } table { table-layout: auto; }",
+      "expectedText": "東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です",
+      "intentionalOverflow": true,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[nowrap-inline-element]",
+      "public081Fails": false
+    },
+    {
+      "name": "auto-nowrap-block-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><p>東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です</p></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { white-space: nowrap; overflow-wrap: anywhere; } table { table-layout: auto; }",
+      "expectedText": "東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です",
+      "intentionalOverflow": true,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[nowrap-block-element]",
+      "public081Fails": false
+    },
+    {
+      "name": "auto-word-separators-plain",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td>alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta </td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { ; } table { table-layout: auto; }",
+      "expectedText": "alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta ",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[word-separators-plain]",
+      "public081Fails": false
+    },
+    {
+      "name": "auto-word-separators-inline-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><span>alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta </span></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { ; } table { table-layout: auto; }",
+      "expectedText": "alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta ",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[word-separators-inline-element]",
+      "public081Fails": true
+    },
+    {
+      "name": "auto-word-separators-block-element",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><p>alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta </p></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { ; } table { table-layout: auto; }",
+      "expectedText": "alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta alpha beta gamma delta ",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_auto_table_uses_wrappable_minimum[word-separators-block-element]",
+      "public081Fails": true
+    },
+    {
+      "name": "fixed-span-japanese",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><span>東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です</span></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { ; } table { table-layout: fixed; }",
+      "expectedText": "東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です東京都の交通計画と地域調査の結果を説明する日本語の文章です",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_fixed_table_wrapped_span_starts_inside_cell[japanese]",
+      "public081Fails": true
+    },
+    {
+      "name": "fixed-span-latin",
+      "kind": "wrapping",
+      "html": "<html lang='ja'><body><table><tr><td><span>ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN</span></td></tr></table></body></html>",
+      "css": "\n        @page { size: 360pt 360pt; margin: 24pt; }\n        body { margin: 0; font: 12pt \"Fullbleed CJK Test\"; line-height: 1.5; }\n        table { width: 180pt; border-collapse: collapse; }\n        td { padding: 0; border: 1pt solid #175c52; }\n        p { margin: 0; }\n    td { overflow-wrap: anywhere; } table { table-layout: fixed; }",
+      "expectedText": "ABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMNABCDEFGHIJKLMN",
+      "intentionalOverflow": false,
+      "fontFiles": [
+        "FullbleedCJKTest-Regular.ttf"
+      ],
+      "coreTest": "test_fixed_table_wrapped_span_starts_inside_cell[latin]",
+      "public081Fails": true
+    },
+    {
+      "name": "child-width",
+      "kind": "child-width",
+      "html": "<table><tr><td><div class=\"target\">FIRST</div></td><td>SECOND</td></tr></table>",
+      "css": "@page { size:600pt 400pt; margin:24pt; }\n        body { margin:0; font:12pt Helvetica; }\n        table { width:180pt; border-collapse:collapse; }\n        td { padding:0; border:1pt solid #175c52; }\n    .target {width:240pt;}",
+      "secondCellMinimumLeftPt": 265,
+      "fontFiles": [],
+      "coreTest": "test_auto_table_preserves_authored_child_widths[width]",
+      "public081Fails": false
+    },
+    {
+      "name": "child-min-width",
+      "kind": "child-width",
+      "html": "<table><tr><td><div class=\"target\">FIRST</div></td><td>SECOND</td></tr></table>",
+      "css": "@page { size:600pt 400pt; margin:24pt; }\n        body { margin:0; font:12pt Helvetica; }\n        table { width:180pt; border-collapse:collapse; }\n        td { padding:0; border:1pt solid #175c52; }\n    .target {min-width:240pt;}",
+      "secondCellMinimumLeftPt": 265,
+      "fontFiles": [],
+      "coreTest": "test_auto_table_preserves_authored_child_widths[min-width]",
+      "public081Fails": true
+    },
+    {
+      "name": "child-nested-width",
+      "kind": "child-width",
+      "html": "<table><tr><td><div><div class=\"target\">FIRST</div></div></td><td>SECOND</td></tr></table>",
+      "css": "@page { size:600pt 400pt; margin:24pt; }\n        body { margin:0; font:12pt Helvetica; }\n        table { width:180pt; border-collapse:collapse; }\n        td { padding:0; border:1pt solid #175c52; }\n    .target {width:240pt;}",
+      "secondCellMinimumLeftPt": 265,
+      "fontFiles": [],
+      "coreTest": "test_auto_table_preserves_authored_child_widths[nested-width]",
+      "public081Fails": false
+    },
+    {
+      "name": "child-nested-min-width",
+      "kind": "child-width",
+      "html": "<table><tr><td><div><div class=\"target\">FIRST</div></div></td><td>SECOND</td></tr></table>",
+      "css": "@page { size:600pt 400pt; margin:24pt; }\n        body { margin:0; font:12pt Helvetica; }\n        table { width:180pt; border-collapse:collapse; }\n        td { padding:0; border:1pt solid #175c52; }\n    .target {min-width:240pt;}",
+      "secondCellMinimumLeftPt": 265,
+      "fontFiles": [],
+      "coreTest": "test_auto_table_preserves_authored_child_widths[nested-min-width]",
+      "public081Fails": true
+    },
+    {
+      "name": "child-border-box",
+      "kind": "child-width",
+      "html": "<table><tr><td><div class=\"target\">FIRST</div></td><td>SECOND</td></tr></table>",
+      "css": "@page { size:600pt 400pt; margin:24pt; }\n        body { margin:0; font:12pt Helvetica; }\n        table { width:180pt; border-collapse:collapse; }\n        td { padding:0; border:1pt solid #175c52; }\n    .target {width:240pt;box-sizing:border-box;padding:10pt;border:2pt solid #555;}",
+      "secondCellMinimumLeftPt": 265,
+      "fontFiles": [],
+      "coreTest": "test_auto_table_preserves_authored_child_widths[border-box]",
+      "public081Fails": false
+    },
+    {
+      "name": "child-percentage",
+      "kind": "child-width",
+      "html": "<table><tr><td><div class=\"target\">FIRST</div></td><td>SECOND</td></tr></table>",
+      "css": "@page { size:600pt 400pt; margin:24pt; }\n        body { margin:0; font:12pt Helvetica; }\n        table { width:180pt; border-collapse:collapse; }\n        td { padding:0; border:1pt solid #175c52; }\n    .target {width:100%;}",
+      "secondCellMinimumLeftPt": null,
+      "fontFiles": [],
+      "coreTest": "test_auto_table_preserves_authored_child_widths[percentage]",
+      "public081Fails": false
+    }
+  ]
+}

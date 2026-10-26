@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.2 - 2026-10-26
+
+- Pin the published Fullbleed 2.5.37 engine to correct wrapping in narrow automatic/fixed tables and respect widths and minimum widths on nested cell content.
+- Add 35 shared core fixtures through direct and compiled C# rendering, including Japanese text, long Latin tokens, explicit break rules, authored widths, and intentional-overflow controls. Retain the renamed test font and upstream license.
+- Compare the same inputs against the hash-pinned public 0.2.1 package, require all 34 healthy direct/compiled controls to retain exact output, and check existing PDF/PNG fixtures for changes.
+- Keep the managed API, native ABI, runtime dependencies, and supported platform/framework matrix unchanged. Review saved output when upgrading affected templates.
+
 ## 0.2.1 - 2026-10-26
 
 - Pin the published Fullbleed 2.5.35 engine, including corrected long-table pagination, forced breaks in auto-height containers, and footnotes that stay with moved callouts.

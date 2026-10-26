@@ -11,7 +11,7 @@ runtimes/{rid}/native/          generated/staged package assets
 scripts/                        build, verify, and pack entrypoints
 ```
 
-The native crate pins the published Fullbleed `2.5.35` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
+The native crate pins the published Fullbleed `2.5.37` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
 
 ## Local verification
 
@@ -21,7 +21,7 @@ The native crate pins the published Fullbleed `2.5.35` crate with an exact Cargo
 
 This stages the host native library, checks Rust formatting and Clippy, runs native tests, verifies managed formatting, builds the full solution, and runs the managed test suite. The integration suite verifies deterministic rendering, diagnostics, metrics, PNG output, in-memory and direct-to-file batches, fixed and reflow compiled bindings, inspection, template stamping/composition, concurrency, and failure-path recovery.
 
-CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.35` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
+CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.37` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
 
 ## Local package
 
@@ -49,6 +49,41 @@ A second matrix consumes that same assembled package on .NET 8, 9, and 10 for ea
 The evidence job independently checks six fixtures: the styled invoice, an explicit regular-face invoice control, weight-700 bold text, two fixed records, two reflow records, and Unicode text using a separately registered Noto Sans font. It compares their PDF bytes and saved-PDF PNG previews across all 12 consumers, plus the invoice's HTML preview. It also rejects evidence from a missing or incorrect framework/platform combination. `pypdf` and PDFium must agree on extracted text; FontTools checks embedded glyph programs, metrics, mappings, checksums, notices, and compact metadata against all five source fonts. These readers are release-check dependencies, not dependencies of applications using the .NET package.
 
 Each isolated consumer also renders 22 regular/italic family cases: explicit-face controls, both registration orders through ordinary/fixed/reflow output, and ordinary `@font-face` mappings. The independent family verifier checks embedded face names and notice tables, extracted text, and native/PDFium preview pixels against those controls. Their PDFs and previews must agree across all 12 consumers.
+
+## Table-wrapping verification
+
+Each isolated package consumer renders 35 retained core fixtures through both
+direct and compiled C# APIs. They cover Japanese text, long Latin tokens,
+`word-break`, `overflow-wrap`, `line-break`, inline and block children, fixed
+tables, and authored child widths/minimum widths. Intentional `nowrap`,
+`keep-all`, and unbreakable-content controls must preserve their behavior.
+
+```sh
+python tools/verify_table_wrapping.py artifacts/package-smoke/table-wrapping
+python tools/compare_table_wrapping_packages.py artifacts/package-smoke
+```
+
+The fixture JSON is retained byte for byte from the
+[verified JavaScript integration](https://github.com/fullbleed-engine/fullbleed-node/blob/c5513fe4f7d0c82cfef084d76ff6df7ab3b0c710/test/fixtures/table-wrapping-2.5.37.json),
+which records its original Python/core source and expected failure set. A
+renamed, test-only BIZ UDPGothic subset includes its source metadata and OFL
+notice; it is not a general-purpose Japanese font shipped to applications.
+
+The independent verifier checks exact extracted content, character positions,
+authored widths, one-page layout, and visible previews. The evidence job
+compares the 70 PDFs and native previews across all twelve consumers, running
+its independent PDFium inspections on the same evidence host. PDFium's own
+rasterization and glyph bounds for the six unembedded-Helvetica fixtures can
+differ between reader operating systems; this is separate from Fullbleed's
+deterministic PDF and preview output.
+
+The comparison installs the actual public NuGet 0.2.1 package, verifies its
+archive hash and engine 2.5.35 provenance, and requires its known 18 failures
+per rendering mode. All 17 healthy cases per mode must retain identical PDFs,
+native previews, independent PDFium pixels, text, and glyph bounds on the same
+host. Existing package fixture PDFs and native previews must also remain
+byte-identical. CI retains the baseline, inputs, font, reports, and previews in
+`table-wrapping-comparison`; these checks do not establish universal CSS parity.
 
 ## Engine regression verification
 

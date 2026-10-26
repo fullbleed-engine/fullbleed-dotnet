@@ -73,12 +73,13 @@ Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmo
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/TaggedStructureFixtures.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/EngineRegressionFixtures.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/PaginationFixtures.cs') -Destination $consumer
+Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/TableWrappingFixtures.cs') -Destination $consumer
 if ($componentConstants) {
     Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/ComponentFixtures.cs') -Destination $consumer
     Copy-Item -LiteralPath (Join-Path $repository 'samples/FullBleed.DotNet.Components/InvoiceDocument.cs') -Destination $consumer
 }
 Copy-Item -LiteralPath (Join-Path $repository 'samples/FullBleed.DotNet.Showcase/Assets') -Destination $consumer -Recurse
-foreach ($name in @('tagged-structure.html', 'tagged-structure.css', 'engine-2.5.22.json', 'engine-regressions-font-OFL.txt', 'pagination-2.5.35.json')) {
+foreach ($name in @('tagged-structure.html', 'tagged-structure.css', 'engine-2.5.22.json', 'engine-regressions-font-OFL.txt', 'pagination-2.5.35.json', 'table-wrapping-2.5.37.json', 'table-wrapping-font.json', 'FullbleedCJKTest-Regular.ttf', 'FullbleedCJKTest-OFL.txt')) {
     Copy-Item -LiteralPath (Join-Path $repository "tests/FullBleed.DotNet.PackageSmoke/Assets/$name") -Destination (Join-Path $consumer 'Assets')
 }
 $verificationFonts = Join-Path $consumer 'Assets/verification-fonts'
