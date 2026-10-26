@@ -13,6 +13,7 @@ from verify_tagged_structure import verify as verify_tagged_structure, validator
 from verify_engine_regressions import verify as verify_engine_regressions
 from verify_component_outputs import verify as verify_component_outputs
 from verify_pagination_outputs import verify as verify_pagination_outputs
+from verify_table_wrapping import verify as verify_table_wrapping
 
 ROOT = Path(__file__).resolve().parents[1]
 RIDS = ['win-x64', 'linux-x64', 'osx-x64', 'osx-arm64']
@@ -35,6 +36,7 @@ def main():
     tagged_inputs = []
     engine_cases = []
     pagination_cases = []
+    table_cases = []
     verapdf = validator(ROOT / 'artifacts/verapdf')
     for rid, framework in product(RIDS, FRAMEWORKS):
         consumer = f'{rid}-net{framework}'
@@ -84,6 +86,10 @@ def main():
         pagination_report = verify_pagination_outputs(directory / 'pagination')
         assert pagination_report['packageVersion'] == manifest['version']
         pagination_cases.append(pagination_report['cases'])
+        table_report = verify_table_wrapping(directory / 'table-wrapping')
+        assert table_report['packageVersion'] == manifest['version'] and len(table_report['cases']) == 70
+        table_cases.append(table_report['cases'])
+        data['IndependentTableWrappingChecks'] = {'status': 'passed', 'cases': len(table_report['cases'])}
         data['IndependentPaginationChecks'] = {'status': 'passed', 'cases': len(pagination_report['cases'])}
         data['IndependentComponentChecks'] = {'status': 'passed', 'cases': len(component_report['cases'])}
         data['IndependentEngineChecks'] = {'status': 'passed', 'cases': len(engine_report['cases'])}
@@ -123,6 +129,8 @@ def main():
     for cases in component_cases:
         assert cases == component_cases[0], 'Component PDFs, text, styles, previews or glyph bounds differ across platforms/frameworks'
     assert all(cases == pagination_cases[0] for cases in pagination_cases), 'Pagination PDFs, text, previews or glyph bounds differ across platforms/frameworks'
+    # Independent inspection runs here on one reader host for all 12 artifacts.
+    assert all(cases == table_cases[0] for cases in table_cases), 'Table-wrapping PDFs, text, previews or glyph bounds differ across platform/framework consumers'
     base14_previews = {}
     for cases in engine_cases:
         assert [(item['name'], item['mode']) for item in cases] == [(item['name'], item['mode']) for item in engine_cases[0]]
@@ -145,6 +153,7 @@ def main():
               'engineRegressionFixtures': engine_cases[0],
               'componentFixtures': component_cases[0],
               'paginationFixtures': pagination_cases[0],
+              'tableWrappingFixtures': table_cases[0],
               'scope': 'Northstar invoice PDF, HTML preview and finalized-PDF 96-DPI PNG match on .NET 8, 9 and 10 '
                        'across Windows x64, Linux x64, Intel macOS and Apple Silicon macOS. '
                        'Bold, fixed-record, reflow-record and Unicode fixture PDFs and saved-PDF previews also match. '
@@ -157,6 +166,7 @@ def main():
                        'The rich tagged specimen passes pinned veraPDF 1.30.2 for PDF/UA-1 and PDF/UA-2 across all 12 consumers, with identical PDFs, previews and text. '
                         'Thirteen counter, clipping, border-image and first-letter layouts pass independent checks through direct and compiled output, with identical PDFs and previews across all consumers. '
                        'Nine pagination layouts pass independent checks through direct and compiled output, with identical PDFs and previews across all consumers. '
+                       'Thirty-five table-wrapping layouts pass through direct and compiled output; PDFs and native previews match across all consumers, with independent readers run on the evidence host. '
                        'These retained fixtures are not a universal platform-parity or conformance claim.'}
     path = ROOT / 'artifacts/cross-platform-evidence.json'
     path.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
