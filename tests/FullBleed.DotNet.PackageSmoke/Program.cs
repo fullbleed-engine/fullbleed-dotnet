@@ -195,6 +195,7 @@ InlineLayoutFixtures.Run(assets, outputDirectory, features.BindingVersion);
 StandardFontFixtures.Run(assets, outputDirectory, features.BindingVersion);
 TaggedStructureFixtures.Run(assets, outputDirectory, features.BindingVersion);
 EngineRegressionFixtures.Run(assets, outputDirectory, features.BindingVersion);
+PaginationFixtures.Run(assets, outputDirectory, features.BindingVersion);
 #if FULLBLEED_COMPONENTS
 ComponentFixtures.Run(assets, outputDirectory, features.BindingVersion);
 #endif
