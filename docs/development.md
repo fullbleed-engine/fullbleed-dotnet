@@ -11,7 +11,7 @@ runtimes/{rid}/native/          generated/staged package assets
 scripts/                        build, verify, and pack entrypoints
 ```
 
-The native crate pins the published Fullbleed `2.5.37` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
+The native crate pins the published Fullbleed `2.5.39` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
 
 ## Local verification
 
@@ -21,7 +21,7 @@ The native crate pins the published Fullbleed `2.5.37` crate with an exact Cargo
 
 This stages the host native library, checks Rust formatting and Clippy, runs native tests, verifies managed formatting, builds the full solution, and runs the managed test suite. The integration suite verifies deterministic rendering, diagnostics, metrics, PNG output, in-memory and direct-to-file batches, fixed and reflow compiled bindings, inspection, template stamping/composition, concurrency, and failure-path recovery.
 
-CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.37` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
+CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.39` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
 
 ## Local package
 
@@ -49,6 +49,32 @@ A second matrix consumes that same assembled package on .NET 8, 9, and 10 for ea
 The evidence job independently checks six fixtures: the styled invoice, an explicit regular-face invoice control, weight-700 bold text, two fixed records, two reflow records, and Unicode text using a separately registered Noto Sans font. It compares their PDF bytes and saved-PDF PNG previews across all 12 consumers, plus the invoice's HTML preview. It also rejects evidence from a missing or incorrect framework/platform combination. `pypdf` and PDFium must agree on extracted text; FontTools checks embedded glyph programs, metrics, mappings, checksums, notices, and compact metadata against all five source fonts. These readers are release-check dependencies, not dependencies of applications using the .NET package.
 
 Each isolated consumer also renders 22 regular/italic family cases: explicit-face controls, both registration orders through ordinary/fixed/reflow output, and ordinary `@font-face` mappings. The independent family verifier checks embedded face names and notice tables, extracted text, and native/PDFium preview pixels against those controls. Their PDFs and previews must agree across all 12 consumers.
+
+## Document regression verification
+
+Each isolated package consumer previews 39 retained PDFs with 43 pages. These
+cover independently embedded Inter/Noto Sans subsets, regular and bold text,
+both subset orders, merged pages, and a three-record certificate. The compact
+fixture archive includes its source provenance and font licenses. Source PDF
+bytes stay unchanged, repeated previews must match, and twelve pairs compare
+composed/merged pages with equivalent controls.
+
+The consumer also renders 41 retained generated-quotation inputs through direct,
+compiled, and two-record reflow APIs: 123 documents and 164 pages. The records
+exercise quotation depth reset as well as normal and silent quotation tokens.
+Independent pypdf and PDFium readers check exact text and page counts. Native
+previews and PDFs are compared across all twelve platform/framework consumers.
+
+```sh
+python tools/verify_document_regressions.py artifacts/package-smoke/document-regressions
+python tools/compare_document_packages.py artifacts/package-smoke
+```
+
+The public NuGet 0.2.2 package supplies the negative control. Its archive hash,
+engine 2.5.37 provenance, incorrect previews, and quotation outputs are retained.
+Healthy controls and earlier fixture families remain subject to byte comparisons.
+These checks cover the listed cases; they do not establish general raster parity
+or a standards-conformance claim.
 
 ## Table-wrapping verification
 

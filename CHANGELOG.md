@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.3 - 2026-10-27
+
+- Pin the published Fullbleed 2.5.39 engine to preserve the right glyphs when previewing PDFs with multiple embedded subsets of the same font. This also brings the generated-quotation corrections from 2.5.38 into direct, compiled and reflow rendering.
+- Add 39 imported PDFs with 43 preview pages and 41 quotation inputs in three rendering modes. Compare against the hash-pinned public 0.2.2 package, preserve healthy controls and all earlier fixture PDFs/previews, and retain independent text and raster checks.
+- Keep the managed API, native ABI, runtime dependencies and supported platform/framework matrix unchanged. Review saved output when upgrading affected documents.
+
 ## 0.2.2 - 2026-10-26
 
 - Pin the published Fullbleed 2.5.37 engine to correct wrapping in narrow automatic/fixed tables and respect widths and minimum widths on nested cell content.

@@ -1,0 +1,381 @@
+{
+  "schema": "fullbleed.dotnet.generated_quotes.inputs.v1",
+  "coreVersion": "2.5.38",
+  "source": "https://github.com/fullbleed-engine/fullbleed-official/releases/tag/v2.5.38",
+  "sourceManifestSha256": "f2bfa0cf9508bb28f185eb7a0de91ee6015d69ecaf0b7693e7c2d6c91e06c335",
+  "fontSha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+  "documentLanguage": "en",
+  "documentTitle": "Synthetic quotation order probe",
+  "cases": [
+    {
+      "name": "inline-nested",
+      "expectedText": "RecordAda[outer{inner}end]",
+      "htmlSha256": "159977ffa92b7c4aafcdc2214ac5d12b9f408a05e7cd22ff8a533dd292cbfd1e",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"q\" style=\"display:inline\">outer<span class=\"q\">inner</span>end</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "f9c3916939e781f2ccd543d40c2a8264c57445bcbffde416faadd79ab0e7d22e"
+    },
+    {
+      "name": "inline-silent-before",
+      "expectedText": "RecordAda{one}{two}",
+      "htmlSha256": "e106ccc29758b8a32757499bd2a39fe1da771159bf7923038c3a0335e3c2fd84",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"open\" style=\"display:inline\"><span class=\"q\">one</span></span><span class=\"q\">two</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "c5356059bb43e1e67bde636ac5d9ccfd11848d3c7cb066530ded8fa7f5bfbb0a"
+    },
+    {
+      "name": "inline-silent-after",
+      "expectedText": "RecordAda[one]{two}",
+      "htmlSha256": "3df073dcdfb719fae8b9efd58d0980c4a98bbe31cf687cc13666d02e1aa7d000",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"after\" style=\"display:inline\"><span class=\"q\">one</span></span><span class=\"q\">two</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "7b0f361648b43b40cbb72fcebd0bb061238d403275ad60caa45fbfaeab97ec9f"
+    },
+    {
+      "name": "inline-close-after-zero-probe",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "5cfab4b38cac260ebddf0be1a365e583b9a289fe63e28fa67605f038e7c04c81",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"closeafter\" style=\"display:inline\"><span class=\"open\"></span></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5a93fafe3ed3990c56a061b1d6c610b38ec658694b04505f901b8f2252a7f28c"
+    },
+    {
+      "name": "inline-visible-close-zero-probe",
+      "expectedText": "RecordAda][one]",
+      "htmlSha256": "48256d75eb5c37bb66c6eda027c4432c96f3aea2657ba3e0eb63a403262acb8d",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"visibleclose\" style=\"display:inline\"><span class=\"open\"></span></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "0f023312d9015ca8344e7845b052c9f6a2b687df4f29f410846cbdf17e5b88b3"
+    },
+    {
+      "name": "inline-balanced-after",
+      "expectedText": "RecordAda{}{one}",
+      "htmlSha256": "289b3c484025e2d536b5b96bdf302c659ef4afeb903d3f112f8fec98529a059c",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"balanced\" style=\"display:inline\"><span class=\"open\"></span></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "d9055ec0e7197c036eb74b8743e40a18b39f3affce70b52c37abe89ae4f6be2b"
+    },
+    {
+      "name": "contents-nested",
+      "expectedText": "RecordAda[outer{inner}end]",
+      "htmlSha256": "5906d23883f303ea44046d2287fe2725334482cb1adf266cba84f787ddbc96fa",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"q\" style=\"display:contents\">outer<span class=\"q\">inner</span>end</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "b60b6213736e04c419117f404b5e81ced5e1f108210776ca92f08aacf6bf97fa"
+    },
+    {
+      "name": "contents-silent-before",
+      "expectedText": "RecordAda{one}{two}",
+      "htmlSha256": "4568c80658c184a98b784463aeb47b4dbfcfc50277dcf5a39b6509ee9cceca25",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"open\" style=\"display:contents\"><span class=\"q\">one</span></span><span class=\"q\">two</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "c5356059bb43e1e67bde636ac5d9ccfd11848d3c7cb066530ded8fa7f5bfbb0a"
+    },
+    {
+      "name": "contents-silent-after",
+      "expectedText": "RecordAda[one]{two}",
+      "htmlSha256": "b5c0dc0d45c0e0bed3a505ff353d62c5d223c447e7d8a0413234772f8a73ee79",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"after\" style=\"display:contents\"><span class=\"q\">one</span></span><span class=\"q\">two</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "7b0f361648b43b40cbb72fcebd0bb061238d403275ad60caa45fbfaeab97ec9f"
+    },
+    {
+      "name": "contents-close-after-zero-probe",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "0aaa3a24a78a9b46a76e597324065aea625877ce8021fdaad007edb25843cc2f",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"closeafter\" style=\"display:contents\"><span class=\"open\"></span></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5a93fafe3ed3990c56a061b1d6c610b38ec658694b04505f901b8f2252a7f28c"
+    },
+    {
+      "name": "contents-visible-close-zero-probe",
+      "expectedText": "RecordAda][one]",
+      "htmlSha256": "b888ee918718b337edd26a400ed1a514e0f73f21451fa231f9094ffb030c1845",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"visibleclose\" style=\"display:contents\"><span class=\"open\"></span></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "0f023312d9015ca8344e7845b052c9f6a2b687df4f29f410846cbdf17e5b88b3"
+    },
+    {
+      "name": "contents-balanced-after",
+      "expectedText": "RecordAda{}{one}",
+      "htmlSha256": "c16bc21db768a6a14541fcd31567a84613f0148ecd5e2df35fda479690b4eb7e",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"balanced\" style=\"display:contents\"><span class=\"open\"></span></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "d9055ec0e7197c036eb74b8743e40a18b39f3affce70b52c37abe89ae4f6be2b"
+    },
+    {
+      "name": "block-nested",
+      "expectedText": "RecordAda[outer{inner}end]",
+      "htmlSha256": "0e1ba18357119b46d38221d06d27fb7dd326d12e5a168b5eaf0ee2b5f3702c23",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"q\" style=\"display:block\">outer<span class=\"q\">inner</span>end</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5d226c793b349098e687811b58e2a7f3ededa00d19815b71995de6e088b48e7b"
+    },
+    {
+      "name": "block-silent-before",
+      "expectedText": "RecordAda{one}{two}",
+      "htmlSha256": "01b72fe5c18eead7f7561fa69a0e7907a913c71c8af1cc3ec8bfbf45f255874d",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"open\" style=\"display:block\"><span class=\"q\">one</span></span><span class=\"q\">two</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "454b931681f5e312d006105735a89ed5bf21f6965822c1e574a0556ade4245e7"
+    },
+    {
+      "name": "block-silent-after",
+      "expectedText": "RecordAda[one]{two}",
+      "htmlSha256": "c44fc63a04f2a274f7d4f2bde55b9b2752018e96ad6c7c867f586922c53569c4",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"after\" style=\"display:block\"><span class=\"q\">one</span></span><span class=\"q\">two</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "88d30648607277fe5c5b07457016df14048b2dd6d8605ba0ed4ae5fa5c053f39"
+    },
+    {
+      "name": "block-close-after-zero-probe",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "d8febec3b0e3881ca164982a789aa6c44714c02b0272b3bce613686fbf62c9e6",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"closeafter\" style=\"display:block\"><span class=\"open\"></span></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "889e62bc1d19aa2739c5d679c870e3aa194ee2988ad58e135db639be7e05db9b"
+    },
+    {
+      "name": "block-visible-close-zero-probe",
+      "expectedText": "RecordAda][one]",
+      "htmlSha256": "6ab6bdd70e3c21721eb7e64c0cd7836dae6032a21264b5d038e1820ecdd55b1d",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"visibleclose\" style=\"display:block\"><span class=\"open\"></span></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "9d03762220c76a9c27c57bdda386d0c331bb092fe3732bababc735239df44371"
+    },
+    {
+      "name": "block-balanced-after",
+      "expectedText": "RecordAda{}{one}",
+      "htmlSha256": "4fae18df4f4ecd7422e34a9d011117cb1d5a265485f6c1db59f47447ffe7c5b0",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"balanced\" style=\"display:block\"><span class=\"open\"></span></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "1bdbb6b1fadf8fad5dc04d1cb1768e1e6665cb8f45313f9d371ac19dd37eebcb"
+    },
+    {
+      "name": "inline-block-nested",
+      "expectedText": "RecordAda[outer{inner}end]",
+      "htmlSha256": "6928d226f3e3a7308b547329a8f2056cc83eb612d16b4962ba8596ddb7a14cfd",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"q\" style=\"display:inline-block\">outer<span class=\"q\">inner</span>end</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5d226c793b349098e687811b58e2a7f3ededa00d19815b71995de6e088b48e7b"
+    },
+    {
+      "name": "inline-block-silent-before",
+      "expectedText": "RecordAda{one}{two}",
+      "htmlSha256": "8ec4a62d92e667968823148e44b8a6bea631d4b507af27bd8dc74e306f321967",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"open\" style=\"display:inline-block\"><span class=\"q\">one</span></span><span class=\"q\">two</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "6f0a9be552ad397b6d4679515447d38ace3138fdb2c940e55814d2a17a8eaa3d"
+    },
+    {
+      "name": "inline-block-silent-after",
+      "expectedText": "RecordAda[one]{two}",
+      "htmlSha256": "80da0f67d53f4a5306dcd4b91e4d7d6dc8b38128a3c8da4a8625732fd28c61fc",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"after\" style=\"display:inline-block\"><span class=\"q\">one</span></span><span class=\"q\">two</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "1dea6667bad4f5fb940ab8c5d7dde3fbf1c2e0728476589c0407e6878abe3013"
+    },
+    {
+      "name": "inline-block-close-after-zero-probe",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "7146cc9e8a65c88e1ad96711066776feb2f30bb0c33ffa00d44e1184f0b1bc1c",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"closeafter\" style=\"display:inline-block\"><span class=\"open\"></span></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5a93fafe3ed3990c56a061b1d6c610b38ec658694b04505f901b8f2252a7f28c"
+    },
+    {
+      "name": "inline-block-visible-close-zero-probe",
+      "expectedText": "RecordAda][one]",
+      "htmlSha256": "4290f7c4395c322817fd3befd9ae095485c3b647783fee1979b84d47f11a3b40",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"visibleclose\" style=\"display:inline-block\"><span class=\"open\"></span></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "2ba03f3064b6d213fbdfb82f8e2b72d0e0646bb65d136eb3c2516cecb7ab5ce3"
+    },
+    {
+      "name": "inline-block-balanced-after",
+      "expectedText": "RecordAda{}{one}",
+      "htmlSha256": "a46c2c90e95561dbb7ab4545a369801d8384c46a2605b0069854d19c35054d3b",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"balanced\" style=\"display:inline-block\"><span class=\"open\"></span></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "fe915310165b18d4451f92f37dc622bdc94694724e5d6356bb18f1f8fe30c020"
+    },
+    {
+      "name": "display-none",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "2b16c1832d2d136fd8d863395c33aca7cb9ff444bac688b3d24d778fb956deab",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"open\" style=\"display:none\"></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5a93fafe3ed3990c56a061b1d6c610b38ec658694b04505f901b8f2252a7f28c"
+    },
+    {
+      "name": "visibility-hidden",
+      "expectedText": "RecordAda{one}",
+      "htmlSha256": "db39e6bb67dcfaf7c1c98bec1b00c774a8096bf636b5205b7773b732d3179cbd",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"open\" style=\"visibility:hidden\"></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "d163807c4cd1ab1badb1aa51e3791be3e93b023aa641bd2382e901c3ebc1b310"
+    },
+    {
+      "name": "no-negative-depth",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "3c630f3bebd84bc948be34a11fd6ae8c3dfc68b36f2c7a5b1d890299bd08453d",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"close\"></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5a93fafe3ed3990c56a061b1d6c610b38ec658694b04505f901b8f2252a7f28c"
+    },
+    {
+      "name": "repeated-last-pair",
+      "expectedText": "RecordAda[outer{inner{deep}}]",
+      "htmlSha256": "f2e1fdc52ce5ff4b06acd51e0bc7daee1462658e0729012a96323cc2242da63b",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"q\">outer<span class=\"q\">inner<span class=\"q\">deep</span></span></span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "b409c095dd6649d63d713e8fd60eac8ade295235a2812bafae0d6485c35d9a12"
+    },
+    {
+      "name": "table-cells",
+      "expectedText": "RecordAda[one][two]",
+      "htmlSha256": "db1915c28069f46091ef773da438a6000cf2fc0ae6dafee21566009f9919960d",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><table><tr><td class=\"q\">one</td><td class=\"q\">two</td></tr></table></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "482aff8d3456c0cd6fc5425b18c51bd7401436445b9d0fd31056a4cd52525a8b"
+    },
+    {
+      "name": "literal-control",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "59ab1092763b1e27ee750e2cce526e53afa981d0f4ea10ff08d3c82b713fa4e9",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span>[one]</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "e1eb002fc6a8e43811612c8af9b442e068717e2229e260ecf4d920cd116a23d8"
+    },
+    {
+      "name": "image-before",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "568905e62863584e4434eae2d68a8f9428eada44cb1e5b2e033ba1d712adef71",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><img class=\"open\" width=\"1\" height=\"1\" alt=\"\"><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5af32cf67a53f40d2785b4fb123cb7d01655d8d12e9e2a4224880b02ec23a99b"
+    },
+    {
+      "name": "image-after",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "ea182da879315435ee4b2ee161a8bb6786bf6a31460ad7696bae53d7f5afe479",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><img class=\"after\" width=\"1\" height=\"1\" alt=\"\"><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5af32cf67a53f40d2785b4fb123cb7d01655d8d12e9e2a4224880b02ec23a99b"
+    },
+    {
+      "name": "image-contents",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "6168441c93e51ae7bcd0ef3c80ac5da3b9e5482a2394199635c36317659ad2f4",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><img class=\"open\" style=\"display:contents\" alt=\"\"><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5a93fafe3ed3990c56a061b1d6c610b38ec658694b04505f901b8f2252a7f28c"
+    },
+    {
+      "name": "line-break-before",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "7fb8de33560150756a3e9723e6f4bfcd39afa6c282145eb675359b1ae9584b8a",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><br class=\"open\"><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "fc10d4a7ef8cf6ab84daefa3b0d4f52c205b0329a3763dbb793349bd0b089cb2"
+    },
+    {
+      "name": "svg-before",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "2b8847d229de7610ae2f41cd818566082390a0a738134f6a2523d80b222cfe7e",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"open\" width=\"1\" height=\"1\"></svg><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "63d3d65f6342169859171e9b3890d8e953130c560c6f0a3c4ca06456424ebc31"
+    },
+    {
+      "name": "rule-before",
+      "expectedText": "RecordAda{one}",
+      "htmlSha256": "c728222d6a6743b78b1d4a6404d325e6ddf4581281c0aade580cabaa980a6050",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><hr class=\"open\"><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "6e94bef95d42676f8a2ffcd370034d6d91f942c3bf1ac0d81430262dce12b77f"
+    },
+    {
+      "name": "input-before",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "588de382801baee61df2e7496a4d4e8666134b605aeb06913aadec92fdfd4534",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><input class=\"open\" type=\"text\" value=\"\"><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5a93fafe3ed3990c56a061b1d6c610b38ec658694b04505f901b8f2252a7f28c"
+    },
+    {
+      "name": "textarea-before",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "5a21d5ef7e163459243a17d0efabe2e81919ebada500d5a207932cfab22f8033",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><textarea class=\"open\"></textarea><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5a93fafe3ed3990c56a061b1d6c610b38ec658694b04505f901b8f2252a7f28c"
+    },
+    {
+      "name": "select-before",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "7e968b8a02b9917e41ed70c06abb34c0310dd789f28783c656987428ac7d9a54",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><select class=\"open\"></select><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5a93fafe3ed3990c56a061b1d6c610b38ec658694b04505f901b8f2252a7f28c"
+    },
+    {
+      "name": "hidden-subtree",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "d225a888de66909ad817409df1f6bb9a5fc224f34decc8b4a3a73ac495bd41f1",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><div style=\"display:none\"><span class=\"open\"></span></div><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5a93fafe3ed3990c56a061b1d6c610b38ec658694b04505f901b8f2252a7f28c"
+    },
+    {
+      "name": "before-display-none",
+      "expectedText": "RecordAda[one]",
+      "htmlSha256": "4510614a1bee2f3317f9fec8a58e5a02b0e955bda7fd9c6f180fe82f9d617b91",
+      "cssSha256": "e6fce6d738fb3c5905817b08a72a1577d86963104ae7b306369c51a1a4aa45fb",
+      "html": "<html><body><p>Record Ada</p><span class=\"open suppressed\"></span><span class=\"q\">one</span></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\nbody { margin: 0; font-family: Inter; font-size: 20px; quotes: \"[\" \"]\" \"{\" \"}\" }\n.q::before { content: open-quote } .q::after { content: close-quote }\n.open::before { content: no-open-quote } .after::after { content: no-open-quote }\n.close::before { content: no-close-quote } .closeafter::after { content: no-close-quote }\n.visibleclose::after { content: close-quote } .balanced::after { content: open-quote close-quote }\n.suppressed::before { display: none }\n",
+      "qualifiedDirectPdfSha256": "5a93fafe3ed3990c56a061b1d6c610b38ec658694b04505f901b8f2252a7f28c"
+    }
+  ],
+  "scope": "Forty-one unchanged synthetic quotation fixtures from the verified public core release; check direct and compiled C# output with independent text extraction."
+}

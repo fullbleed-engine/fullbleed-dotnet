@@ -200,6 +200,10 @@ if (Version.Parse(features.BindingVersion) >= new Version(0, 2, 1))
 {
     TableWrappingFixtures.Run(assets, outputDirectory, features.BindingVersion);
 }
+if (Version.Parse(features.BindingVersion) >= new Version(0, 2, 2))
+{
+    DocumentRegressionFixtures.Run(assets, outputDirectory, features.BindingVersion);
+}
 #if FULLBLEED_COMPONENTS
 ComponentFixtures.Run(assets, outputDirectory, features.BindingVersion);
 #endif

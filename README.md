@@ -11,7 +11,7 @@ The managed assembly has no third-party NuGet runtime dependencies. Native runti
 
 ## Status
 
-Version `0.2.2` updates the native engine to Fullbleed `2.5.37`, correcting Japanese text and long-token wrapping inside narrow table cells, including nested spans and paragraphs. Authored child widths and minimum widths are respected; intentional `nowrap` and `keep-all` behavior is preserved. It retains the component and HTML/CSS APIs, native ABI, SVG raster fallback, and earlier pagination fixes. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.2.2). Review saved PDF baselines when upgrading templates affected by layout fixes. See the [table-wrapping verification](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#table-wrapping-verification) for the covered cases.
+Version `0.2.3` updates the native engine to Fullbleed `2.5.39`. It corrects missing or substituted glyphs in previews of PDF templates and merged pages that embed different subsets of the same font family. It also includes the generated-quotation ordering fix from engine 2.5.38. The component and HTML/CSS APIs, native ABI, SVG raster fallback, and earlier table/pagination fixes remain available. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.2.3). Review saved PDF baselines when upgrading templates that use generated quotations. See the [document regression verification](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#document-regression-verification) for the covered cases.
 
 Component trees and styles are immutable after construction. Text and attributes are escaped, LINQ children are enumerated once, and custom components are normal methods returning elements. Read the [component guide](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/components.md), including [how class names and styles connect](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/components.md#class-names-and-styles).
 
@@ -35,7 +35,7 @@ With the .NET 10 SDK installed:
 ```sh
 dotnet new console -n FullbleedDemo --framework net10.0
 cd FullbleedDemo
-dotnet add package FullBleed.DotNet --version 0.2.2
+dotnet add package FullBleed.DotNet --version 0.2.3
 ```
 
 Replace `Program.cs` with:

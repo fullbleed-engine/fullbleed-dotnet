@@ -14,6 +14,7 @@ from verify_engine_regressions import verify as verify_engine_regressions
 from verify_component_outputs import verify as verify_component_outputs
 from verify_pagination_outputs import verify as verify_pagination_outputs
 from verify_table_wrapping import verify as verify_table_wrapping
+from verify_document_regressions import verify as verify_document_regressions
 
 ROOT = Path(__file__).resolve().parents[1]
 RIDS = ['win-x64', 'linux-x64', 'osx-x64', 'osx-arm64']
@@ -37,6 +38,7 @@ def main():
     engine_cases = []
     pagination_cases = []
     table_cases = []
+    document_cases = []
     verapdf = validator(ROOT / 'artifacts/verapdf')
     for rid, framework in product(RIDS, FRAMEWORKS):
         consumer = f'{rid}-net{framework}'
@@ -89,6 +91,11 @@ def main():
         table_report = verify_table_wrapping(directory / 'table-wrapping')
         assert table_report['packageVersion'] == manifest['version'] and len(table_report['cases']) == 70
         table_cases.append(table_report['cases'])
+        document_report = verify_document_regressions(directory / 'document-regressions')
+        assert document_report['packageVersion'] == manifest['version']
+        document_cases.append({key: document_report[key] for key in ['previewCases', 'quotationCases', 'equivalentPreviews']})
+        data['IndependentDocumentRegressionChecks'] = {'status': 'passed', 'importedPdfs': 39, 'importedPreviewPages': 43,
+                                                       'quotationDocuments': 123, 'quotationPages': 164}
         data['IndependentTableWrappingChecks'] = {'status': 'passed', 'cases': len(table_report['cases'])}
         data['IndependentPaginationChecks'] = {'status': 'passed', 'cases': len(pagination_report['cases'])}
         data['IndependentComponentChecks'] = {'status': 'passed', 'cases': len(component_report['cases'])}
@@ -131,6 +138,7 @@ def main():
     assert all(cases == pagination_cases[0] for cases in pagination_cases), 'Pagination PDFs, text, previews or glyph bounds differ across platforms/frameworks'
     # Independent inspection runs here on one reader host for all 12 artifacts.
     assert all(cases == table_cases[0] for cases in table_cases), 'Table-wrapping PDFs, text, previews or glyph bounds differ across platform/framework consumers'
+    assert all(cases == document_cases[0] for cases in document_cases), 'Imported previews or quotation PDFs/text/previews differ across platform/framework consumers'
     base14_previews = {}
     for cases in engine_cases:
         assert [(item['name'], item['mode']) for item in cases] == [(item['name'], item['mode']) for item in engine_cases[0]]
@@ -154,6 +162,7 @@ def main():
               'componentFixtures': component_cases[0],
               'paginationFixtures': pagination_cases[0],
               'tableWrappingFixtures': table_cases[0],
+              'documentRegressionFixtures': document_cases[0],
               'scope': 'Northstar invoice PDF, HTML preview and finalized-PDF 96-DPI PNG match on .NET 8, 9 and 10 '
                        'across Windows x64, Linux x64, Intel macOS and Apple Silicon macOS. '
                        'Bold, fixed-record, reflow-record and Unicode fixture PDFs and saved-PDF previews also match. '
@@ -167,6 +176,8 @@ def main():
                         'Thirteen counter, clipping, border-image and first-letter layouts pass independent checks through direct and compiled output, with identical PDFs and previews across all consumers. '
                        'Nine pagination layouts pass independent checks through direct and compiled output, with identical PDFs and previews across all consumers. '
                        'Thirty-five table-wrapping layouts pass through direct and compiled output; PDFs and native previews match across all consumers, with independent readers run on the evidence host. '
+                       'Thirty-nine imported PDFs retain their bytes and all 43 native previews match the qualified font-subset controls. '
+                       'Forty-one quotation inputs pass independent text checks through direct, compiled and two-record reflow output, with matching PDFs and previews across all consumers. '
                        'These retained fixtures are not a universal platform-parity or conformance claim.'}
     path = ROOT / 'artifacts/cross-platform-evidence.json'
     path.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
