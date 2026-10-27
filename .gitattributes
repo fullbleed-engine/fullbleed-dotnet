@@ -13,3 +13,6 @@ tests/FullBleed.DotNet.PackageSmoke/Assets/table-wrapping-font.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/FullbleedCJKTest-Regular.ttf -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/FullbleedCJKTest-OFL.txt -text -whitespace
 tests/FullBleed.DotNet.PackageSmoke/Assets/engine-regressions-font-OFL.txt -text -whitespace
+tests/FullBleed.DotNet.PackageSmoke/Assets/pdf-preview-subsets-2.5.39.json -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/pdf-preview-subsets-2.5.39.zip -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/generated-quotes-2.5.38.json -text

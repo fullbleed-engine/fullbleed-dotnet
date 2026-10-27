@@ -1,0 +1,908 @@
+{
+  "schema": "fullbleed.dotnet.preview_subsets.inputs.v1",
+  "source": "https://github.com/fullbleed-engine/fullbleed-official/blob/4105826488808726515b5c46171adf6849e1743c/tests/test_fullbleed_composed_preview_fonts.py",
+  "sourceSha256": "0bf2e8dce567cd5311a609285d397a2c0cf2d2dd824818572e101c844be687f9",
+  "coreVersion": "2.5.39",
+  "evidence": "https://github.com/fullbleed-engine/fullbleed-official/releases/tag/v2.5.39",
+  "archive": "pdf-preview-subsets-2.5.39.zip",
+  "archiveSha256": "980b4712cd6c4018aaea9a6def088a5bae1f5ed18aedfc9090cdfcbb649e318d",
+  "members": {
+    "pdfs/test_composed_preview_preserve0/composed.pdf": {
+      "bytes": 10525,
+      "sha256": "f5045f342281a1f28b4addd4e25b7cdcbee302dc66dd959a83028ada1c02c5ef"
+    },
+    "pdfs/test_composed_preview_preserve0/control.pdf": {
+      "bytes": 6927,
+      "sha256": "0653b98c3972bb7fca8c53b48dc2ff02589e5b82ff450bfc5f5143d46e7be019"
+    },
+    "pdfs/test_composed_preview_preserve0/overlay.pdf": {
+      "bytes": 6002,
+      "sha256": "a0aaedbf0e9a77e9e6991027d8925c7cf51edb6f1b394013058a76f7b08aba58"
+    },
+    "pdfs/test_composed_preview_preserve0/template.pdf": {
+      "bytes": 5067,
+      "sha256": "bb79ef407e2f94f93a290af88095695c0cda08a13f47935c88ba7af336e051d6"
+    },
+    "pdfs/test_composed_preview_preserve1/composed.pdf": {
+      "bytes": 9829,
+      "sha256": "8a1cdd6ab510b2a7925792a4c28b0e83391484d6801bd10af39ee22da104705a"
+    },
+    "pdfs/test_composed_preview_preserve1/control.pdf": {
+      "bytes": 6426,
+      "sha256": "00b2afb8272e73790e634a77184af513901b6a8757dea0b282a0f2cf4db075fd"
+    },
+    "pdfs/test_composed_preview_preserve1/overlay.pdf": {
+      "bytes": 5623,
+      "sha256": "8577e172bf9ff7c303169d78c523e2bb679cdc70577747bcfdff0733b3cd4655"
+    },
+    "pdfs/test_composed_preview_preserve1/template.pdf": {
+      "bytes": 4807,
+      "sha256": "80081bef7eb305e664bbacaf93cd711755df13dda294b163eb031b195de2931b"
+    },
+    "pdfs/test_composed_preview_preserve2/composed.pdf": {
+      "bytes": 36337,
+      "sha256": "f08c4a583fe06c39320ea46ba74e52a93b67c3c9f0ce674a1bd99ab3bd004865"
+    },
+    "pdfs/test_composed_preview_preserve2/control.pdf": {
+      "bytes": 43118,
+      "sha256": "4522b53f7ec11e97ddd4b0d312a096bc872d474910ab5731681c72ec92f3e020"
+    },
+    "pdfs/test_composed_preview_preserve2/overlay.pdf": {
+      "bytes": 30629,
+      "sha256": "d420a00c8c782e795ba609acbe1b24c2746a789f87e9820a4bdaaa4febb56f86"
+    },
+    "pdfs/test_composed_preview_preserve2/template.pdf": {
+      "bytes": 17708,
+      "sha256": "d01292cdcf185750f321bbbbc98101e1de522be71c8890be1d7136246fd9cfdb"
+    },
+    "pdfs/test_composed_preview_preserve3/composed.pdf": {
+      "bytes": 25694,
+      "sha256": "954d3194e135e60d425dd179137e5ddf99dd403f45156eb536fdd2df17440209"
+    },
+    "pdfs/test_composed_preview_preserve3/control.pdf": {
+      "bytes": 29863,
+      "sha256": "9cf1d5f843cc5773a3f262529bd1ec4536b7df93b55a3023a47114358b3036b5"
+    },
+    "pdfs/test_composed_preview_preserve3/overlay.pdf": {
+      "bytes": 21587,
+      "sha256": "5d8c228beaacc4d8baa27bcd65742f27209f4de3e819bc87b38919508d5d968b"
+    },
+    "pdfs/test_composed_preview_preserve3/template.pdf": {
+      "bytes": 12638,
+      "sha256": "6f8812c53aa511560fd19ac703bb4b3014764e3fd8a9da6aba9f3c1eb391eaab"
+    },
+    "pdfs/test_composed_preview_preserve4/composed.pdf": {
+      "bytes": 10526,
+      "sha256": "6f808b8fb95bd0a4abb44bd484870487dce493d8327101efedc82dfbf38481e1"
+    },
+    "pdfs/test_composed_preview_preserve4/control.pdf": {
+      "bytes": 6929,
+      "sha256": "e386c2a0dca2d67cd6433f299f3dfa4bb526f66c382fb40082f1ddc1673f0a7c"
+    },
+    "pdfs/test_composed_preview_preserve4/overlay.pdf": {
+      "bytes": 5070,
+      "sha256": "04df3e66e10857a19180ba01eb5fa728a453325c37f57862829116e10d94a510"
+    },
+    "pdfs/test_composed_preview_preserve4/template.pdf": {
+      "bytes": 6000,
+      "sha256": "a32c9381cef7081e6cbd873986992633197a1f53ceb08a6c1806a6c8f761d3c8"
+    },
+    "pdfs/test_composed_preview_preserve5/composed.pdf": {
+      "bytes": 9829,
+      "sha256": "d65aafee9c5c376a2ae9220f1e172880f67fb6adae9f19b2f6f60721c3bdc5c7"
+    },
+    "pdfs/test_composed_preview_preserve5/control.pdf": {
+      "bytes": 6426,
+      "sha256": "903a0d78a161bda42669f63740fda484ad4e766df296a9822a39d0c369958e01"
+    },
+    "pdfs/test_composed_preview_preserve5/overlay.pdf": {
+      "bytes": 4803,
+      "sha256": "20cc863e9f19a68b12969fa5262b622e8df7ec755ea84e2d31d37c94b5cefa13"
+    },
+    "pdfs/test_composed_preview_preserve5/template.pdf": {
+      "bytes": 5627,
+      "sha256": "d7a0ee5cc51d090215cfd8946d1fa2d2e38435954886421ee2750f1ee906f97d"
+    },
+    "pdfs/test_composed_preview_preserve6/composed.pdf": {
+      "bytes": 36338,
+      "sha256": "0eddb0ea152d30ba8009c355e7cff4c8a2e2e242e46bc0460d3e0cdfd49dc3cd"
+    },
+    "pdfs/test_composed_preview_preserve6/control.pdf": {
+      "bytes": 43113,
+      "sha256": "a8480d2acb9ac5da7377e3d5754b019cb3d058cb902b86b304ae2df8eb102792"
+    },
+    "pdfs/test_composed_preview_preserve6/overlay.pdf": {
+      "bytes": 17712,
+      "sha256": "569b0dc0e8b23bf3f2ddcf435ac748d26afe1b1eaf582964b6fe85ffbdd15cb8"
+    },
+    "pdfs/test_composed_preview_preserve6/template.pdf": {
+      "bytes": 30626,
+      "sha256": "ea9bc707c6496cf8d5f86bf5cdb28aea389cde941d018edd935e07322dd1a6b8"
+    },
+    "pdfs/test_composed_preview_preserve7/composed.pdf": {
+      "bytes": 25695,
+      "sha256": "fea51068594b5c7538917efde01ec0432ea2d483232c8c293ee4e3c00fb8f95c"
+    },
+    "pdfs/test_composed_preview_preserve7/control.pdf": {
+      "bytes": 29858,
+      "sha256": "fdbcf279aaeba21b76d97683dd00221ad82b73c3fb9b34d99c2d1177e6210ab2"
+    },
+    "pdfs/test_composed_preview_preserve7/overlay.pdf": {
+      "bytes": 12635,
+      "sha256": "11e18cf336d17e6920bb274f115f60471e22c4e1478365354f4ef27f93386c46"
+    },
+    "pdfs/test_composed_preview_preserve7/template.pdf": {
+      "bytes": 21591,
+      "sha256": "8f4c768d203e80e58faa176a3aa437cca5dba40ba86acc199f4e2faf78835f75"
+    },
+    "pdfs/test_merged_pages_preserve_ind0/merged.pdf": {
+      "bytes": 10855,
+      "sha256": "55862d13190bcc2a879c282c6a11458938adb31d0f6de0f68d7dc2c1d084fa10"
+    },
+    "pdfs/test_merged_pages_preserve_ind0/source-0.pdf": {
+      "bytes": 5067,
+      "sha256": "bb79ef407e2f94f93a290af88095695c0cda08a13f47935c88ba7af336e051d6"
+    },
+    "pdfs/test_merged_pages_preserve_ind0/source-1.pdf": {
+      "bytes": 6000,
+      "sha256": "a32c9381cef7081e6cbd873986992633197a1f53ceb08a6c1806a6c8f761d3c8"
+    },
+    "pdfs/test_merged_pages_preserve_ind1/merged.pdf": {
+      "bytes": 10221,
+      "sha256": "aabcaba2c845691d76e6452638d1d3d12188d5022ccea5745b710fbc3da850de"
+    },
+    "pdfs/test_merged_pages_preserve_ind1/source-0.pdf": {
+      "bytes": 4807,
+      "sha256": "80081bef7eb305e664bbacaf93cd711755df13dda294b163eb031b195de2931b"
+    },
+    "pdfs/test_merged_pages_preserve_ind1/source-1.pdf": {
+      "bytes": 5627,
+      "sha256": "d7a0ee5cc51d090215cfd8946d1fa2d2e38435954886421ee2750f1ee906f97d"
+    },
+    "pdfs/certificate.pdf": {
+      "bytes": 55136,
+      "sha256": "f6aedb37d9be4a5dc520f5324311c63f2c24310cddb96943db6a83214d503576"
+    },
+    "licenses/Inter-OFL.txt": {
+      "bytes": 4377,
+      "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57"
+    },
+    "licenses/NotoSans-OFL.txt": {
+      "bytes": 4396,
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+    },
+    "licenses/Fullbleed-MIT.txt": {
+      "bytes": 1074,
+      "sha256": "292b8bfd248b5aec9833fc7372a918f35d7facf0829b655ff54989c964a308d8"
+    }
+  },
+  "cases": [
+    {
+      "name": "test_composed_preview_preserve0/composed",
+      "file": "test_composed_preview_preserve0/composed.pdf",
+      "pdfSha256": "f5045f342281a1f28b4addd4e25b7cdcbee302dc66dd959a83028ada1c02c5ef",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00ebWXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "f6c9df98a1bfc04fb6589852875050431c45fa16b1b86d1c9018e5d41c731831"
+      ],
+      "public022PreviewMatches": [
+        false
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve0/control",
+      "file": "test_composed_preview_preserve0/control.pdf",
+      "pdfSha256": "0653b98c3972bb7fca8c53b48dc2ff02589e5b82ff450bfc5f5143d46e7be019",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00ebWXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "f6c9df98a1bfc04fb6589852875050431c45fa16b1b86d1c9018e5d41c731831"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve0/overlay",
+      "file": "test_composed_preview_preserve0/overlay.pdf",
+      "pdfSha256": "a0aaedbf0e9a77e9e6991027d8925c7cf51edb6f1b394013058a76f7b08aba58",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "9b84af635c17f9d3fff240949af7817a892b7c5bd10e16c49bd08eeeccddda1f"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve0/template",
+      "file": "test_composed_preview_preserve0/template.pdf",
+      "pdfSha256": "bb79ef407e2f94f93a290af88095695c0cda08a13f47935c88ba7af336e051d6",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "39e495b90add7c088c0225a1d2378abebdb400ab855d6f0219707a157caa9af7"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve1/composed",
+      "file": "test_composed_preview_preserve1/composed.pdf",
+      "pdfSha256": "8a1cdd6ab510b2a7925792a4c28b0e83391484d6801bd10af39ee22da104705a",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00ebWXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "85a10677dbe458c64443c347b746e2ef701ccdfd546833967f64e9c56e1e9591"
+      ],
+      "public022PreviewMatches": [
+        false
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve1/control",
+      "file": "test_composed_preview_preserve1/control.pdf",
+      "pdfSha256": "00b2afb8272e73790e634a77184af513901b6a8757dea0b282a0f2cf4db075fd",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00ebWXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "85a10677dbe458c64443c347b746e2ef701ccdfd546833967f64e9c56e1e9591"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve1/overlay",
+      "file": "test_composed_preview_preserve1/overlay.pdf",
+      "pdfSha256": "8577e172bf9ff7c303169d78c523e2bb679cdc70577747bcfdff0733b3cd4655",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "786f9c6995a61ac0b477e95714731da991338b1f400980e2663ad97acdb53ab3"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve1/template",
+      "file": "test_composed_preview_preserve1/template.pdf",
+      "pdfSha256": "80081bef7eb305e664bbacaf93cd711755df13dda294b163eb031b195de2931b",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "f6c9636f91d4d96def9be67547491f23e134d574fb243dfeb61ca1d1cc1648c4"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve2/composed",
+      "file": "test_composed_preview_preserve2/composed.pdf",
+      "pdfSha256": "f08c4a583fe06c39320ea46ba74e52a93b67c3c9f0ce674a1bd99ab3bd004865",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00ebWXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "d20d7f313f9e81c6180534f9bbc1042f419e82f72a09aa05a77960b3904d2058"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve2/control",
+      "file": "test_composed_preview_preserve2/control.pdf",
+      "pdfSha256": "4522b53f7ec11e97ddd4b0d312a096bc872d474910ab5731681c72ec92f3e020",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00ebWXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "d20d7f313f9e81c6180534f9bbc1042f419e82f72a09aa05a77960b3904d2058"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve2/overlay",
+      "file": "test_composed_preview_preserve2/overlay.pdf",
+      "pdfSha256": "d420a00c8c782e795ba609acbe1b24c2746a789f87e9820a4bdaaa4febb56f86",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "e5f0ca30e22b692041e259caf4e278481ab359a03133fa9e327a317f8beaf976"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve2/template",
+      "file": "test_composed_preview_preserve2/template.pdf",
+      "pdfSha256": "d01292cdcf185750f321bbbbc98101e1de522be71c8890be1d7136246fd9cfdb",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "ba673e72f6e29b7af1a8d8bd6f3b2f33db11a2c8ce426eb74f6dfe3f86d4462f"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve3/composed",
+      "file": "test_composed_preview_preserve3/composed.pdf",
+      "pdfSha256": "954d3194e135e60d425dd179137e5ddf99dd403f45156eb536fdd2df17440209",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00ebWXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "1c963e03e58251caf728a06cbeb3c5a4d57db1f741f1dea4ea27af7aa460cf19"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve3/control",
+      "file": "test_composed_preview_preserve3/control.pdf",
+      "pdfSha256": "9cf1d5f843cc5773a3f262529bd1ec4536b7df93b55a3023a47114358b3036b5",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00ebWXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "1c963e03e58251caf728a06cbeb3c5a4d57db1f741f1dea4ea27af7aa460cf19"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve3/overlay",
+      "file": "test_composed_preview_preserve3/overlay.pdf",
+      "pdfSha256": "5d8c228beaacc4d8baa27bcd65742f27209f4de3e819bc87b38919508d5d968b",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "beb05aa4ff7cc308ccdcb7336d1e8285eb2a48c34cae8e1271492abfeb2cc709"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve3/template",
+      "file": "test_composed_preview_preserve3/template.pdf",
+      "pdfSha256": "6f8812c53aa511560fd19ac703bb4b3014764e3fd8a9da6aba9f3c1eb391eaab",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "b142ad03009df43317000aeaa4365e8281f31345116a04d441b7cb467c15b494"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve4/composed",
+      "file": "test_composed_preview_preserve4/composed.pdf",
+      "pdfSha256": "6f808b8fb95bd0a4abb44bd484870487dce493d8327101efedc82dfbf38481e1",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "90a7e815376e3455371372174f34753ee072aeb732a1652553e29e10889c0a1c"
+      ],
+      "public022PreviewMatches": [
+        false
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve4/control",
+      "file": "test_composed_preview_preserve4/control.pdf",
+      "pdfSha256": "e386c2a0dca2d67cd6433f299f3dfa4bb526f66c382fb40082f1ddc1673f0a7c",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "90a7e815376e3455371372174f34753ee072aeb732a1652553e29e10889c0a1c"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve4/overlay",
+      "file": "test_composed_preview_preserve4/overlay.pdf",
+      "pdfSha256": "04df3e66e10857a19180ba01eb5fa728a453325c37f57862829116e10d94a510",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "f06514270eb98b5b2cbceb7f5b13b3d41ed915e81e25260d6c9e7a9a487b8114"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve4/template",
+      "file": "test_composed_preview_preserve4/template.pdf",
+      "pdfSha256": "a32c9381cef7081e6cbd873986992633197a1f53ceb08a6c1806a6c8f761d3c8",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "8c4cb97cb9eca5547dba142eb14bef39f61f8a99014113443d69c6cc23d3ba7e"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve5/composed",
+      "file": "test_composed_preview_preserve5/composed.pdf",
+      "pdfSha256": "d65aafee9c5c376a2ae9220f1e172880f67fb6adae9f19b2f6f60721c3bdc5c7",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "3cd653a083ab0a71e3506bbe689dd9590619e600126cc43e4c9cf91c133448bc"
+      ],
+      "public022PreviewMatches": [
+        false
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve5/control",
+      "file": "test_composed_preview_preserve5/control.pdf",
+      "pdfSha256": "903a0d78a161bda42669f63740fda484ad4e766df296a9822a39d0c369958e01",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "3cd653a083ab0a71e3506bbe689dd9590619e600126cc43e4c9cf91c133448bc"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve5/overlay",
+      "file": "test_composed_preview_preserve5/overlay.pdf",
+      "pdfSha256": "20cc863e9f19a68b12969fa5262b622e8df7ec755ea84e2d31d37c94b5cefa13",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "a805e2fe62098453de4d261fee3875ca720fabac7cf5b9de368471b2d63dabfa"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve5/template",
+      "file": "test_composed_preview_preserve5/template.pdf",
+      "pdfSha256": "d7a0ee5cc51d090215cfd8946d1fa2d2e38435954886421ee2750f1ee906f97d",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "914fbaa299a30a0963d0744afe860ec5f85da91cedb1a4312c469190b072f911"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve6/composed",
+      "file": "test_composed_preview_preserve6/composed.pdf",
+      "pdfSha256": "0eddb0ea152d30ba8009c355e7cff4c8a2e2e242e46bc0460d3e0cdfd49dc3cd",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "bc6c955de81a960134dec1fb26817377e61408f08ec83becb121e44855bbc02f"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve6/control",
+      "file": "test_composed_preview_preserve6/control.pdf",
+      "pdfSha256": "a8480d2acb9ac5da7377e3d5754b019cb3d058cb902b86b304ae2df8eb102792",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "bc6c955de81a960134dec1fb26817377e61408f08ec83becb121e44855bbc02f"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve6/overlay",
+      "file": "test_composed_preview_preserve6/overlay.pdf",
+      "pdfSha256": "569b0dc0e8b23bf3f2ddcf435ac748d26afe1b1eaf582964b6fe85ffbdd15cb8",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "51d1b2a8189d46e0ab7357433b469645c2afb14a1b2f396ac405efd45603d211"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve6/template",
+      "file": "test_composed_preview_preserve6/template.pdf",
+      "pdfSha256": "ea9bc707c6496cf8d5f86bf5cdb28aea389cde941d018edd935e07322dd1a6b8",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "71c3782303a030a077b46fd85245023f52908d0a2b6e463c01309d23c1ad0efa"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve7/composed",
+      "file": "test_composed_preview_preserve7/composed.pdf",
+      "pdfSha256": "fea51068594b5c7538917efde01ec0432ea2d483232c8c293ee4e3c00fb8f95c",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "226653d0c498073182a68d75f524a162583381642524607605c34c69ba300188"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve7/control",
+      "file": "test_composed_preview_preserve7/control.pdf",
+      "pdfSha256": "fdbcf279aaeba21b76d97683dd00221ad82b73c3fb9b34d99c2d1177e6210ab2",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "226653d0c498073182a68d75f524a162583381642524607605c34c69ba300188"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve7/overlay",
+      "file": "test_composed_preview_preserve7/overlay.pdf",
+      "pdfSha256": "11e18cf336d17e6920bb274f115f60471e22c4e1478365354f4ef27f93386c46",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "fb9c0337795e3b8e95341c883544691c36e055ecb3d01875814b5b54789a6860"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_composed_preview_preserve7/template",
+      "file": "test_composed_preview_preserve7/template.pdf",
+      "pdfSha256": "8f4c768d203e80e58faa176a3aa437cca5dba40ba86acc199f4e2faf78835f75",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "fd0f275e60a024ef75e6aad9f526060995ca2a78866370ee4537330b9870e8a6"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_merged_pages_preserve_ind0/merged",
+      "file": "test_merged_pages_preserve_ind0/merged.pdf",
+      "pdfSha256": "55862d13190bcc2a879c282c6a11458938adb31d0f6de0f68d7dc2c1d084fa10",
+      "dpi": 96,
+      "pages": 2,
+      "expectedText": [
+        "ABCDZo\u00eb",
+        "WXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "39e495b90add7c088c0225a1d2378abebdb400ab855d6f0219707a157caa9af7",
+        "8c4cb97cb9eca5547dba142eb14bef39f61f8a99014113443d69c6cc23d3ba7e"
+      ],
+      "public022PreviewMatches": [
+        true,
+        false
+      ]
+    },
+    {
+      "name": "test_merged_pages_preserve_ind0/source-0",
+      "file": "test_merged_pages_preserve_ind0/source-0.pdf",
+      "pdfSha256": "bb79ef407e2f94f93a290af88095695c0cda08a13f47935c88ba7af336e051d6",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "39e495b90add7c088c0225a1d2378abebdb400ab855d6f0219707a157caa9af7"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_merged_pages_preserve_ind0/source-1",
+      "file": "test_merged_pages_preserve_ind0/source-1.pdf",
+      "pdfSha256": "a32c9381cef7081e6cbd873986992633197a1f53ceb08a6c1806a6c8f761d3c8",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "8c4cb97cb9eca5547dba142eb14bef39f61f8a99014113443d69c6cc23d3ba7e"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_merged_pages_preserve_ind1/merged",
+      "file": "test_merged_pages_preserve_ind1/merged.pdf",
+      "pdfSha256": "aabcaba2c845691d76e6452638d1d3d12188d5022ccea5745b710fbc3da850de",
+      "dpi": 96,
+      "pages": 2,
+      "expectedText": [
+        "ABCDZo\u00eb",
+        "WXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "f6c9636f91d4d96def9be67547491f23e134d574fb243dfeb61ca1d1cc1648c4",
+        "914fbaa299a30a0963d0744afe860ec5f85da91cedb1a4312c469190b072f911"
+      ],
+      "public022PreviewMatches": [
+        true,
+        false
+      ]
+    },
+    {
+      "name": "test_merged_pages_preserve_ind1/source-0",
+      "file": "test_merged_pages_preserve_ind1/source-0.pdf",
+      "pdfSha256": "80081bef7eb305e664bbacaf93cd711755df13dda294b163eb031b195de2931b",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "ABCDZo\u00eb"
+      ],
+      "expectedNativePreviewSha256": [
+        "f6c9636f91d4d96def9be67547491f23e134d574fb243dfeb61ca1d1cc1648c4"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "test_merged_pages_preserve_ind1/source-1",
+      "file": "test_merged_pages_preserve_ind1/source-1.pdf",
+      "pdfSha256": "d7a0ee5cc51d090215cfd8946d1fa2d2e38435954886421ee2750f1ee906f97d",
+      "dpi": 96,
+      "pages": 1,
+      "expectedText": [
+        "WXYZ0123456789-"
+      ],
+      "expectedNativePreviewSha256": [
+        "914fbaa299a30a0963d0744afe860ec5f85da91cedb1a4312c469190b072f911"
+      ],
+      "public022PreviewMatches": [
+        true
+      ]
+    },
+    {
+      "name": "certificate",
+      "file": "certificate.pdf",
+      "pdfSha256": "f6aedb37d9be4a5dc520f5324311c63f2c24310cddb96943db6a83214d503576",
+      "dpi": 110,
+      "pages": 3,
+      "expectedText": [
+        "commonground.COMMUNITYLEARNINGFIELDNOTES/2026CERTIFICATEOFPARTICIPATIONLearning,putintopractice.PRESENTEDTOFORCOMPLETINGCOMPLETEDCERTIFICATEIDSharedknowledge.Strongercommunities.COMMONGROUNDWORKSHOPSDemonstrationcertificate.Allnamesandeventsarefictional.SamiraPatelDesigningplacesforpeople24October2026CG-2026-0142",
+        "commonground.COMMUNITYLEARNINGFIELDNOTES/2026CERTIFICATEOFPARTICIPATIONLearning,putintopractice.PRESENTEDTOFORCOMPLETINGCOMPLETEDCERTIFICATEIDSharedknowledge.Strongercommunities.COMMONGROUNDWORKSHOPSDemonstrationcertificate.Allnamesandeventsarefictional.MateoRiveraDesigningplacesforpeople24October2026CG-2026-0143",
+        "commonground.COMMUNITYLEARNINGFIELDNOTES/2026CERTIFICATEOFPARTICIPATIONLearning,putintopractice.PRESENTEDTOFORCOMPLETINGCOMPLETEDCERTIFICATEIDSharedknowledge.Strongercommunities.COMMONGROUNDWORKSHOPSDemonstrationcertificate.Allnamesandeventsarefictional.AveryMorganDesigningplacesforpeople24October2026CG-2026-0144"
+      ],
+      "expectedNativePreviewSha256": [
+        "016b9802e1be5215c2beed5f4d054b5fddaec4bfdefb34e1175d11114100a8a4",
+        "f5a63c6754a872cc68eea7eb2343b335dffc3114916892d26eaec10adc7f2200",
+        "3c8ab220249dc21f1eb10d6181669cfa27eefa60132e685fe205f381574e04a5"
+      ],
+      "public022PreviewMatches": [
+        false,
+        false,
+        false
+      ]
+    }
+  ],
+  "equivalentPreviews": [
+    {
+      "left": "test_composed_preview_preserve0/composed",
+      "leftPage": 0,
+      "right": "test_composed_preview_preserve0/control",
+      "rightPage": 0
+    },
+    {
+      "left": "test_composed_preview_preserve1/composed",
+      "leftPage": 0,
+      "right": "test_composed_preview_preserve1/control",
+      "rightPage": 0
+    },
+    {
+      "left": "test_composed_preview_preserve2/composed",
+      "leftPage": 0,
+      "right": "test_composed_preview_preserve2/control",
+      "rightPage": 0
+    },
+    {
+      "left": "test_composed_preview_preserve3/composed",
+      "leftPage": 0,
+      "right": "test_composed_preview_preserve3/control",
+      "rightPage": 0
+    },
+    {
+      "left": "test_composed_preview_preserve4/composed",
+      "leftPage": 0,
+      "right": "test_composed_preview_preserve4/control",
+      "rightPage": 0
+    },
+    {
+      "left": "test_composed_preview_preserve5/composed",
+      "leftPage": 0,
+      "right": "test_composed_preview_preserve5/control",
+      "rightPage": 0
+    },
+    {
+      "left": "test_composed_preview_preserve6/composed",
+      "leftPage": 0,
+      "right": "test_composed_preview_preserve6/control",
+      "rightPage": 0
+    },
+    {
+      "left": "test_composed_preview_preserve7/composed",
+      "leftPage": 0,
+      "right": "test_composed_preview_preserve7/control",
+      "rightPage": 0
+    },
+    {
+      "left": "test_merged_pages_preserve_ind0/merged",
+      "leftPage": 0,
+      "right": "test_merged_pages_preserve_ind0/source-0",
+      "rightPage": 0
+    },
+    {
+      "left": "test_merged_pages_preserve_ind0/merged",
+      "leftPage": 1,
+      "right": "test_merged_pages_preserve_ind0/source-1",
+      "rightPage": 0
+    },
+    {
+      "left": "test_merged_pages_preserve_ind1/merged",
+      "leftPage": 0,
+      "right": "test_merged_pages_preserve_ind1/source-0",
+      "rightPage": 0
+    },
+    {
+      "left": "test_merged_pages_preserve_ind1/merged",
+      "leftPage": 1,
+      "right": "test_merged_pages_preserve_ind1/source-1",
+      "rightPage": 0
+    }
+  ],
+  "publicBaseline": {
+    "package": "0.2.2",
+    "engine": "2.5.37",
+    "packageSha256": "6926462d1578e03e6de61015e2e3877c83079b83fc1b35d7859d763a3e4e2429",
+    "failedPages": [
+      "test_composed_preview_preserve0/composed-page-1.png",
+      "test_composed_preview_preserve1/composed-page-1.png",
+      "test_composed_preview_preserve4/composed-page-1.png",
+      "test_composed_preview_preserve5/composed-page-1.png",
+      "test_merged_pages_preserve_ind0/merged-page-2.png",
+      "test_merged_pages_preserve_ind1/merged-page-2.png",
+      "certificate-page-1.png",
+      "certificate-page-2.png",
+      "certificate-page-3.png"
+    ]
+  },
+  "scope": "Thirty-nine synthetic PDFs with 43 pages: independent font subsets, regular/bold and reversed-order controls, merged pages, and a three-record certificate. Static PDF inputs and qualified native previews; no general raster-parity or conformance claim."
+}
