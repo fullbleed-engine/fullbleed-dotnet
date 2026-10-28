@@ -1,0 +1,4270 @@
+{
+  "schema": "fullbleed.dotnet.text_decorations.inputs.v1",
+  "fontSha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+  "dpi": 144,
+  "sourceProbe": "https://github.com/fullbleed-engine/fullbleed-official/blob/v2.5.40/tools/smoke_text_decoration_spaces.py",
+  "sourceProbeSha256": "bf51bf16ac91370ed69795ee4ed1efff54705ad8d1de16a9820f5314731f524e",
+  "publicReferenceVersion": "2.5.40",
+  "publicReferenceReportSha256": "7904bd1d0ee65e2a4c879a11a5c92ff2dca9d7ba96247a95d15ca7e6a16ff602",
+  "publicReferenceWheelSha256": "15b97862e9513a6f9521debd87974aef221ec1c83e34ea76908ae12cc3508458",
+  "publicBaseline": {
+    "package": "0.2.3",
+    "engine": "2.5.39",
+    "packageSha256": "650b71406a40e19edd8c00f280d36f41c4cfcf5603ad86f219512e3ff0f8651a",
+    "failedDirectCases": [
+      "underline",
+      "overline",
+      "line-through",
+      "underline-overline-line-through",
+      "word-letter-spacing",
+      "nested-strong",
+      "propagated-raised",
+      "descendant-none",
+      "wrapped",
+      "atomic-isolation",
+      "collapsed-edges",
+      "collapsed-multiple",
+      "decoration-shadow"
+    ]
+  },
+  "adaptation": "Use the actual Inter font family in C# in place of the Python fixture alias Probe; use the same source font bytes. Geometry and native/PDFium pixels are explicit per-mode oracles. Reference PDF hashes identify evidence, not a metadata-parity requirement.",
+  "cases": [
+    {
+      "name": "underline",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p>HH <span class=\"dec\">HH HH</span> HH</p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n.dec {text-decoration-line:underline}",
+      "htmlSha256": "6df6768549309d6f9396b19b713123b48426fde882e9823d1ab56675d9331c82",
+      "cssSha256": "824728030d0a71053a0cbb215f05fd6146051b71e3e9a621a88a60f5bed8b896",
+      "bands": 1,
+      "intervals": 1,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "56e6182adf81ce82c3c3db8d27c4dbd8f7ee65d68c57430c011ea47361f4135d",
+          "glyphGeometrySha256": "6fcdae049efd65365fe1face384c8cb5899a594d2cb3a530336462d26cdffbb9",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "a6019c142956137b81b2600867991c578cd0a04eb4c52147208cffc69740cdbe"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "14d40455ff41e65323d293166e111fb6c7b55ae36581dd86527f2395f5739cdb"
+            },
+            "native": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "fa3dbff024094ee9176d44f221c2640559afe5e4fb9ea06839b1f5fcef4afbe8"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "56e6182adf81ce82c3c3db8d27c4dbd8f7ee65d68c57430c011ea47361f4135d",
+          "glyphGeometrySha256": "6fcdae049efd65365fe1face384c8cb5899a594d2cb3a530336462d26cdffbb9",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "a6019c142956137b81b2600867991c578cd0a04eb4c52147208cffc69740cdbe"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "14d40455ff41e65323d293166e111fb6c7b55ae36581dd86527f2395f5739cdb"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "91bb758b6c9de017db35e3050286c2aa1ce4b087b108ab08e2939beea149d8ae",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "a6019c142956137b81b2600867991c578cd0a04eb4c52147208cffc69740cdbe"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "446ad0b159c42cf8872f238d405b1729369417d7b09406ddf04b278eb04c6cc7"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "14d40455ff41e65323d293166e111fb6c7b55ae36581dd86527f2395f5739cdb"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e1ff83aefe3dcb9fd17f9c11c3fe3effa7026e223198e371e6e667122140c342"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "74d127c0481e064fc60dab5a7ba4770131f136a490f535e1729f10839d055a18",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "a6019c142956137b81b2600867991c578cd0a04eb4c52147208cffc69740cdbe"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "446ad0b159c42cf8872f238d405b1729369417d7b09406ddf04b278eb04c6cc7"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "14d40455ff41e65323d293166e111fb6c7b55ae36581dd86527f2395f5739cdb"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e1ff83aefe3dcb9fd17f9c11c3fe3effa7026e223198e371e6e667122140c342"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "74d127c0481e064fc60dab5a7ba4770131f136a490f535e1729f10839d055a18",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "a6019c142956137b81b2600867991c578cd0a04eb4c52147208cffc69740cdbe"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "446ad0b159c42cf8872f238d405b1729369417d7b09406ddf04b278eb04c6cc7"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "14d40455ff41e65323d293166e111fb6c7b55ae36581dd86527f2395f5739cdb"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e1ff83aefe3dcb9fd17f9c11c3fe3effa7026e223198e371e6e667122140c342"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "2d4d7bbf992681a180e94c1ee1020d99830b8dc41020b5ed379fe5c7abcfa0de",
+      "public023DirectPasses": false
+    },
+    {
+      "name": "overline",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p>HH <span class=\"dec\">HH HH</span> HH</p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n.dec {text-decoration-line:overline}",
+      "htmlSha256": "6df6768549309d6f9396b19b713123b48426fde882e9823d1ab56675d9331c82",
+      "cssSha256": "fade1788ebd755951d715f68dc3df501014384d572a45b3b480ce4eabf46a528",
+      "bands": 1,
+      "intervals": 1,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "121f5b74960483ec111f5a03fcc2fbbc8b039bf8405ae2277478079ca340d1ff",
+          "glyphGeometrySha256": "6fcdae049efd65365fe1face384c8cb5899a594d2cb3a530336462d26cdffbb9",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "3dfb031ee7da5a1d0e43d06be249d4e1c8c488bafe2f84eb1bef7e0e34669d5b"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "170464a2ede5baebf5089783316ae12aa828a180ba303185dee23818b7541528"
+            },
+            "native": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "381d5bab28e048fe5b4e2b8a00d8722fd88aaaa38231108c3115e386b5bef540"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "121f5b74960483ec111f5a03fcc2fbbc8b039bf8405ae2277478079ca340d1ff",
+          "glyphGeometrySha256": "6fcdae049efd65365fe1face384c8cb5899a594d2cb3a530336462d26cdffbb9",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "3dfb031ee7da5a1d0e43d06be249d4e1c8c488bafe2f84eb1bef7e0e34669d5b"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "170464a2ede5baebf5089783316ae12aa828a180ba303185dee23818b7541528"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "06d9325d8dc69ca9c9195f588ac3774304a2eb398aa0be45cd824134fa108959",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "3dfb031ee7da5a1d0e43d06be249d4e1c8c488bafe2f84eb1bef7e0e34669d5b"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "e0ec2a0fbd658ad012e985f793a1afc6e4fb776b61877fd522a4168d7a87436b"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "170464a2ede5baebf5089783316ae12aa828a180ba303185dee23818b7541528"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "5e33c31a579d19dbfea59778c2fd2980eab9a7d89882502dd7fe225fa0b5fef8"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "49d6eedb24a115390923a49676c9146d3be6402786b106a7dc43b3d3494c2697",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "3dfb031ee7da5a1d0e43d06be249d4e1c8c488bafe2f84eb1bef7e0e34669d5b"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "e0ec2a0fbd658ad012e985f793a1afc6e4fb776b61877fd522a4168d7a87436b"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "170464a2ede5baebf5089783316ae12aa828a180ba303185dee23818b7541528"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "5e33c31a579d19dbfea59778c2fd2980eab9a7d89882502dd7fe225fa0b5fef8"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "49d6eedb24a115390923a49676c9146d3be6402786b106a7dc43b3d3494c2697",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "3dfb031ee7da5a1d0e43d06be249d4e1c8c488bafe2f84eb1bef7e0e34669d5b"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "e0ec2a0fbd658ad012e985f793a1afc6e4fb776b61877fd522a4168d7a87436b"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "170464a2ede5baebf5089783316ae12aa828a180ba303185dee23818b7541528"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ]
+              ],
+              "pixels_sha256": "5e33c31a579d19dbfea59778c2fd2980eab9a7d89882502dd7fe225fa0b5fef8"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "260e5121d11a51efcd585de4b08e71bb2f9ce9f29cc9032265cd266c37247dab",
+      "public023DirectPasses": false
+    },
+    {
+      "name": "line-through",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p>HH <span class=\"dec\">HH HH</span> HH</p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n.dec {text-decoration-line:line-through}",
+      "htmlSha256": "6df6768549309d6f9396b19b713123b48426fde882e9823d1ab56675d9331c82",
+      "cssSha256": "208696cd4d2db644c458e67e029ecaabbf0d63a8e009ea6a9af82528697797b1",
+      "bands": 1,
+      "intervals": 1,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "a77125ed1c0dd8de91e4848342bdfc6d731aa18cd3858a013ec8080c89823df6",
+          "glyphGeometrySha256": "6fcdae049efd65365fe1face384c8cb5899a594d2cb3a530336462d26cdffbb9",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "c92d8e65228f27cfe3416d2a2d112133f0a874201f23704a85dffdd483deea6c"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "58f824891b3c723d0a11cd2b1418104ff792be97fe0cc7a0f552d23f855fb458"
+            },
+            "native": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "cc28388b2e415ca6f5828ff600fae2f7e3025c0bea0f901014f4f37961c7b884"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "a77125ed1c0dd8de91e4848342bdfc6d731aa18cd3858a013ec8080c89823df6",
+          "glyphGeometrySha256": "6fcdae049efd65365fe1face384c8cb5899a594d2cb3a530336462d26cdffbb9",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "c92d8e65228f27cfe3416d2a2d112133f0a874201f23704a85dffdd483deea6c"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "58f824891b3c723d0a11cd2b1418104ff792be97fe0cc7a0f552d23f855fb458"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "31e7062ee97c32fedb51d0e01cb66504d178129e6c4006048180b648c00c396e",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "c92d8e65228f27cfe3416d2a2d112133f0a874201f23704a85dffdd483deea6c"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "1bda2d66a4f44baf747d375eaa528ed667f507bfb6d12b8fa2681538fdd26637"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "58f824891b3c723d0a11cd2b1418104ff792be97fe0cc7a0f552d23f855fb458"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "bbef4102cb6a23d837c78298931dbf1dbf98653ea3c07f20be2356593ad87eec"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "69881b575dc7acc8640dc5ae2258cffa552283169831a4f38339280b13aa2317",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "c92d8e65228f27cfe3416d2a2d112133f0a874201f23704a85dffdd483deea6c"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "1bda2d66a4f44baf747d375eaa528ed667f507bfb6d12b8fa2681538fdd26637"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "58f824891b3c723d0a11cd2b1418104ff792be97fe0cc7a0f552d23f855fb458"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "bbef4102cb6a23d837c78298931dbf1dbf98653ea3c07f20be2356593ad87eec"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "69881b575dc7acc8640dc5ae2258cffa552283169831a4f38339280b13aa2317",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "c92d8e65228f27cfe3416d2a2d112133f0a874201f23704a85dffdd483deea6c"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "1bda2d66a4f44baf747d375eaa528ed667f507bfb6d12b8fa2681538fdd26637"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "58f824891b3c723d0a11cd2b1418104ff792be97fe0cc7a0f552d23f855fb458"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ]
+              ],
+              "pixels_sha256": "bbef4102cb6a23d837c78298931dbf1dbf98653ea3c07f20be2356593ad87eec"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "4fb1d4e8b584526cf78f94671e001f7909993b0a6096e4ba63e45b46c588fd61",
+      "public023DirectPasses": false
+    },
+    {
+      "name": "underline-overline-line-through",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p>HH <span class=\"dec\">HH HH</span> HH</p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n.dec {text-decoration-line:underline overline line-through}",
+      "htmlSha256": "6df6768549309d6f9396b19b713123b48426fde882e9823d1ab56675d9331c82",
+      "cssSha256": "e32c1a6ebbcb71f3ac2e478fa9809ca405924b733c5aa8d8d354db0f3bd14c51",
+      "bands": 3,
+      "intervals": 1,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "2723193f6e415696b543ba13d27b4a31d85f7ef67efdb4ee29dcbc3c0bca1336",
+          "glyphGeometrySha256": "6fcdae049efd65365fe1face384c8cb5899a594d2cb3a530336462d26cdffbb9",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "063ca7c5753fb1c0f2fa8f5cbae73aec57ca1c0ddf09ac982d01993a3a7132fa"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "8ca27ef2ccab604e46fa78fba890c2b5f259ae3db8565af1fb616d3803e31518"
+            },
+            "native": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "02320ffdd37d5600e61c963efdcaef31e4950e51dcdaa9520183647d5e5933a9"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "2723193f6e415696b543ba13d27b4a31d85f7ef67efdb4ee29dcbc3c0bca1336",
+          "glyphGeometrySha256": "6fcdae049efd65365fe1face384c8cb5899a594d2cb3a530336462d26cdffbb9",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "063ca7c5753fb1c0f2fa8f5cbae73aec57ca1c0ddf09ac982d01993a3a7132fa"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "8ca27ef2ccab604e46fa78fba890c2b5f259ae3db8565af1fb616d3803e31518"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "b4129097938782be07fe9f30d727e32ebfe0e41294a0674e2f8b82ea91d31523",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "063ca7c5753fb1c0f2fa8f5cbae73aec57ca1c0ddf09ac982d01993a3a7132fa"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e2086be21a4f98d592b8f54bcf563681674a2687921d99bdea65c328aa61c06e"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "8ca27ef2ccab604e46fa78fba890c2b5f259ae3db8565af1fb616d3803e31518"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "039d8c193edefc0f2b8e2cba52467d098674d6ed45fec4a8ade205420f343278"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "e90ce1fbef466bd971faee4bd952cb67b56a639d605158fcc5b936d3e4c85941",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "063ca7c5753fb1c0f2fa8f5cbae73aec57ca1c0ddf09ac982d01993a3a7132fa"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e2086be21a4f98d592b8f54bcf563681674a2687921d99bdea65c328aa61c06e"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "8ca27ef2ccab604e46fa78fba890c2b5f259ae3db8565af1fb616d3803e31518"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "039d8c193edefc0f2b8e2cba52467d098674d6ed45fec4a8ade205420f343278"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "e90ce1fbef466bd971faee4bd952cb67b56a639d605158fcc5b936d3e4c85941",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "063ca7c5753fb1c0f2fa8f5cbae73aec57ca1c0ddf09ac982d01993a3a7132fa"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e2086be21a4f98d592b8f54bcf563681674a2687921d99bdea65c328aa61c06e"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "8ca27ef2ccab604e46fa78fba890c2b5f259ae3db8565af1fb616d3803e31518"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  35,
+                  210,
+                  37
+                ],
+                [
+                  94,
+                  60,
+                  210,
+                  62
+                ],
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "039d8c193edefc0f2b8e2cba52467d098674d6ed45fec4a8ade205420f343278"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "c2b39bed9d19f7a8d691ce99fb8cf5fc95c82c7fb4f5ba113175e1f32888ff08",
+      "public023DirectPasses": false
+    },
+    {
+      "name": "word-letter-spacing",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p>HH <span class=\"dec\">HH HH</span> HH</p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n.dec {word-spacing:12px;letter-spacing:3px}",
+      "htmlSha256": "6df6768549309d6f9396b19b713123b48426fde882e9823d1ab56675d9331c82",
+      "cssSha256": "e8063f331575cd1f0d351662cc5bc2ab7b84da20250495620011cc6d00916557",
+      "bands": 1,
+      "intervals": 1,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "a32567cac8479cdb0a70db119a96952990addca32ce67c6db0e3798ece98ef08",
+          "glyphGeometrySha256": "240869718281c73c1fdbb85934b6dedce56af98221187ddc19b6a8a373ed0d05",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "df290f8b749c8b8dceaff4aa558eafd87fbdcab9c4f385c9c79e0a29a9cc809e"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "9b25e4ae368d99a285da60d7cdfa47bafac288b659b388cbdef437d32ef2b16d"
+            },
+            "native": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "2efbfd4b2b1953142e91d4b2738a612248feadc20ee3ce6b209d658995d997ab"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "a32567cac8479cdb0a70db119a96952990addca32ce67c6db0e3798ece98ef08",
+          "glyphGeometrySha256": "240869718281c73c1fdbb85934b6dedce56af98221187ddc19b6a8a373ed0d05",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "df290f8b749c8b8dceaff4aa558eafd87fbdcab9c4f385c9c79e0a29a9cc809e"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "9b25e4ae368d99a285da60d7cdfa47bafac288b659b388cbdef437d32ef2b16d"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "936d50fdeb9ec54b1e7480162a4b9f95687d6feba62924490bb7e2c6a79b23fc",
+          "glyphGeometrySha256": "b5fea430481e8378adb1942cc64fbc3b7b41fb4d30024572a0a767075635df39",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "df290f8b749c8b8dceaff4aa558eafd87fbdcab9c4f385c9c79e0a29a9cc809e"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "edfa5174b8c28964f0148926d73f99967fd4450dfc077d1fbc04aa70dc6289f2"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "9b25e4ae368d99a285da60d7cdfa47bafac288b659b388cbdef437d32ef2b16d"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "c1b33f2d08b3b1ff13f6ef218a626e81ee826ff958a049ef4c9d9aae432050df"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "b66e63105775ea1021a8e15e686c74eafc6adcc2cc019ea8287814cedce24334",
+          "glyphGeometrySha256": "b5fea430481e8378adb1942cc64fbc3b7b41fb4d30024572a0a767075635df39",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "df290f8b749c8b8dceaff4aa558eafd87fbdcab9c4f385c9c79e0a29a9cc809e"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "edfa5174b8c28964f0148926d73f99967fd4450dfc077d1fbc04aa70dc6289f2"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "9b25e4ae368d99a285da60d7cdfa47bafac288b659b388cbdef437d32ef2b16d"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "c1b33f2d08b3b1ff13f6ef218a626e81ee826ff958a049ef4c9d9aae432050df"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "b66e63105775ea1021a8e15e686c74eafc6adcc2cc019ea8287814cedce24334",
+          "glyphGeometrySha256": "b5fea430481e8378adb1942cc64fbc3b7b41fb4d30024572a0a767075635df39",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "df290f8b749c8b8dceaff4aa558eafd87fbdcab9c4f385c9c79e0a29a9cc809e"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "edfa5174b8c28964f0148926d73f99967fd4450dfc077d1fbc04aa70dc6289f2"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "9b25e4ae368d99a285da60d7cdfa47bafac288b659b388cbdef437d32ef2b16d"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  250,
+                  78
+                ]
+              ],
+              "pixels_sha256": "c1b33f2d08b3b1ff13f6ef218a626e81ee826ff958a049ef4c9d9aae432050df"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "1c4f6b8404fd0b398e1c392f633b2eb3acd5dbf6fa7595b134e2c62d41562ecc",
+      "public023DirectPasses": false
+    },
+    {
+      "name": "nested-strong",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p><span class=\"dec\">HH <strong>HH HH</strong> HH</span></p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n",
+      "htmlSha256": "bdf1b4b9e982543c640214f975d142ce008c19321891d4b44ef73e3e038f56a0",
+      "cssSha256": "8b011bf774b5e02d870b3d1ccd086a879028bcb38fb39ec44b102d11070fac33",
+      "bands": 1,
+      "intervals": 1,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "f1aba80171672b14d31708111becc22d419fe5b4734715c189bb07882b79c70d",
+          "glyphGeometrySha256": "6fcdae049efd65365fe1face384c8cb5899a594d2cb3a530336462d26cdffbb9",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "755768e05f11a2fb66743e5b42b896f51ea9453c35f70fdd9fc21066e4074270"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e9f9e5fb81ca57a5696b792157a5889bf87b8103b6edfeb0b5006d3c0d7baf0c"
+            },
+            "native": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "c3b90d0086b0921b76ee3f719eca4aea348cf1b5b33cc18d3f01b9084beb072a"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "f1aba80171672b14d31708111becc22d419fe5b4734715c189bb07882b79c70d",
+          "glyphGeometrySha256": "6fcdae049efd65365fe1face384c8cb5899a594d2cb3a530336462d26cdffbb9",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "755768e05f11a2fb66743e5b42b896f51ea9453c35f70fdd9fc21066e4074270"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e9f9e5fb81ca57a5696b792157a5889bf87b8103b6edfeb0b5006d3c0d7baf0c"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "52e52e13cd510b1de3e61a4e798385c213911d4eb4fbf0b3d9a39f8b9072aff6",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "755768e05f11a2fb66743e5b42b896f51ea9453c35f70fdd9fc21066e4074270"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e043e74e77b5d3e01d74cd0c3580cb970892529ddae5292980acb6cfc8a33e67"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e9f9e5fb81ca57a5696b792157a5889bf87b8103b6edfeb0b5006d3c0d7baf0c"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "6f5eb8f6a9640e470083b76a1ef089749e06f39a49d07f4c4fe58867e45055a3"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "50afd6544f6359fbf235e2477c8fcf4677305e77367ca27fd538aa097d0138cd",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "755768e05f11a2fb66743e5b42b896f51ea9453c35f70fdd9fc21066e4074270"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e043e74e77b5d3e01d74cd0c3580cb970892529ddae5292980acb6cfc8a33e67"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e9f9e5fb81ca57a5696b792157a5889bf87b8103b6edfeb0b5006d3c0d7baf0c"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "6f5eb8f6a9640e470083b76a1ef089749e06f39a49d07f4c4fe58867e45055a3"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "50afd6544f6359fbf235e2477c8fcf4677305e77367ca27fd538aa097d0138cd",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "755768e05f11a2fb66743e5b42b896f51ea9453c35f70fdd9fc21066e4074270"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e043e74e77b5d3e01d74cd0c3580cb970892529ddae5292980acb6cfc8a33e67"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e9f9e5fb81ca57a5696b792157a5889bf87b8103b6edfeb0b5006d3c0d7baf0c"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "6f5eb8f6a9640e470083b76a1ef089749e06f39a49d07f4c4fe58867e45055a3"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "bb1289884991e1f857803dc06e7686686bfc68a9873c787156eb12179d3080a1",
+      "public023DirectPasses": false
+    },
+    {
+      "name": "propagated-raised",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p><span class=\"dec\">HH <span style=\"vertical-align:8px\">HH HH</span> HH</span></p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n",
+      "htmlSha256": "d0afa637bad5fd70506a0460c16920f6a417a4a64afbd0abf839c02a09b8c11e",
+      "cssSha256": "8b011bf774b5e02d870b3d1ccd086a879028bcb38fb39ec44b102d11070fac33",
+      "bands": 1,
+      "intervals": 1,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "4e332e98286bc46b9b107ec76c797e4d6b90624c8ae3d934132bec8e82a97c10",
+          "glyphGeometrySha256": "1a3f7b404bc0aac87c80639000030f77ba83cfe06a9b8f4ad6d73bd288699e06",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "d1f90ac6057b5ec1c1519b071b76df089585abf58521edc88666a80d139698b6"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "26d235618979374d7bcbba8ab74f95e1491316535a810948bc8f146519506115"
+            },
+            "native": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "7672e56db16dd7dc11307e0a1536b7855cf4d249a74a00457036f7605593e921"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "4e332e98286bc46b9b107ec76c797e4d6b90624c8ae3d934132bec8e82a97c10",
+          "glyphGeometrySha256": "1a3f7b404bc0aac87c80639000030f77ba83cfe06a9b8f4ad6d73bd288699e06",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "d1f90ac6057b5ec1c1519b071b76df089585abf58521edc88666a80d139698b6"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "26d235618979374d7bcbba8ab74f95e1491316535a810948bc8f146519506115"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "31b14f6c7dffc7331c111ddd3e7254ecbdfa6aece00f91ab7f057d0442a444c4",
+          "glyphGeometrySha256": "a83283bd077a03315b4c48d00f88aa01c2117d562ad43fd279b7bf8817810545",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "d1f90ac6057b5ec1c1519b071b76df089585abf58521edc88666a80d139698b6"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "d89b8b55e540783fcc2498d562d0ceff3f8b1b2b99180fa5486d8a981bcda324"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "26d235618979374d7bcbba8ab74f95e1491316535a810948bc8f146519506115"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "925dcab70507b97b3158ac58c0e29eded447593ee4ff1bdad3d076691433c03a"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "9ff3f589edb602435c914eec580de7010ab920b8aa9089f5ebdad4b94fee06e0",
+          "glyphGeometrySha256": "a83283bd077a03315b4c48d00f88aa01c2117d562ad43fd279b7bf8817810545",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "d1f90ac6057b5ec1c1519b071b76df089585abf58521edc88666a80d139698b6"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "d89b8b55e540783fcc2498d562d0ceff3f8b1b2b99180fa5486d8a981bcda324"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "26d235618979374d7bcbba8ab74f95e1491316535a810948bc8f146519506115"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "925dcab70507b97b3158ac58c0e29eded447593ee4ff1bdad3d076691433c03a"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "9ff3f589edb602435c914eec580de7010ab920b8aa9089f5ebdad4b94fee06e0",
+          "glyphGeometrySha256": "a83283bd077a03315b4c48d00f88aa01c2117d562ad43fd279b7bf8817810545",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "d1f90ac6057b5ec1c1519b071b76df089585abf58521edc88666a80d139698b6"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "d89b8b55e540783fcc2498d562d0ceff3f8b1b2b99180fa5486d8a981bcda324"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "26d235618979374d7bcbba8ab74f95e1491316535a810948bc8f146519506115"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  89,
+                  273,
+                  90
+                ]
+              ],
+              "pixels_sha256": "925dcab70507b97b3158ac58c0e29eded447593ee4ff1bdad3d076691433c03a"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "637caa62a1a5d90cfed7b05fc720ad249bee524e3c2a86c84bf904c240ccf1ce",
+      "public023DirectPasses": false
+    },
+    {
+      "name": "descendant-none",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p><span class=\"dec\">HH <span style=\"text-decoration:none\">HH HH</span> HH</span></p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n",
+      "htmlSha256": "d510e4228aa42dff19b5149475f5a7422fa01d5ee57691af934dd8801f0cd75f",
+      "cssSha256": "8b011bf774b5e02d870b3d1ccd086a879028bcb38fb39ec44b102d11070fac33",
+      "bands": 1,
+      "intervals": 1,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "f1aba80171672b14d31708111becc22d419fe5b4734715c189bb07882b79c70d",
+          "glyphGeometrySha256": "6fcdae049efd65365fe1face384c8cb5899a594d2cb3a530336462d26cdffbb9",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "755768e05f11a2fb66743e5b42b896f51ea9453c35f70fdd9fc21066e4074270"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e9f9e5fb81ca57a5696b792157a5889bf87b8103b6edfeb0b5006d3c0d7baf0c"
+            },
+            "native": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "c3b90d0086b0921b76ee3f719eca4aea348cf1b5b33cc18d3f01b9084beb072a"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "f1aba80171672b14d31708111becc22d419fe5b4734715c189bb07882b79c70d",
+          "glyphGeometrySha256": "6fcdae049efd65365fe1face384c8cb5899a594d2cb3a530336462d26cdffbb9",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "755768e05f11a2fb66743e5b42b896f51ea9453c35f70fdd9fc21066e4074270"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e9f9e5fb81ca57a5696b792157a5889bf87b8103b6edfeb0b5006d3c0d7baf0c"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "52e52e13cd510b1de3e61a4e798385c213911d4eb4fbf0b3d9a39f8b9072aff6",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "755768e05f11a2fb66743e5b42b896f51ea9453c35f70fdd9fc21066e4074270"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e043e74e77b5d3e01d74cd0c3580cb970892529ddae5292980acb6cfc8a33e67"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e9f9e5fb81ca57a5696b792157a5889bf87b8103b6edfeb0b5006d3c0d7baf0c"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "6f5eb8f6a9640e470083b76a1ef089749e06f39a49d07f4c4fe58867e45055a3"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "50afd6544f6359fbf235e2477c8fcf4677305e77367ca27fd538aa097d0138cd",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "755768e05f11a2fb66743e5b42b896f51ea9453c35f70fdd9fc21066e4074270"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e043e74e77b5d3e01d74cd0c3580cb970892529ddae5292980acb6cfc8a33e67"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e9f9e5fb81ca57a5696b792157a5889bf87b8103b6edfeb0b5006d3c0d7baf0c"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "6f5eb8f6a9640e470083b76a1ef089749e06f39a49d07f4c4fe58867e45055a3"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "50afd6544f6359fbf235e2477c8fcf4677305e77367ca27fd538aa097d0138cd",
+          "glyphGeometrySha256": "4602c01cbce0ecaf8d130e2171a97fc29b85a5f859e0a757fc597048e657e164",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "755768e05f11a2fb66743e5b42b896f51ea9453c35f70fdd9fc21066e4074270"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e043e74e77b5d3e01d74cd0c3580cb970892529ddae5292980acb6cfc8a33e67"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "e9f9e5fb81ca57a5696b792157a5889bf87b8103b6edfeb0b5006d3c0d7baf0c"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  273,
+                  78
+                ]
+              ],
+              "pixels_sha256": "6f5eb8f6a9640e470083b76a1ef089749e06f39a49d07f4c4fe58867e45055a3"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "b20e48c8d56e690f3ad9837781b1568d25756d1145228e87ade352ef6e2ee6d2",
+      "public023DirectPasses": false
+    },
+    {
+      "name": "wrapped",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p><span class=\"dec\"> HH HH HH HH </span></p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\np:not(.label) {width:100px}",
+      "htmlSha256": "695b5256f4236b2fadb3fa01701ffe28ae7b30a3fa479a7aa1aaefa21cf9c01c",
+      "cssSha256": "cc6dfb7353a6ce5574e66f59bee5a940c359e7ff6e7220d03a91f1c4b903d0d0",
+      "bands": 2,
+      "intervals": 1,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "18406b4203f7d846f21c570d7edde3cb27a6f8eefe5e322ba0faa2abaa45d5ea",
+          "glyphGeometrySha256": "399c378f076bd3b545bab34527709f9b7e0d8d43ecab356994b88b52af0c6793",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "7943cc4f8de162a393409ecc4cb7728bfeb744bd9a4c2d269a8da08f56f89e2f"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "c3b65b10379bfc4e3bc0f2dd94fa74d46ffaa0e2be1fd023c49e939c64a85b39"
+            },
+            "native": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "4a46555420599b7b2c4f0bae0728d7cd47ad402b054c29df60291b397db1833c"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "18406b4203f7d846f21c570d7edde3cb27a6f8eefe5e322ba0faa2abaa45d5ea",
+          "glyphGeometrySha256": "399c378f076bd3b545bab34527709f9b7e0d8d43ecab356994b88b52af0c6793",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "7943cc4f8de162a393409ecc4cb7728bfeb744bd9a4c2d269a8da08f56f89e2f"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "c3b65b10379bfc4e3bc0f2dd94fa74d46ffaa0e2be1fd023c49e939c64a85b39"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "498ab5b99825d3db5c93483c4f9e1fe8153d130b045123d9faee9942ac6aba3c",
+          "glyphGeometrySha256": "9883bf3e2206dd9bbdd558d72b00c1df503bd167a4938afc0d9f0e765a3d109d",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "7943cc4f8de162a393409ecc4cb7728bfeb744bd9a4c2d269a8da08f56f89e2f"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "94aea849d9f45f05309a286c5857419e9c8756522d935a4325925cf59b17f0d7"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "c3b65b10379bfc4e3bc0f2dd94fa74d46ffaa0e2be1fd023c49e939c64a85b39"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "6a2a9f69dcce602e8f6e131922feef460db80adcf2b5d844b751879188dd70b0"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "7fdd0cddaf52764ff3c791896a5f68877a3143f8fca476d39fd752699f3d37e8",
+          "glyphGeometrySha256": "9883bf3e2206dd9bbdd558d72b00c1df503bd167a4938afc0d9f0e765a3d109d",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "7943cc4f8de162a393409ecc4cb7728bfeb744bd9a4c2d269a8da08f56f89e2f"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "94aea849d9f45f05309a286c5857419e9c8756522d935a4325925cf59b17f0d7"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "c3b65b10379bfc4e3bc0f2dd94fa74d46ffaa0e2be1fd023c49e939c64a85b39"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "6a2a9f69dcce602e8f6e131922feef460db80adcf2b5d844b751879188dd70b0"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "7fdd0cddaf52764ff3c791896a5f68877a3143f8fca476d39fd752699f3d37e8",
+          "glyphGeometrySha256": "9883bf3e2206dd9bbdd558d72b00c1df503bd167a4938afc0d9f0e765a3d109d",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "7943cc4f8de162a393409ecc4cb7728bfeb744bd9a4c2d269a8da08f56f89e2f"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "94aea849d9f45f05309a286c5857419e9c8756522d935a4325925cf59b17f0d7"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "c3b65b10379bfc4e3bc0f2dd94fa74d46ffaa0e2be1fd023c49e939c64a85b39"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ],
+                [
+                  30,
+                  137,
+                  146,
+                  138
+                ]
+              ],
+              "pixels_sha256": "6a2a9f69dcce602e8f6e131922feef460db80adcf2b5d844b751879188dd70b0"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "f31aceb65092f5cc0463045c81cfd1a3b2aa8296a24993b4f8e99b9de39f3717",
+      "public023DirectPasses": false
+    },
+    {
+      "name": "nowrap-control",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p>HH <span class=\"dec\">HH HH</span> HH</p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n.dec {white-space:nowrap}",
+      "htmlSha256": "6df6768549309d6f9396b19b713123b48426fde882e9823d1ab56675d9331c82",
+      "cssSha256": "01797365a9e22cfb46906c55b2c22e9e99441f7f09c9a07b80658997a990d5a8",
+      "bands": 1,
+      "intervals": 1,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "f4c7093afc6fc0a60e55c3c2fb073849045be197c5fb914091cfbc8ce1d96f69",
+          "glyphGeometrySha256": "f9637937c22c176920593d1ee36dbeeccd4ae3379b5a344ab5a65428767a3e1c",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "19a91c1d215a253c769252bbf9acbbe014efaa129bcda97bf61fa94154f60c1d"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "60dc04ae5ac9c891df8a931a93f923d92cfad68815d35e2a59110962aa4ce479"
+            },
+            "native": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "281cbaa0e819d5ed6da94cc5a8db51f4fa06c278a70c57110905aeee9a963400"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "f4c7093afc6fc0a60e55c3c2fb073849045be197c5fb914091cfbc8ce1d96f69",
+          "glyphGeometrySha256": "f9637937c22c176920593d1ee36dbeeccd4ae3379b5a344ab5a65428767a3e1c",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "19a91c1d215a253c769252bbf9acbbe014efaa129bcda97bf61fa94154f60c1d"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "60dc04ae5ac9c891df8a931a93f923d92cfad68815d35e2a59110962aa4ce479"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "d281a1c6c372f5a13ac2d8da97830ff2cc14a786ccba93e35205c0982efc65a2",
+          "glyphGeometrySha256": "bf496270e6ccb33482cd2bb1b9f4706a59e5d4e95818129c880701f84c5f5956",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "19a91c1d215a253c769252bbf9acbbe014efaa129bcda97bf61fa94154f60c1d"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "30eb0355c938137986d7d985556c88e5bb827f1760ab4ba324e3ccc5006cf169"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "60dc04ae5ac9c891df8a931a93f923d92cfad68815d35e2a59110962aa4ce479"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "98b5940193aae1732bfeeefd6d2c06237eeaa528fc17c448997644445cf2c731"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "d28b1cff820579de9c57bfb5abae3913628ceb39452e967fa3c5eaed5d3e1bc1",
+          "glyphGeometrySha256": "bf496270e6ccb33482cd2bb1b9f4706a59e5d4e95818129c880701f84c5f5956",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "19a91c1d215a253c769252bbf9acbbe014efaa129bcda97bf61fa94154f60c1d"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "30eb0355c938137986d7d985556c88e5bb827f1760ab4ba324e3ccc5006cf169"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "60dc04ae5ac9c891df8a931a93f923d92cfad68815d35e2a59110962aa4ce479"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "98b5940193aae1732bfeeefd6d2c06237eeaa528fc17c448997644445cf2c731"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHRecordAAA",
+            "HHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "d28b1cff820579de9c57bfb5abae3913628ceb39452e967fa3c5eaed5d3e1bc1",
+          "glyphGeometrySha256": "bf496270e6ccb33482cd2bb1b9f4706a59e5d4e95818129c880701f84c5f5956",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "19a91c1d215a253c769252bbf9acbbe014efaa129bcda97bf61fa94154f60c1d"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "30eb0355c938137986d7d985556c88e5bb827f1760ab4ba324e3ccc5006cf169"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "60dc04ae5ac9c891df8a931a93f923d92cfad68815d35e2a59110962aa4ce479"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "98b5940193aae1732bfeeefd6d2c06237eeaa528fc17c448997644445cf2c731"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "f4c7093afc6fc0a60e55c3c2fb073849045be197c5fb914091cfbc8ce1d96f69",
+      "public023DirectPasses": true
+    },
+    {
+      "name": "atomic-isolation",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p><span class=\"dec\">HH <span class=\"atom\">KK KK</span> HH</span></p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n.atom {display:inline-block;color:#0000b0}",
+      "htmlSha256": "9b668a3da06f0c5d9219c6a97a66e96397f50bb09532a3a0d66a727b1a217c69",
+      "cssSha256": "7e94e92b966002695116951a44fe9f7f1763e0b879998601eb631c4bbe88a382",
+      "bands": 1,
+      "intervals": 2,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHKKKKHHRecordAAA"
+          ],
+          "referencePdfSha256": "04c993b121379c3d4c5e2b9149b0a583329afa5a9676576724d775414b23ec3a",
+          "glyphGeometrySha256": "1c9b6bb3c1c4ba492ce29b3fb4d0ce51a46a8e4f27d8f27fc782b256b919dda5",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "41132b6ac5b5fe189a674bedf3329f6cc621cf719b4c4b8ea55cdb9d14e090a5"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "6aa44abec45901e48e2da5abc7e1a35146f926a0df4ece10b938a3c341537db0"
+            },
+            "native": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "5785963575f227f369756a361fddb0d597d469d4c1dc9e0335a157f96df84a54"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHKKKKHHRecordAAA"
+          ],
+          "referencePdfSha256": "04c993b121379c3d4c5e2b9149b0a583329afa5a9676576724d775414b23ec3a",
+          "glyphGeometrySha256": "1c9b6bb3c1c4ba492ce29b3fb4d0ce51a46a8e4f27d8f27fc782b256b919dda5",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "41132b6ac5b5fe189a674bedf3329f6cc621cf719b4c4b8ea55cdb9d14e090a5"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "6aa44abec45901e48e2da5abc7e1a35146f926a0df4ece10b938a3c341537db0"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHKKKKHHRecordAAA",
+            "HHKKKKHHRecordBBB"
+          ],
+          "referencePdfSha256": "4e9f8ff4f7d08d5f3aa852daa4b627ef61c243944a212c4fdfd005f244f6402c",
+          "glyphGeometrySha256": "0bf4b28fe8a8b0f68d3a9f28efbf14a1f8f85ebaa28b80baa7d893bc07ff57f5",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "41132b6ac5b5fe189a674bedf3329f6cc621cf719b4c4b8ea55cdb9d14e090a5"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "189941ab4dd57147420fa4acf5a4057d117c3cea571ea5b83239dc7b199ad48b"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "6aa44abec45901e48e2da5abc7e1a35146f926a0df4ece10b938a3c341537db0"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "9112ea239c4d99f9999aae66475e890f8e07edf4184ca817e0a71d4b60ef704f"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHKKKKHHRecordAAA",
+            "HHKKKKHHRecordBBB"
+          ],
+          "referencePdfSha256": "398d80eca6d6c063a9f24a6e39935958375be8f5693188621b4b2128aee70422",
+          "glyphGeometrySha256": "0bf4b28fe8a8b0f68d3a9f28efbf14a1f8f85ebaa28b80baa7d893bc07ff57f5",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "41132b6ac5b5fe189a674bedf3329f6cc621cf719b4c4b8ea55cdb9d14e090a5"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "189941ab4dd57147420fa4acf5a4057d117c3cea571ea5b83239dc7b199ad48b"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "6aa44abec45901e48e2da5abc7e1a35146f926a0df4ece10b938a3c341537db0"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "9112ea239c4d99f9999aae66475e890f8e07edf4184ca817e0a71d4b60ef704f"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHKKKKHHRecordAAA",
+            "HHKKKKHHRecordBBB"
+          ],
+          "referencePdfSha256": "398d80eca6d6c063a9f24a6e39935958375be8f5693188621b4b2128aee70422",
+          "glyphGeometrySha256": "0bf4b28fe8a8b0f68d3a9f28efbf14a1f8f85ebaa28b80baa7d893bc07ff57f5",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "41132b6ac5b5fe189a674bedf3329f6cc621cf719b4c4b8ea55cdb9d14e090a5"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "189941ab4dd57147420fa4acf5a4057d117c3cea571ea5b83239dc7b199ad48b"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "6aa44abec45901e48e2da5abc7e1a35146f926a0df4ece10b938a3c341537db0"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  263,
+                  78
+                ]
+              ],
+              "pixels_sha256": "9112ea239c4d99f9999aae66475e890f8e07edf4184ca817e0a71d4b60ef704f"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "7b920cc0e48f233f840fd861fc5e67f4ae2432f84d115092bd554d08ebf7c770",
+      "public023DirectPasses": false
+    },
+    {
+      "name": "authored-boundaries",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p><span class=\"dec\">HH</span> <span class=\"dec\">HH</span></p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n",
+      "htmlSha256": "211fd7978ed3e727243cd5308bbc553a325d7dc4fa59db68eedc507a8dcac1ad",
+      "cssSha256": "8b011bf774b5e02d870b3d1ccd086a879028bcb38fb39ec44b102d11070fac33",
+      "bands": 1,
+      "intervals": 2,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHHHRecordAAA"
+          ],
+          "referencePdfSha256": "2ff7da8d02586bf5299bf2d1ad82f8e9d4cbb9b51c4f263439b3accd97a87fab",
+          "glyphGeometrySha256": "289c0a7dcbeb41dbb5a9a63a57c45796f2e22f68d2efc942c27302728d2e724b",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "ee1ebad05e75485f7edaa5ae6e8413f5da97633008ce0babc9bd00a378193d31"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "46496988ba1b466a81f4e15e80937e21d73072039bf7af9b0091518d70d0ff09"
+            },
+            "native": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "c5f3a8c5b5cfc43717f927de92761f8f9800dc79ebf70d2ea3354a640494b5da"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHHHRecordAAA"
+          ],
+          "referencePdfSha256": "2ff7da8d02586bf5299bf2d1ad82f8e9d4cbb9b51c4f263439b3accd97a87fab",
+          "glyphGeometrySha256": "289c0a7dcbeb41dbb5a9a63a57c45796f2e22f68d2efc942c27302728d2e724b",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "ee1ebad05e75485f7edaa5ae6e8413f5da97633008ce0babc9bd00a378193d31"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "46496988ba1b466a81f4e15e80937e21d73072039bf7af9b0091518d70d0ff09"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHHHRecordAAA",
+            "HHHHRecordBBB"
+          ],
+          "referencePdfSha256": "ff9c783e31194eb6847a5e89d21a01970837fd3bb6c3461926484d4c5041eef1",
+          "glyphGeometrySha256": "72b427468c18d0860e8bd3797dd46a9fe238961ed0e6a338b6e959d22da6a50d",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "ee1ebad05e75485f7edaa5ae6e8413f5da97633008ce0babc9bd00a378193d31"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "c508ffc823b47d25d3814d7dce851efe381fe286c1ddb1a29b52ea6d7c80b40a"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "46496988ba1b466a81f4e15e80937e21d73072039bf7af9b0091518d70d0ff09"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "a11fe8938c5bfa114c45331f24850911dc851b91127b59a2932b897dcaf79812"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHHHRecordAAA",
+            "HHHHRecordBBB"
+          ],
+          "referencePdfSha256": "25d83aa1583a35de0268b963baf04c65ca2d6d374269944fe5db98810c56786d",
+          "glyphGeometrySha256": "72b427468c18d0860e8bd3797dd46a9fe238961ed0e6a338b6e959d22da6a50d",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "ee1ebad05e75485f7edaa5ae6e8413f5da97633008ce0babc9bd00a378193d31"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "c508ffc823b47d25d3814d7dce851efe381fe286c1ddb1a29b52ea6d7c80b40a"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "46496988ba1b466a81f4e15e80937e21d73072039bf7af9b0091518d70d0ff09"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "a11fe8938c5bfa114c45331f24850911dc851b91127b59a2932b897dcaf79812"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHHHRecordAAA",
+            "HHHHRecordBBB"
+          ],
+          "referencePdfSha256": "25d83aa1583a35de0268b963baf04c65ca2d6d374269944fe5db98810c56786d",
+          "glyphGeometrySha256": "72b427468c18d0860e8bd3797dd46a9fe238961ed0e6a338b6e959d22da6a50d",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "ee1ebad05e75485f7edaa5ae6e8413f5da97633008ce0babc9bd00a378193d31"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "c508ffc823b47d25d3814d7dce851efe381fe286c1ddb1a29b52ea6d7c80b40a"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "46496988ba1b466a81f4e15e80937e21d73072039bf7af9b0091518d70d0ff09"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "a11fe8938c5bfa114c45331f24850911dc851b91127b59a2932b897dcaf79812"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "2ff7da8d02586bf5299bf2d1ad82f8e9d4cbb9b51c4f263439b3accd97a87fab",
+      "public023DirectPasses": true
+    },
+    {
+      "name": "collapsed-edges",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p><span class=\"dec\">   HH HH   </span></p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n",
+      "htmlSha256": "12c6edc24397fe1e0d3d986bfd6b7efc3ad91eee0757ca5bb9a4ed27dfac4761",
+      "cssSha256": "8b011bf774b5e02d870b3d1ccd086a879028bcb38fb39ec44b102d11070fac33",
+      "bands": 1,
+      "intervals": 1,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHHHRecordAAA"
+          ],
+          "referencePdfSha256": "1fb61448939c896c839803b1b6c4c30f178ca36a4c279beea6c9a024c4f97a6f",
+          "glyphGeometrySha256": "289c0a7dcbeb41dbb5a9a63a57c45796f2e22f68d2efc942c27302728d2e724b",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "2fa65aaf33788f2caad43cdb86385d2f1d5831032e66adcbb7ff0663fd0248f9"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "4c659709510e4e3ee21a95f33500fd82797daf6206de5978c100bd1fd7a58f1b"
+            },
+            "native": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "b69fc5d0808d0c3013646409622578ba7340d450068e69e80a41cd4b27bf4198"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHHHRecordAAA"
+          ],
+          "referencePdfSha256": "1fb61448939c896c839803b1b6c4c30f178ca36a4c279beea6c9a024c4f97a6f",
+          "glyphGeometrySha256": "289c0a7dcbeb41dbb5a9a63a57c45796f2e22f68d2efc942c27302728d2e724b",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "2fa65aaf33788f2caad43cdb86385d2f1d5831032e66adcbb7ff0663fd0248f9"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "4c659709510e4e3ee21a95f33500fd82797daf6206de5978c100bd1fd7a58f1b"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHHHRecordAAA",
+            "HHHHRecordBBB"
+          ],
+          "referencePdfSha256": "1ae6b5b109a249ee28ca733bd8c01159991482a62cfa3dec53cda6df6bc9ea1a",
+          "glyphGeometrySha256": "72b427468c18d0860e8bd3797dd46a9fe238961ed0e6a338b6e959d22da6a50d",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "2fa65aaf33788f2caad43cdb86385d2f1d5831032e66adcbb7ff0663fd0248f9"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "bcdaa8f2169dcf9ad28c14f7e29b1a540f5027bd2471f0b293ccdbf1920ff7a1"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "4c659709510e4e3ee21a95f33500fd82797daf6206de5978c100bd1fd7a58f1b"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "76c0f86a6cade8f59ea1e9b3fe531cd26b66e1349ddab1b6ee73a03d7b1cc3c3"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHHHRecordAAA",
+            "HHHHRecordBBB"
+          ],
+          "referencePdfSha256": "c0acd3fcaacc7d68d019229d1ca29e12b49f9e3719a31ddc077c259814762816",
+          "glyphGeometrySha256": "72b427468c18d0860e8bd3797dd46a9fe238961ed0e6a338b6e959d22da6a50d",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "2fa65aaf33788f2caad43cdb86385d2f1d5831032e66adcbb7ff0663fd0248f9"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "bcdaa8f2169dcf9ad28c14f7e29b1a540f5027bd2471f0b293ccdbf1920ff7a1"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "4c659709510e4e3ee21a95f33500fd82797daf6206de5978c100bd1fd7a58f1b"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "76c0f86a6cade8f59ea1e9b3fe531cd26b66e1349ddab1b6ee73a03d7b1cc3c3"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHHHRecordAAA",
+            "HHHHRecordBBB"
+          ],
+          "referencePdfSha256": "c0acd3fcaacc7d68d019229d1ca29e12b49f9e3719a31ddc077c259814762816",
+          "glyphGeometrySha256": "72b427468c18d0860e8bd3797dd46a9fe238961ed0e6a338b6e959d22da6a50d",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "2fa65aaf33788f2caad43cdb86385d2f1d5831032e66adcbb7ff0663fd0248f9"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "bcdaa8f2169dcf9ad28c14f7e29b1a540f5027bd2471f0b293ccdbf1920ff7a1"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "4c659709510e4e3ee21a95f33500fd82797daf6206de5978c100bd1fd7a58f1b"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "76c0f86a6cade8f59ea1e9b3fe531cd26b66e1349ddab1b6ee73a03d7b1cc3c3"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "2ff7da8d02586bf5299bf2d1ad82f8e9d4cbb9b51c4f263439b3accd97a87fab",
+      "public023DirectPasses": false,
+      "controlHtml": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p><span class=\"dec\">HH HH</span></p><p class=\"label\">Record {{record}}</p></body></html>"
+    },
+    {
+      "name": "collapsed-multiple",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p><span class=\"dec\">HH \n\t HH</span></p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n",
+      "htmlSha256": "94bf1228ea98400200473b159ac252d1110b8178cb09ccd172b469d2216ec796",
+      "cssSha256": "8b011bf774b5e02d870b3d1ccd086a879028bcb38fb39ec44b102d11070fac33",
+      "bands": 1,
+      "intervals": 1,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHHHRecordAAA"
+          ],
+          "referencePdfSha256": "1fb61448939c896c839803b1b6c4c30f178ca36a4c279beea6c9a024c4f97a6f",
+          "glyphGeometrySha256": "289c0a7dcbeb41dbb5a9a63a57c45796f2e22f68d2efc942c27302728d2e724b",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "2fa65aaf33788f2caad43cdb86385d2f1d5831032e66adcbb7ff0663fd0248f9"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "4c659709510e4e3ee21a95f33500fd82797daf6206de5978c100bd1fd7a58f1b"
+            },
+            "native": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "b69fc5d0808d0c3013646409622578ba7340d450068e69e80a41cd4b27bf4198"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHHHRecordAAA"
+          ],
+          "referencePdfSha256": "1fb61448939c896c839803b1b6c4c30f178ca36a4c279beea6c9a024c4f97a6f",
+          "glyphGeometrySha256": "289c0a7dcbeb41dbb5a9a63a57c45796f2e22f68d2efc942c27302728d2e724b",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "2fa65aaf33788f2caad43cdb86385d2f1d5831032e66adcbb7ff0663fd0248f9"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "4c659709510e4e3ee21a95f33500fd82797daf6206de5978c100bd1fd7a58f1b"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHHHRecordAAA",
+            "HHHHRecordBBB"
+          ],
+          "referencePdfSha256": "1ae6b5b109a249ee28ca733bd8c01159991482a62cfa3dec53cda6df6bc9ea1a",
+          "glyphGeometrySha256": "72b427468c18d0860e8bd3797dd46a9fe238961ed0e6a338b6e959d22da6a50d",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "2fa65aaf33788f2caad43cdb86385d2f1d5831032e66adcbb7ff0663fd0248f9"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "bcdaa8f2169dcf9ad28c14f7e29b1a540f5027bd2471f0b293ccdbf1920ff7a1"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "4c659709510e4e3ee21a95f33500fd82797daf6206de5978c100bd1fd7a58f1b"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "76c0f86a6cade8f59ea1e9b3fe531cd26b66e1349ddab1b6ee73a03d7b1cc3c3"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHHHRecordAAA",
+            "HHHHRecordBBB"
+          ],
+          "referencePdfSha256": "c0acd3fcaacc7d68d019229d1ca29e12b49f9e3719a31ddc077c259814762816",
+          "glyphGeometrySha256": "72b427468c18d0860e8bd3797dd46a9fe238961ed0e6a338b6e959d22da6a50d",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "2fa65aaf33788f2caad43cdb86385d2f1d5831032e66adcbb7ff0663fd0248f9"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "bcdaa8f2169dcf9ad28c14f7e29b1a540f5027bd2471f0b293ccdbf1920ff7a1"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "4c659709510e4e3ee21a95f33500fd82797daf6206de5978c100bd1fd7a58f1b"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "76c0f86a6cade8f59ea1e9b3fe531cd26b66e1349ddab1b6ee73a03d7b1cc3c3"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHHHRecordAAA",
+            "HHHHRecordBBB"
+          ],
+          "referencePdfSha256": "c0acd3fcaacc7d68d019229d1ca29e12b49f9e3719a31ddc077c259814762816",
+          "glyphGeometrySha256": "72b427468c18d0860e8bd3797dd46a9fe238961ed0e6a338b6e959d22da6a50d",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "2fa65aaf33788f2caad43cdb86385d2f1d5831032e66adcbb7ff0663fd0248f9"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "bcdaa8f2169dcf9ad28c14f7e29b1a540f5027bd2471f0b293ccdbf1920ff7a1"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "4c659709510e4e3ee21a95f33500fd82797daf6206de5978c100bd1fd7a58f1b"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  30,
+                  77,
+                  146,
+                  78
+                ]
+              ],
+              "pixels_sha256": "76c0f86a6cade8f59ea1e9b3fe531cd26b66e1349ddab1b6ee73a03d7b1cc3c3"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "2ff7da8d02586bf5299bf2d1ad82f8e9d4cbb9b51c4f263439b3accd97a87fab",
+      "public023DirectPasses": false,
+      "controlHtml": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p><span class=\"dec\">HH HH</span></p><p class=\"label\">Record {{record}}</p></body></html>"
+    },
+    {
+      "name": "only-collapsed",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p><span class=\"dec\">  </span>HH</p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n",
+      "htmlSha256": "17cea67887af90d978483eee664f09bfad539e787d779a5340ee73a21402242a",
+      "cssSha256": "8b011bf774b5e02d870b3d1ccd086a879028bcb38fb39ec44b102d11070fac33",
+      "bands": 0,
+      "intervals": 0,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHRecordAAA"
+          ],
+          "referencePdfSha256": "87b8391d5d383c9227772ca82a1fb5d9db70e1ac7738a80636771e8c38ccda91",
+          "glyphGeometrySha256": "6f9b4d9935d4c9142d295ed7083c480c499ca6eab769dd96879052390bcdf7c1",
+          "images": {
+            "pdfium-1": {
+              "bounds": [],
+              "pixels_sha256": "a4be7d6fefe2ab43fe6916d415a671b849ad15a3732d7e8e34bdde67e822f10b"
+            },
+            "finalized-1": {
+              "bounds": [],
+              "pixels_sha256": "d37409fd1bee1c6c946a8fea352577a78dfa298b67a32bb7c0213da916420a06"
+            },
+            "native": {
+              "bounds": [],
+              "pixels_sha256": "6249b1df263d4d14671241a7bbae492cbad97a15dae4f27092546513a53a8c16"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHRecordAAA"
+          ],
+          "referencePdfSha256": "87b8391d5d383c9227772ca82a1fb5d9db70e1ac7738a80636771e8c38ccda91",
+          "glyphGeometrySha256": "6f9b4d9935d4c9142d295ed7083c480c499ca6eab769dd96879052390bcdf7c1",
+          "images": {
+            "pdfium-1": {
+              "bounds": [],
+              "pixels_sha256": "a4be7d6fefe2ab43fe6916d415a671b849ad15a3732d7e8e34bdde67e822f10b"
+            },
+            "finalized-1": {
+              "bounds": [],
+              "pixels_sha256": "d37409fd1bee1c6c946a8fea352577a78dfa298b67a32bb7c0213da916420a06"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHRecordAAA",
+            "HHRecordBBB"
+          ],
+          "referencePdfSha256": "60b88d32c7fd6495079cdb4f12e3028d9722fd74c1ef21ed3eb833a605502e14",
+          "glyphGeometrySha256": "5fa5f291653c1e75e4267b03561bc0b99c7f8f19def49b37ffab79ff75e3fdf4",
+          "images": {
+            "pdfium-1": {
+              "bounds": [],
+              "pixels_sha256": "a4be7d6fefe2ab43fe6916d415a671b849ad15a3732d7e8e34bdde67e822f10b"
+            },
+            "pdfium-2": {
+              "bounds": [],
+              "pixels_sha256": "2d048f0dce9529f31d303ad80ac08f5f7798c275f96dce209cdf3c196f49e3d8"
+            },
+            "finalized-1": {
+              "bounds": [],
+              "pixels_sha256": "d37409fd1bee1c6c946a8fea352577a78dfa298b67a32bb7c0213da916420a06"
+            },
+            "finalized-2": {
+              "bounds": [],
+              "pixels_sha256": "5d3dcf56b53c39faa1912d12b583aaf161774e41dcceaeef0578740512672a2e"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHRecordAAA",
+            "HHRecordBBB"
+          ],
+          "referencePdfSha256": "e4514f7e4bc7e6706fc9b93d8192ab369c702e540fa62ad96da4117a10af09bd",
+          "glyphGeometrySha256": "5fa5f291653c1e75e4267b03561bc0b99c7f8f19def49b37ffab79ff75e3fdf4",
+          "images": {
+            "pdfium-1": {
+              "bounds": [],
+              "pixels_sha256": "a4be7d6fefe2ab43fe6916d415a671b849ad15a3732d7e8e34bdde67e822f10b"
+            },
+            "pdfium-2": {
+              "bounds": [],
+              "pixels_sha256": "2d048f0dce9529f31d303ad80ac08f5f7798c275f96dce209cdf3c196f49e3d8"
+            },
+            "finalized-1": {
+              "bounds": [],
+              "pixels_sha256": "d37409fd1bee1c6c946a8fea352577a78dfa298b67a32bb7c0213da916420a06"
+            },
+            "finalized-2": {
+              "bounds": [],
+              "pixels_sha256": "5d3dcf56b53c39faa1912d12b583aaf161774e41dcceaeef0578740512672a2e"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHRecordAAA",
+            "HHRecordBBB"
+          ],
+          "referencePdfSha256": "e4514f7e4bc7e6706fc9b93d8192ab369c702e540fa62ad96da4117a10af09bd",
+          "glyphGeometrySha256": "5fa5f291653c1e75e4267b03561bc0b99c7f8f19def49b37ffab79ff75e3fdf4",
+          "images": {
+            "pdfium-1": {
+              "bounds": [],
+              "pixels_sha256": "a4be7d6fefe2ab43fe6916d415a671b849ad15a3732d7e8e34bdde67e822f10b"
+            },
+            "pdfium-2": {
+              "bounds": [],
+              "pixels_sha256": "2d048f0dce9529f31d303ad80ac08f5f7798c275f96dce209cdf3c196f49e3d8"
+            },
+            "finalized-1": {
+              "bounds": [],
+              "pixels_sha256": "d37409fd1bee1c6c946a8fea352577a78dfa298b67a32bb7c0213da916420a06"
+            },
+            "finalized-2": {
+              "bounds": [],
+              "pixels_sha256": "5d3dcf56b53c39faa1912d12b583aaf161774e41dcceaeef0578740512672a2e"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "87b8391d5d383c9227772ca82a1fb5d9db70e1ac7738a80636771e8c38ccda91",
+      "public023DirectPasses": true
+    },
+    {
+      "name": "decoration-shadow",
+      "html": "<!doctype html><html lang=\"en\"><head><title>Decoration spaces</title></head><body><p>HH <span class=\"dec\">HH HH</span> HH</p><p class=\"label\">Record {{record}}</p></body></html>",
+      "css": "@page {size:480px 260px;margin:20px}\nhtml,body {margin:0;padding:0;color:black;background:white}\nbody {font-family:Inter;font-size:24px;line-height:40px}\np {margin:0} .label {margin-top:40px;font-size:12px;color:#333}\n.dec {text-decoration-line:underline;text-decoration-color:#d00000;\ntext-decoration-thickness:2px;text-underline-offset:3px;text-decoration-skip-ink:none}\n.dec {text-shadow:0 8px 0 #0000b0}",
+      "htmlSha256": "6df6768549309d6f9396b19b713123b48426fde882e9823d1ab56675d9331c82",
+      "cssSha256": "307d2203968c8d042b4f648c9c5ebdefe367a9b695d8725a691310d7db3b2233",
+      "bands": 1,
+      "intervals": 1,
+      "expected": {
+        "direct": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "cbf9a614a1993dc8e526a49553fe2a5ad0eb3d77080529fd0e3c9abed2c9cf7a",
+          "glyphGeometrySha256": "7a18781c2c57cec71574437e8c352aed94f01e705b854b6201267cde8addd61c",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "cab85ff38080a6e18b10fe6d5994f1941f5359f20e8b80e40a0a2beebaffcd24"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "c2cf78f7bdc88d884010ca9d01e59e5725ee0ddfa47e21880720de019e009fe1"
+            },
+            "native": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "4749b2015bbbd9fa5a35db5951a9d67f7465f4ea4a5e0a17fc55094b01b0e9b6"
+            }
+          }
+        },
+        "compiled": {
+          "pages": 1,
+          "text": [
+            "HHHHHHHHHHHHRecordAAA"
+          ],
+          "referencePdfSha256": "cbf9a614a1993dc8e526a49553fe2a5ad0eb3d77080529fd0e3c9abed2c9cf7a",
+          "glyphGeometrySha256": "7a18781c2c57cec71574437e8c352aed94f01e705b854b6201267cde8addd61c",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "cab85ff38080a6e18b10fe6d5994f1941f5359f20e8b80e40a0a2beebaffcd24"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "c2cf78f7bdc88d884010ca9d01e59e5725ee0ddfa47e21880720de019e009fe1"
+            }
+          }
+        },
+        "fixed": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHHHHHRecordAAA",
+            "HHHHHHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "5a61d7f6d27a795787cd68ef37a9b56e5344346ca38ff165b90d97b5a5bbb241",
+          "glyphGeometrySha256": "425288e75f7acb8d91955e6a7e5d218aa59b9336fdc3fd3069aaedae21237306",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "cab85ff38080a6e18b10fe6d5994f1941f5359f20e8b80e40a0a2beebaffcd24"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "86179bcb2381e58f116899be3dcb6f6b83df396862d74018b8d20558dc16aa54"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "c2cf78f7bdc88d884010ca9d01e59e5725ee0ddfa47e21880720de019e009fe1"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "b714ee94f60856f654b98c78d8add47d44724248b45e5d265d6b9aacab274568"
+            }
+          }
+        },
+        "reflow": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHHHHHRecordAAA",
+            "HHHHHHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "074a3816fd989f9ab64c29dc197b2438226397d301f5c1a4ec084301fa7ac71b",
+          "glyphGeometrySha256": "425288e75f7acb8d91955e6a7e5d218aa59b9336fdc3fd3069aaedae21237306",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "cab85ff38080a6e18b10fe6d5994f1941f5359f20e8b80e40a0a2beebaffcd24"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "86179bcb2381e58f116899be3dcb6f6b83df396862d74018b8d20558dc16aa54"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "c2cf78f7bdc88d884010ca9d01e59e5725ee0ddfa47e21880720de019e009fe1"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "b714ee94f60856f654b98c78d8add47d44724248b45e5d265d6b9aacab274568"
+            }
+          }
+        },
+        "compact": {
+          "pages": 2,
+          "text": [
+            "HHHHHHHHHHHHRecordAAA",
+            "HHHHHHHHHHHHRecordBBB"
+          ],
+          "referencePdfSha256": "074a3816fd989f9ab64c29dc197b2438226397d301f5c1a4ec084301fa7ac71b",
+          "glyphGeometrySha256": "425288e75f7acb8d91955e6a7e5d218aa59b9336fdc3fd3069aaedae21237306",
+          "images": {
+            "pdfium-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "cab85ff38080a6e18b10fe6d5994f1941f5359f20e8b80e40a0a2beebaffcd24"
+            },
+            "pdfium-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "86179bcb2381e58f116899be3dcb6f6b83df396862d74018b8d20558dc16aa54"
+            },
+            "finalized-1": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "c2cf78f7bdc88d884010ca9d01e59e5725ee0ddfa47e21880720de019e009fe1"
+            },
+            "finalized-2": {
+              "bounds": [
+                [
+                  94,
+                  77,
+                  210,
+                  78
+                ]
+              ],
+              "pixels_sha256": "b714ee94f60856f654b98c78d8add47d44724248b45e5d265d6b9aacab274568"
+            }
+          }
+        }
+      },
+      "public023DirectPdfSha256": "c185aa471dfd146643e494653b09e0d46d73ecb1316fb41defef6f1123d3cf98",
+      "public023DirectPasses": false
+    }
+  ]
+}
