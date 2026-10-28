@@ -1,0 +1,190 @@
+{
+  "schema": "fullbleed.preformatted_inputs.v1",
+  "sourceCommit": "c09539ffef7d7903dd95b2f033f038f580d321b7",
+  "sourceTestSha256": "6d611de87f2add72b8dd2a94c74644ef151e3ab3bfbc8b193cc66e89739918ec",
+  "fontSha256": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
+  "cases": [
+    {
+      "name": "wrap-anywhere",
+      "kind": "wrap",
+      "text": "   PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij\n    SUFFIX",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere }\n",
+      "html": "<pre><code>   PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij\n    SUFFIX</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "b293296759f75aaeef9df4e4e3813705d5b2a08b0c91dfaaa9221342a04e3bdd",
+      "cssSha256": "97305847fedfe689c8025f693949d5ce47b3e8da016b1690b4f2f49f8e8f560f"
+    },
+    {
+      "name": "wrap-break-word",
+      "kind": "wrap",
+      "text": "   PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij\n    SUFFIX",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:pre-wrap; overflow-wrap:break-word }\n",
+      "html": "<pre><code>   PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij\n    SUFFIX</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "b293296759f75aaeef9df4e4e3813705d5b2a08b0c91dfaaa9221342a04e3bdd",
+      "cssSha256": "3f5d3cbb54049bdcd293e97f47039c882cb420308a764be7fe064097e1ab14d4"
+    },
+    {
+      "name": "wrap-break-all",
+      "kind": "wrap",
+      "text": "   PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij\n    SUFFIX",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:pre-wrap; word-break:break-all }\n",
+      "html": "<pre><code>   PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij\n    SUFFIX</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "b293296759f75aaeef9df4e4e3813705d5b2a08b0c91dfaaa9221342a04e3bdd",
+      "cssSha256": "d66ac232f8d59e6e1d38abd3758e641e85c742175d91b647baae62f9e227010a"
+    },
+    {
+      "name": "wrap-pre-line",
+      "kind": "wrap",
+      "text": "   PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij\n    SUFFIX",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:pre-line; overflow-wrap:anywhere }\n",
+      "html": "<pre><code>   PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij\n    SUFFIX</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "b293296759f75aaeef9df4e4e3813705d5b2a08b0c91dfaaa9221342a04e3bdd",
+      "cssSha256": "e997a8288d367a08270662c7997c74db910eedbda5fc6c7e783ed1bbb4493161"
+    },
+    {
+      "name": "wrap-break-spaces",
+      "kind": "wrap",
+      "text": "   PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij\n    SUFFIX",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:break-spaces; overflow-wrap:anywhere }\n",
+      "html": "<pre><code>   PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij\n    SUFFIX</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "b293296759f75aaeef9df4e4e3813705d5b2a08b0c91dfaaa9221342a04e3bdd",
+      "cssSha256": "cf9a14e00fc50bb369bc64a3dbf78d4bdd9ecd3e2e5577c3e2af4cce803fbeaa"
+    },
+    {
+      "name": "wrap-normal",
+      "kind": "wrap",
+      "text": "   PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij\n    SUFFIX",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:normal; overflow-wrap:anywhere }\n",
+      "html": "<pre><code>   PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij\n    SUFFIX</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "b293296759f75aaeef9df4e4e3813705d5b2a08b0c91dfaaa9221342a04e3bdd",
+      "cssSha256": "9a9c7520b8c67c9bd39db7c6c4315c79ef020499dd8502447f414f0b118da792"
+    },
+    {
+      "name": "wrap-words",
+      "kind": "wrap",
+      "text": "   PREFIX word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word \n    SUFFIX",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:pre-wrap }\n",
+      "html": "<pre><code>   PREFIX word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word \n    SUFFIX</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "6a03970adc78403f2f88b3f907308d9da297683fa486a1294a62542da178e602",
+      "cssSha256": "34b213c740f6c24fb984d36f1504b719436d45ef5620b779c750f22a259854d5"
+    },
+    {
+      "name": "no-wrap-default",
+      "kind": "no-wrap",
+      "text": "PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; overflow-wrap:anywhere }\n",
+      "html": "<pre><code>PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "150e7bbe41a4361f902f25c37888753ee27cda58f3c6390e5068fbaee4e0a4e0",
+      "cssSha256": "9e01b66eae2220a1250e574ed690e49a4a27bbb7d882934f068ed54173d4b026"
+    },
+    {
+      "name": "no-wrap-pre",
+      "kind": "no-wrap",
+      "text": "PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:pre; overflow-wrap:anywhere }\n",
+      "html": "<pre><code>PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "150e7bbe41a4361f902f25c37888753ee27cda58f3c6390e5068fbaee4e0a4e0",
+      "cssSha256": "cdff7eb09276aa18d8c17372aa23a6bc8bb50b34f084912aaf3f2bd3d2a4ef3c"
+    },
+    {
+      "name": "no-wrap-nowrap",
+      "kind": "no-wrap",
+      "text": "PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:nowrap; overflow-wrap:anywhere }\n",
+      "html": "<pre><code>PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "150e7bbe41a4361f902f25c37888753ee27cda58f3c6390e5068fbaee4e0a4e0",
+      "cssSha256": "6c314f9cfbd01a3c76947900aec10c90ee6f900c6ea68f2392e4f08626d3dc6d"
+    },
+    {
+      "name": "no-wrap-text-wrap",
+      "kind": "no-wrap",
+      "text": "PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:pre-wrap; text-wrap:nowrap; overflow-wrap:anywhere }\n",
+      "html": "<pre><code>PREFIX abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "150e7bbe41a4361f902f25c37888753ee27cda58f3c6390e5068fbaee4e0a4e0",
+      "cssSha256": "80d311be647f4ef03249febfb9f4279dc85292102107f6e324a7ba957e197fdc"
+    },
+    {
+      "name": "whitespace-pre",
+      "kind": "whitespace",
+      "text": "   ALPHA\n    BETA",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:pre }\n",
+      "preserveIndent": true,
+      "preserveNewline": true,
+      "html": "<pre><code>   ALPHA\n    BETA</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "7d55753d5f84cbef07b8830fbcfed5e6514840a108ef9e82fa7504425701e0bb",
+      "cssSha256": "5fa24564dbc77f26910b556c96be116e33c8706221fd66def872ce830290d860"
+    },
+    {
+      "name": "whitespace-pre-wrap",
+      "kind": "whitespace",
+      "text": "   ALPHA\n    BETA",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:pre-wrap }\n",
+      "preserveIndent": true,
+      "preserveNewline": true,
+      "html": "<pre><code>   ALPHA\n    BETA</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "7d55753d5f84cbef07b8830fbcfed5e6514840a108ef9e82fa7504425701e0bb",
+      "cssSha256": "34b213c740f6c24fb984d36f1504b719436d45ef5620b779c750f22a259854d5"
+    },
+    {
+      "name": "whitespace-break-spaces",
+      "kind": "whitespace",
+      "text": "   ALPHA\n    BETA",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:break-spaces }\n",
+      "preserveIndent": true,
+      "preserveNewline": true,
+      "html": "<pre><code>   ALPHA\n    BETA</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "7d55753d5f84cbef07b8830fbcfed5e6514840a108ef9e82fa7504425701e0bb",
+      "cssSha256": "395777c069c0d6b2a39465ffa88cf4fd7fc6434eee753125b255dd1e9cf85387"
+    },
+    {
+      "name": "whitespace-pre-line",
+      "kind": "whitespace",
+      "text": "   ALPHA\n    BETA",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:pre-line }\n",
+      "preserveIndent": false,
+      "preserveNewline": true,
+      "html": "<pre><code>   ALPHA\n    BETA</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "7d55753d5f84cbef07b8830fbcfed5e6514840a108ef9e82fa7504425701e0bb",
+      "cssSha256": "07caa61fe0951e5f60a87c6a977db4730264b2738623cf6bdb3a75c4bdf7def1"
+    },
+    {
+      "name": "whitespace-normal",
+      "kind": "whitespace",
+      "text": "   ALPHA\n    BETA",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:normal }\n",
+      "preserveIndent": false,
+      "preserveNewline": false,
+      "html": "<pre><code>   ALPHA\n    BETA</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "7d55753d5f84cbef07b8830fbcfed5e6514840a108ef9e82fa7504425701e0bb",
+      "cssSha256": "ec1954d867cc05225d35a7e070d63adc2c467d1edfd103e9811fa0b7414a708c"
+    },
+    {
+      "name": "whitespace-nowrap",
+      "kind": "whitespace",
+      "text": "   ALPHA\n    BETA",
+      "css": "@page { size:180pt 120pt; margin:12pt; }\nbody { margin:0; }\npre, code { font-family:'Noto Sans'; font-size:10pt; line-height:14pt; }\ncode { white-space:inherit; overflow-wrap:inherit; word-break:inherit; }\npre { margin:0; white-space:nowrap }\n",
+      "preserveIndent": false,
+      "preserveNewline": false,
+      "html": "<pre><code>   ALPHA\n    BETA</code></pre>",
+      "template": "<pre><code>{{content}}</code></pre>",
+      "htmlSha256": "7d55753d5f84cbef07b8830fbcfed5e6514840a108ef9e82fa7504425701e0bb",
+      "cssSha256": "901d1739bdf69f3ff2c281b1316284a88630e3d44410268841e82919089859be"
+    }
+  ]
+}
