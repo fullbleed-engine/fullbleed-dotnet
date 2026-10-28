@@ -16,3 +16,7 @@ tests/FullBleed.DotNet.PackageSmoke/Assets/engine-regressions-font-OFL.txt -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/pdf-preview-subsets-2.5.39.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/pdf-preview-subsets-2.5.39.zip -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/generated-quotes-2.5.38.json -text
+# This captured fixture retains CRLF bytes in its recorded source hash.
+tests/FullBleed.DotNet.PackageSmoke/Assets/text-decorations-2.5.40.json -text whitespace=cr-at-eol
+tests/FullBleed.DotNet.PackageSmoke/Assets/text-decorations-public-023.json -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/text-decorations-public-023.zip -text

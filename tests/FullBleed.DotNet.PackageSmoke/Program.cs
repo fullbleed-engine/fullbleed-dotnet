@@ -204,6 +204,10 @@ if (Version.Parse(features.BindingVersion) >= new Version(0, 2, 2))
 {
     DocumentRegressionFixtures.Run(assets, outputDirectory, features.BindingVersion);
 }
+if (Version.Parse(features.BindingVersion) >= new Version(0, 2, 4))
+{
+    TextDecorationFixtures.Run(assets, outputDirectory, features.BindingVersion);
+}
 #if FULLBLEED_COMPONENTS
 ComponentFixtures.Run(assets, outputDirectory, features.BindingVersion);
 #endif

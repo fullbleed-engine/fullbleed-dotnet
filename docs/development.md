@@ -11,7 +11,7 @@ runtimes/{rid}/native/          generated/staged package assets
 scripts/                        build, verify, and pack entrypoints
 ```
 
-The native crate pins the published Fullbleed `2.5.39` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
+The native crate pins the published Fullbleed `2.5.40` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
 
 ## Local verification
 
@@ -21,7 +21,7 @@ The native crate pins the published Fullbleed `2.5.39` crate with an exact Cargo
 
 This stages the host native library, checks Rust formatting and Clippy, runs native tests, verifies managed formatting, builds the full solution, and runs the managed test suite. The integration suite verifies deterministic rendering, diagnostics, metrics, PNG output, in-memory and direct-to-file batches, fixed and reflow compiled bindings, inspection, template stamping/composition, concurrency, and failure-path recovery.
 
-CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.39` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
+CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.40` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
 
 ## Local package
 
@@ -266,6 +266,34 @@ styles. These checks concern the recorded fixtures, not full language parity.
 Older-package comparisons deliberately omit the new component fixture source:
 the 0.1.x managed assemblies do not export this API. All existing legacy
 fixtures continue to run against those packages unchanged.
+
+## Text-decoration verification
+
+The isolated package consumer renders sixteen explicit-font inputs through
+direct, compiled, fixed-record, reflow and compact modes: eighty PDFs and 128
+pages. Cases cover continuous lines across word spaces, inherited decorations,
+raised spans, collapsed edges, atomic-inline boundaries and decoration shadows.
+The inputs retain the exact Inter font hash and per-mode expectations from the
+published Fullbleed 2.5.40 core.
+
+```sh
+python tools/verify_text_decorations.py artifacts/package-smoke/text-decorations
+python tools/compare_text_decoration_control.py artifacts/package-smoke/text-decorations
+```
+
+Independent PDF readers check text and every glyph position. PDFium renders and
+144-DPI native previews must match the recorded pixels and decoration bounds.
+Removing decorations must preserve glyph positions; collapsing equivalent
+whitespace must preserve painted output. The assembled-package check also
+compares the actual PDF and native PNG bytes across all twelve consumers.
+
+The second command inspects sixteen retained Windows .NET 8 outputs from the
+signature-verified public 0.2.3 package. It must reject thirteen known direct
+failures and preserve the three healthy PDF and preview controls byte for byte.
+The fixture archive includes its input strings, capture source, native-module
+hash and public-package hash. CI inspects these saved controls without rerunning
+the old engine or claiming a fresh registry download. These checks cover the
+recorded cases; they do not establish arbitrary-document parity or conformance.
 
 ## NuGet trusted publishing
 

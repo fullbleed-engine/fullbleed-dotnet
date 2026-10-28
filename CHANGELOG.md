@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.4 - 2026-10-27
+
+- Pin the published Fullbleed 2.5.40 engine to correct text-decoration continuity across collapsed word spaces, including inherited decorations, raised spans, shadows and atomic-inline boundaries.
+- Add sixteen shared inputs in direct, compiled, fixed, reflow and compact modes, with explicit fonts and independent text, glyph-geometry and pixel checks.
+- Retain the public 0.2.3 Windows controls for independent CI inspection: thirteen known direct failures and three healthy PDF/preview controls whose bytes must remain unchanged.
+- Preserve the managed API, native ABI and runtime dependency footprint.
+
 ## 0.2.3 - 2026-10-27
 
 - Pin the published Fullbleed 2.5.39 engine to preserve the right glyphs when previewing PDFs with multiple embedded subsets of the same font. This also brings the generated-quotation corrections from 2.5.38 into direct, compiled and reflow rendering.
