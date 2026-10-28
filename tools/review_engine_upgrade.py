@@ -87,7 +87,7 @@ def review(before, after, output):
         return {path.relative_to(directory).as_posix(): path for path in directory.rglob('*')
                 if path.is_file() and path.suffix in ('.pdf', '.png')
                 # Later fixture families have their own public-package controls.
-                and path.relative_to(directory).parts[0] not in ('pagination', 'table-wrapping', 'document-regressions')
+                and path.relative_to(directory).parts[0] not in ('pagination', 'table-wrapping', 'document-regressions', 'text-decorations')
                 and not any(part.startswith('pdfium-') for part in path.relative_to(directory).parts)}
     old_files, new_files = files(before), files(after)
     assert old_files.keys() == new_files.keys(), 'Legacy PDF/preview file set changed'
