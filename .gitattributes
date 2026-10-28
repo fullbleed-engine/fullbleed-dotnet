@@ -20,3 +20,8 @@ tests/FullBleed.DotNet.PackageSmoke/Assets/generated-quotes-2.5.38.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/text-decorations-2.5.40.json -text whitespace=cr-at-eol
 tests/FullBleed.DotNet.PackageSmoke/Assets/text-decorations-public-023.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/text-decorations-public-023.zip -text
+
+# Retained preformatted inputs and public-package controls are byte-exact.
+tests/FullBleed.DotNet.PackageSmoke/Assets/preformatted-whitespace-2.5.41.json -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/preformatted-public-025.json -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/preformatted-public-025.zip -text

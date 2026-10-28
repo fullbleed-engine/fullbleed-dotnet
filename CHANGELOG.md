@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.6 - 2026-10-28
+
+- Pin the published Fullbleed 2.5.41 engine so preformatted blocks honor computed CSS whitespace and wrapping.
+- Cover seventeen inputs through direct, compiled and reflow output with independent text, font, glyph-bound and preview checks.
+- Retain the public 0.2.5 failure controls and verify the same packaged outputs across the supported platforms and .NET frameworks.
+- Preserve the managed API, native ABI and runtime dependency footprint.
+
 ## 0.2.5 - 2026-10-28
 
 - Describe HTML/CSS-to-PDF generation, invoices and reports in the NuGet metadata so developers can identify the package's existing document-rendering surface.

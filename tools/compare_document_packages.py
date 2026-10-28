@@ -91,7 +91,7 @@ def compare_legacy(before, after):
     def inventory(directory):
         return {path.relative_to(directory).as_posix(): sha256(path.read_bytes()).hexdigest()
                 for path in directory.rglob('*') if path.is_file() and path.suffix in ['.pdf', '.png']
-                and path.relative_to(directory).parts[0] not in ['document-regressions', 'text-decorations']
+                and path.relative_to(directory).parts[0] not in ['document-regressions', 'text-decorations', 'preformatted-whitespace']
                 and not any(part.startswith('pdfium') for part in path.relative_to(directory).parts)}
     previous, current = inventory(before), inventory(after)
     assert len(previous) > 100, 'Missing earlier fixture output'
