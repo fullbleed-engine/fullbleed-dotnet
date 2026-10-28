@@ -27,7 +27,9 @@ def main():
     source={name:re.findall(r'```csharp\n(.*?)```',(ROOT/path).read_text(encoding='utf-8'),re.S)
             for name,path in [('readme','README.md'),('guide','docs/components.md')]}
     assert len(source['guide'])==6
-    source['readme']=source['readme'][:1]
+    readme=source.pop('readme')
+    assert len(readme)>=2
+    source={'readme-html':[readme[0]],'readme-components':[readme[1]],**source}
     env={**os.environ,'DOTNET_CLI_TELEMETRY_OPTOUT':'1','DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE':'true'}
     env.pop('FULLBLEED_NATIVE_LIBRARY',None)
     reports=[]
@@ -61,7 +63,7 @@ styledNotice.RenderImagePagesToDirectory(engine, "output/notice-preview", dpi: 9
             relative=path.relative_to(consumer/'output');destination=target/relative
             destination.parent.mkdir(parents=True,exist_ok=True);destination.write_bytes(path.read_bytes())
             files.append({'path':relative.as_posix(),'sha256':sha256(path.read_bytes()).hexdigest()})
-        if name=='readme':
+        if name.startswith('readme-'):
             reader=PdfReader(target/'report.pdf');assert len(reader.pages)==1
             text=''.join(reader.pages[0].extract_text().split())
             assert 'Quarterlyreport' in text and 'Deterministicprintoutput.' in text
@@ -80,7 +82,7 @@ styledNotice.RenderImagePagesToDirectory(engine, "output/notice-preview", dpi: 9
         reports.append({'name':name,'consumer':str(consumer),'blocks':len(blocks),
                         'source_sha256':sha256(actual.encode()).hexdigest(),'files':files})
     receipt={'ok':True,'version':version,'package_sha256':manifest['package']['sha256'],'reports':reports,
-             'scope':'Actual README quickstart and all six component-guide C# blocks compile and render against the isolated NuGet; styling colors/sizes and PDF page counts independently checked.'}
+             'scope':'Both actual README quickstarts and all six component-guide C# blocks compile and render against the isolated NuGet; styling colors/sizes and PDF page counts independently checked.'}
     (args.output/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({'ok':True,'projects':len(reports),'source_blocks':sum(r['blocks'] for r in reports)}))
 

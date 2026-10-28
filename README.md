@@ -1,6 +1,8 @@
 # Fullbleed for .NET
 
-Build deterministic PDFs from C# components or HTML/CSS with [Fullbleed PDF Engine](https://github.com/fullbleed-engine/fullbleed-official). Compose documents from ordinary methods, LINQ, named elements and explicit styles, then use native rendering, previews, diagnostics and compiled variable-data publishing (VDP).
+Generate deterministic PDFs from HTML/CSS in C# with [Fullbleed PDF Engine](https://github.com/fullbleed-engine/fullbleed-official). Build invoices, reports and other print documents with an in-process Rust renderer. You can also author documents with C# components, LINQ and reusable styles. Both paths support native rendering, PNG previews, diagnostics and compiled variable-data publishing (VDP).
+
+[Try your HTML/CSS in the browser playground](https://docs.fullbleed.dev/playground/) or [browse designed PDF examples and their source](https://docs.fullbleed.dev/examples/). The library and its native bridge are MIT-licensed; bundled dependencies and fonts retain their own notices.
 
 This repository contains two complementary integration layers:
 
@@ -11,7 +13,7 @@ The managed assembly has no third-party NuGet runtime dependencies. Native runti
 
 ## Status
 
-Version `0.2.4` uses Fullbleed `2.5.40`. Underlines, overlines and strikethroughs continue across collapsed word spaces and retain inherited decorations through nested spans. The same engine correction applies to direct, compiled, fixed-record and reflow rendering. It includes the earlier font-subset preview, quotation, table and pagination fixes. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.2.4). Review saved output when upgrading documents that use text decorations.
+Version `0.2.5` uses Fullbleed `2.5.40`. This release clarifies package discovery and adds an HTML/CSS quickstart alongside the component example. The rendering APIs and engine are unchanged from `0.2.4`, including its text-decoration corrections and earlier font-subset preview, quotation, table and pagination fixes. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.2.5).
 
 Component trees and styles are immutable after construction. Text and attributes are escaped, LINQ children are enumerated once, and custom components are normal methods returning elements. Read the [component guide](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/components.md), including [how class names and styles connect](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/components.md#class-names-and-styles).
 
@@ -35,10 +37,42 @@ With the .NET 10 SDK installed:
 ```sh
 dotnet new console -n FullbleedDemo --framework net10.0
 cd FullbleedDemo
-dotnet add package FullBleed.DotNet --version 0.2.4
+dotnet add package FullBleed.DotNet --version 0.2.5
 ```
 
-Replace `Program.cs` with:
+### HTML/CSS to PDF
+
+Replace `Program.cs` with this complete example:
+
+```csharp
+using FullBleed.DotNet;
+
+const string html = """
+    <h1>Quarterly report</h1>
+    <p class="notice">Deterministic print output.</p>
+    """;
+const string css = """
+    @page { size: A4; margin: 18mm; }
+    body { font-family: Helvetica; }
+    .notice { color: #315d9b; font-size: 18pt; }
+    """;
+
+using var engine = new FullBleedEngine(new FullBleedEngineOptions
+{
+    DocumentLanguage = "en-US",
+    DocumentTitle = "Quarterly report",
+});
+engine.RenderPdfToFile(html, css, "output/report.pdf");
+engine.RenderImagePagesToDirectory(html, css, "output/preview", dpi: 96);
+```
+
+Run `dotnet run` and open `output/report.pdf`. Existing .NET 8 and 9 projects use the same package and API. For template files, pass strings from `File.ReadAllText("report.html")` and `File.ReadAllText("report.css")`. For a web response, `engine.RenderPdf(html, css)` returns the PDF bytes.
+
+The renderer accepts static HTML/CSS; render any Razor templates before passing them in. JavaScript execution and live webpage capture require a browser. The [Northstar invoice below](#a-styled-invoice-you-can-run) shows a complete document with explicit fonts and richer styling.
+
+### C# components and reusable styles
+
+Alternatively, replace `Program.cs` with the component version. `WithClass("notice")` writes the class name; the `.notice` rule in `StyleSheet` supplies its styling.
 
 ```csharp
 using FullBleed.DotNet;
@@ -65,7 +99,7 @@ report.RenderPdfToFile(engine, "output/report.pdf");
 report.RenderImagePagesToDirectory(engine, "output/preview", dpi: 96);
 ```
 
-Run `dotnet run` and open `output/report.pdf`. Existing .NET 8 and 9 projects use the same package and API.
+Run it with the same `dotnet run` command. The [component guide](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/components.md) covers reusable methods, conditional children, inline styles and HTML/CSS export.
 
 `FullBleedRenderer.Render(...)` and `RenderToFile(...)` remain as compatibility helpers for the original proof of concept.
 

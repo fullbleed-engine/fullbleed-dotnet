@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.5 - 2026-10-28
+
+- Describe HTML/CSS-to-PDF generation, invoices and reports in the NuGet metadata so developers can identify the package's existing document-rendering surface.
+- Add a complete HTML/CSS quickstart before the C# component example, with template-file and PDF-byte entry points, direct playground/example links and explicit class-name styling guidance.
+- Execute both README quickstarts against the assembled NuGet package in the existing documentation check.
+- Keep the managed API, native ABI, Fullbleed 2.5.40 engine and runtime dependency footprint unchanged.
+
 ## 0.2.4 - 2026-10-27
 
 - Pin the published Fullbleed 2.5.40 engine to correct text-decoration continuity across collapsed word spaces, including inherited decorations, raised spans, shadows and atomic-inline boundaries.

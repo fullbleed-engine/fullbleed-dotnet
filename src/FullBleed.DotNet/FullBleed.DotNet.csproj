@@ -13,10 +13,11 @@
     <NoWarn>$(NoWarn);CS1591</NoWarn>
 
     <PackageId>FullBleed.DotNet</PackageId>
-    <Version>0.2.4</Version>
+    <Version>0.2.5</Version>
     <Authors>Fullbleed contributors</Authors>
-    <Description>Compose PDFs with C# components, LINQ and reusable styles. Dependency-free managed Fullbleed bindings with native rendering, previews, compiled VDP and structured CLI access.</Description>
-    <PackageTags>pdf;components;html;css;document-generation;vdp;printing;fullbleed</PackageTags>
+    <Description>Generate PDFs from HTML/CSS in C# with an in-process Rust engine. Build invoices and reports, or compose documents with C# components, LINQ and reusable styles. Includes native runtimes, PNG previews, diagnostics and compiled VDP; no browser or system PDF stack required.</Description>
+    <PackageTags>pdf;html;css;html-to-pdf;invoice;report;document-generation;components;vdp;printing;fullbleed</PackageTags>
+    <PackageReleaseNotes>Clearer HTML/CSS-to-PDF package metadata and runnable quickstarts for both HTML/CSS and C# components. Rendering APIs and the Fullbleed 2.5.40 engine are unchanged.</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryType>git</RepositoryType>
