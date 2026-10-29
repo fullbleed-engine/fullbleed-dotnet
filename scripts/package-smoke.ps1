@@ -77,6 +77,7 @@ Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmo
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/DocumentRegressionFixtures.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/TextDecorationFixtures.cs') -Destination $consumer
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/PreformattedFixtures.cs') -Destination $consumer
+Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/RadialGradientFixtures.cs') -Destination $consumer
 if ($componentConstants) {
     Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/ComponentFixtures.cs') -Destination $consumer
     Copy-Item -LiteralPath (Join-Path $repository 'samples/FullBleed.DotNet.Components/InvoiceDocument.cs') -Destination $consumer
@@ -86,6 +87,7 @@ foreach ($name in @('tagged-structure.html', 'tagged-structure.css', 'engine-2.5
     Copy-Item -LiteralPath (Join-Path $repository "tests/FullBleed.DotNet.PackageSmoke/Assets/$name") -Destination (Join-Path $consumer 'Assets')
 }
 $verificationFonts = Join-Path $consumer 'Assets/verification-fonts'
+Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/Assets/radial-gradient-endpoints-2.5.43.json') -Destination (Join-Path $consumer 'Assets')
 New-Item -ItemType Directory -Path $verificationFonts | Out-Null
 foreach ($name in @('NotoSans-Regular.ttf', 'NotoSans-OFL.txt')) {
     Copy-Item -LiteralPath (Join-Path $repository "tests/FullBleed.DotNet.Tests/Assets/$name") -Destination $verificationFonts

@@ -212,6 +212,10 @@ if (Version.Parse(features.BindingVersion) >= new Version(0, 2, 6))
 {
     PreformattedFixtures.Run(assets, outputDirectory, features.BindingVersion);
 }
+if (Version.Parse(features.BindingVersion) >= new Version(0, 2, 7))
+{
+    RadialGradientFixtures.Run(assets, outputDirectory, features.BindingVersion);
+}
 #if FULLBLEED_COMPONENTS
 ComponentFixtures.Run(assets, outputDirectory, features.BindingVersion);
 #endif

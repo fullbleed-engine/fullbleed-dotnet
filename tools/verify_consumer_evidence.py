@@ -17,6 +17,7 @@ from verify_table_wrapping import verify as verify_table_wrapping
 from verify_document_regressions import verify as verify_document_regressions
 from verify_text_decorations import verify as verify_text_decorations
 from verify_preformatted import verify as verify_preformatted
+from verify_radial_gradients import verify as verify_radial_gradients
 
 ROOT = Path(__file__).resolve().parents[1]
 RIDS = ['win-x64', 'linux-x64', 'osx-x64', 'osx-arm64']
@@ -43,6 +44,7 @@ def main():
     document_cases = []
     decoration_cases = []
     preformatted_cases = []
+    radial_cases = []
     verapdf = validator(ROOT / 'artifacts/verapdf')
     for rid, framework in product(RIDS, FRAMEWORKS):
         consumer = f'{rid}-net{framework}'
@@ -108,6 +110,10 @@ def main():
         assert preformatted_report['packageVersion'] == manifest['version'] and len(preformatted_report['cases']) == 51
         preformatted_cases.append(preformatted_report['cases'])
         data['IndependentPreformattedChecks'] = {'status': 'passed', 'cases': 51, 'pages': sum(r['pages'] for r in preformatted_report['cases'])}
+        radial_report = verify_radial_gradients(directory / 'radial-gradient-endpoints')
+        assert radial_report['packageVersion'] == manifest['version'] and len(radial_report['cases']) == 24
+        radial_cases.append(radial_report['cases'])
+        data['IndependentRadialGradientChecks'] = {'status': 'passed', 'cases': 24, 'matchingCoreReference': '2.5.43'}
         data['IndependentTableWrappingChecks'] = {'status': 'passed', 'cases': len(table_report['cases'])}
         data['IndependentPaginationChecks'] = {'status': 'passed', 'cases': len(pagination_report['cases'])}
         data['IndependentComponentChecks'] = {'status': 'passed', 'cases': len(component_report['cases'])}
@@ -153,6 +159,7 @@ def main():
     assert all(cases == document_cases[0] for cases in document_cases), 'Imported previews or quotation PDFs/text/previews differ across platform/framework consumers'
     assert all(cases == decoration_cases[0] for cases in decoration_cases), 'Decoration PDFs, glyph positions, text or previews differ across platform/framework consumers'
     assert all(cases == preformatted_cases[0] for cases in preformatted_cases), 'Preformatted PDFs, text, glyph bounds or previews differ across consumers'
+    assert all(cases == radial_cases[0] for cases in radial_cases), 'Radial-gradient PDFs, colors, stitching bounds or previews differ across consumers'
     base14_previews = {}
     for cases in engine_cases:
         assert [(item['name'], item['mode']) for item in cases] == [(item['name'], item['mode']) for item in engine_cases[0]]
@@ -179,6 +186,7 @@ def main():
               'documentRegressionFixtures': document_cases[0],
               'textDecorationFixtures': decoration_cases[0],
               'preformattedFixtures': preformatted_cases[0],
+              'radialGradientFixtures': radial_cases[0],
               'scope': 'Northstar invoice PDF, HTML preview and finalized-PDF 96-DPI PNG match on .NET 8, 9 and 10 '
                        'across Windows x64, Linux x64, Intel macOS and Apple Silicon macOS. '
                        'Bold, fixed-record, reflow-record and Unicode fixture PDFs and saved-PDF previews also match. '
@@ -196,6 +204,7 @@ def main():
                        'Forty-one quotation inputs pass independent text checks through direct, compiled and two-record reflow output, with matching PDFs and previews across all consumers. '
                        'Sixteen text-decoration inputs pass in five rendering modes, with 128 independently inspected pages per consumer and matching saved output across all consumers. '
                        'Seventeen preformatted inputs pass through direct, compiled and reflow output, with identical saved PDFs and previews across all consumers. '
+                       'Twelve radial-gradient inputs pass through direct and compiled output, with valid stitching bounds and identical PDFs, native pixels and independent PDFium pixels matching the qualified 2.5.43 core reference. '
                        'These retained fixtures are not a universal platform-parity or conformance claim.'}
     path = ROOT / 'artifacts/cross-platform-evidence.json'
     path.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
