@@ -13,7 +13,7 @@ The managed assembly has no third-party NuGet runtime dependencies. Native runti
 
 ## Status
 
-Version `0.2.6` uses Fullbleed `2.5.41`. Preformatted blocks now honor authored whitespace and wrapping. Default `pre` and explicit no-wrap policies retain their behavior; documents requesting wrapping may gain pages. The managed APIs and native ABI are unchanged. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.2.6).
+Version `0.2.7` uses Fullbleed `2.5.43`. Radial gradients preserve their final color outside the ending shape, including opacity changes. Gradient stitching intervals are corrected as well. The managed APIs and native ABI are unchanged. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.2.7).
 
 Component trees and styles are immutable after construction. Text and attributes are escaped, LINQ children are enumerated once, and custom components are normal methods returning elements. Read the [component guide](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/components.md), including [how class names and styles connect](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/components.md#class-names-and-styles).
 
@@ -37,7 +37,7 @@ With the .NET 10 SDK installed:
 ```sh
 dotnet new console -n FullbleedDemo --framework net10.0
 cd FullbleedDemo
-dotnet add package FullBleed.DotNet --version 0.2.6
+dotnet add package FullBleed.DotNet --version 0.2.7
 ```
 
 ### HTML/CSS to PDF

@@ -1,0 +1,541 @@
+{
+  "schema": "fullbleed.radial_gradient_endpoints.v1",
+  "referenceVersion": "2.5.43",
+  "referenceSourceCommit": "0ae5ae42a9f2bf29a20659bf3719bc8e06ef19b4",
+  "referenceRelease": "https://github.com/fullbleed-engine/fullbleed-official/releases/tag/v2.5.43",
+  "readers": {
+    "pdfium": "5.14.0",
+    "pillow": "12.3.0"
+  },
+  "scope": "Twelve synthetic radial-gradient cases. Nine reproduce final-stop failures in engine 2.5.41; three are controls. No general conformance claim.",
+  "cases": [
+    {
+      "name": "opaque",
+      "html": "<!doctype html><html><body><div></div></body></html>",
+      "css": "@page{size:100pt 100pt;margin:0}html,body{margin:0}body{background:white}div{width:100pt;height:100pt;background:radial-gradient(circle 30pt at 50pt 50pt,red 0%,gold 100%,blue 100%)}",
+      "inputSha256": "8450471d0a67c7e3720e50c439e7abf01b9d237f3bf43b1e09f4757c01639081",
+      "expected": [
+        0,
+        0,
+        255
+      ],
+      "probes": [
+        [
+          95,
+          5
+        ],
+        [
+          95,
+          50
+        ],
+        [
+          95,
+          95
+        ]
+      ],
+      "candidatePdfSha256": "b9e8840fa71b05866e9c919be1f32927c5db08da38f113dad7c6d2e7b2d2d528",
+      "affected": true,
+      "dpi": 144,
+      "referenceImages": {
+        "native": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "c129da18a1f9a7041c586b0e449022d67623ff105fb66cedf308aa9e9841ca7f"
+        },
+        "pdfium": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "d65f9dfcb8d009246da6d40cf0effbdfb704cf7b86e70a2f5e1c7ee7ece9a13a"
+        }
+      }
+    },
+    {
+      "name": "alpha",
+      "html": "<!doctype html><html><body><div></div></body></html>",
+      "css": "@page{size:100pt 100pt;margin:0}html,body{margin:0}body{background:white}div{width:100pt;height:100pt;background:radial-gradient(circle 30pt at 50pt 50pt,red 0%,gold 100%,rgba(0,0,255,.25) 100%)}",
+      "inputSha256": "572f17708bc5ff0bd1b9b169a6c0148c56d48911af119771bc856f7f50fc03a3",
+      "expected": [
+        191,
+        191,
+        255
+      ],
+      "probes": [
+        [
+          95,
+          5
+        ],
+        [
+          95,
+          50
+        ],
+        [
+          95,
+          95
+        ]
+      ],
+      "candidatePdfSha256": "93aaa9e2b8b0b65abb6bfe4757c8bb4266d5482e7d51a86a1fd1025183087644",
+      "affected": true,
+      "dpi": 144,
+      "referenceImages": {
+        "native": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "1fe845fd752a6c728d160ef59e692f35dfdeb1862a6354552a4995937ac30ff0"
+        },
+        "pdfium": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "483373cea7eab175059c2f2916295a43134a8c8362e2041044b0b98ded527ec5"
+        }
+      }
+    },
+    {
+      "name": "alpha-only",
+      "html": "<!doctype html><html><body><div></div></body></html>",
+      "css": "@page{size:100pt 100pt;margin:0}html,body{margin:0}body{background:white}div{width:100pt;height:100pt;background:radial-gradient(circle 30pt at 50pt 50pt,red 0%,gold 100%,rgba(255,215,0,.25) 100%)}",
+      "inputSha256": "5134f0493018fd63354ab45d4119267d2220c01445e4fc29dae655e3a284b197",
+      "expected": [
+        255,
+        245,
+        191
+      ],
+      "probes": [
+        [
+          95,
+          5
+        ],
+        [
+          95,
+          50
+        ],
+        [
+          95,
+          95
+        ]
+      ],
+      "candidatePdfSha256": "6a9ab7e028ef6c6ce3307183f965499521cfba06ce4f54bd139cae20a544700d",
+      "affected": true,
+      "dpi": 144,
+      "referenceImages": {
+        "native": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "6626547c430f8a0b5c88a76ec2f66fa7fafdd085c4f592929d4758fd4f0584ee"
+        },
+        "pdfium": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "a97d037e588a0e9b114a58bc8cd3d02510c034f1faddd4cdb948012af81a0c55"
+        }
+      }
+    },
+    {
+      "name": "transparent",
+      "html": "<!doctype html><html><body><div></div></body></html>",
+      "css": "@page{size:100pt 100pt;margin:0}html,body{margin:0}body{background:#00ff00}div{width:100pt;height:100pt;background:radial-gradient(circle 30pt at 50pt 50pt,red 0%,gold 100%,rgba(0,0,255,0) 100%)}",
+      "inputSha256": "9d3d53588e79f64cb9dc751015c7ca913b0a96bfcda8676985996ccb7ff20732",
+      "expected": [
+        0,
+        255,
+        0
+      ],
+      "probes": [
+        [
+          95,
+          5
+        ],
+        [
+          95,
+          50
+        ],
+        [
+          95,
+          95
+        ]
+      ],
+      "candidatePdfSha256": "cfd994777cc3c77929b707aa1600fff4432d2a1736013b9439e5d636206373ba",
+      "affected": true,
+      "dpi": 144,
+      "referenceImages": {
+        "native": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "f99dd79dfd5dfb146200090226e518c3134ec57b9d181fa61c4ac7ccf13e1dde"
+        },
+        "pdfium": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "0745c0fd5dffa0ae2bd33582659b1055ef8ff29b2e46796c398e44eda3c7427e"
+        }
+      }
+    },
+    {
+      "name": "ellipse",
+      "html": "<!doctype html><html><body><div></div></body></html>",
+      "css": "@page{size:100pt 100pt;margin:0}html,body{margin:0}body{background:white}div{width:100pt;height:100pt;background:radial-gradient(ellipse 30pt 15pt at 50pt 50pt,red 0%,gold 100%,blue 100%)}",
+      "inputSha256": "1fce5e5159f24f5c0f8d988ec8e1d96a448f5ff64fd6875a34dffe1c9ab20874",
+      "expected": [
+        0,
+        0,
+        255
+      ],
+      "probes": [
+        [
+          95,
+          5
+        ],
+        [
+          95,
+          50
+        ],
+        [
+          95,
+          95
+        ]
+      ],
+      "candidatePdfSha256": "fa9be1a3544095196dbebaeb4d3865babb5fc5b356a05ca1f67626294b1ee00d",
+      "affected": true,
+      "dpi": 144,
+      "referenceImages": {
+        "native": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "1789fe37b4fecc512c64bf8c4b0cb90ac95b9e643ec7c8597c5d1a1dfbef830a"
+        },
+        "pdfium": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "22e01ca019f0f16a207fdefa22080fd9042bbdd4e8475dcd5314b25d08032404"
+        }
+      }
+    },
+    {
+      "name": "offset",
+      "html": "<!doctype html><html><body><div></div></body></html>",
+      "css": "@page{size:100pt 100pt;margin:0}html,body{margin:0}body{background:white}div{width:100pt;height:100pt;background:radial-gradient(circle 30pt at 20pt 25pt,red 0%,gold 100%,blue 100%)}",
+      "inputSha256": "f981dc23640c235d21bc0205cd8022c35e9c4ec42f92e94a6be838915829a30b",
+      "expected": [
+        0,
+        0,
+        255
+      ],
+      "probes": [
+        [
+          95,
+          5
+        ],
+        [
+          95,
+          50
+        ],
+        [
+          95,
+          95
+        ]
+      ],
+      "candidatePdfSha256": "d408ff7d2f4334d54d83a0f3409e0450bffdcf2fee69ca3376c31699998e18a0",
+      "affected": true,
+      "dpi": 144,
+      "referenceImages": {
+        "native": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "21315a06a6464f52971624421444e92d0133b091a9836b0762ef3c216336a8d1"
+        },
+        "pdfium": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "cc5a8d3df3336fd76bda8b93d5df5251cc13178354187b043b6b36a21799199a"
+        }
+      }
+    },
+    {
+      "name": "hard-band",
+      "html": "<!doctype html><html><body><div></div></body></html>",
+      "css": "@page{size:100pt 100pt;margin:0}html,body{margin:0}body{background:white}div{width:100pt;height:100pt;background:radial-gradient(circle 30pt at 50pt 50pt,red 0% 100%,blue 100%)}",
+      "inputSha256": "74718f979e41c9b2ed58ea96c9738689e591f5bc5c84b62927cef2f787942037",
+      "expected": [
+        0,
+        0,
+        255
+      ],
+      "probes": [
+        [
+          95,
+          5
+        ],
+        [
+          95,
+          50
+        ],
+        [
+          95,
+          95
+        ]
+      ],
+      "candidatePdfSha256": "e90c82c649d6f2e01313130d9fa1b118f5d4495d75528d1d7cb0f3bdaa3c3424",
+      "affected": true,
+      "dpi": 144,
+      "referenceImages": {
+        "native": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "fb5436c8bcedb53124728319cfedb1a3e18bfe7d46d816ceb24d67098590ef90"
+        },
+        "pdfium": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "792a12c8d1d21665859feeac0ff77c1b647a3315e76dd988b816b11910b9c186"
+        }
+      }
+    },
+    {
+      "name": "three-final-stops",
+      "html": "<!doctype html><html><body><div></div></body></html>",
+      "css": "@page{size:100pt 100pt;margin:0}html,body{margin:0}body{background:white}div{width:100pt;height:100pt;background:radial-gradient(circle 30pt at 50pt 50pt,red 0%,gold 100%,lime 100%,blue 100%)}",
+      "inputSha256": "9d654366270b2abd812f812ed03e0aaae3b63c7c222f4898958e0b84cd7b92c7",
+      "expected": [
+        0,
+        0,
+        255
+      ],
+      "probes": [
+        [
+          95,
+          5
+        ],
+        [
+          95,
+          50
+        ],
+        [
+          95,
+          95
+        ]
+      ],
+      "candidatePdfSha256": "b9e8840fa71b05866e9c919be1f32927c5db08da38f113dad7c6d2e7b2d2d528",
+      "affected": true,
+      "dpi": 144,
+      "referenceImages": {
+        "native": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "c129da18a1f9a7041c586b0e449022d67623ff105fb66cedf308aa9e9841ca7f"
+        },
+        "pdfium": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "d65f9dfcb8d009246da6d40cf0effbdfb704cf7b86e70a2f5e1c7ee7ece9a13a"
+        }
+      }
+    },
+    {
+      "name": "rounded-endpoint",
+      "html": "<!doctype html><html><body><div></div></body></html>",
+      "css": "@page{size:100pt 100pt;margin:0}html,body{margin:0}body{background:white}div{width:100pt;height:100pt;background:radial-gradient(circle 30pt at 50pt 50pt,red 0%,gold 99.99999%,blue 100%)}",
+      "inputSha256": "1ae24f97645df23de36b1c913b9144e032e9abc8c8a9e031c0ae457a9a990636",
+      "expected": [
+        0,
+        0,
+        255
+      ],
+      "probes": [
+        [
+          95,
+          5
+        ],
+        [
+          95,
+          50
+        ],
+        [
+          95,
+          95
+        ]
+      ],
+      "candidatePdfSha256": "b9e8840fa71b05866e9c919be1f32927c5db08da38f113dad7c6d2e7b2d2d528",
+      "affected": true,
+      "dpi": 144,
+      "referenceImages": {
+        "native": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "c129da18a1f9a7041c586b0e449022d67623ff105fb66cedf308aa9e9841ca7f"
+        },
+        "pdfium": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "d65f9dfcb8d009246da6d40cf0effbdfb704cf7b86e70a2f5e1c7ee7ece9a13a"
+        }
+      }
+    },
+    {
+      "name": "early-final-stop",
+      "html": "<!doctype html><html><body><div></div></body></html>",
+      "css": "@page{size:100pt 100pt;margin:0}html,body{margin:0}body{background:white}div{width:100pt;height:100pt;background:radial-gradient(circle 30pt at 50pt 50pt,red 0%,gold 50%,blue 50%)}",
+      "inputSha256": "b0079713a6f5b788295e1012c88608c0f6e0f77bc05b04590c212ce37d043fcd",
+      "expected": [
+        0,
+        0,
+        255
+      ],
+      "probes": [
+        [
+          95,
+          5
+        ],
+        [
+          95,
+          50
+        ],
+        [
+          95,
+          95
+        ]
+      ],
+      "candidatePdfSha256": "ba067fdbc61f024e8c057d0a7ec73a743cb72a72ae22048476b0f1e5f5637eb6",
+      "affected": false,
+      "dpi": 144,
+      "referenceImages": {
+        "native": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "829072af715e5f41e8b1aa31d870e482fb77c113959c465508830895637e7a2a"
+        },
+        "pdfium": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "7cf7810eee4fafd78a680c39551d8e3e54f163252938c189e1870fb6dc141905"
+        }
+      }
+    },
+    {
+      "name": "smooth-control",
+      "html": "<!doctype html><html><body><div></div></body></html>",
+      "css": "@page{size:100pt 100pt;margin:0}html,body{margin:0}body{background:white}div{width:100pt;height:100pt;background:radial-gradient(circle 30pt at 50pt 50pt,red,gold,blue)}",
+      "inputSha256": "4b0b19add42f57ab5e4e8c027db90e2dd24ed1fa3a7b985d1e2372e720b32bc5",
+      "expected": [
+        0,
+        0,
+        255
+      ],
+      "probes": [
+        [
+          95,
+          5
+        ],
+        [
+          95,
+          50
+        ],
+        [
+          95,
+          95
+        ]
+      ],
+      "candidatePdfSha256": "77f18633e8bcdab62d34670325fa6c7ac3512c9410cb2f5e8c0e35f0d3302ad3",
+      "affected": false,
+      "dpi": 144,
+      "referenceImages": {
+        "native": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "0ef60edfdf2a3d2d79ceafe07ccb3525890be79f76e6fb6891e26a7a024e4c3c"
+        },
+        "pdfium": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "2804634d3d37da98bf5dc5a3e70280a6f66d1e35314cbd16575b220c5a7f210f"
+        }
+      }
+    },
+    {
+      "name": "repeating-control",
+      "html": "<!doctype html><html><body><div></div></body></html>",
+      "css": "@page{size:100pt 100pt;margin:0}html,body{margin:0}body{background:white}div{width:100pt;height:100pt;background:repeating-radial-gradient(circle 30pt at 50pt 50pt,red 0pt 10pt,blue 10pt 20pt)}",
+      "inputSha256": "af774e08fec8096077a2db76f8ed005104a7361681a01d7822f9c4452391ded2",
+      "expected": [
+        255,
+        0,
+        0
+      ],
+      "probes": [
+        [
+          95,
+          5
+        ],
+        [
+          95,
+          50
+        ],
+        [
+          95,
+          95
+        ]
+      ],
+      "candidatePdfSha256": "9b9e15b183ff0c049d4d499f92df871d3655bd94a98f68c30a7afd2dc82cc6c3",
+      "affected": false,
+      "dpi": 144,
+      "referenceImages": {
+        "native": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "b8a1263907b0a31686949de5ae8ea869cf9b10c7842c481a531ab3c9606fd4fe"
+        },
+        "pdfium": {
+          "size": [
+            200,
+            200
+          ],
+          "rgbSha256": "bf06cd4e2ffef4fd23e20cfb8c4d3d01c0ff04a39a77c837e275d0194aa1de7b"
+        }
+      }
+    }
+  ]
+}

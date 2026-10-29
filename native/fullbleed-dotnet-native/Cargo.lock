@@ -10,9 +10,9 @@ checksum = "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6"
 
 [[package]]
 name = "fullbleed"
-version = "2.5.41"
+version = "2.5.43"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "801e55aeb9ce33a35b825f56ce23ee7a0076434ba53c8051807e1a0856a18a13"
+checksum = "83de6953d083d5479e7820d9f3235a6eda0f2288d95753e5129566459134dde4"
 dependencies = [
  "fullbleed_audit_contract",
  "subsetter",
@@ -21,7 +21,7 @@ dependencies = [
 
 [[package]]
 name = "fullbleed-dotnet-native"
-version = "0.2.6"
+version = "0.2.7"
 dependencies = [
  "base64",
  "fullbleed",

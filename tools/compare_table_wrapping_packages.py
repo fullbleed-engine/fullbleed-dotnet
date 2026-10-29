@@ -46,13 +46,13 @@ def compare_legacy(before, after):
     def files(directory):
         return {path.relative_to(directory).as_posix(): sha256(path.read_bytes()).hexdigest()
                 for path in directory.rglob('*') if path.is_file() and path.suffix in ['.pdf', '.png']
-                and path.relative_to(directory).parts[0] not in ['table-wrapping', 'document-regressions', 'text-decorations', 'preformatted-whitespace']
+                and path.relative_to(directory).parts[0] not in ['table-wrapping', 'document-regressions', 'text-decorations', 'preformatted-whitespace', 'radial-gradient-endpoints']
                 and not any(part.startswith('pdfium') for part in path.relative_to(directory).parts)}
     previous, current = files(before), files(after)
     assert len(previous) > 100, 'Missing existing package-output evidence'
     assert previous.keys() == current.keys(), 'Existing fixture output set changed'
     assert previous == current, [name for name in previous if previous[name] != current[name]]
-    return dict(ok=True, unchangedFiles=len(previous), scope='Existing PDF and native PNG fixtures are byte-identical to public 0.2.1; new table cases and the separately checked 0.2.3 document regressions are excluded.')
+    return dict(ok=True, unchangedFiles=len(previous), scope='Historical PDF and native PNG fixtures remain byte-identical to public 0.2.1; fixture families introduced in later releases are checked separately.')
 
 
 def main():
