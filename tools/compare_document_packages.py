@@ -91,14 +91,14 @@ def compare_legacy(before, after):
     def inventory(directory):
         return {path.relative_to(directory).as_posix(): sha256(path.read_bytes()).hexdigest()
                 for path in directory.rglob('*') if path.is_file() and path.suffix in ['.pdf', '.png']
-                and path.relative_to(directory).parts[0] not in ['document-regressions', 'text-decorations', 'preformatted-whitespace']
+                and path.relative_to(directory).parts[0] not in ['document-regressions', 'text-decorations', 'preformatted-whitespace', 'radial-gradient-endpoints']
                 and not any(part.startswith('pdfium') for part in path.relative_to(directory).parts)}
     previous, current = inventory(before), inventory(after)
     assert len(previous) > 100, 'Missing earlier fixture output'
     assert previous.keys() == current.keys(), 'Earlier fixture file set changed'
     assert previous == current, [name for name in previous if previous[name] != current[name]]
     return dict(ok=True, unchangedFiles=len(previous),
-        scope='All earlier fixture PDFs and native PNGs remain byte-identical to public 0.2.2; the new document-regressions family is checked separately.')
+        scope='Historical PDF and native PNG fixtures remain byte-identical to public 0.2.2; fixture families introduced in later releases are checked separately.')
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
