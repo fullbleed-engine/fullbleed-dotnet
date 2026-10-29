@@ -25,3 +25,8 @@ tests/FullBleed.DotNet.PackageSmoke/Assets/text-decorations-public-023.zip -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/preformatted-whitespace-2.5.41.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/preformatted-public-025.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/preformatted-public-025.zip -text
+
+# Retain radial-gradient inputs and captured public-package controls byte for byte.
+tests/FullBleed.DotNet.PackageSmoke/Assets/radial-gradient-endpoints-2.5.43.json -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/radial-gradients-public-026.json -text whitespace=cr-at-eol
+tests/FullBleed.DotNet.PackageSmoke/Assets/radial-gradients-public-026.zip -text
