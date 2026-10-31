@@ -30,3 +30,8 @@ tests/FullBleed.DotNet.PackageSmoke/Assets/preformatted-public-025.zip -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/radial-gradient-endpoints-2.5.43.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/radial-gradients-public-026.json -text whitespace=cr-at-eol
 tests/FullBleed.DotNet.PackageSmoke/Assets/radial-gradients-public-026.zip -text
+
+# Preserve shared page-font inputs and captured public-package controls exactly.
+tests/FullBleed.DotNet.PackageSmoke/Assets/page-margin-fonts-2.5.48.json -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/page-margin-fonts-public-027.json -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/page-margin-fonts-public-027.zip -text

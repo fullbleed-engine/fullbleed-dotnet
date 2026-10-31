@@ -1,0 +1,101 @@
+{
+  "schema": "fullbleed.page_margin_font_fixture.v1",
+  "source": "https://github.com/fullbleed-engine/fullbleed-official/blob/0997487693615434e8f3d45422ab5a89e67f4d71/tools/smoke_page_margin_fonts.py",
+  "sourceSha256": "db4fe6a2061d75cd16e030de3e08c66450e04fe9e487abb4b842fe2e500e3f6d",
+  "fonts": [
+    {
+      "path": "test/fonts/NotoSans-Regular.ttf",
+      "name": "Body.ttf",
+      "sha256": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d"
+    },
+    {
+      "path": "assets/fonts/DMSerifDisplay-Regular.ttf",
+      "name": "Display.ttf",
+      "sha256": "8cc3643535edf039aa5d95440a8542735e9197e4f4b8d9303e980fefbf5ab616"
+    }
+  ],
+  "scope": "Eight explicit-face comparisons for page-margin font selection; no complete CSS or conformance claim.",
+  "cases": [
+    {
+      "name": "local-alias",
+      "html": "<p>Record Alpha \u2014 body text.</p>",
+      "aliasCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@font-face {font-family:Brand;src:local(\"DMSerifDisplay-Regular\");} @page {@bottom-center {font-family:Brand;}}",
+      "controlCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@page {@bottom-center {font-family:\"DM Serif Display\";}}",
+      "footerFaces": [
+        "DMSerifDisplay-Regular"
+      ],
+      "footerSize": 12
+    },
+    {
+      "name": "url-alias",
+      "html": "<p>Record Alpha \u2014 body text.</p>",
+      "aliasCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@font-face {font-family:Brand;src:url(\"Display.ttf\");font-weight:400;}@page {@bottom-center {font-family:Br\\61 nd;}}",
+      "controlCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@page {@bottom-center {font-family:\"DM Serif Display\";}}",
+      "footerFaces": [
+        "DMSerifDisplay-Regular"
+      ],
+      "footerSize": 12
+    },
+    {
+      "name": "inherited-weight",
+      "html": "<p>Record Alpha \u2014 body text.</p>",
+      "aliasCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@font-face {font-family:Brand;src:url(\"Body.ttf\");font-weight:400;} @font-face {font-family:Brand;src:url(\"Display.ttf\");font-weight:700;} html {font-family:Brand;} @page {font-weight:700;}",
+      "controlCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@page {font-family:\"DM Serif Display\";font-weight:700;}",
+      "footerFaces": [
+        "DMSerifDisplay-Regular"
+      ],
+      "footerSize": 12
+    },
+    {
+      "name": "fallback-alias",
+      "html": "<p>Record Alpha \u2014 body text.</p>",
+      "aliasCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@font-face {font-family:Brand;src:url(\"Display.ttf\");font-weight:400;}@page {@bottom-center {font-family:\"Unavailable\",Brand;}}",
+      "controlCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@page {@bottom-center {font-family:\"Unavailable\",\"DM Serif Display\";}}",
+      "footerFaces": [
+        "DMSerifDisplay-Regular"
+      ],
+      "footerSize": 12
+    },
+    {
+      "name": "page-inherit",
+      "html": "<p>Record Alpha \u2014 body text.</p>",
+      "aliasCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@font-face {font-family:Brand;src:url(\"Display.ttf\");font-weight:400;}@page {font-family:Brand;@bottom-center {font-family:inherit;}}",
+      "controlCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@page {font-family:\"DM Serif Display\";}",
+      "footerFaces": [
+        "DMSerifDisplay-Regular"
+      ],
+      "footerSize": 12
+    },
+    {
+      "name": "quoted-generic-alias",
+      "html": "<p>Record Alpha \u2014 body text.</p>",
+      "aliasCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@font-face {font-family:\"serif\";src:url(\"Display.ttf\");} @page {font-family:\"serif\";}",
+      "controlCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@page {font-family:\"DM Serif Display\";}",
+      "footerFaces": [
+        "DMSerifDisplay-Regular"
+      ],
+      "footerSize": 12
+    },
+    {
+      "name": "size-adjust",
+      "html": "<p>Record Alpha \u2014 body text.</p>",
+      "aliasCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@font-face {font-family:Adjusted;src:url(\"Display.ttf\");size-adjust:125%;} @page {font-family:Adjusted;}",
+      "controlCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@page {font-family:\"DM Serif Display\";@bottom-center {font-size:15pt;}}",
+      "footerFaces": [
+        "DMSerifDisplay-Regular"
+      ],
+      "footerSize": 15
+    },
+    {
+      "name": "named-pages",
+      "html": "<section><p>Record Alpha \u2014 first body.</p></section><section class=\"second\"><p>Record Alpha \u2014 second body.</p></section>",
+      "aliasCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@font-face {font-family:Brand;src:url(\"Display.ttf\");font-weight:400;}@font-face {font-family:BodyAlias;src:url(\"Body.ttf\");} @page:first {font-family:Brand;} @page second {font-family:BodyAlias;} .second {break-before:page;page:second;}",
+      "controlCss": "\n@page { size: 320pt 240pt; margin: 40pt 24pt;\n  @bottom-center { content: \"FOOTER \" counter(page) \" of \" counter(pages);\n                   font-size: 12pt; line-height: 18pt; }\n}\nhtml { font-family: \"Noto Sans\"; font-size: 14pt; font-synthesis: none; }\nbody, p { margin: 0; }\n@page:first {font-family:\"DM Serif Display\";} @page second {font-family:\"Noto Sans\";} .second {break-before:page;page:second;}",
+      "footerFaces": [
+        "DMSerifDisplay-Regular",
+        "NotoSans-Regular"
+      ],
+      "footerSize": 12
+    }
+  ]
+}

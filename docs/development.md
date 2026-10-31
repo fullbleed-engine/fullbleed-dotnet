@@ -11,7 +11,7 @@ runtimes/{rid}/native/          generated/staged package assets
 scripts/                        build, verify, and pack entrypoints
 ```
 
-The native crate pins the published Fullbleed `2.5.40` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
+The native crate pins the published Fullbleed `2.5.48` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
 
 ## Local verification
 
@@ -21,7 +21,7 @@ The native crate pins the published Fullbleed `2.5.40` crate with an exact Cargo
 
 This stages the host native library, checks Rust formatting and Clippy, runs native tests, verifies managed formatting, builds the full solution, and runs the managed test suite. The integration suite verifies deterministic rendering, diagnostics, metrics, PNG output, in-memory and direct-to-file batches, fixed and reflow compiled bindings, inspection, template stamping/composition, concurrency, and failure-path recovery.
 
-CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.40` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
+CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.48` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
 
 ## Local package
 
@@ -49,6 +49,31 @@ A second matrix consumes that same assembled package on .NET 8, 9, and 10 for ea
 The evidence job independently checks six fixtures: the styled invoice, an explicit regular-face invoice control, weight-700 bold text, two fixed records, two reflow records, and Unicode text using a separately registered Noto Sans font. It compares their PDF bytes and saved-PDF PNG previews across all 12 consumers, plus the invoice's HTML preview. It also rejects evidence from a missing or incorrect framework/platform combination. `pypdf` and PDFium must agree on extracted text; FontTools checks embedded glyph programs, metrics, mappings, checksums, notices, and compact metadata against all five source fonts. These readers are release-check dependencies, not dependencies of applications using the .NET package.
 
 Each isolated consumer also renders 22 regular/italic family cases: explicit-face controls, both registration orders through ordinary/fixed/reflow output, and ordinary `@font-face` mappings. The independent family verifier checks embedded face names and notice tables, extracted text, and native/PDFium preview pixels against those controls. Their PDFs and previews must agree across all 12 consumers.
+
+### Page-font verification
+
+Each isolated package consumer renders eight page-font layouts through direct,
+compiled, fixed-record, throughput reflow and compact reflow APIs. The 40 pairs
+produce 144 pages per consumer. Inputs are retained from the verified 2.5.48
+core/Node cases, using the same licensed Noto Sans and DM Serif Display fonts.
+The weight descriptor uses distinct supplied faces as selection markers; it is
+not a check of physical bold synthesis.
+
+```sh
+python tools/verify_page_margin_fonts.py artifacts/package-smoke/page-margin-fonts
+python tools/compare_page_margin_font_control.py artifacts/package-smoke/page-margin-fonts
+```
+
+The verifier checks exact text, embedded footer faces and sizes, page counts,
+repeat rendering, native previews and independent PDFium pixels. The same
+assembled package must produce identical output across all twelve consumers.
+The retained public NuGet 0.2.7 output supplies eight failing alias cases and an
+incorrect explicit fallback-family control. Pair equality alone cannot detect
+that control's wrong font, so the candidate must also pass independent face
+inspection. Seven healthy old controls retain their PDF bytes, text and pixels.
+CI retains the focused `page-margin-font-evidence` artifact with the package
+identity, cross-platform summary, candidate output and old-package comparison.
+These checks do not establish general CSS parity or standards conformance.
 
 ## Document regression verification
 
