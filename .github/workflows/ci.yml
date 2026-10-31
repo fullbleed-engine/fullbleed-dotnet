@@ -46,7 +46,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install the independently versioned CLI for integration tests
-        run: python -m pip install fullbleed==2.5.43
+        run: python -m pip install fullbleed==2.5.48
 
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
@@ -237,6 +237,17 @@ jobs:
         run: python tools/compare_preformatted_control.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0/preformatted-whitespace
       - name: Reject public 0.2.6 radial endpoint defects and preserve healthy output
         run: python tools/compare_radial_gradient_control.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0/radial-gradient-endpoints
+      - name: Reject public 0.2.7 page-font defects and preserve healthy controls
+        run: python tools/compare_page_margin_font_control.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0/page-margin-fonts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: page-margin-font-evidence
+          path: |
+            artifacts/page-margin-font-summary.json
+            artifacts/consumer-evidence/package-consumer-win-x64-net8.0/page-margin-fonts/
+            artifacts/page-margin-font-comparison/
+          if-no-files-found: error
       - name: Reject blank public 0.1.5 previews with system fonts hidden
         run: |
           sudo env "PATH=$PATH" "DOTNET_ROOT=$DOTNET_ROOT" unshare --mount --propagation private "$(command -v python)" \

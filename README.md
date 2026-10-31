@@ -13,7 +13,7 @@ The managed assembly has no third-party NuGet runtime dependencies. Native runti
 
 ## Status
 
-Version `0.2.7` uses Fullbleed `2.5.43`. Radial gradients preserve their final color outside the ending shape, including opacity changes. Gradient stitching intervals are corrected as well. The managed APIs and native ABI are unchanged. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.2.7).
+Version `0.2.8` uses Fullbleed `2.5.48`. Registered font aliases and fallback families now work in page headers and footers, including inherited weight and `size-adjust`. The managed APIs and native ABI are unchanged. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.2.8).
 
 Component trees and styles are immutable after construction. Text and attributes are escaped, LINQ children are enumerated once, and custom components are normal methods returning elements. Read the [component guide](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/components.md), including [how class names and styles connect](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/components.md#class-names-and-styles).
 
@@ -37,7 +37,7 @@ With the .NET 10 SDK installed:
 ```sh
 dotnet new console -n FullbleedDemo --framework net10.0
 cd FullbleedDemo
-dotnet add package FullBleed.DotNet --version 0.2.7
+dotnet add package FullBleed.DotNet --version 0.2.8
 ```
 
 ### HTML/CSS to PDF
@@ -126,6 +126,36 @@ This writes `invoice.pdf` and a PNG preview. The [sample source](https://github.
 The 0.1.4 family-selection fix corrects the invoice's brand to its intended regular face. The release check compares it with an explicit regular-face control, while preserving the original family CSS in the real invoice. It also checks bold text, fixed and reflow records, Unicode text, and both font registration orders. See [how to reproduce the comparison](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/development.md#font-output-comparison).
 
 The historical [0.1.3 font-compaction evidence](https://github.com/fullbleed-engine/fullbleed-dotnet/releases/tag/v0.1.3) records this invoice changing from 81,227 to 34,542 bytes with identical text and pixels. That measurement uses the earlier font selection; the 0.1.4 correction changes its appearance and size. Savings depend on the document and fonts.
+
+### Fonts in page headers and footers
+
+Give registered font bytes the filename used by `@font-face`, then use the alias
+in `@page` or a margin box. For example, with a local `Brand.ttf` font:
+
+```csharp
+using FullBleed.DotNet;
+
+using var engine = new FullBleedEngine(new FullBleedEngineOptions
+{
+    Assets = [FullBleedAsset.FromBytes(File.ReadAllBytes("Brand.ttf"), FullBleedAssetKind.Font, "Brand.ttf")],
+});
+engine.RenderPdfToFile("<p>A branded document.</p>", """
+    @font-face { font-family: Brand; src: url("Brand.ttf"); }
+    html { font-family: Brand; }
+    @page {
+        size: A4; margin: 20mm;
+        @bottom-center { content: "Page " counter(page); font-size: 10pt; }
+    }
+    """, "output/branded.pdf");
+```
+
+Page typography inherits from `html` through `@page` to each margin box. A font
+set only on `body` does not set the page font. Use version **0.2.8 or newer** for
+this alias behavior; earlier packages can silently select a fallback face.
+The [font registration guide](https://docs.fullbleed.dev/engine/font-registration/#fonts-in-page-headers-and-footers)
+explains explicit families, fallback lists and descriptor selection. CI compares
+eight font layouts with explicit-face controls through five C# rendering paths
+and independently checks the embedded faces, sizes, text and previews.
 
 ## LINQ and compiled VDP
 

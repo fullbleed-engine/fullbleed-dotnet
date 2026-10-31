@@ -28,8 +28,8 @@ def main():
             for name,path in [('readme','README.md'),('guide','docs/components.md')]}
     assert len(source['guide'])==6
     readme=source.pop('readme')
-    assert len(readme)>=2
-    source={'readme-html':[readme[0]],'readme-components':[readme[1]],**source}
+    assert len(readme)>=3 and 'Brand.ttf' in readme[2]
+    source={'readme-html':[readme[0]],'readme-components':[readme[1]],'readme-page-fonts':[readme[2]],**source}
     env={**os.environ,'DOTNET_CLI_TELEMETRY_OPTOUT':'1','DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE':'true'}
     env.pop('FULLBLEED_NATIVE_LIBRARY',None)
     reports=[]
@@ -51,6 +51,13 @@ styledNotice.RenderImagePagesToDirectory(engine, "output/notice-preview", dpi: 9
         (consumer/'Program.cs').write_text(actual,encoding='utf-8')
         target=args.output/name;target.mkdir(exist_ok=True)
         (target/'Program.cs').write_text(actual,encoding='utf-8')
+        font_inputs=[]
+        if name=='readme-page-fonts':
+            for filename,original in [('Brand.ttf','DMSerifDisplay-Regular.ttf'),('Brand-OFL.txt','DMSerifDisplay-OFL.txt')]:
+                data=(ROOT/'samples/FullBleed.DotNet.Showcase/Assets/fonts'/original).read_bytes()
+                (consumer/filename).write_bytes(data)
+                (target/filename).write_bytes(data)
+                font_inputs.append({'path':filename,'sha256':sha256(data).hexdigest()})
         commands=[['dotnet','restore','Consumer.csproj','--source',str(args.packages.resolve()),'--packages',str(consumer/'packages'),'--force-evaluate'],
                   ['dotnet','run','--project','Consumer.csproj','-c','Release','--no-restore']]
         for index,command in enumerate(commands):
@@ -63,7 +70,14 @@ styledNotice.RenderImagePagesToDirectory(engine, "output/notice-preview", dpi: 9
             relative=path.relative_to(consumer/'output');destination=target/relative
             destination.parent.mkdir(parents=True,exist_ok=True);destination.write_bytes(path.read_bytes())
             files.append({'path':relative.as_posix(),'sha256':sha256(path.read_bytes()).hexdigest()})
-        if name.startswith('readme-'):
+        if name=='readme-page-fonts':
+            reader=PdfReader(target/'branded.pdf');assert len(reader.pages)==1
+            spans=[]
+            reader.pages[0].extract_text(visitor_text=lambda text,cm,tm,font,size: spans.append((text.strip(),str(font['/BaseFont']),size)) if text.strip() and font else None)
+            assert any('A branded document.' in text for text,face,size in spans)
+            footers=[span for span in spans if span[0]=='Page 1']
+            assert len(footers)==1 and footers[0][1].endswith('DMSerifDisplay-Regular') and footers[0][2]==10
+        elif name.startswith('readme-'):
             reader=PdfReader(target/'report.pdf');assert len(reader.pages)==1
             text=''.join(reader.pages[0].extract_text().split())
             assert 'Quarterlyreport' in text and 'Deterministicprintoutput.' in text
@@ -80,9 +94,9 @@ styledNotice.RenderImagePagesToDirectory(engine, "output/notice-preview", dpi: 9
                 assert (18 if fixture=='payment' else 14) in sizes
                 if fixture=='notice':assert any(max(abs(a-b) for a,b in zip(color,(166/255,66/255,50/255)))<.003 for color in colors)
         reports.append({'name':name,'consumer':str(consumer),'blocks':len(blocks),
-                        'source_sha256':sha256(actual.encode()).hexdigest(),'files':files})
+                        'source_sha256':sha256(actual.encode()).hexdigest(),'files':files,'font_inputs':font_inputs})
     receipt={'ok':True,'version':version,'package_sha256':manifest['package']['sha256'],'reports':reports,
-             'scope':'Both actual README quickstarts and all six component-guide C# blocks compile and render against the isolated NuGet; styling colors/sizes and PDF page counts independently checked.'}
+             'scope':'Both actual README quickstarts, the registered page-font example, and all six component-guide C# blocks compile and render against the isolated NuGet; styling colors/sizes, footer face and PDF page counts independently checked.'}
     (args.output/'verification.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({'ok':True,'projects':len(reports),'source_blocks':sum(r['blocks'] for r in reports)}))
 

@@ -216,6 +216,10 @@ if (Version.Parse(features.BindingVersion) >= new Version(0, 2, 7))
 {
     RadialGradientFixtures.Run(assets, outputDirectory, features.BindingVersion);
 }
+if (Version.Parse(features.BindingVersion) >= new Version(0, 2, 8))
+{
+    PageMarginFontFixtures.Run(assets, outputDirectory, features.BindingVersion);
+}
 #if FULLBLEED_COMPONENTS
 ComponentFixtures.Run(assets, outputDirectory, features.BindingVersion);
 #endif
