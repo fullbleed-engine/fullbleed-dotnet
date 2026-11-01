@@ -19,6 +19,7 @@ from verify_text_decorations import verify as verify_text_decorations
 from verify_preformatted import verify as verify_preformatted
 from verify_radial_gradients import verify as verify_radial_gradients
 from verify_page_margin_fonts import verify as verify_page_margin_fonts
+from verify_generated_counters import verify as verify_generated_counters
 
 ROOT = Path(__file__).resolve().parents[1]
 RIDS = ['win-x64', 'linux-x64', 'osx-x64', 'osx-arm64']
@@ -47,6 +48,7 @@ def main():
     preformatted_cases = []
     radial_cases = []
     page_font_cases = []
+    counter_cases = []
     verapdf = validator(ROOT / 'artifacts/verapdf')
     for rid, framework in product(RIDS, FRAMEWORKS):
         consumer = f'{rid}-net{framework}'
@@ -120,6 +122,10 @@ def main():
         assert page_font_report['packageVersion'] == manifest['version'] and page_font_report['pairs'] == 40 and page_font_report['pages'] == 144
         page_font_cases.append(page_font_report['cases'])
         data['IndependentPageFontChecks'] = {'status': 'passed', 'pairs': 40, 'pages': 144}
+        counter_report = verify_generated_counters(directory / 'generated-counters')
+        assert counter_report['packageVersion'] == manifest['version'] and counter_report['documents'] == 295 and counter_report['pages'] == 480
+        counter_cases.append(counter_report['cases'])
+        data['IndependentGeneratedCounterChecks'] = {'status': 'passed', 'documents': 295, 'pages': 480}
         data['IndependentTableWrappingChecks'] = {'status': 'passed', 'cases': len(table_report['cases'])}
         data['IndependentPaginationChecks'] = {'status': 'passed', 'cases': len(pagination_report['cases'])}
         data['IndependentComponentChecks'] = {'status': 'passed', 'cases': len(component_report['cases'])}
@@ -167,6 +173,7 @@ def main():
     assert all(cases == preformatted_cases[0] for cases in preformatted_cases), 'Preformatted PDFs, text, glyph bounds or previews differ across consumers'
     assert all(cases == radial_cases[0] for cases in radial_cases), 'Radial-gradient PDFs, colors, stitching bounds or previews differ across consumers'
     assert all(cases == page_font_cases[0] for cases in page_font_cases), 'Page-font PDFs, embedded faces, text or previews differ across consumers'
+    assert all(cases == counter_cases[0] for cases in counter_cases), 'Generated-counter PDFs, record sequences or native previews differ across consumers'
     base14_previews = {}
     for cases in engine_cases:
         assert [(item['name'], item['mode']) for item in cases] == [(item['name'], item['mode']) for item in engine_cases[0]]
@@ -195,6 +202,7 @@ def main():
               'preformattedFixtures': preformatted_cases[0],
               'radialGradientFixtures': radial_cases[0],
               'pageFontFixtures': page_font_cases[0],
+              'generatedCounterFixtures': counter_cases[0],
               'scope': 'Northstar invoice PDF, HTML preview and finalized-PDF 96-DPI PNG match on .NET 8, 9 and 10 '
                        'across Windows x64, Linux x64, Intel macOS and Apple Silicon macOS. '
                        'Bold, fixed-record, reflow-record and Unicode fixture PDFs and saved-PDF previews also match. '
@@ -214,6 +222,7 @@ def main():
                        'Seventeen preformatted inputs pass through direct, compiled and reflow output, with identical saved PDFs and previews across all consumers. '
                        'Twelve radial-gradient inputs pass through direct and compiled output, with valid stitching bounds and identical PDFs, native pixels and independent PDFium pixels matching the qualified 2.5.43 core reference. '
                         'Eight page-font alias/control pairs pass through direct, compiled, fixed, throughput reflow and compact reflow output: 40 pairs and 144 independently inspected pages per consumer, with identical PDF bytes, text, native previews and independent pixels across consumers. '
+                       'Fifty-nine generated-counter inputs pass through five rendering modes: 295 PDFs and 480 independently read pages per consumer, with matching saved PDFs, record sequences and native witness previews. Raw PDF text-stream order is retained separately without a logical reading-order claim. '
                        'These retained fixtures are not a universal platform-parity or conformance claim.'}
     path = ROOT / 'artifacts/cross-platform-evidence.json'
     path.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
@@ -221,6 +230,11 @@ def main():
         'status': 'passed', 'package': manifest['version'], 'packageSha256': manifest['package']['sha256'],
         'consumers': [{'platform': row['Runtime'], 'framework': row['FrameworkVersion'], 'checks': row['IndependentPageFontChecks']} for row in records],
         'allConsumerOutputsMatch': True, 'cases': page_font_cases[0],
+    }, indent=2) + '\n', encoding='utf8')
+    (ROOT / 'artifacts/generated-counter-summary.json').write_text(json.dumps({
+        'status': 'passed', 'package': manifest['version'], 'packageSha256': manifest['package']['sha256'],
+        'consumers': [{'platform': row['Runtime'], 'framework': row['FrameworkVersion'], 'checks': row['IndependentGeneratedCounterChecks']} for row in records],
+        'allConsumerOutputsMatch': True, 'cases': counter_cases[0],
     }, indent=2) + '\n', encoding='utf8')
     print(f'{len(records)} isolated package consumers passed; fixture PDFs and native previews match across platforms.')
 

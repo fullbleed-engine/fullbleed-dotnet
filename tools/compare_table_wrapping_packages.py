@@ -46,7 +46,7 @@ def compare_legacy(before, after):
     def files(directory):
         return {path.relative_to(directory).as_posix(): sha256(path.read_bytes()).hexdigest()
                 for path in directory.rglob('*') if path.is_file() and path.suffix in ['.pdf', '.png']
-                and path.relative_to(directory).parts[0] not in ['table-wrapping', 'document-regressions', 'text-decorations', 'preformatted-whitespace', 'radial-gradient-endpoints', 'page-margin-fonts']
+                and path.relative_to(directory).parts[0] not in ['table-wrapping', 'document-regressions', 'text-decorations', 'preformatted-whitespace', 'radial-gradient-endpoints', 'page-margin-fonts', 'generated-counters']
                 and not any(part.startswith('pdfium') for part in path.relative_to(directory).parts)}
     previous, current = files(before), files(after)
     assert len(previous) > 100, 'Missing existing package-output evidence'
