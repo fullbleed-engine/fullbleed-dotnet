@@ -10,16 +10,16 @@ from zipfile import ZipFile
 from verify_generated_counters import verify, SOURCE
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = SOURCE.with_name('generated-counters-public-028.json')
-MANIFEST_SHA256 = 'f42e525b9a85e7f83de2d7c1304922942a0e978caef00ac382dfb7dc6039a033'
+MANIFEST = SOURCE.with_name('generated-counters-public-029.json')
+MANIFEST_SHA256 = 'd0fcad561975092f4f5316932f6608ca2c83d1d7686bea16a69746a2e058e895'
 
 
 def compare(candidate, output):
     assert sha256(MANIFEST.read_bytes()).hexdigest() == MANIFEST_SHA256
     manifest = json.loads(MANIFEST.read_bytes())
-    assert manifest['package'] == '0.2.8' and manifest['engine'] == '2.5.48'
-    assert manifest['packageSha256'] == '3374481dcae686c894bd059cea972660f5365e862b079f1078e173210a524b0b'
-    assert manifest['nativeSha256'] == '4456f2e15b6ecf6ba3a5ef374f7f465bfa622e8fc3544c76807dd212e46f8176'
+    assert manifest['package'] == '0.2.9' and manifest['engine'] == '2.5.49'
+    assert manifest['packageSha256'] == '6c2fc070907654594e55ee1407f7ef44624892242d4e84f148251eb951d4fee3'
+    assert manifest['nativeSha256'] == 'dc0f9bddf254c0ec64aff19abcab6f553083e6159c9afdfbfbd33d33a1b71664'
     assert manifest['nativeModuleVerifiedAgainstPackage']
     assert sha256(SOURCE.read_bytes()).hexdigest() == manifest['inputSha256']
     archive_path = SOURCE.with_name(manifest['archive'])
@@ -28,7 +28,7 @@ def compare(candidate, output):
     baseline.mkdir(parents=True, exist_ok=True)
     with ZipFile(archive_path) as archive:
         assert archive.testzip() is None
-        assert len(archive.namelist()) == len(manifest['members']) == 62
+        assert len(archive.namelist()) == len(manifest['members']) == 14
         assert set(archive.namelist()) == set(manifest['members'])
         for member in archive.infolist():
             relative = PurePosixPath(member.filename)
@@ -46,10 +46,10 @@ def compare(candidate, output):
     previous = verify(baseline, negative_control=True)
     current = json.loads((candidate / 'verification.json').read_bytes())
     assert current['ok'] and not current['negativeControl']
-    assert tuple(map(int, current['packageVersion'].split('.'))) >= (0, 2, 9)
+    assert tuple(map(int, current['packageVersion'].split('.'))) >= (0, 2, 10)
     assert previous['fixtureSha256'] == current['fixtureSha256'] == manifest['inputSha256']
     assert sorted(previous['failures']) == sorted(manifest['failedCases'])
-    assert len(previous['failures']) == 47 and current['documents'] == 295 and current['pages'] == 480
+    assert len(previous['failures']) == 7 and current['documents'] == 350 and current['pages'] == 576
     after = {(row['name'], row['mode']): row for row in current['cases']}
     corrected = preserved = byte_identical_healthy = 0
     for old in previous['cases']:
@@ -62,12 +62,12 @@ def compare(candidate, output):
             byte_identical_healthy += old['pdfSha256'] == new['pdfSha256']
         else:
             corrected += 1
-    assert corrected == 47 and preserved == 12
-    record = dict(ok=True, baselinePackage='0.2.8', baselineEngine='2.5.48', candidatePackage=current['packageVersion'],
+    assert corrected == 7 and preserved == 4
+    record = dict(ok=True, baselinePackage='0.2.9', baselineEngine='2.5.49', candidatePackage=current['packageVersion'],
         correctedDirectCases=corrected, unchangedHealthyCounterSequences=preserved,
-        byteIdenticalHealthyControls=byte_identical_healthy, candidateDocuments=295, candidatePages=480,
+        byteIdenticalHealthyControls=byte_identical_healthy, candidateDocuments=350, candidatePages=576,
         baselineArchiveSha256=manifest['archiveSha256'], inputSha256=manifest['inputSha256'],
-        scope='The retained public Windows x64/.NET 8 output is independently reinspected. All 47 wrong direct cases must improve, while 12 healthy counter sequences and page counts remain unchanged. Candidate platform coverage is verified separately; raw PDF text-stream order is not a logical reading-order claim.')
+        scope='The retained public Windows x64/.NET 10 output is independently reinspected. All seven wrong direct cases must improve, while four healthy counter sequences and page counts remain unchanged. Candidate platform coverage is verified separately; raw PDF text-stream order is not a logical reading-order claim.')
     (output / 'comparison.json').write_text(json.dumps(record, indent=2) + '\n', encoding='utf8')
     return record
 

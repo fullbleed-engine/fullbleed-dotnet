@@ -40,3 +40,7 @@ tests/FullBleed.DotNet.PackageSmoke/Assets/page-margin-fonts-public-027.zip -tex
 tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-2.5.49.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-public-028.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-public-028.zip -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-2.5.50.json -text
+# Preserve this captured Windows manifest byte for byte.
+tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-public-029.json -text whitespace=cr-at-eol
+tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-public-029.zip -text

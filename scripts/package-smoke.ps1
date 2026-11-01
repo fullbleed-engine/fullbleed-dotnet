@@ -91,7 +91,7 @@ foreach ($name in @('tagged-structure.html', 'tagged-structure.css', 'engine-2.5
 $verificationFonts = Join-Path $consumer 'Assets/verification-fonts'
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/Assets/radial-gradient-endpoints-2.5.43.json') -Destination (Join-Path $consumer 'Assets')
 Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/Assets/page-margin-fonts-2.5.48.json') -Destination (Join-Path $consumer 'Assets')
-Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-2.5.49.json') -Destination (Join-Path $consumer 'Assets')
+Copy-Item -LiteralPath (Join-Path $repository 'tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-2.5.50.json') -Destination (Join-Path $consumer 'Assets')
 New-Item -ItemType Directory -Path $verificationFonts | Out-Null
 foreach ($name in @('NotoSans-Regular.ttf', 'NotoSans-OFL.txt')) {
     Copy-Item -LiteralPath (Join-Path $repository "tests/FullBleed.DotNet.Tests/Assets/$name") -Destination $verificationFonts

@@ -7,7 +7,7 @@ internal static class GeneratedCounterFixtures
 {
     internal static void Run(string assets, string outputDirectory, string version)
     {
-        var input = File.ReadAllBytes(Path.Combine(assets, "generated-counters-2.5.49.json"));
+        var input = File.ReadAllBytes(Path.Combine(assets, "generated-counters-2.5.50.json"));
         using var source = JsonDocument.Parse(input);
         var font = File.ReadAllBytes(Path.Combine(assets, "fonts", "Inter-Variable.ttf"));
         if (Hash(font) != source.RootElement.GetProperty("font").GetProperty("sha256").GetString())
@@ -46,7 +46,7 @@ internal static class GeneratedCounterFixtures
                     throw new InvalidOperationException("Unexpected generated-counter page count.");
                 }
                 var previews = new List<object>();
-                if (name == "block-after-increment")
+                if (name is "block-after-increment" or "contents-counter-order")
                 {
                     var original = engine.RenderFinalizedPdfImagePagesToDirectory(path,
                         Path.Combine(output, name + "-" + mode + "-preview"), dpi: 96, stem: "native");
@@ -62,7 +62,7 @@ internal static class GeneratedCounterFixtures
                 cases.Add(new { name, mode, names, filename, pages, pdfSha256 = Hash(pdf), previews, repeatPdfBytesMatch = true });
             }
         }
-        if (cases.Count != 295) throw new InvalidOperationException("Incomplete generated-counter fixtures.");
+        if (cases.Count != 350) throw new InvalidOperationException("Incomplete generated-counter fixtures.");
         File.WriteAllText(Path.Combine(output, "renders.json"), JsonSerializer.Serialize(new
         {
             status = "rendered-awaiting-independent-readback",

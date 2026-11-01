@@ -220,7 +220,7 @@ if (Version.Parse(features.BindingVersion) >= new Version(0, 2, 8))
 {
     PageMarginFontFixtures.Run(assets, outputDirectory, features.BindingVersion);
 }
-if (Version.Parse(features.BindingVersion) >= new Version(0, 2, 9))
+if (Version.Parse(features.BindingVersion) >= new Version(0, 2, 10))
 {
     GeneratedCounterFixtures.Run(assets, outputDirectory, features.BindingVersion);
 }
