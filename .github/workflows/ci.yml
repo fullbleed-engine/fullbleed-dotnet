@@ -46,7 +46,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install the independently versioned CLI for integration tests
-        run: python -m pip install fullbleed==2.5.50
+        run: python -m pip install fullbleed==2.5.51
 
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
@@ -237,6 +237,17 @@ jobs:
         run: python tools/compare_preformatted_control.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0/preformatted-whitespace
       - name: Reject public 0.2.6 radial endpoint defects and preserve healthy output
         run: python tools/compare_radial_gradient_control.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0/radial-gradient-endpoints
+      - name: Reject public 0.2.10 font-cascade failures and preserve healthy controls
+        run: python tools/compare_font_cascade_control.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0/font-cascade
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: font-cascade-evidence
+          path: |
+            artifacts/font-cascade-summary.json
+            artifacts/font-cascade-comparison/
+            artifacts/consumer-evidence/package-consumer-win-x64-net8.0/font-cascade/
+          if-no-files-found: error
       - name: Reject public 0.2.9 counter defects and preserve healthy sequences
         run: python tools/compare_generated_counter_control.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0/generated-counters
       - uses: actions/upload-artifact@v4
@@ -299,6 +310,7 @@ jobs:
             artifacts/consumer-evidence/**/text-decorations/**/pdfium-*.png
             artifacts/consumer-evidence/**/document-regressions/**/*.json
             artifacts/consumer-evidence/**/document-regressions/**/pdfium-*.png
+            artifacts/consumer-evidence/**/font-cascade/verification.json
             artifacts/consumer-evidence/**/generated-counters/verification.json
             artifacts/consumer-evidence/**/generated-counters/*-pdfium-*.png
             artifacts/component-guide/**

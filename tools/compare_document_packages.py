@@ -91,11 +91,14 @@ def compare_legacy(before, after):
     def inventory(directory):
         return {path.relative_to(directory).as_posix(): sha256(path.read_bytes()).hexdigest()
                 for path in directory.rglob('*') if path.is_file() and path.suffix in ['.pdf', '.png']
-                and path.relative_to(directory).parts[0] not in ['document-regressions', 'text-decorations', 'preformatted-whitespace', 'radial-gradient-endpoints', 'page-margin-fonts', 'generated-counters']
+                and path.relative_to(directory).parts[0] not in ['document-regressions', 'text-decorations', 'preformatted-whitespace', 'radial-gradient-endpoints', 'page-margin-fonts', 'generated-counters', 'font-cascade']
                 and not any(part.startswith('pdfium') for part in path.relative_to(directory).parts)}
     previous, current = inventory(before), inventory(after)
     assert len(previous) > 100, 'Missing earlier fixture output'
-    assert previous.keys() == current.keys(), 'Earlier fixture file set changed'
+    assert previous.keys() == current.keys(), (
+        'Earlier fixture file set changed: '
+        f'missing={sorted(previous.keys() - current.keys())}, '
+        f'added={sorted(current.keys() - previous.keys())}')
     assert previous == current, [name for name in previous if previous[name] != current[name]]
     return dict(ok=True, unchangedFiles=len(previous),
         scope='Historical PDF and native PNG fixtures remain byte-identical to public 0.2.2; fixture families introduced in later releases are checked separately.')

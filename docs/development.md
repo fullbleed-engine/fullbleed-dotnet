@@ -11,7 +11,7 @@ runtimes/{rid}/native/          generated/staged package assets
 scripts/                        build, verify, and pack entrypoints
 ```
 
-The native crate pins the published Fullbleed `2.5.50` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
+The native crate pins the published Fullbleed `2.5.51` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
 
 ## Local verification
 
@@ -21,7 +21,7 @@ The native crate pins the published Fullbleed `2.5.50` crate with an exact Cargo
 
 This stages the host native library, checks Rust formatting and Clippy, runs native tests, verifies managed formatting, builds the full solution, and runs the managed test suite. The integration suite verifies deterministic rendering, diagnostics, metrics, PNG output, in-memory and direct-to-file batches, fixed and reflow compiled bindings, inspection, template stamping/composition, concurrency, and failure-path recovery.
 
-CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.50` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
+CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.51` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
 
 ## Local package
 
@@ -72,7 +72,7 @@ and its four healthy sequences and page counts must stay unchanged. The 59
 prior inputs remain unchanged; CI requires all 70 candidate cases to pass. The focused
 `generated-counter-evidence` artifact retains inputs, saved output and the
 comparison. These fixtures do not establish complete CSS conformance or browser
-raster parity. See the [core guide and remaining limitations](https://github.com/fullbleed-engine/fullbleed-official/blob/v2.5.50/docs/generated-content.md).
+raster parity. See the [core guide and remaining limitations](https://github.com/fullbleed-engine/fullbleed-official/blob/v2.5.51/docs/generated-content.md).
 
 ### Page-font verification
 
@@ -364,3 +364,9 @@ After publication, verify NuGet's public index, package metadata, and downloaded
 ## Adding native functionality
 
 Prefer a narrow exported operation over exposing Rust layout directly. Keep input/output ownership explicit, initialize every out parameter before work, convert panics to status codes, and add a managed integration test that forces both success and error cleanup paths.
+
+Thirteen explicit Base-14 font witnesses are rendered by each isolated package
+consumer. Independent PDF inspection checks the selected text fonts and saved
+previews across all twelve platform/runtime combinations. The retained public
+0.2.10 control supplies eleven incorrect font selections and two healthy
+controls; the candidate must correct the failures and preserve those controls.
