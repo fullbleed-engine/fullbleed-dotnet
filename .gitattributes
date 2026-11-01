@@ -47,3 +47,6 @@ tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-public-029.zip -te
 tests/FullBleed.DotNet.PackageSmoke/Assets/font-cascade-2.5.51.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/font-cascade-public-0210.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/font-cascade-public-0210.zip -text
+
+# Keep build, release, and verification tooling out of language statistics.
+tools/** -linguist-detectable
