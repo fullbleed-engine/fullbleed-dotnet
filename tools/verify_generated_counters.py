@@ -11,7 +11,7 @@ from pypdf import PdfReader
 import pypdfium2 as pdfium
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / 'tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-2.5.49.json'
+SOURCE = ROOT / 'tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-2.5.50.json'
 MODES = ('direct', 'compiled', 'fixed', 'reflow', 'compact')
 
 
@@ -28,19 +28,18 @@ def verify(directory, *, negative_control=False, baseline=None):
     assert report['status'] == 'rendered-awaiting-independent-readback'
     inputs = (directory / 'inputs.json').read_bytes()
     assert report['fixtureSha256'] == sha256(inputs).hexdigest()
-    # The retained public control predates repository LF normalization.
-    # Its exact bytes remain hashed, and every parsed input must match.
-    assert json.loads(inputs) == source
+    assert inputs == source_bytes
     if negative_control:
-        assert report['packageVersion'] == '0.2.8'
+        assert report['packageVersion'] == '0.2.9'
     else:
-        assert inputs == source_bytes and source['engineVersion'] == '2.5.49'
-        assert tuple(map(int, report['packageVersion'].split('.'))) >= (0, 2, 9)
+        assert inputs == source_bytes and source['engineVersion'] == '2.5.50'
+        assert tuple(map(int, report['packageVersion'].split('.'))) >= (0, 2, 10)
     modes = ('direct',) if negative_control else MODES
     assert tuple(report['modes']) == modes
-    expected = {row['name']:row for row in source['cases']}
+    assert len(source['cases']) == 70 and len(source['newCases']) == 11
+    expected = {row['name']:row for row in source['cases'] if not negative_control or row['name'] in source['newCases']}
     wanted = {(name, mode) for name in expected for mode in modes}
-    assert len(expected) == 59 and len(report['cases']) == len(wanted)
+    assert len(expected) == (11 if negative_control else 70) and len(report['cases']) == len(wanted)
     assert {(r['name'],r['mode']) for r in report['cases']} == wanted
     records = []
     for row in report['cases']:
@@ -83,7 +82,7 @@ def verify(directory, *, negative_control=False, baseline=None):
                                 search.close()
                     finally:
                         text_page.close()
-                    if name == 'block-after-increment':
+                    if name in ['block-after-increment', 'contents-counter-order'] and not negative_control:
                         bitmap = page.render(scale=96/72)
                         try:
                             bitmap.to_pil().save(directory / f'{name}-{mode}-pdfium-{number+1}.png')
@@ -107,7 +106,7 @@ def verify(directory, *, negative_control=False, baseline=None):
                 rawExtractedText=raw_record))
         actual = ''.join('Record'+r['name']+r['counterText'] for r in record_results)
         previews = [] if negative_control else row['previews']
-        assert len(previews) == (row['pages'] if name == 'block-after-increment' and not negative_control else 0)
+        assert len(previews) == (row['pages'] if name in ['block-after-increment', 'contents-counter-order'] and not negative_control else 0)
         for number, preview in enumerate(previews, 1):
             assert preview['filename'] == f'{name}-{mode}-native-{number}.png'
             image_path = directory / preview['filename']
@@ -122,24 +121,24 @@ def verify(directory, *, negative_control=False, baseline=None):
         platform=report.get('platform'), runtime=report['runtime'],
         fixtureSha256=fixture_sha, inputSha256=report['fixtureSha256'], documents=len(records),
         pages=sum(r['pages'] for r in records), failures=failures, cases=records,
-        scope='59 reviewed core counter documents through C# direct, compiled, fixed and throughput/compact reflow saved-PDF paths. '
+        scope='70 reviewed core counter documents through C# direct, compiled, fixed and throughput/compact reflow saved-PDF paths. '
         'Counter sequences, record bindings and page ranges are read with pypdf and PDFium; heading placement is checked with glyph geometry. '
         'Fixed bindings are painted after static content, so raw PDF text-stream order is retained separately and is not claimed to be logical reading order. '
         'HTML list controls preserve Fullbleed behavior; '
         'this is not complete CSS or browser raster parity.')
     if negative_control:
-        result['ok'] = len(failures) == 47 and len(records)-len(failures) == 12
+        result['ok'] = len(failures) == 7 and len(records)-len(failures) == 4
     elif baseline is not None:
         before = json.loads((Path(baseline) / 'verification.json').read_bytes())
-        assert before['ok'] and before['negativeControl'] and before['packageVersion'] == '0.2.8'
-        assert before['fixtureSha256'] == fixture_sha and len(before['cases']) == 59 and len(before['failures']) == 47
+        assert before['ok'] and before['negativeControl'] and before['packageVersion'] == '0.2.9'
+        assert before['fixtureSha256'] == fixture_sha and len(before['cases']) == 11 and len(before['failures']) == 7
         direct = {r['name']:r for r in records if r['mode'] == 'direct'}
         healthy = [r for r in before['cases'] if r['matchesExpected']]
         assert all((direct[r['name']]['actual'],direct[r['name']]['pages']) == (r['actual'],r['pages']) for r in healthy)
-        result['publicControl'] = dict(packageVersion='0.2.8',
+        result['publicControl'] = dict(packageVersion='0.2.9',
             correctedDirectCases=sum(not r['matchesExpected'] and direct[r['name']]['matchesExpected'] for r in before['cases']),
             unchangedHealthyControls=len(healthy), reportSha256=sha256((Path(baseline)/'verification.json').read_bytes()).hexdigest())
-        assert result['publicControl']['correctedDirectCases'] == 47 and len(healthy) == 12
+        assert result['publicControl']['correctedDirectCases'] == 7 and len(healthy) == 4
     (directory / 'verification.json').write_text(json.dumps(result, indent=2)+'\n', encoding='utf8')
     assert result['ok'], 'Counter readback failed; inspect verification.json'
     return result

@@ -123,9 +123,9 @@ def main():
         page_font_cases.append(page_font_report['cases'])
         data['IndependentPageFontChecks'] = {'status': 'passed', 'pairs': 40, 'pages': 144}
         counter_report = verify_generated_counters(directory / 'generated-counters')
-        assert counter_report['packageVersion'] == manifest['version'] and counter_report['documents'] == 295 and counter_report['pages'] == 480
+        assert counter_report['packageVersion'] == manifest['version'] and counter_report['documents'] == 350 and counter_report['pages'] == 576
         counter_cases.append(counter_report['cases'])
-        data['IndependentGeneratedCounterChecks'] = {'status': 'passed', 'documents': 295, 'pages': 480}
+        data['IndependentGeneratedCounterChecks'] = {'status': 'passed', 'documents': 350, 'pages': 576}
         data['IndependentTableWrappingChecks'] = {'status': 'passed', 'cases': len(table_report['cases'])}
         data['IndependentPaginationChecks'] = {'status': 'passed', 'cases': len(pagination_report['cases'])}
         data['IndependentComponentChecks'] = {'status': 'passed', 'cases': len(component_report['cases'])}
@@ -222,7 +222,7 @@ def main():
                        'Seventeen preformatted inputs pass through direct, compiled and reflow output, with identical saved PDFs and previews across all consumers. '
                        'Twelve radial-gradient inputs pass through direct and compiled output, with valid stitching bounds and identical PDFs, native pixels and independent PDFium pixels matching the qualified 2.5.43 core reference. '
                         'Eight page-font alias/control pairs pass through direct, compiled, fixed, throughput reflow and compact reflow output: 40 pairs and 144 independently inspected pages per consumer, with identical PDF bytes, text, native previews and independent pixels across consumers. '
-                       'Fifty-nine generated-counter inputs pass through five rendering modes: 295 PDFs and 480 independently read pages per consumer, with matching saved PDFs, record sequences and native witness previews. Raw PDF text-stream order is retained separately without a logical reading-order claim. '
+                       'Seventy generated-counter inputs pass through five rendering modes: 350 PDFs and 576 independently read pages per consumer, with matching saved PDFs, record sequences and native witness previews. Raw PDF text-stream order is retained separately without a logical reading-order claim. '
                        'These retained fixtures are not a universal platform-parity or conformance claim.'}
     path = ROOT / 'artifacts/cross-platform-evidence.json'
     path.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')

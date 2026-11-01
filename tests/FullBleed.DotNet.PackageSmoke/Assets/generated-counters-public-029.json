@@ -1,0 +1,87 @@
+{
+  "schema": "fullbleed.dotnet.generated_counter_public_control.v1",
+  "package": "0.2.9",
+  "engine": "2.5.49",
+  "packageUrl": "https://api.nuget.org/v3-flatcontainer/fullbleed.dotnet/0.2.9/fullbleed.dotnet.0.2.9.nupkg",
+  "packageSha256": "6c2fc070907654594e55ee1407f7ef44624892242d4e84f148251eb951d4fee3",
+  "nativeSha256": "dc0f9bddf254c0ec64aff19abcab6f553083e6159c9afdfbfbd33d33a1b71664",
+  "nativeModuleVerifiedAgainstPackage": true,
+  "platform": "win-x64",
+  "framework": "10.0.12",
+  "inputSha256": "20831f809d07887c033f419731fdc9573f75bb291f9a3856e834e070a4587ddc",
+  "retainedInputSha256": "20831f809d07887c033f419731fdc9573f75bb291f9a3856e834e070a4587ddc",
+  "sourceInputsIdenticalAfterJsonParsing": true,
+  "archive": "generated-counters-public-029.zip",
+  "archiveSha256": "f871d64ae8118e7a5a384ac80678c05a4ad300ec89b45a56561f74833521d117",
+  "originalRendersSha256": "0055329243b1c2d7188fd8fb282fd60c8d7cf1139cb21c3ba257986e1f43f8b7",
+  "normalization": "Only the local native-module path was reduced to its filename. PDF and original input bytes are unchanged.",
+  "failedCases": [
+    "contents-before-reset-new-name-direct",
+    "contents-counter-order-direct",
+    "contents-nested-wrappers-direct",
+    "contents-selector-ancestry-direct",
+    "contents-after-new-counter-direct",
+    "contents-hidden-wrapper-direct",
+    "contents-page-boundary-direct"
+  ],
+  "healthyControls": 4,
+  "members": {
+    "Inter-OFL.txt": {
+      "bytes": 4377,
+      "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57"
+    },
+    "contents-after-new-counter-direct.pdf": {
+      "bytes": 7007,
+      "sha256": "238bf06a6c4fdcd61f714478d52f9ce00a5d0db1d4b5515ee3133c2768c83c4e"
+    },
+    "contents-before-reset-new-name-direct.pdf": {
+      "bytes": 7182,
+      "sha256": "3a65f850d6c4403e83d7de017026757c97cc716ee1e3746dabbbce384a661836"
+    },
+    "contents-counter-order-direct.pdf": {
+      "bytes": 6165,
+      "sha256": "4d8eb63d340c540e5e03e178463bbf5ade48650db29b73b8de1b877dbe01e534"
+    },
+    "contents-hidden-wrapper-direct.pdf": {
+      "bytes": 6165,
+      "sha256": "4d8eb63d340c540e5e03e178463bbf5ade48650db29b73b8de1b877dbe01e534"
+    },
+    "contents-inherited-counter-direct.pdf": {
+      "bytes": 6663,
+      "sha256": "708ae5903c994f30537e797917a0d3b0a8261a1bc2aa3832c801b93a8ea26098"
+    },
+    "contents-nested-wrappers-direct.pdf": {
+      "bytes": 6165,
+      "sha256": "4d8eb63d340c540e5e03e178463bbf5ade48650db29b73b8de1b877dbe01e534"
+    },
+    "contents-page-boundary-direct.pdf": {
+      "bytes": 6545,
+      "sha256": "307b72a2486de3798c517639192bd6223be5479b1fdaeb7b5587ab1745da13d8"
+    },
+    "contents-physical-container-scope-direct.pdf": {
+      "bytes": 6298,
+      "sha256": "6fca3efada364b4169d1c64303b30dd198775012acb187a8d43bfce4ab6880a2"
+    },
+    "contents-physical-sibling-scopes-direct.pdf": {
+      "bytes": 6165,
+      "sha256": "4d8eb63d340c540e5e03e178463bbf5ade48650db29b73b8de1b877dbe01e534"
+    },
+    "contents-selector-ancestry-direct.pdf": {
+      "bytes": 6165,
+      "sha256": "4d8eb63d340c540e5e03e178463bbf5ade48650db29b73b8de1b877dbe01e534"
+    },
+    "contents-wrapper-mutations-ignored-direct.pdf": {
+      "bytes": 6480,
+      "sha256": "0d40169cb637623ed430d6a662c28d26de482dc92494b3f3f046eb525974a911"
+    },
+    "inputs.json": {
+      "bytes": 58166,
+      "sha256": "20831f809d07887c033f419731fdc9573f75bb291f9a3856e834e070a4587ddc"
+    },
+    "renders.json": {
+      "bytes": 3557,
+      "sha256": "c6cb9bed66056ebfc24001e1cd746c92beede63a4ca39b363b5a2beb29bc1369"
+    }
+  },
+  "scope": "Actual saved output from public NuGet 0.2.9 in a Windows x64/.NET 10 managed consumer. Eleven new display:contents cases; no candidate or universal parity claim."
+}

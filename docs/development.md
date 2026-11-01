@@ -11,7 +11,7 @@ runtimes/{rid}/native/          generated/staged package assets
 scripts/                        build, verify, and pack entrypoints
 ```
 
-The native crate pins the published Fullbleed `2.5.49` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
+The native crate pins the published Fullbleed `2.5.50` crate with an exact Cargo dependency and a checked-in lockfile. The build and tests need no sibling engine checkout. Build scripts require the requested RID to match the Rust host, so an x64 binary cannot silently be staged as ARM64.
 
 ## Local verification
 
@@ -21,7 +21,7 @@ The native crate pins the published Fullbleed `2.5.49` crate with an exact Cargo
 
 This stages the host native library, checks Rust formatting and Clippy, runs native tests, verifies managed formatting, builds the full solution, and runs the managed test suite. The integration suite verifies deterministic rendering, diagnostics, metrics, PNG output, in-memory and direct-to-file batches, fixed and reflow compiled bindings, inspection, template stamping/composition, concurrency, and failure-path recovery.
 
-CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.49` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
+CLI integration tests run when the independently installed `fullbleed` command is available. A render failure is a test failure. CI installs `fullbleed==2.5.50` and sets `FULLBLEED_REQUIRE_CLI=1`, making a missing CLI a failure too. Native integration tests are unconditional once the bridge is built. The registered-font fixture includes its font and OFL notice.
 
 ## Local package
 
@@ -52,9 +52,9 @@ Each isolated consumer also renders 22 regular/italic family cases: explicit-fac
 
 ### Generated-counter verification
 
-Each isolated package consumer renders 59 counter documents through direct,
-compiled, fixed-record, throughput reflow and compact reflow APIs: 295 saved
-PDFs and 480 pages. The two batch records use distinct names. pypdf and PDFium
+Each isolated package consumer renders 70 counter documents through direct,
+compiled, fixed-record, throughput reflow and compact reflow APIs: 350 saved
+PDFs and 576 pages. The two batch records use distinct names. pypdf and PDFium
 must agree on each page's raw text; the reader checks every record range,
 counter sequence and binding, plus heading placement with glyph geometry.
 The fixed-batch API paints bound text separately from static content, so raw
@@ -66,12 +66,13 @@ python tools/compare_generated_counter_control.py artifacts/package-smoke/genera
 ```
 
 All twelve consumers must produce identical saved PDFs, native witness previews
-and extracted sequences. The retained public NuGet 0.2.8 control supplies 47
-incorrect direct cases and 12 healthy controls; CI requires those failures to
-improve while preserving healthy sequences and page counts. The focused
+and extracted sequences. The retained public NuGet 0.2.9 control covers the
+eleven new `display: contents` cases. Its seven failures must be corrected,
+and its four healthy sequences and page counts must stay unchanged. The 59
+prior inputs remain unchanged; CI requires all 70 candidate cases to pass. The focused
 `generated-counter-evidence` artifact retains inputs, saved output and the
 comparison. These fixtures do not establish complete CSS conformance or browser
-raster parity. See the [core guide and remaining limitations](https://github.com/fullbleed-engine/fullbleed-official/blob/v2.5.49/docs/generated-content.md).
+raster parity. See the [core guide and remaining limitations](https://github.com/fullbleed-engine/fullbleed-official/blob/v2.5.50/docs/generated-content.md).
 
 ### Page-font verification
 

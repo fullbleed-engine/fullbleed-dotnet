@@ -46,7 +46,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install the independently versioned CLI for integration tests
-        run: python -m pip install fullbleed==2.5.49
+        run: python -m pip install fullbleed==2.5.50
 
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
@@ -237,7 +237,7 @@ jobs:
         run: python tools/compare_preformatted_control.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0/preformatted-whitespace
       - name: Reject public 0.2.6 radial endpoint defects and preserve healthy output
         run: python tools/compare_radial_gradient_control.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0/radial-gradient-endpoints
-      - name: Reject public 0.2.8 counter defects and preserve healthy sequences
+      - name: Reject public 0.2.9 counter defects and preserve healthy sequences
         run: python tools/compare_generated_counter_control.py artifacts/consumer-evidence/package-consumer-linux-x64-net8.0/generated-counters
       - uses: actions/upload-artifact@v4
         if: always()
