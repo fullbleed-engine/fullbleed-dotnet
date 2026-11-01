@@ -224,6 +224,10 @@ if (Version.Parse(features.BindingVersion) >= new Version(0, 2, 10))
 {
     GeneratedCounterFixtures.Run(assets, outputDirectory, features.BindingVersion);
 }
+if (Version.Parse(features.BindingVersion) >= new Version(0, 2, 11))
+{
+    FontCascadeFixtures.Run(assets, outputDirectory, features.BindingVersion);
+}
 #if FULLBLEED_COMPONENTS
 ComponentFixtures.Run(assets, outputDirectory, features.BindingVersion);
 #endif

@@ -20,6 +20,7 @@ from verify_preformatted import verify as verify_preformatted
 from verify_radial_gradients import verify as verify_radial_gradients
 from verify_page_margin_fonts import verify as verify_page_margin_fonts
 from verify_generated_counters import verify as verify_generated_counters
+from verify_font_cascade import verify as verify_font_cascade
 
 ROOT = Path(__file__).resolve().parents[1]
 RIDS = ['win-x64', 'linux-x64', 'osx-x64', 'osx-arm64']
@@ -49,6 +50,7 @@ def main():
     radial_cases = []
     page_font_cases = []
     counter_cases = []
+    cascade_cases = []
     verapdf = validator(ROOT / 'artifacts/verapdf')
     for rid, framework in product(RIDS, FRAMEWORKS):
         consumer = f'{rid}-net{framework}'
@@ -126,6 +128,11 @@ def main():
         assert counter_report['packageVersion'] == manifest['version'] and counter_report['documents'] == 350 and counter_report['pages'] == 576
         counter_cases.append(counter_report['cases'])
         data['IndependentGeneratedCounterChecks'] = {'status': 'passed', 'documents': 350, 'pages': 576}
+        cascade_report = verify_font_cascade(directory / 'font-cascade')
+        assert cascade_report['packageVersion'] == manifest['version'] and cascade_report['documents'] == 13
+        cascade_cases.append(cascade_report['cases'])
+        data['IndependentFontCascadeChecks'] = {'status': 'passed', 'documents': 13, 'pages': 13}
+
         data['IndependentTableWrappingChecks'] = {'status': 'passed', 'cases': len(table_report['cases'])}
         data['IndependentPaginationChecks'] = {'status': 'passed', 'cases': len(pagination_report['cases'])}
         data['IndependentComponentChecks'] = {'status': 'passed', 'cases': len(component_report['cases'])}
@@ -174,6 +181,7 @@ def main():
     assert all(cases == radial_cases[0] for cases in radial_cases), 'Radial-gradient PDFs, colors, stitching bounds or previews differ across consumers'
     assert all(cases == page_font_cases[0] for cases in page_font_cases), 'Page-font PDFs, embedded faces, text or previews differ across consumers'
     assert all(cases == counter_cases[0] for cases in counter_cases), 'Generated-counter PDFs, record sequences or native previews differ across consumers'
+    assert all(cases == cascade_cases[0] for cases in cascade_cases), 'Font-cascade PDFs, selected fonts or previews differ across consumers'
     base14_previews = {}
     for cases in engine_cases:
         assert [(item['name'], item['mode']) for item in cases] == [(item['name'], item['mode']) for item in engine_cases[0]]
@@ -235,6 +243,11 @@ def main():
         'status': 'passed', 'package': manifest['version'], 'packageSha256': manifest['package']['sha256'],
         'consumers': [{'platform': row['Runtime'], 'framework': row['FrameworkVersion'], 'checks': row['IndependentGeneratedCounterChecks']} for row in records],
         'allConsumerOutputsMatch': True, 'cases': counter_cases[0],
+    }, indent=2) + '\n', encoding='utf8')
+    (ROOT / 'artifacts/font-cascade-summary.json').write_text(json.dumps({
+        'status': 'passed', 'package': manifest['version'], 'packageSha256': manifest['package']['sha256'],
+        'consumers': [{'platform': row['Runtime'], 'framework': row['FrameworkVersion'], 'checks': row['IndependentFontCascadeChecks']} for row in records],
+        'allConsumerOutputsMatch': True, 'cases': cascade_cases[0],
     }, indent=2) + '\n', encoding='utf8')
     print(f'{len(records)} isolated package consumers passed; fixture PDFs and native previews match across platforms.')
 

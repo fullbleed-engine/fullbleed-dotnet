@@ -1,0 +1,96 @@
+{
+  "packageVersion": "0.2.10",
+  "engineVersion": "2.5.50",
+  "packageSha256": "53f167355dfb915e7aefaa712ddd561b6794c5f8bed3b800c4fa398faf1b871d",
+  "publicPackageUrl": "https://api.nuget.org/v3-flatcontainer/fullbleed.dotnet/0.2.10/fullbleed.dotnet.0.2.10.nupkg",
+  "actualLoadedNativeSha256": "c9abda2d1f818566768a3d3a05a2426523431cdb400c805807ecc345b2695e85",
+  "actualLoadedNativeMatchesPackage": true,
+  "fixtureSha256": "3f1efafef9514a325eb951560871014ef346162ae0264001b6c585d28c4cfa15",
+  "schema": "fullbleed.dotnet.font_cascade_public_control.v1",
+  "archiveSha256": "5a9cc353df2aa6c6ba2aabf58c45e9375ff12f8a75c120926ea54cf864c7bbcf",
+  "files": {
+    "important-1.png": "892bfd6285236b56fd32d4858edd8a7484b1deef585726b8b0ad621c52617cb4",
+    "important.pdf": "a2fd2afc8e72170c807d0db66bfc1fff5daae826fe0aa0ded145f24bde7276db",
+    "inherit-1.png": "892bfd6285236b56fd32d4858edd8a7484b1deef585726b8b0ad621c52617cb4",
+    "inherit-fallback-1.png": "5ef89ef581c4903a5e919ad00299faf334f208bd76b0b033eafc83fe1ce9a081",
+    "inherit-fallback.pdf": "54cc618cda4c8b2a73e9a6cf71c29360069955a6b3a4aa0a20674aed2f857afc",
+    "inherit.pdf": "a2fd2afc8e72170c807d0db66bfc1fff5daae826fe0aa0ded145f24bde7276db",
+    "initial-1.png": "5ef89ef581c4903a5e919ad00299faf334f208bd76b0b033eafc83fe1ce9a081",
+    "initial-fallback-1.png": "892bfd6285236b56fd32d4858edd8a7484b1deef585726b8b0ad621c52617cb4",
+    "initial-fallback.pdf": "a2fd2afc8e72170c807d0db66bfc1fff5daae826fe0aa0ded145f24bde7276db",
+    "initial.pdf": "54cc618cda4c8b2a73e9a6cf71c29360069955a6b3a4aa0a20674aed2f857afc",
+    "inline-1.png": "892bfd6285236b56fd32d4858edd8a7484b1deef585726b8b0ad621c52617cb4",
+    "inline.pdf": "a2fd2afc8e72170c807d0db66bfc1fff5daae826fe0aa0ded145f24bde7276db",
+    "inputs.json": "3f1efafef9514a325eb951560871014ef346162ae0264001b6c585d28c4cfa15",
+    "later-rule-1.png": "892bfd6285236b56fd32d4858edd8a7484b1deef585726b8b0ad621c52617cb4",
+    "later-rule.pdf": "a2fd2afc8e72170c807d0db66bfc1fff5daae826fe0aa0ded145f24bde7276db",
+    "missing-variable-1.png": "5ef89ef581c4903a5e919ad00299faf334f208bd76b0b033eafc83fe1ce9a081",
+    "missing-variable.pdf": "54cc618cda4c8b2a73e9a6cf71c29360069955a6b3a4aa0a20674aed2f857afc",
+    "renders.json": "9511fb47e760acf24c080bb0bbee62c7a0d25bd395ff2302d2c3c522bb6c5db1",
+    "shorthand-1.png": "f84ad577416060e6a07de1b341cb04abd2e7047c2568eb1765f68dd7ca7aa402",
+    "shorthand.pdf": "24e48422dbd6235a548e2f9a126a3a057bccf9fc3722b0c5d5ecaa7b19186273",
+    "specificity-1.png": "892bfd6285236b56fd32d4858edd8a7484b1deef585726b8b0ad621c52617cb4",
+    "specificity.pdf": "a2fd2afc8e72170c807d0db66bfc1fff5daae826fe0aa0ded145f24bde7276db",
+    "unset-1.png": "892bfd6285236b56fd32d4858edd8a7484b1deef585726b8b0ad621c52617cb4",
+    "unset-fallback-1.png": "5ef89ef581c4903a5e919ad00299faf334f208bd76b0b033eafc83fe1ce9a081",
+    "unset-fallback.pdf": "54cc618cda4c8b2a73e9a6cf71c29360069955a6b3a4aa0a20674aed2f857afc",
+    "unset.pdf": "a2fd2afc8e72170c807d0db66bfc1fff5daae826fe0aa0ded145f24bde7276db",
+    "variable-wins-1.png": "892bfd6285236b56fd32d4858edd8a7484b1deef585726b8b0ad621c52617cb4",
+    "variable-wins.pdf": "a2fd2afc8e72170c807d0db66bfc1fff5daae826fe0aa0ded145f24bde7276db"
+  },
+  "actualBaseFonts": {
+    "later-rule": [
+      "Helvetica"
+    ],
+    "specificity": [
+      "Helvetica"
+    ],
+    "important": [
+      "Helvetica"
+    ],
+    "inline": [
+      "Helvetica"
+    ],
+    "shorthand": [
+      "Helvetica"
+    ],
+    "inherit": [
+      "Helvetica"
+    ],
+    "unset": [
+      "Helvetica"
+    ],
+    "initial": [
+      "Courier"
+    ],
+    "variable-wins": [
+      "Helvetica"
+    ],
+    "missing-variable": [
+      "Courier"
+    ],
+    "inherit-fallback": [
+      "Courier"
+    ],
+    "unset-fallback": [
+      "Courier"
+    ],
+    "initial-fallback": [
+      "Helvetica"
+    ]
+  },
+  "failingCases": [
+    "important",
+    "inherit",
+    "inherit-fallback",
+    "initial",
+    "inline",
+    "later-rule",
+    "missing-variable",
+    "shorthand",
+    "specificity",
+    "unset",
+    "unset-fallback"
+  ],
+  "scope": "Thirteen explicit Base-14 font selections from the published 0.2.10 Windows runtime. Eleven incorrect selections and two healthy controls; no independent adoption or conformance claim."
+}

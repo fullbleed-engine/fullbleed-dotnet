@@ -13,7 +13,7 @@ The managed assembly has no third-party NuGet runtime dependencies. Native runti
 
 ## Status
 
-Version `0.2.10` uses Fullbleed `2.5.50`. Generated counters continue through `display: contents` wrappers: three numbered items now produce `1, 2, 3` while selectors and inherited styles retain the HTML ancestry. The managed APIs and native ABI are unchanged. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.2.10). Read the [counter authoring guide and remaining limits](https://github.com/fullbleed-engine/fullbleed-official/blob/v2.5.50/docs/generated-content.md). Component authoring remains alpha.
+Version `0.2.11` uses Fullbleed `2.5.51`. A winning `font-family` replaces an earlier variable-based family; an unresolved winning variable inherits the parent font. The managed APIs and native ABI are unchanged. The NuGet package ID is [`FullBleed.DotNet`](https://www.nuget.org/packages/FullBleed.DotNet/0.2.11). Read the [counter authoring guide and remaining limits](https://github.com/fullbleed-engine/fullbleed-official/blob/v2.5.51/docs/generated-content.md). Component authoring remains alpha.
 
 Component trees and styles are immutable after construction. Text and attributes are escaped, LINQ children are enumerated once, and custom components are normal methods returning elements. Read the [component guide](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/components.md), including [how class names and styles connect](https://github.com/fullbleed-engine/fullbleed-dotnet/blob/master/docs/components.md#class-names-and-styles).
 
@@ -37,7 +37,7 @@ With the .NET 10 SDK installed:
 ```sh
 dotnet new console -n FullbleedDemo --framework net10.0
 cd FullbleedDemo
-dotnet add package FullBleed.DotNet --version 0.2.10
+dotnet add package FullBleed.DotNet --version 0.2.11
 ```
 
 ### HTML/CSS to PDF

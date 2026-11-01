@@ -1,0 +1,125 @@
+{
+  "schema": "fullbleed.font_cascade.v1",
+  "cases": [
+    {
+      "name": "later-rule",
+      "html": "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Font cascade witness</title><style>.parent{font-family:Times-Roman;--ff:Helvetica}.child {font-family:var(--ff)} .child {font-family:Courier}</style><section class=\"parent\"><div class=\"child\" style=\"\">Font witness</div></section></html>",
+      "css": "",
+      "expectedBaseFonts": [
+        "Courier"
+      ],
+      "pages": 1
+    },
+    {
+      "name": "specificity",
+      "html": "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Font cascade witness</title><style>.parent{font-family:Times-Roman;--ff:Helvetica}div.child {font-family:Courier} .child {font-family:var(--ff)}</style><section class=\"parent\"><div class=\"child\" style=\"\">Font witness</div></section></html>",
+      "css": "",
+      "expectedBaseFonts": [
+        "Courier"
+      ],
+      "pages": 1
+    },
+    {
+      "name": "important",
+      "html": "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Font cascade witness</title><style>.parent{font-family:Times-Roman;--ff:Helvetica}.child {font-family:Courier!important} div.child {font-family:var(--ff)}</style><section class=\"parent\"><div class=\"child\" style=\"\">Font witness</div></section></html>",
+      "css": "",
+      "expectedBaseFonts": [
+        "Courier"
+      ],
+      "pages": 1
+    },
+    {
+      "name": "inline",
+      "html": "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Font cascade witness</title><style>.parent{font-family:Times-Roman;--ff:Helvetica}.child {font-family:var(--ff)}</style><section class=\"parent\"><div class=\"child\" style=\"font-family:Courier\">Font witness</div></section></html>",
+      "css": "",
+      "expectedBaseFonts": [
+        "Courier"
+      ],
+      "pages": 1
+    },
+    {
+      "name": "shorthand",
+      "html": "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Font cascade witness</title><style>.parent{font-family:Times-Roman;--ff:Helvetica}.child {font-family:var(--ff)} .child {font:12px Courier}</style><section class=\"parent\"><div class=\"child\" style=\"\">Font witness</div></section></html>",
+      "css": "",
+      "expectedBaseFonts": [
+        "Courier"
+      ],
+      "pages": 1
+    },
+    {
+      "name": "inherit",
+      "html": "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Font cascade witness</title><style>.parent{font-family:Times-Roman;--ff:Helvetica}.child {font-family:var(--ff)} .child {font-family:inherit}</style><section class=\"parent\"><div class=\"child\" style=\"\">Font witness</div></section></html>",
+      "css": "",
+      "expectedBaseFonts": [
+        "Times-Roman"
+      ],
+      "pages": 1
+    },
+    {
+      "name": "unset",
+      "html": "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Font cascade witness</title><style>.parent{font-family:Times-Roman;--ff:Helvetica}.child {font-family:var(--ff)} .child {font-family:unset}</style><section class=\"parent\"><div class=\"child\" style=\"\">Font witness</div></section></html>",
+      "css": "",
+      "expectedBaseFonts": [
+        "Times-Roman"
+      ],
+      "pages": 1
+    },
+    {
+      "name": "initial",
+      "html": "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Font cascade witness</title><style>.parent{font-family:Times-Roman;--ff:Courier}.child {font-family:var(--ff)} .child {font-family:initial}</style><section class=\"parent\"><div class=\"child\" style=\"\">Font witness</div></section></html>",
+      "css": "",
+      "expectedBaseFonts": [
+        "Helvetica"
+      ],
+      "pages": 1
+    },
+    {
+      "name": "variable-wins",
+      "html": "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Font cascade witness</title><style>.parent{font-family:Times-Roman;--ff:Helvetica}.child {font-family:Courier} .child {font-family:var(--ff)}</style><section class=\"parent\"><div class=\"child\" style=\"\">Font witness</div></section></html>",
+      "css": "",
+      "expectedBaseFonts": [
+        "Helvetica"
+      ],
+      "pages": 1
+    },
+    {
+      "name": "missing-variable",
+      "html": "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Font cascade witness</title><style>.parent{font-family:Times-Roman;--ff:Helvetica}.child {font-family:Courier} .child {font-family:var(--missing)}</style><section class=\"parent\"><div class=\"child\" style=\"\">Font witness</div></section></html>",
+      "css": "",
+      "expectedBaseFonts": [
+        "Times-Roman"
+      ],
+      "pages": 1
+    },
+    {
+      "name": "inherit-fallback",
+      "html": "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Font cascade witness</title><style>.parent{font-family:Times-Roman;--ff:Helvetica}.child {font-family:Courier} .child {font-family:var(--missing,inherit)}</style><section class=\"parent\"><div class=\"child\" style=\"\">Font witness</div></section></html>",
+      "css": "",
+      "expectedBaseFonts": [
+        "Times-Roman"
+      ],
+      "pages": 1
+    },
+    {
+      "name": "unset-fallback",
+      "html": "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Font cascade witness</title><style>.parent{font-family:Times-Roman;--ff:Helvetica}.child {font-family:Courier} .child {font-family:var(--missing,unset)}</style><section class=\"parent\"><div class=\"child\" style=\"\">Font witness</div></section></html>",
+      "css": "",
+      "expectedBaseFonts": [
+        "Times-Roman"
+      ],
+      "pages": 1
+    },
+    {
+      "name": "initial-fallback",
+      "html": "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Font cascade witness</title><style>.parent{font-family:Times-Roman;--ff:Helvetica}.child {font-family:Courier} .child {font-family:var(--missing,initial)}</style><section class=\"parent\"><div class=\"child\" style=\"\">Font witness</div></section></html>",
+      "css": "",
+      "expectedBaseFonts": [
+        "Helvetica"
+      ],
+      "pages": 1
+    }
+  ],
+  "scope": "Explicit Base-14 fonts through actual PDF text operators; no complete CSS conformance claim.",
+  "engineVersion": "2.5.51",
+  "sourceCommit": "2c292b6dcb56245848f537b5c64e3294895b945e"
+}

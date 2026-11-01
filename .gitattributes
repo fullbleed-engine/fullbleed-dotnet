@@ -44,3 +44,6 @@ tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-2.5.50.json -text
 # Preserve this captured Windows manifest byte for byte.
 tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-public-029.json -text whitespace=cr-at-eol
 tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-public-029.zip -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/font-cascade-2.5.51.json -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/font-cascade-public-0210.json -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/font-cascade-public-0210.zip -text
