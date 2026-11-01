@@ -35,3 +35,8 @@ tests/FullBleed.DotNet.PackageSmoke/Assets/radial-gradients-public-026.zip -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/page-margin-fonts-2.5.48.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/page-margin-fonts-public-027.json -text
 tests/FullBleed.DotNet.PackageSmoke/Assets/page-margin-fonts-public-027.zip -text
+
+# Preserve generated-counter inputs and retained public control bytes.
+tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-2.5.49.json -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-public-028.json -text
+tests/FullBleed.DotNet.PackageSmoke/Assets/generated-counters-public-028.zip -text

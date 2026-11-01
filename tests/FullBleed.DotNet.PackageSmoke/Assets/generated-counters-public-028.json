@@ -1,0 +1,319 @@
+{
+  "schema": "fullbleed.dotnet.generated_counter_public_control.v1",
+  "package": "0.2.8",
+  "engine": "2.5.48",
+  "packageUrl": "https://api.nuget.org/v3-flatcontainer/fullbleed.dotnet/0.2.8/fullbleed.dotnet.0.2.8.nupkg",
+  "packageSha256": "3374481dcae686c894bd059cea972660f5365e862b079f1078e173210a524b0b",
+  "nativeSha256": "4456f2e15b6ecf6ba3a5ef374f7f465bfa622e8fc3544c76807dd212e46f8176",
+  "nativeModuleVerifiedAgainstPackage": true,
+  "platform": "win-x64",
+  "framework": "8.0.33",
+  "inputSha256": "4fa48a7f3e1c03087d796159a49d1b1bef479f8088bd28034de6505234823ef1",
+  "retainedInputSha256": "4e39409d7a61c830be0e7998b291438ca6029bf6daeea53a8ea4eb22520a860c",
+  "sourceInputsIdenticalAfterJsonParsing": true,
+  "archive": "generated-counters-public-028.zip",
+  "archiveSha256": "efc1a15f9be5639ca9638a76945c86f7c7971e9b0c4d340170f3136cc6499d3e",
+  "originalRendersSha256": "d6f10e428e237c5db9e4641b0a9dd17ddc4d5740c006fa032584e2ee7308152a",
+  "normalization": "Only the local native-module path was reduced to its filename. PDF and original input bytes are unchanged.",
+  "failedCases": [
+    "block-after-read-direct",
+    "block-after-increment-direct",
+    "block-before-increment-direct",
+    "block-both-increment-direct",
+    "block-after-set-direct",
+    "block-before-reset-direct",
+    "block-empty-before-direct",
+    "block-empty-after-direct",
+    "block-quotes-and-counters-direct",
+    "inline-block-after-read-direct",
+    "inline-block-after-increment-direct",
+    "inline-block-before-increment-direct",
+    "inline-block-both-increment-direct",
+    "inline-block-after-set-direct",
+    "inline-block-before-reset-direct",
+    "inline-block-empty-before-direct",
+    "inline-block-empty-after-direct",
+    "inline-block-quotes-and-counters-direct",
+    "inline-after-read-direct",
+    "inline-after-increment-direct",
+    "inline-before-increment-direct",
+    "inline-both-increment-direct",
+    "inline-after-set-direct",
+    "inline-before-reset-direct",
+    "inline-empty-before-direct",
+    "inline-empty-after-direct",
+    "inline-quotes-and-counters-direct",
+    "contents-after-read-direct",
+    "contents-after-increment-direct",
+    "contents-before-increment-direct",
+    "contents-both-increment-direct",
+    "contents-after-set-direct",
+    "contents-before-reset-direct",
+    "contents-empty-before-direct",
+    "contents-empty-after-direct",
+    "contents-quotes-and-counters-direct",
+    "block-before-reset-new-name-direct",
+    "inline-block-before-reset-new-name-direct",
+    "inline-before-reset-new-name-direct",
+    "hidden-subtree-direct",
+    "invisible-counter-direct",
+    "nested-counter-stack-direct",
+    "anonymous-cell-after-direct",
+    "counter-format-direct",
+    "root-counter-direct",
+    "parent-counter-priority-direct",
+    "pagination-direct"
+  ],
+  "healthyControls": 12,
+  "members": {
+    "Inter-OFL.txt": {
+      "bytes": 4377,
+      "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57"
+    },
+    "anonymous-cell-after-direct.pdf": {
+      "bytes": 6555,
+      "sha256": "3de412b61830c6dc5fcaeac481f4672c67fecb12141039ac5691f98dfc737512"
+    },
+    "block-after-increment-direct.pdf": {
+      "bytes": 7139,
+      "sha256": "80faa39e66e2e462d762b76aafa214f6a1de5a23c84a98b00eeb3f9650034dca"
+    },
+    "block-after-read-direct.pdf": {
+      "bytes": 6959,
+      "sha256": "cec0bc5d69498b195e671ad33a605c8fffba6579006907e85c63ec2ecbaf659e"
+    },
+    "block-after-reset-direct.pdf": {
+      "bytes": 7153,
+      "sha256": "237b53de6d3ab776012b1ba73e9e14e81f0f4b729136fb64c40b7bf14bfc1bed"
+    },
+    "block-after-set-direct.pdf": {
+      "bytes": 7161,
+      "sha256": "e7fa9547b3ed2887332a6dea4b2cefa06d08bb2ca83a0aeb54ddf96649fb6df7"
+    },
+    "block-before-increment-direct.pdf": {
+      "bytes": 7141,
+      "sha256": "0ee0f634ae3655c39cbade82e1b16ab9974c10b4fcf88e05c45dc42db8da58e6"
+    },
+    "block-before-reset-direct.pdf": {
+      "bytes": 7116,
+      "sha256": "2ab5b4f9bf5f5912aa14e1024fff57be15289e3893a543064c0051106c01efcb"
+    },
+    "block-before-reset-new-name-direct.pdf": {
+      "bytes": 7116,
+      "sha256": "e48060f0c80137bd9e8431e0c37cac52f909615957341ccf7e33f0d1818f4694"
+    },
+    "block-both-increment-direct.pdf": {
+      "bytes": 7109,
+      "sha256": "430fb029882ac6d7e2eedbef6505de91f59fde854908db9af89e5e5552ec363a"
+    },
+    "block-empty-after-direct.pdf": {
+      "bytes": 6945,
+      "sha256": "f57b6492d5eb82bab5e3cc995c56881c1d9700dcbc8938a92f57259c6c947ea6"
+    },
+    "block-empty-before-direct.pdf": {
+      "bytes": 6819,
+      "sha256": "83f00740fe69613456e3a20df8d8cf34e1bb806c518a4c7d1d46675259b87484"
+    },
+    "block-quotes-and-counters-direct.pdf": {
+      "bytes": 7330,
+      "sha256": "35335213503817a66998741b0e0b9523785d62720f47cdab6c8ec038663339cf"
+    },
+    "contents-after-increment-direct.pdf": {
+      "bytes": 7144,
+      "sha256": "9338eb93ef1f87061be5dde9b3da8135ecb48bd474b3db7053bc37d67bdce25f"
+    },
+    "contents-after-read-direct.pdf": {
+      "bytes": 6963,
+      "sha256": "8598e23e2de382263568c9fd1eb58d23bfef3f76282273510055f6ea793700ad"
+    },
+    "contents-after-reset-direct.pdf": {
+      "bytes": 7157,
+      "sha256": "5f8840f4306e76605f94d1e90a6e5ddbdcad0b33b663380c5d670f7ce2610b13"
+    },
+    "contents-after-set-direct.pdf": {
+      "bytes": 7165,
+      "sha256": "56ac96f9b3a481de6e6629a692fa1436d4d1a0b4a6dd3c02ae3f8164f57c9d1b"
+    },
+    "contents-before-increment-direct.pdf": {
+      "bytes": 7144,
+      "sha256": "0ed6cd3a829328828e98be92dd357c02e4b957dd29c7a4badf8e4856e4191a04"
+    },
+    "contents-before-reset-direct.pdf": {
+      "bytes": 7117,
+      "sha256": "12ee6258927ca52230616e879c0c58cfc106332661a8f5bf23a61c923fd732d8"
+    },
+    "contents-both-increment-direct.pdf": {
+      "bytes": 7111,
+      "sha256": "7412b8c20df5e351c38fead18a6c0f31c1a25f3ad256a66f7711d074542498a3"
+    },
+    "contents-empty-after-direct.pdf": {
+      "bytes": 6948,
+      "sha256": "e26fa303502d5c21adac381790a9bcf5924cfc64f605c9a65efecf8265a2bb7f"
+    },
+    "contents-empty-before-direct.pdf": {
+      "bytes": 6818,
+      "sha256": "757261c40d5b7fd6a2f63d2dc0f860e44624675a30ddc8d63863c5de93d24c73"
+    },
+    "contents-quotes-and-counters-direct.pdf": {
+      "bytes": 7332,
+      "sha256": "d96e5b9408c3f1f17664d73554f184fed1b097f2b10227eed31ed1aa04a5bde3"
+    },
+    "counter-format-direct.pdf": {
+      "bytes": 6965,
+      "sha256": "bd7148c2eafce8b2991266956830862bd12b07739822a9fe56e6e5956662dbe4"
+    },
+    "hidden-subtree-direct.pdf": {
+      "bytes": 6959,
+      "sha256": "cec0bc5d69498b195e671ad33a605c8fffba6579006907e85c63ec2ecbaf659e"
+    },
+    "inline-after-increment-direct.pdf": {
+      "bytes": 7144,
+      "sha256": "9338eb93ef1f87061be5dde9b3da8135ecb48bd474b3db7053bc37d67bdce25f"
+    },
+    "inline-after-read-direct.pdf": {
+      "bytes": 6963,
+      "sha256": "8598e23e2de382263568c9fd1eb58d23bfef3f76282273510055f6ea793700ad"
+    },
+    "inline-after-reset-direct.pdf": {
+      "bytes": 7157,
+      "sha256": "5f8840f4306e76605f94d1e90a6e5ddbdcad0b33b663380c5d670f7ce2610b13"
+    },
+    "inline-after-set-direct.pdf": {
+      "bytes": 7165,
+      "sha256": "56ac96f9b3a481de6e6629a692fa1436d4d1a0b4a6dd3c02ae3f8164f57c9d1b"
+    },
+    "inline-before-increment-direct.pdf": {
+      "bytes": 7144,
+      "sha256": "0ed6cd3a829328828e98be92dd357c02e4b957dd29c7a4badf8e4856e4191a04"
+    },
+    "inline-before-reset-direct.pdf": {
+      "bytes": 7117,
+      "sha256": "12ee6258927ca52230616e879c0c58cfc106332661a8f5bf23a61c923fd732d8"
+    },
+    "inline-before-reset-new-name-direct.pdf": {
+      "bytes": 7118,
+      "sha256": "b0db0a2482899f9ba450aa63b32ddf7bc94c0d662e930aaee6e41307f700d27c"
+    },
+    "inline-block-after-increment-direct.pdf": {
+      "bytes": 7139,
+      "sha256": "80faa39e66e2e462d762b76aafa214f6a1de5a23c84a98b00eeb3f9650034dca"
+    },
+    "inline-block-after-read-direct.pdf": {
+      "bytes": 6959,
+      "sha256": "cec0bc5d69498b195e671ad33a605c8fffba6579006907e85c63ec2ecbaf659e"
+    },
+    "inline-block-after-reset-direct.pdf": {
+      "bytes": 7153,
+      "sha256": "237b53de6d3ab776012b1ba73e9e14e81f0f4b729136fb64c40b7bf14bfc1bed"
+    },
+    "inline-block-after-set-direct.pdf": {
+      "bytes": 7161,
+      "sha256": "e7fa9547b3ed2887332a6dea4b2cefa06d08bb2ca83a0aeb54ddf96649fb6df7"
+    },
+    "inline-block-before-increment-direct.pdf": {
+      "bytes": 7141,
+      "sha256": "0ee0f634ae3655c39cbade82e1b16ab9974c10b4fcf88e05c45dc42db8da58e6"
+    },
+    "inline-block-before-reset-direct.pdf": {
+      "bytes": 7116,
+      "sha256": "2ab5b4f9bf5f5912aa14e1024fff57be15289e3893a543064c0051106c01efcb"
+    },
+    "inline-block-before-reset-new-name-direct.pdf": {
+      "bytes": 7116,
+      "sha256": "e48060f0c80137bd9e8431e0c37cac52f909615957341ccf7e33f0d1818f4694"
+    },
+    "inline-block-both-increment-direct.pdf": {
+      "bytes": 7109,
+      "sha256": "430fb029882ac6d7e2eedbef6505de91f59fde854908db9af89e5e5552ec363a"
+    },
+    "inline-block-empty-after-direct.pdf": {
+      "bytes": 6945,
+      "sha256": "f57b6492d5eb82bab5e3cc995c56881c1d9700dcbc8938a92f57259c6c947ea6"
+    },
+    "inline-block-empty-before-direct.pdf": {
+      "bytes": 6819,
+      "sha256": "83f00740fe69613456e3a20df8d8cf34e1bb806c518a4c7d1d46675259b87484"
+    },
+    "inline-block-quotes-and-counters-direct.pdf": {
+      "bytes": 7330,
+      "sha256": "35335213503817a66998741b0e0b9523785d62720f47cdab6c8ec038663339cf"
+    },
+    "inline-both-increment-direct.pdf": {
+      "bytes": 7111,
+      "sha256": "7412b8c20df5e351c38fead18a6c0f31c1a25f3ad256a66f7711d074542498a3"
+    },
+    "inline-empty-after-direct.pdf": {
+      "bytes": 6948,
+      "sha256": "e26fa303502d5c21adac381790a9bcf5924cfc64f605c9a65efecf8265a2bb7f"
+    },
+    "inline-empty-before-direct.pdf": {
+      "bytes": 6818,
+      "sha256": "757261c40d5b7fd6a2f63d2dc0f860e44624675a30ddc8d63863c5de93d24c73"
+    },
+    "inline-quotes-and-counters-direct.pdf": {
+      "bytes": 7332,
+      "sha256": "d96e5b9408c3f1f17664d73554f184fed1b097f2b10227eed31ed1aa04a5bde3"
+    },
+    "inputs.json": {
+      "bytes": 47993,
+      "sha256": "4e39409d7a61c830be0e7998b291438ca6029bf6daeea53a8ea4eb22520a860c"
+    },
+    "invisible-counter-direct.pdf": {
+      "bytes": 7020,
+      "sha256": "641cda1191f163e40f14aad80b72f92b34b7b5eae1020897f493420ba6f38a68"
+    },
+    "list-reversed-direct.pdf": {
+      "bytes": 6713,
+      "sha256": "7ca859d9a558adcb7deabc3b16f4b7673a767218256a53116b15ff58bea8a3c7"
+    },
+    "list-start-value-direct.pdf": {
+      "bytes": 6858,
+      "sha256": "c7c8f5d2ea23eef17eedf5e672b00b648fd9c1aca312561c442b65361a0423bb"
+    },
+    "list-value-whitespace-direct.pdf": {
+      "bytes": 6858,
+      "sha256": "c7c8f5d2ea23eef17eedf5e672b00b648fd9c1aca312561c442b65361a0423bb"
+    },
+    "literal-control-direct.pdf": {
+      "bytes": 6320,
+      "sha256": "6bfffd1d140d81ad1596416ee06afd03e782208ec56dfefd5553811b18879194"
+    },
+    "nested-counter-stack-direct.pdf": {
+      "bytes": 7480,
+      "sha256": "04839e1ef08fcf451fd81218b57fb8052e42c3a5eb54e9f9aeebc590e4fd3557"
+    },
+    "no-generated-box-direct.pdf": {
+      "bytes": 6945,
+      "sha256": "f57b6492d5eb82bab5e3cc995c56881c1d9700dcbc8938a92f57259c6c947ea6"
+    },
+    "pagination-direct.pdf": {
+      "bytes": 7529,
+      "sha256": "6dfbeb5b5cafc7605a9f8b8f799991f2a1b0bffe169f252d65f86a1059be0117"
+    },
+    "parent-counter-priority-direct.pdf": {
+      "bytes": 6802,
+      "sha256": "2d4a7ae104bf71e4a7a22d46d6868c353d1934ffb576ec5ae395d4095b21b997"
+    },
+    "renders.json": {
+      "bytes": 16526,
+      "sha256": "7017eeab003fec3a44eaa156f35b75ebae98d512a0d8f4921a6d51d7cec72852"
+    },
+    "replaced-counter-direct.pdf": {
+      "bytes": 5808,
+      "sha256": "e938b094d64b65a5c4ea3e0acc669327591567a51fb2a199237db309b682dc45"
+    },
+    "root-counter-direct.pdf": {
+      "bytes": 7080,
+      "sha256": "33d1c76ad12c41ffb6647ad693ee9296239613346712fbb35b0b56ce3c43db1c"
+    },
+    "suppressed-pseudo-direct.pdf": {
+      "bytes": 6945,
+      "sha256": "f57b6492d5eb82bab5e3cc995c56881c1d9700dcbc8938a92f57259c6c947ea6"
+    },
+    "table-cell-after-direct.pdf": {
+      "bytes": 7119,
+      "sha256": "66e1e86018928ba92ecc7ea5d0e0a53d5177ff46ea612527d144370e277f1748"
+    }
+  },
+  "scope": "Actual saved output of the public Windows x64/.NET 8 NuGet package. No candidate or universal parity claim."
+}

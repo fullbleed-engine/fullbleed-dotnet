@@ -1,0 +1,426 @@
+{
+  "schema": "fullbleed.generated_counter_fixture.v1",
+  "engineVersion": "2.5.49",
+  "sourceCommit": "30fe1a55ba8833568118ac2db020982afda588be",
+  "sourceTestSha256": "5c63f6e4902ccbedb99c1b505e2e8fc7eadfe87fb2bf4d43bc17ce1713fd1878",
+  "font": {
+    "name": "Inter-Variable.ttf",
+    "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031"
+  },
+  "scope": "The 59 reviewed core document cases. HTML list controls preserve Fullbleed behavior; no general browser parity claim.",
+  "cases": [
+    {
+      "name": "block-after-read",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: block }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[2]T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "block-after-increment",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: block }.root::after { counter-increment: n 3 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[5]T[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "block-before-increment",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: block }.root::before { counter-increment: n 3 }",
+      "expectedCounterText": "B[3]I[4]FirstI[5]SecondA[5]T[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "block-both-increment",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: block }.root::before { counter-increment: n 3 } .root::after { counter-increment: n 4 }",
+      "expectedCounterText": "B[3]I[4]FirstI[5]SecondA[9]T[9]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "block-after-set",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: block }.root::after { counter-set: n 8 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[8]T[8]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "block-before-reset",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: block }.root::before { counter-reset: n 5 }",
+      "expectedCounterText": "B[5]I[1]FirstI[2]SecondA[2]T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "block-after-reset",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: block }.root::after { counter-reset: n 9 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[9]T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "block-empty-before",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: block }.root::before { content: ''; counter-increment: n 3 }",
+      "expectedCounterText": "I[4]FirstI[5]SecondA[5]T[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "block-empty-after",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: block }.root::after { content: ''; counter-increment: n 3 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondT[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "block-quotes-and-counters",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: block }.root::before { content: open-quote 'B[' counter(n) ']' } .root::after { content: 'A[' counter(n) ']' close-quote }",
+      "expectedCounterText": "{B[0]I[1]FirstI[2]SecondA[2]}T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-block-after-read",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline-block }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[2]T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-block-after-increment",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline-block }.root::after { counter-increment: n 3 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[5]T[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-block-before-increment",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline-block }.root::before { counter-increment: n 3 }",
+      "expectedCounterText": "B[3]I[4]FirstI[5]SecondA[5]T[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-block-both-increment",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline-block }.root::before { counter-increment: n 3 } .root::after { counter-increment: n 4 }",
+      "expectedCounterText": "B[3]I[4]FirstI[5]SecondA[9]T[9]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-block-after-set",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline-block }.root::after { counter-set: n 8 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[8]T[8]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-block-before-reset",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline-block }.root::before { counter-reset: n 5 }",
+      "expectedCounterText": "B[5]I[1]FirstI[2]SecondA[2]T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-block-after-reset",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline-block }.root::after { counter-reset: n 9 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[9]T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-block-empty-before",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline-block }.root::before { content: ''; counter-increment: n 3 }",
+      "expectedCounterText": "I[4]FirstI[5]SecondA[5]T[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-block-empty-after",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline-block }.root::after { content: ''; counter-increment: n 3 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondT[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-block-quotes-and-counters",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline-block }.root::before { content: open-quote 'B[' counter(n) ']' } .root::after { content: 'A[' counter(n) ']' close-quote }",
+      "expectedCounterText": "{B[0]I[1]FirstI[2]SecondA[2]}T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-after-read",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[2]T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-after-increment",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline }.root::after { counter-increment: n 3 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[5]T[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-before-increment",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline }.root::before { counter-increment: n 3 }",
+      "expectedCounterText": "B[3]I[4]FirstI[5]SecondA[5]T[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-both-increment",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline }.root::before { counter-increment: n 3 } .root::after { counter-increment: n 4 }",
+      "expectedCounterText": "B[3]I[4]FirstI[5]SecondA[9]T[9]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-after-set",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline }.root::after { counter-set: n 8 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[8]T[8]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-before-reset",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline }.root::before { counter-reset: n 5 }",
+      "expectedCounterText": "B[5]I[1]FirstI[2]SecondA[2]T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-after-reset",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline }.root::after { counter-reset: n 9 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[9]T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-empty-before",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline }.root::before { content: ''; counter-increment: n 3 }",
+      "expectedCounterText": "I[4]FirstI[5]SecondA[5]T[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-empty-after",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline }.root::after { content: ''; counter-increment: n 3 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondT[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-quotes-and-counters",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline }.root::before { content: open-quote 'B[' counter(n) ']' } .root::after { content: 'A[' counter(n) ']' close-quote }",
+      "expectedCounterText": "{B[0]I[1]FirstI[2]SecondA[2]}T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "contents-after-read",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: contents }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[2]T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "contents-after-increment",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: contents }.root::after { counter-increment: n 3 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[5]T[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "contents-before-increment",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: contents }.root::before { counter-increment: n 3 }",
+      "expectedCounterText": "B[3]I[4]FirstI[5]SecondA[5]T[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "contents-both-increment",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: contents }.root::before { counter-increment: n 3 } .root::after { counter-increment: n 4 }",
+      "expectedCounterText": "B[3]I[4]FirstI[5]SecondA[9]T[9]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "contents-after-set",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: contents }.root::after { counter-set: n 8 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[8]T[8]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "contents-before-reset",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: contents }.root::before { counter-reset: n 5 }",
+      "expectedCounterText": "B[5]I[1]FirstI[2]SecondA[2]T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "contents-after-reset",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: contents }.root::after { counter-reset: n 9 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[9]T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "contents-empty-before",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: contents }.root::before { content: ''; counter-increment: n 3 }",
+      "expectedCounterText": "I[4]FirstI[5]SecondA[5]T[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "contents-empty-after",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: contents }.root::after { content: ''; counter-increment: n 3 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondT[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "contents-quotes-and-counters",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: contents }.root::before { content: open-quote 'B[' counter(n) ']' } .root::after { content: 'A[' counter(n) ']' close-quote }",
+      "expectedCounterText": "{B[0]I[1]FirstI[2]SecondA[2]}T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "block-before-reset-new-name",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: block } body { counter-reset: none } .root::before { counter-reset: n 5 }",
+      "expectedCounterText": "B[5]I[6]FirstI[7]SecondA[7]T[0]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-block-before-reset-new-name",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline-block } body { counter-reset: none } .root::before { counter-reset: n 5 }",
+      "expectedCounterText": "B[5]I[6]FirstI[7]SecondA[7]T[0]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "inline-before-reset-new-name",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root { display: inline } body { counter-reset: none } .root::before { counter-reset: n 5 }",
+      "expectedCounterText": "B[5]I[6]FirstI[7]SecondA[7]T[0]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "hidden-subtree",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span style=\"display:none\"><span class=\"item\">Hidden</span></span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[2]T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "invisible-counter",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\" style=\"visibility:hidden\">Hidden</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n",
+      "expectedCounterText": "B[0]I[1]FirstI[3]SecondA[3]T[3]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "suppressed-pseudo",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root::after { display: none; counter-increment: n 3 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondT[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "no-generated-box",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root::after { content: none; counter-increment: n 3 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondT[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "nested-counter-stack",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><div class=\"item\">First<div class=\"nest\"><span class=\"item\">Inner</span></div></div><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.nest { counter-reset: n 5 } .nest::after { content: \"N[\" counters(n, \".\") \"]\"; counter-increment: n 2 }",
+      "expectedCounterText": "B[0]I[1]FirstI[6]InnerN[1.8]I[2]SecondA[2]T[2]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "table-cell-after",
+      "html": "<html><body><p>Record {{name}}</p><table><tr><td class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></td><td class=\"tail\">Tail</td></tr></table></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root::after { counter-increment: n 3 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[5]T[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "anonymous-cell-after",
+      "html": "<html><body><p>Record {{name}}</p><div style=\"display:table-row\"><div style=\"display:table-cell\" class=\"root\">First</div><div style=\"display:table-cell\" class=\"tail\">Tail</div></div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root::after { counter-increment: n 3 }",
+      "expectedCounterText": "B[0]FirstA[3]T[3]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "replaced-counter",
+      "html": "<html><body><p>Record {{name}}</p><img alt=\"\" width=\"1\" height=\"1\" style=\"counter-increment:n 4\"><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\nimg::before { content: counter(n); counter-increment: n 99 }",
+      "expectedCounterText": "T[4]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "counter-format",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.root::after { content: 'A[' counter(n, upper-roman) ']'; counter-increment: n 3 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[V]T[5]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "root-counter",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><span class=\"item\">First</span><span class=\"item\">Second</span></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\nhtml { counter-reset: n 7 } body { counter-reset: none }",
+      "expectedCounterText": "B[7]I[8]FirstI[9]SecondA[9]T[9]Tail",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "parent-counter-priority",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"reset\">First</div><div class=\"item\">Second</div><div class=\"tail\">End</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.reset { counter-reset: n 5 } .reset::before { content: \"R[\" counter(n) \"]\" }",
+      "expectedCounterText": "R[5]FirstI[1]SecondT[1]End",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "pagination",
+      "html": "<html><body><p>Record {{name}}</p><div class=\"root\"><div class=\"item\">First</div><div class=\"item next\">Second</div></div><div class=\"tail\">Tail</div></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n.next { break-before: page } .root::after { counter-increment: n 3 }",
+      "expectedCounterText": "B[0]I[1]FirstI[2]SecondA[5]T[5]Tail",
+      "pagesPerRecord": 2
+    },
+    {
+      "name": "list-start-value",
+      "html": "<html><body><p>Record {{name}}</p><ol start=\"3\"><li>First</li><li value=\"8\">Second</li><li>Third</li></ol></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\nol { list-style: none } li::before { content: counter(list-item) ':' }",
+      "expectedCounterText": "3:First8:Second9:Third",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "list-value-whitespace",
+      "html": "<html><body><p>Record {{name}}</p><ol start=\" 3 \"><li>First</li><li value=\" 8 \">Second</li><li>Third</li></ol></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\nol { list-style: none } li::before { content: counter(list-item) ':' }",
+      "expectedCounterText": "3:First8:Second9:Third",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "list-reversed",
+      "html": "<html><body><p>Record {{name}}</p><ol reversed><li>First</li><li>Second</li><li>Third</li></ol></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\nol { list-style: none } li::before { content: counter(list-item) ':' }",
+      "expectedCounterText": "3:First2:Second1:Third",
+      "pagesPerRecord": 1
+    },
+    {
+      "name": "literal-control",
+      "html": "<html><body><p>Record {{name}}</p><p>B[0]FirstA[2]</p></body></html>",
+      "css": "@page { size: 600px 400px; margin: 12px }\n* { margin: 0; padding: 0 }\nbody { font: 18px Inter; line-height: 1.5; counter-reset: n; quotes: \"{\" \"}\" }\n.root::before { content: 'B[' counter(n) ']' }\n.root::after { content: 'A[' counter(n) ']' }\n.item { counter-increment: n }\n.item::before { content: 'I[' counter(n) ']' }\n.tail::before { content: 'T[' counter(n) ']' }\n",
+      "expectedCounterText": "B[0]FirstA[2]",
+      "pagesPerRecord": 1
+    }
+  ]
+}
